@@ -1,0 +1,52 @@
+<!-- menu-burger -->
+<app-botton-burger></app-botton-burger>
+ 
+ <!-- Esto debería ser el componente perfil-header -->
+ 
+ 
+ <app-usuario></app-usuario>
+
+
+
+ <!-- Círculos de progreso -->
+
+
+<div class="iphoneCard">
+    <div class="title textBlueBold22">Tus nutrientes hoy</div>
+    <div class="row-center-wrap">
+        <div routerLink="grupo" class="col-center">
+            <app-vitamin-chart></app-vitamin-chart>
+            <div class="title  textBlueSemi20">Vitaminas</div>
+        </div>
+        
+        <div routerLink="grupo" class="col-center">
+            <app-mineral-chart></app-mineral-chart>
+            <div class="title textBlueSemi20">Minerales</div>
+        </div>
+        
+        <div routerLink="grupo" class="col-center">
+            <app-omegas-chart></app-omegas-chart>
+            <div class="title textBlueSemi20" >Ácidos grasos</div>
+        </div>
+        
+        <div routerLink="grupo" class="col-center">
+            <app-aminoacid-chart></app-aminoacid-chart>
+            <div class="title textBlueSemi20">Aminoácidos</div>
+        </div>
+        
+    </div>
+
+</div>
+
+<div class="iphoneCard">
+    <div class="title textBlueBold22">Tu progreso vs otros users</div>
+    <div>
+        <app-grafica-others></app-grafica-others>
+    </div>
+
+</div>
+
+<div class="footer"></div>
+
+
+<!-- <app-nav-bar></app-nav-bar> -->

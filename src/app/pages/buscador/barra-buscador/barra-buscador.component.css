@@ -1,0 +1,211 @@
+/* ////////// Grid  */
+
+.iphoneCard
+{
+    height: auto;
+    min-height: 100px;
+    border-radius: 30px 30px 0 0;
+    width: 340px;
+    background-color:  rgba(178, 193, 198, 0.185)
+
+/*     background-color:  rgba(178, 193, 198, 0.185);;
+ */   
+}
+.iphoneCard:focus
+{
+    height: auto;
+    min-height: 100px;
+    border-radius: 30px;
+    width: 340px;
+    background-color:  rgba(178, 193, 198, 0.185)
+
+/*     background-color:  rgba(178, 193, 198, 0.185);;
+ */   
+}
+.menu-item
+{
+    width: inherit;
+    height: 100px;
+    
+  /*   border: solid 0.5px 0.5px 0 0 #B2C1C6;
+    border-bottom: solid 0.5px rgba(178, 193, 198, 0.685); */
+}
+.menu-item-busqueda
+{
+    width: inherit;
+    height: 40px;
+    
+  /*   border: solid 0.5px 0.5px 0 0 #B2C1C6;
+    border-bottom: solid 0.5px rgba(178, 193, 198, 0.685); */
+}
+.menu-item-busqueda-title
+{
+    width: inherit;
+    height: 20px;
+    
+  /*   border: solid 0.5px 0.5px 0 0 #B2C1C6;
+    border-bottom: solid 0.5px rgba(178, 193, 198, 0.685); */
+}
+.izquierda
+{
+    left: 5px;
+}
+.widthMenu100
+{
+    width: 340px;
+
+}
+.alignCenter
+{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+.marginTop10
+{
+    margin-top: 10px;
+}
+.marginTop5
+{
+    margin-top: 5px;
+}
+.marginBottom10
+{
+    margin-bottom: 10px;
+}
+.marginBottom5
+{
+    margin-bottom: 5px;
+}
+.marginLeft32
+{
+    margin-left: 32px;
+    text-align: left;
+    
+}
+.marginLeft12
+{
+    margin-left: 12px;
+    
+}
+.iconSize32
+{
+    height: 32px;
+    width:  32px;
+}
+.separadorMenu
+{
+    width: 10px;
+}
+/* ////////// text  */
+
+
+.textBlueBold28{
+    font-size: 28px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform:none;
+  }
+
+  .textGrayRegular20
+  {
+    font-size: 20px;
+    color: #B2C1C6;
+    text-align: center;
+    font-family: dosis-regular;
+    text-transform:none;
+  }
+  .textBlueSemi20
+  {
+    font-size: 20px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-semibold;
+    text-transform:none;
+  }
+  .textGrayBold20
+  {
+    font-size: 20px;
+    color: #B2C1C6;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform:none;
+  }
+  .textBlueBold22
+{
+    font-size: 22px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform: none;
+}
+.absolutePressEnter{
+    bottom: 0px;
+    
+}
+.visible{
+    visibility: visible;
+}
+.invisible{
+    visibility: hidden;
+}
+.col-right-buscar{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    /* align-self: right; */
+    align-items:flex-end;   /* alinea elementos verticalmente a la derecha */
+    /* justify-items:right; */
+    justify-content: flex-end;  /* sitúa elementos en la parte superior de la columna */
+}
+
+/* ////////// inputs  */
+.buscarNavbar input
+{
+    box-sizing: border-box;
+    height: inherit;
+    width: 180px;
+    border:none;
+    font-size: 28px;
+    font-family: dosis-medium;
+    text-transform: capitalize;
+    color: hsla(213, 44%, 28%, 0.685);
+    background-color:transparent;
+   
+}
+.buscarNavbar input::placeholder
+{
+ 
+    border:none;
+    text-align: left;
+    font-size: 28px;
+    font-family: dosis-bold;
+    text-transform: capitalize;
+    color: #667a92;
+   
+}
+.buscarNavbar input:focus
+{
+    text-align: left;
+    outline: none;
+   
+}
+.buscarNavbar input
+{
+    text-align: left;
+    outline: none;
+   
+}
+.custom-hr
+{
+    width: inherit;
+    border-bottom: solid 2px rgba(178, 193, 198, 0.185); 
+    position: relative;
+    align-self: center;
+}
+.menu-item-busqueda:hover
+{
+    background-color: #5ce1e662;
+}

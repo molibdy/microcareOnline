@@ -1,0 +1,471 @@
+
+/* Colores de fondo */
+
+.backgroundBlue{
+    background-color: #5ce1e6;
+}
+
+.backgroundDark{
+    background-color: #667a92;
+}
+
+.backgroundLight{
+    background-color: #F8FBFB;
+}
+
+.backgroundGray{
+    background-color: #B2C1C6;
+}
+.backgroundGrayOpacity
+{
+   background-color:  rgba(178, 193, 198, 0.185)
+    
+}
+
+
+/* Colores de fondo micronutrientes */
+
+.backgroundGreen{
+    background-color: #DEFF88;
+}
+
+.backgroundOrange{
+    background-color: #FFD38C;
+}
+
+.backgroundCoral{
+    background-color: #FF96A3;
+}
+
+.backgroundPurple{
+    background-color: #A18CE8;
+}
+
+
+
+/* Colores de letra */
+
+.colorBlue{
+    color: #5ce1e6;
+}
+
+.colorDark{
+    color: #667a92;
+}
+
+.colorLight{
+    color: #F8FBFB;
+}
+
+.colorGray{
+    color: #B2C1C6;
+}
+.colorWhite
+{
+    color: white;
+    background-color: white;
+}
+
+/* Colores de letra micronutrientes */
+
+.colorGreen{
+    color: #DEFF88;
+}
+
+.colorOrange{
+    color: #FFD38C;
+}
+
+.colorCoral{
+    color: #FF96A3;
+}
+
+.colorPurple{
+    color: #A18CE8;
+}
+
+/* //////////////// body */
+
+body{
+    margin:0;
+    background-color: #F8FBFB;
+    font-family: dosis-regular;
+}
+
+
+/* //////////////////////// fuentes */
+/*  Colores Gradientes */
+
+
+
+.gradientOG{
+    background:  rgb(255,211,140);
+    background: linear-gradient(121deg,  rgb(255,211,140) 0%, rgba(222,255,136,1) 100%);
+}
+.gradientOC{
+    background: rgb(255,211,140);
+    background: linear-gradient(121deg, rgb(255, 211, 140) 0%,rgb(255, 150, 163) 100%);
+    }
+.gradientOP{
+        background: rgb(255,211,140);
+        background: linear-gradient(121deg, rgba(255,211,140,1) 0%,#a18ce8 100%);
+        }
+
+
+.gradientGO{
+            background: rgba(222,255,136,1);
+            background: linear-gradient(121deg,  rgba(222,255,136,1) 0%,rgb(255, 211, 140) 100%);
+            }
+.gradientGC{
+                background:  rgba(222,255,136,1);
+                background: linear-gradient(121deg, rgba(255,211,140,1) 0%,rgb(255, 150, 163));
+                }
+.gradientGP{
+                    background:  rgba(222,255,136,1);
+                    background: linear-gradient(121deg, rgba(255,211,140,1) 0%,rgb(161, 140, 232));
+                    }
+
+
+.gradientPG{
+                background:  rgb(162, 140, 232);
+                background: linear-gradient(121deg,  rgb(162, 140, 232) 0%, rgba(222,255,136,1));
+                }
+.gradientPO{
+                    background:  rgb(162, 140, 232);
+                    background: linear-gradient(121deg, rgb(102, 93, 133) 0%,rgba(255,211,140,1));
+                    }
+.gradientPC{
+                        background:  rgba(222,255,136,1) 100%;
+                        background: linear-gradient(121deg, rgb(102, 93, 133) 0%, rgb(255, 150, 163));
+                        }
+
+
+
+@font-face {
+    font-family: "dosis-regular";
+    src: url(assets/Dosis-Regular.ttf);
+}
+
+@font-face {
+    font-family: "dosis-light";
+    src: url(assets/Dosis-Light.ttf);
+}
+
+@font-face {
+    font-family: "dosis-bold";
+    src: url(assets/Dosis-Bold.ttf);
+}
+
+@font-face {
+    font-family: "dosis-medium";
+    src: url(assets/Dosis-Medium.ttf);
+}
+@font-face {
+    font-family: "dosis-semiBold";
+    src: url(assets/Dosis-SemiBold.ttf);
+}
+
+/* //////////////////////////////////button */
+
+.button-blue{
+    width: 340px;
+    border: 30px;
+    height: 53px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color:#667a92;
+    background-color:#5ce1e6;
+    border-radius: 9px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.button-blue:hover {
+    background-color: white;
+    box-shadow: 0px 15px 20px 5ce1e6;
+    color: #5ce1e6;
+    transform: translateY(-2px);
+}
+.button-blue:-moz-suppressed {
+    background-color: white;
+    box-shadow: 0px 15px 20px 5ce1e6;
+    color: #5ce1e6;
+    transform: translateY(-7px);
+}
+
+.button-gray{
+    width: 340px;
+    border: 30px;
+    height: 53px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: white;
+    background-color:#667a92;
+    border-radius: 9px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.button-gray:hover {
+    background-color: white;
+    box-shadow: 0px 15px 20px 5ce1e6;
+    color: #667a92;
+    transform: translateY(-7px);
+}
+
+
+/* FILAS Y COLUMNAS */
+
+.row-center{
+    display: flex;
+    flex-direction: row;
+    /* text-align: center; */
+    /* align-self: center; */
+    align-items: center;    /* alinea elementos horizontalmente en el centro de la fila */
+    /* justify-items: center; */
+    justify-content: center;   /* alinea elementos verticalmente en el centro */
+}
+
+.row-right{
+    display: flex;
+    flex-direction: row;
+    /* text-align: right; */
+    /* align-self: right; */
+    align-items: right;   /* alinea elementos horizontalmente en el centro de la fila*/
+    /* justify-items: right; */
+    justify-content: flex-end;   /* alinea elementos verticalmente a la derecha */
+}
+
+.row-left{
+    display: flex;
+    flex-direction: row;
+    /* text-align:right; */
+    /* align-self: left; */
+    align-items: center;    /* alinea elementos horizontalmente en el centro de la fila*/
+    /* justify-items: baseline; */
+    justify-content: flex-start;    /* alinea elementos verticalmente a la izquierda */
+}
+
+.col-center{
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+    /* align-self: center; */
+    align-items:center;     /* alinea elementos verticalmente en el centro */
+    /* justify-items:center; */
+    justify-content: center; /* sitúa elementos en la parte central de la columna */
+}
+
+.col-right{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    /* align-self: right; */
+    align-items:flex-end;   /* alinea elementos verticalmente a la derecha */
+    /* justify-items:right; */
+    justify-content: center;  /* sitúa elementos en la parte superior de la columna */
+}
+
+.col-left{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    /* align-self: left; */
+    align-items: flex-start;   /* alinea elementos verticalmente a la izquierda */
+    /* justify-items: left; */
+    /* justify-content: flex-end;  sitúa elementos en la parte inferior de la columna */
+    justify-content: center;  /* sitúa elementos en la parte superior de la columna */
+
+}
+
+.header{
+    height: 60px;
+}
+
+.footer{
+    height: 60px;
+}
+/* /////////// margenes */
+.marginTop10
+{
+    margin-top: 10px;
+}
+.marginTop22{
+    margin-top: 22px;
+}
+.marginTop5
+{
+    margin-top: 5px;
+}
+.marginBottom10
+{
+    margin-bottom: 10px;
+}
+.marginBottom5
+{
+    margin-bottom: 5px;
+}
+.marginLeft32
+{
+    margin-left: 32px;
+    text-align: left;
+    
+}
+.marginLeft12
+{
+    margin-left: 12px;
+    
+}
+.marginRight32
+{
+    margin-right: 32px;
+    
+}
+.marginRight12
+{
+    margin-right: 12px;
+    
+}
+.iconSize32
+{
+    height: 32px;
+    width:  32px;
+}
+/* /////////// tamano de texto */
+.textBlueBold28{
+    font-size: 28px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform:none;
+  }
+
+  .textGrayRegular20
+  {
+    font-size: 20px;
+    color: #B2C1C6;
+    text-align: center;
+    font-family: dosis-regular;
+    text-transform:none;
+  }
+  .textBlueRegular22
+  {
+    font-size: 20px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-regular;
+    text-transform:none;
+  }
+  .textBlueSemi22
+  {
+    font-size: 22px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-semibold;
+    text-transform:unset;
+  }
+  .textGraySemi20
+  {
+    font-size: 20px;
+    color: #B2C1C6;
+    text-align: center;
+    font-family: dosis-semibold;
+    text-transform:none;
+  }
+  .textGrayBold20
+  {
+    font-size: 20px;
+    color: #B2C1C6;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform:none;
+  }
+  .textBlueBold22
+{
+    font-size: 22px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform: none;
+}
+.textBlueSemi20{
+    color: #667a92;
+   
+    font-size: 18px;
+    font-family: dosis-semibold ;
+}
+.custom-hr
+{
+    width: inherit;
+    border-bottom: solid 2px rgba(178, 193, 198, 0.185); 
+    position: relative;
+    align-self: center;
+    
+}
+.textBlueBold20
+{
+    font-size: 20px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform: none;
+}
+
+.textGraySemi16
+{
+  font-size: 16px;
+  color: #B2C1C6;
+  text-align: center;
+  font-family: dosis-semibold;
+  text-transform:none;
+}
+
+
+.textGrayRegular16
+{
+  font-size: 16px;
+  color: #B2C1C6;
+  text-align: center;
+  font-family: dosis-regular;
+  text-transform:none;
+}
+
+.textBlueRegular14
+{
+  font-size: 14px;
+  color: #667a92;
+  text-align: center;
+  font-family: dosis-regular;
+  text-transform:none;
+}
+
+.textBlueSemi18
+  {
+    font-size: 18px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-semibold;
+    text-transform:none;
+  }
+
+
+  .textBlueRegular16
+{
+  font-size: 16px;
+  color: #667a92;
+  text-align: center;
+  font-family: dosis-regular;
+  text-transform:none;
+}

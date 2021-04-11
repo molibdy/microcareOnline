@@ -1,0 +1,88 @@
+<div class="header"></div>
+<div class="tarjeta">
+    <app-botton-cruz></app-botton-cruz>
+    <div class="row-center ancho100">
+        <div class="circlePic"><app-micronutrient-chart></app-micronutrient-chart></div>        
+    </div>
+
+    <br>
+
+    <div class="row-center ancho100">
+        <div class="text">{{grupos[0]}}
+        </div>
+    </div>
+
+    <br>
+    <div class="sub-titulo">
+        Ingredientes ricos en {{grupos[0]}}
+    </div>
+    <div class="row-left wrap ancho100 chip-container">
+        <div *ngFor="let micro of micronutrientes"> 
+            <div class="chip-grande">{{micro}}
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="custom-hr"></div>
+    <br>
+    <div class="wrapper">
+        <div class="item" routerLink="../receta">
+            <div class="row-left"> 
+                <div class="chip1">
+                    Vegano
+                </div>
+                <div class="chip2">
+                    Vegetariano
+                </div>
+            </div>
+            <div class="foto">
+                <img src="https://carneentucasa.com/archivos/Noticias/983.jpg">
+            </div>
+            <div class="row-center">
+                <div class="row-center">
+                    <div class="nombre-receta">
+                        Cocido Madrileño
+                    </div>
+                </div>
+                <div class="row-center">
+                    <div class="chip-micro1">
+                        B
+                    </div>
+                    <div class="chip-micro2">
+                            Mo
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="item" routerLink="../receta">
+            <div class="row-left"> 
+                <div class="chip1">
+                    Vegano
+                </div>
+                <div class="chip2">
+                    Vegetariano
+                </div>
+            </div>
+            <div class="foto">
+                <img src="https://carneentucasa.com/archivos/Noticias/983.jpg">
+            </div>
+            <div class="row-center">
+                <div class="row-center">
+                    <div class="nombre-receta">
+                        Cocido Madrileño
+                    </div>
+                </div>
+                <div class="row-center">
+                    <div class="chip-micro1">
+                        B
+                    </div>
+                    <div class="chip-micro2">
+                            Mo
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

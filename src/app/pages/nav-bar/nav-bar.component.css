@@ -1,0 +1,93 @@
+
+.fijo-abajo{
+    position: fixed;
+    bottom: 0;
+   
+}
+
+.navBar
+{
+    margin: 0%;
+    width: 100%;
+    height: 65px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px 30px 0px 0px;
+    /* position: absolute; 
+    bottom: 0; */
+    position: fixed;
+    bottom: 0;
+}
+
+
+.icons 
+{
+    color: #667A92;
+    /* font-size: 10px; */
+    margin-bottom: 9px;
+    cursor: pointer;
+}
+.material-icons.md-48 { font-size: 48px; }
+
+.barraIconos
+{
+    
+    height: 42px;
+    width: 100%;
+
+}
+.botonAnadir
+{
+    height: 56px;
+    width: 56px;
+    border-radius: 28px;
+    background-color: violet;
+}
+.iconoNavBar
+{
+    height: 42px;
+    padding-top: 15px;
+}
+
+.anadirNavbar
+{
+    height: 156px;
+    overflow: visible;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+
+.circle
+{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background-color: white;
+    align-self: center;
+    overflow: visible;
+    margin-bottom: 15px;
+}
+
+
+.row-center-nav{
+    display: flex;
+    flex-direction: row;
+    /* text-align: center; */
+    /* align-self: center; */
+    align-items: center;    /* alinea elementos horizontalmente en el centro de la fila */
+    /* justify-items: center; */
+    justify-content: center;   /* alinea elementos verticalmente en el centro */
+}
+
+.row-spaced-nav{
+    width:90%;
+    display: flex;
+    flex-direction: row;
+    /* text-align: center; */
+    /* align-self: center; */
+    align-items: center;    /* alinea elementos horizontalmente en el centro de la fila */
+    /* justify-items: center; */
+    justify-content: space-evenly;   /* alinea elementos verticalmente en el centro */
+}
+
+

@@ -1,0 +1,98 @@
+<app-botton-burger></app-botton-burger>
+
+<div class="text row-left">
+    Recetas
+</div>
+<div class="br"></div>
+
+<app-recetas></app-recetas>
+
+<div class="br"></div>
+
+<div>
+    <div class="tarjeta">
+        <div class="br"></div>
+        <div class="row-left">
+            <div class="text ">
+            Para ti
+            </div>
+        </div>
+        <div class="br"></div>
+
+        <div  class="wrapper">
+            <div *ngFor="let receta of listaParaTi" class="item" routerLink="receta">
+                <div class="row-left"> 
+                    <div class="chip1">
+                        {{receta.preferencia1}}
+                    </div>
+                    <div class="chip2">
+                        {{receta.preferencia2}}
+                    </div>
+                </div>
+                <div class="foto">
+                    <img [src]="receta.foto">
+                </div>
+                <div class="row-center">
+                    <div class="row-center">
+                        <div class="nombre-receta">
+                            {{receta.nombre}}
+                        </div>
+                    </div>
+                    <div class="row-center">
+                        <div class="chip-micro1">
+                            {{receta.chip1}}
+                        </div>
+                        <div class="chip-micro2">
+                            {{receta.chip2}}
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="br"></div>
+        <div class="tarjeta">
+            <div class="br"></div>
+            <div class="row-left">
+                <div class="text ">
+                Nuevas en la app
+                </div>
+            </div>
+            <div class="br"></div>
+
+    <div class="wrapper">
+        <div *ngFor="let receta of listaNuevas" class="item" routerLink="receta">
+            <div class="row-left"> 
+                <div class="chip1">
+                    {{receta.preferencia1}}
+                </div>
+                <div class="chip2">
+                    {{receta.preferencia2}}
+                </div>
+            </div>
+            <div class="foto">
+                <img [src]="receta.foto"/>
+            </div>
+            <div class="row-center">
+                <div class="row-center">
+                    <div class="nombre-receta">
+                        {{receta.nombre}}
+                    </div>
+                </div>
+                <div class="row-center">
+                    <div class="chip-micro1">
+                        {{receta.chip1}}
+                    </div>
+                    <div class="chip-micro2">
+                        {{receta.chip2}}
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="footer"></div>
+  <div class="footer"></div>
+
+

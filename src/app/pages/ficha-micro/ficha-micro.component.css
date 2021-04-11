@@ -1,0 +1,326 @@
+input{
+    border:none;
+    font-size: 16px;
+    color:#667a92;
+}
+
+.text{
+    font-size: 25px;
+    color: #667a92;
+    text-align: left;
+}
+  
+.tarjeta{
+    width: 375px;
+    border: 30px;
+    height: 705px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 16px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: relative;
+}
+
+.burger{
+    width: 50px;
+    height: 100px;
+}
+
+.tarjeta-peque{
+    width: 360px;
+    border: 30px;
+    height: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 16px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.circle{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border: none;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.circle-burger{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border: none;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.ancho100{
+    width: 95%;
+}
+
+.chip-container>*{
+
+    
+    margin-left: 14px;
+}
+
+.justify-around{
+    justify-content: space-around;
+
+}
+
+.chip-grande{
+    width: 100px;
+    border: 30px;
+    height: 53px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 50px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    margin-top: 10px;
+    color: #667a92;
+    }
+
+
+.circlePic{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border: none;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -40px;
+}
+    
+
+.hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    width: 220px;
+}
+
+.titulo{
+    margin-left: 10px;
+    font-size: 25px;
+    color: #667a92;
+    text-align: left;
+    justify-content: left;
+}
+
+.sub-titulo{
+    margin-left: 10px;
+    font-size: 21px;
+    color: #667a92;
+    text-align: left;
+    justify-content: left;
+}
+
+.cuerpo{
+    margin-left: 15px;
+    font-size: 16px;
+    color: #667a92;
+    text-align: left;
+    justify-content: left;
+    max-width: 345px;
+}
+
+
+.wrapper{
+    width: 100%;
+    max-height: 250px;
+    border: 10% solid white;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.wrapper::-webkit-scrollbar{
+    width: 0;
+}
+
+.wrapper .item{
+    min-width: 300px;
+    min-height: 20px;
+    text-align: center;
+    background-color: white;
+    margin-right: 2px;
+}
+
+.item{
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 9px;
+}
+
+.pie-foto{
+    width: 270px;
+    height:fit-content;
+    flex-direction: row;
+    text-align: left;
+    align-self: left;
+    align-items: left;
+    justify-items: left;
+    justify-content:space-between;
+}
+
+.foto{
+    overflow:hidden;
+    width: 300px;
+    height: 180px;
+    border-radius:9px;
+    margin-top: 2%;
+}
+
+img{
+    width: 300px;
+    height: auto; 
+}
+
+.nombre-receta{
+    width: 170px;
+    height: 40px;
+    font-size:15px;
+    font-weight: 500;
+    color: #667a92;
+    margin-top: 12px;
+    text-align: left;
+}
+
+.chip1{
+    width: 50px;
+    height: 20px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 9px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 10px;
+}
+
+.chip2{
+    width: 50px;
+    height: 20px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 9px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 19%;
+}
+
+.wrap{
+    flex-wrap: wrap;
+}
+
+.chip-micro1{
+    width:30px;
+    height: 30px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 50%;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    margin-left: 15px;
+}
+
+
+.chip-micro2{
+    width: 30px;
+    height: 30px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 50%;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    margin-left: 15px;
+}
+
+
+.custom-hr
+{
+    width: 300px;
+    border-bottom: solid 2px rgba(178, 193, 198, 0.185); 
+    position: relative;
+    align-self: center;
+}

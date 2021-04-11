@@ -1,0 +1,85 @@
+.iphoneCard
+{
+    margin: 20px;
+    width: 340px;
+    border-radius: 30px;
+}
+.iphoneCardTitle
+{
+    margin: 20px;
+    width: 340px;
+}
+
+.contenedor{
+    width:100%;
+}
+ .icono{
+    margin-right: 15px;
+ }
+
+
+.text{
+    font-size: 28px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-bold;
+    text-transform: capitalize;
+  }
+
+  .textSubtitle
+  {
+    font-size: 20px;
+    color: #B2C1C6;
+    text-align: center;
+    font-family: dosis-regular;
+    text-transform:lowercase;
+  }
+
+.marginLeft32
+{
+    margin-left: 32px;
+    
+}
+.row-left{
+    display: flex;
+    flex-direction: row;
+    align-content: left;
+    justify-content: flex-start;
+    justify-items: left;
+}
+
+.widthMenu
+{
+    width: 100%;
+}
+
+.iconSize
+{
+    height: 32px;
+    width: 32px;
+    margin-left: 100px;
+}
+.fontAwesome {
+    font-family: Helvetica, 'FontAwesome', sans-serif;
+}
+.relative
+{
+    position: relative;
+}
+.absolut
+{
+    position: absolute;
+    
+}
+.imageProfile img
+{
+    width: 60px;
+   border: solid 8px rgb(255, 255, 255);
+    border-radius: 50%;
+}
+
+
+
+
+
+

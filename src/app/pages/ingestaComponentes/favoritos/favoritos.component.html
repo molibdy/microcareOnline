@@ -1,0 +1,50 @@
+    <div class=" row-left marginTop10"> 
+        <div class=" text20 widthMenu  " >Favoritos</div>
+    </div>
+
+    <div class=" row-left-wrap" *ngIf="!isBorrando">
+        <div class=" bordeAnadir marginTop10" *ngIf="isAnadiendo" (click)="isAnadiendo = false">
+            <div class="textDarkSemi18  padding10">
+            Has consumido <span class="textDarkSemi18Bold">{{anadiendo.nombre}}</span> 
+            </div> 
+            </div>
+            <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of favoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)">
+               <div class="fondo-cerrar" (click)='quitarFavorito(i)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
+                    {{favorito.nombre}}
+                    
+                    <mat-chip-list aria-label="Fish selection" >
+                        <mat-chip *ngFor="let micronutriente of favorito.score"  class="chip-material">{{micronutriente.nombre}}</mat-chip>
+                      </mat-chip-list>
+
+
+                
+            </div>
+    </div>
+
+    <div class="col-center bordeEliminar marginTop10" *ngIf="isBorrando">
+        <div class="textDarkSemi18 padding ">
+            Seguro que quieres eliminar <span class="textDarkSemi18Bold">{{borrando.nombre}}</span>?
+        </div>
+        <div class="row-center textDarkSemi18 padding">
+            <button  (click)="cancelarBorrado()" class="mybutton-gray">
+                <div class=" textButton">
+                    <div class="separador10" > </div> 
+                    <div>cancelar</div> 
+                </div> 
+                
+            </button>
+                <div class="separador20px"></div>
+            <button  (click)="quitarFavoritoDefinitivo()" class="mybutton-red">
+                <div class=" textButton">
+                    <div class="separador10" > </div> 
+                    <div>eliminar</div> 
+                </div> 
+                
+            </button>
+           
+        </div>
+       
+    </div>
+
+
+    

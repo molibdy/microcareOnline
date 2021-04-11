@@ -1,0 +1,65 @@
+
+
+    <app-botton-burger></app-botton-burger>
+
+<div class="col-center">
+    <div class="col-center iphoneCard">
+        
+        <div class="row-left text widthMenu marginLeft32 ">¿Qué has comido?</div>
+        
+
+
+ <!--             ///////////// barra menu Burger
+ -->                                                            
+        
+    </div>
+                <div class="busqueda col-left" >
+                    <!--                     //// otro item //// 
+ -->  
+                    <div class=" col-center menu-item colorWhite"  (click)="switchIntReceta()">
+                        <div class="row-left widthMenu" >
+                            
+                                        <div class="marginLeft32"> 
+                                            <mat-icon class="iconSize colorBlue" svgIcon="search"></mat-icon>
+                                        </div>
+                                        <div class="separadorMenu"></div>
+                                        <div class="text20">Introducir a Mano</div>
+                                        <div class="separadorMenuDesplegable"></div>
+                                        <mat-icon svgIcon='arrow-expansion' class='colorGray iconSizeGray' ></mat-icon> 
+
+                     </div>
+                    </div>
+                    <div class=" col-center custom-hr"></div>
+
+                    
+                    <div class=" col-center menu-item-expandible colorWhite" *ngIf="introducirRecetaBooleano">
+                        <div class="row-left widthMenu" >
+                            
+                                     <app-introducir-manual></app-introducir-manual>
+
+                     </div>
+                    </div>
+                    
+                    <div class=" col-center  custom-hr"></div>
+<!--                     //// otro item //// 
+<<<<<<< HEAD
+ -->                        <div class=" col-center  menu-item-abajo colorWhite" routerLink="../buscar-receta" *ngIf="!introducirRecetaBooleano">
+
+                            <div class="row-left widthMenu" >
+                        
+                                    <div class="marginLeft32"> 
+                                        <mat-icon class="iconSize colorBlue"  svgIcon="recipes"></mat-icon>
+                                    </div>
+                                    <div class="separadorMenu"></div>
+                                    <div class="text20">Seleccionar Recetas</div>
+                            </div>
+                            </div>
+<!--                             <div class=" col-center custom-hr"></div>
+ --><!--                 //// bara final
+ -->              <div class=" col-center  custom-hr" style="width: 90%; justify-content: center; bottom: 0.5px;" ></div>
+                <app-favoritos *ngIf="!introducirRecetaBooleano"></app-favoritos>
+
+                </div>
+        </div>
+        
+

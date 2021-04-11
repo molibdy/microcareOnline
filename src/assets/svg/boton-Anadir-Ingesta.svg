@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="86" viewBox="0 0 86 86">
+  <defs>
+    <filter id="Shadow_3" x="9" y="10" width="68" height="68" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Shadow_2" x="0" y="0" width="86" height="86" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-2"/>
+      <feFlood flood-opacity="0.122"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Shadow_1" x="7.5" y="10.5" width="71" height="71" filterUnits="userSpaceOnUse">
+      <feOffset dy="4" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2.5" result="blur-3"/>
+      <feFlood flood-opacity="0.141"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <circle id="FAB_Mask" data-name="FAB Mask" cx="28" cy="28" r="28" fill="#5ce1e6"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <circle id="FAB_Mask-2" data-name="FAB Mask" cx="28" cy="28" r="28" transform="translate(0 70.426)" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Light_FAB_1._Standard" data-name="Light 🌕/ FAB / 1. Standard" transform="translate(15 14)">
+    <g id="Circle_Elevation_Dark_04dp" data-name="Circle Elevation/Dark 🌑/04dp" transform="translate(-109)">
+      <g transform="matrix(1, 0, 0, 1, 94, -14)" filter="url(#Shadow_3)">
+        <rect id="Shadow_3-2" data-name="Shadow 3" width="56" height="56" rx="28" transform="translate(15 14)" fill="none"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 94, -14)" filter="url(#Shadow_2)">
+        <rect id="Shadow_2-2" data-name="Shadow 2" width="56" height="56" rx="28" transform="translate(15 14)" fill="none"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 94, -14)" filter="url(#Shadow_1)">
+        <rect id="Shadow_1-2" data-name="Shadow 1" width="56" height="56" rx="28" transform="translate(15 14)" fill="none"/>
+      </g>
+    </g>
+    <g id="Fill" clip-path="url(#clip-path)">
+      <rect id="_FAB_Color" data-name="🎨 FAB Color" width="56" height="56" fill="#5ce1e6"/>
+    </g>
+    <g id="State" transform="translate(0 -70.424)" clip-path="url(#clip-path-2)">
+      <g id="States_Light_Primary_Container" data-name="States/Light 🌕/Primary Container" transform="translate(6 -201.574)">
+        <rect id="States_Light_Primary_Container_100_Overlay" data-name="States/Light 🌕/Primary Container 100%/Overlay" width="452" height="452" rx="4" fill="none"/>
+      </g>
+    </g>
+    <path id="plus" d="M23.3,10.227H14.773V1.7a1.705,1.705,0,0,0-1.7-1.7H11.932a1.705,1.705,0,0,0-1.7,1.7v8.523H1.7a1.705,1.705,0,0,0-1.7,1.7v1.136a1.705,1.705,0,0,0,1.7,1.7h8.523V23.3a1.705,1.705,0,0,0,1.7,1.7h1.136a1.705,1.705,0,0,0,1.7-1.7V14.773H23.3a1.705,1.705,0,0,0,1.7-1.7V11.932A1.705,1.705,0,0,0,23.3,10.227Zm0,0" transform="translate(16 16.001)" fill="#667a92"/>
+  </g>
+</svg>

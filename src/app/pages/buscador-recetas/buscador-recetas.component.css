@@ -1,0 +1,309 @@
+.text{
+    font-size: 25px;
+    color: #667a92;
+    text-align: center;
+}
+
+.burger{
+    width: 50px;
+    height: 100px;
+}
+
+.chip1{
+    width: 50px;
+    height: 20px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 9px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    position: absolute;
+    margin-top: 15%;
+}
+
+.chip2{
+    width: 50px;
+    height: 20px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 9px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    position: absolute;
+    margin-top: 15%;
+    margin-left: 18%;
+}
+
+
+.chip-micro1{
+    width:30px;
+    height: 30px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 50%;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    /* margin-top: -10%;
+    margin-left: 70%; */
+}
+
+
+.chip-micro2{
+    width: 30px;
+    height: 30px;
+    font-size:9px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 50%;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #667a92;
+    /* margin-top: -10%; */
+    /* margin-left: 82%; */
+}
+
+
+.nombre-receta{
+    width: 170px;
+    height: 40px;
+    font-size:15px;
+    font-weight: 500;
+    color: #667a92;
+    margin-top: 12px;
+    text-align: left;
+}
+
+.wrapper{
+    max-height: 250px;
+    border: 10% solid white;
+    display: flex;
+    overflow-x: auto;
+    overflow-y:hidden;
+    position: relative;
+}
+
+.wrapper::-webkit-scrollbar{
+    width: 0;
+}
+
+.wrapper .item{
+    min-width: 300px;
+    min-height: 20px;
+    text-align: center;
+    background: color #b2c1c6;
+    margin-right: 2px;
+}
+
+.item{
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 9px;
+}
+
+.gray{
+    color: #667a92;
+}
+
+.blue{
+    color: #5ce1e6 ;
+}
+
+.foto{
+    overflow:hidden;
+    width: 300px;
+    height: 180px;
+    border-radius:9px;
+    margin-top: 2%;
+}
+
+img{
+    width: 300px;
+    height: auto; 
+}
+
+.left-padding{
+    padding-left: 6px;
+}
+
+.pie-foto{
+    width: 270px;
+    height:fit-content;
+    flex-direction: row;
+    text-align: left;
+    align-self: left;
+    align-items: left;
+    justify-items: left;
+    justify-content:space-between;
+}
+
+.circle{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border: none;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.row-center{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-self: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.row-right{
+    display: flex;
+    flex-direction: row;
+    text-align: right;
+    align-self: right;
+    align-items: right;
+    justify-items: right;
+    justify-content: flex-end;
+    padding-right: 10%;
+    
+}
+
+.row-left{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    align-self: left;
+    align-items: left;
+    justify-items: left;
+    justify-content: flex-start;
+    padding-left: 10%;
+}
+
+.col-center{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-self: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.col-right{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    align-self: right;
+    align-items: right;
+    justify-items: right;
+    justify-content: right;
+    padding-right: 10%;
+}
+
+.col-left{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-self: left;
+    align-items: left;
+    justify-items: left;
+    justify-content: left;
+    padding-left: 10%;
+}
+
+
+input{
+    border:none;
+    font-size: 16px;
+    color:#667a92;
+    height: 50px;
+    border-radius: 50px;
+    
+}
+  
+.input{
+width: 280px;
+height: 53px;
+font-size: 16px;
+font-weight: 500;
+background-color:white;
+border-radius: 50px;
+box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+cursor: pointer;
+outline: none;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+}
+
+.mas{
+    height: 53px;
+    width: 103px;
+    background-color:white;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta{
+    width: 100%;
+    border: 30px;
+    height: 293px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color:white;
+    border-radius: 10px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    outline: none;
+    align-items: center;
+    flex-direction: column;
+}
+
+button{
+    border: none;
+}
+
+.br{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,99 @@
+.iphoneCard
+  {
+      width: 340px;
+      border-radius: 30px;
+  }
+  .card-about
+  {
+    width: 100%;
+  }
+
+  .logo
+  {
+    width: 318px;
+    height: 185px;
+  }
+
+  .textT{
+    font-size: 26px;
+    color: #667a92;
+    text-align: center;
+    font-family: dosis-bold;
+  }
+  
+.textSubtitle
+{
+  font-size: 23px;
+  color: #B2C1C6;
+  text-align: center;
+  font-family: dosis-regular;
+}
+  
+
+.busqueda
+{
+    height: 300px;
+    margin: 0;
+    border-radius: 0px 0 30px 30px;
+    width: 340px;
+    border-radius: 30px;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1); 
+}
+
+.marginLeft32
+  {
+      margin-left: 32px;
+      
+  }
+
+  .row-left{
+    display: flex;
+    flex-direction: row;
+    align-content: left;
+    justify-content: flex-start;
+    justify-items: left;
+
+ 
+}
+.widthMenu
+{
+    width: 100%;
+}
+.push_button{
+    position:relative;
+    width:200px;
+    color:#FFF;
+    display:block;
+    text-decoration:none;
+    margin:0 auto;
+    border-radius:20px;
+    border:solid 1px #87ffff;
+    background:#4ccfe0;
+    text-align:center;
+    padding:10px 20px;
+  
+    -webkit-transition: all 0.01s;
+    -moz-transition: all 0.01s;
+    transition: all 0.01s;
+  
+    -webkit-box-shadow: 0px 9px 0px #009eae  ;
+        -moz-box-shadow: 0px 9px 0px #009eae
+  
+        ;
+        box-shadow: 0px 9px 0px #009eae
+  
+        ;
+  }
+  .push_button:active{
+    -webkit-box-shadow: 0px 2px 0px #009eae
+  
+    ;
+    -moz-box-shadow: 0px 2px 0px #009eae
+  
+    ;
+    box-shadow: 0px 2px 0px #009eae
+  
+    ;
+    position:relative;
+    top:7px;
+  }
