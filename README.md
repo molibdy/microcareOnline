@@ -1,27 +1,31 @@
-# MicrocareApp
+Design of a web app to track the daily intake of micronutrients and facilitate the fullfillment of the daily recommended doses
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
+Rodri 05/04: Subida register y login + actualizacion de styles
 
-## Development server
+Subida de la version beta del navbar y el repositorio de iconos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Fran 06/4 Menu burguer e inicio intro y tutorial
 
-## Code scaffolding
+Moli 06/04 9:00 actualización con los módulos de angular-calendar (primera versión sólo llevará week-view en forma de menú)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Moli 06/04 9:00 actualización con los módulos de angular-calendar (primera versión sólo llevará week-view en forma de menú)
 
-## Build
+Moli 06/04 21:00 subida del componente calendario, que contiene la vista de día con planning y retos. Controlador con guías para implementación funcional
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Moli 07/04 21:00 subida del componente home, que contiene los cuatro componentes de tipo chart (uno por grupo de micronutrientes) y un componente de tipo gráfica. Además he subido el componente micronutrient-chart con instrucciones para cuando creemos el service que lo rellene con los datos del micronutriente seleccionado.
 
-## Running unit tests
+Rodri 08/04: Subida de los componentes, botton cruz, botton burger y usuario. Actualizacion de Configuracion, fichas micro y fichas grupo. Me da pete el burger menu. FRAN 08/04 17:00 Modulo intro a medias y modulo anadir ingesta y submodulo introducir manual.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+FRAN 09/04 17:00 Modulo anadir ingesta al 80% y submodulo introducir manual arreglado, version 60% burger menu
 
-## Running end-to-end tests
+Fran 10/04 Creada Pipe Gramos, menu burger terminado, menu preferencias al 90%
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Moli 11/04 10:00 Componente "vista receta" con botones "añadir al plan" y "¡consumida!"
 
-## Further help
+Rodri 11/04 Cambio del buscador de buscar recetas se añaden las primeras tarjetas Fran 11/04 18:30 Componente favoritos terminado
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Moli 11/04 18:30 Componente "introducir manual" re-estructurado y con botón de registrar. Botón de "guardar como favorito" en proceso
+
+
+
+Moli 11/04 22:00 CREACION de nuevo repositorio que contiene sólo el proyecto Angular para que funcione el deployment
