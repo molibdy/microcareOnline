@@ -290,6 +290,18 @@ body{
 
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+    /* align-self: center; */
+    align-items:center;     /* alinea elementos verticalmente en el centro */
+    /* justify-items:center; */
+    justify-content: center; /* sitúa elementos en la parte central de la columna */
+    width: 100%;
+}
+
+
 .header{
     height: 60px;
 }

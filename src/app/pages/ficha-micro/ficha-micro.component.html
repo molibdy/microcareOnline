@@ -1,32 +1,43 @@
-<div class="header"></div>
+<app-botton-cruz></app-botton-cruz>
+<div class="br"></div>
+<div class="br"></div>
 <div class="tarjeta">
-    <app-botton-cruz></app-botton-cruz>
+    
     <div class="row-center ancho100">
         <div class="circlePic"><app-micronutrient-chart></app-micronutrient-chart></div>        
     </div>
 
-    <br>
+    <div class="br"></div>
 
     <div class="row-center ancho100">
         <div class="text">{{grupos[0]}}
         </div>
     </div>
 
-    <br>
+     <div class="br"></div>
     <div class="sub-titulo">
         Ingredientes ricos en {{grupos[0]}}
     </div>
+    <div class="br"></div>
     <div class="row-left wrap ancho100 chip-container">
         <div *ngFor="let micro of micronutrientes"> 
             <div class="chip-grande">{{micro}}
             </div>
         </div>
     </div>
-    <br>
+
+    <div class="br"></div>
     <div class="custom-hr"></div>
-    <br>
+    <div class="br"></div>
+
+
+    <div class="sub-titulo">
+        Recetas ricas en {{grupos[0]}}
+    </div>
+
+     <div class="br"></div>
     <div class="wrapper">
-        <div class="item" routerLink="../receta">
+        <div class="item" routerLink="../../../buscar-receta/receta">
             <div class="row-left"> 
                 <div class="chip1">
                     Vegano
@@ -84,5 +95,6 @@
         </div>
     </div>
 </div>
+<div class="footer"></div>
 
 
