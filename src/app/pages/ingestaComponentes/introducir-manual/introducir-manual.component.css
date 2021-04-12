@@ -166,6 +166,18 @@
   justify-content: flex-start;    /* alinea elementos verticalmente a la izquierda */
 }
 
+
+.rowInputs-nombre{
+  width:100%;
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;    /* alinea elementos horizontalmente en el centro de la fila*/
+  justify-content: flex-start;    /* alinea elementos verticalmente a la izquierda */
+}
+
 .width200{
   width: 200px;
 }

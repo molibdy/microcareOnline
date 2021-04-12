@@ -1,8 +1,8 @@
 
 
 <div class="col-center busqueda">
-<!--   ////// primera parte del menu ingesta sin hidden
- -->  <div *ngIf="!hiddenIngesta">
+  <!--   ////// primera parte del menu ingesta sin hidden-->
+   <div *ngIf="!hiddenIngesta">
         <div class="row-left textBoldGray  menu-item-expandible marginLeft12 marginTop10 ">
           <div>Introduce los alimentos que has consumido</div>
         </div>
@@ -52,41 +52,65 @@
                   <button class="boton-anadir marginleft10" (click)='crearIngrediente(ingrediente.value, peso.valueAsNumber)'>
                     <mat-icon class=" iconSizeGrayAdd  " svgIcon='add' ></mat-icon>
                   </button>
-                <!-- </div> -->
+              
 
-            </div>
-
+            </div>  <!-- Fin de rowInputs -->
+        </div>
            
-          <!-- </div> -->
-
-
+          
           <div class=" custom-hr-2"></div>
 
-               <div class=" textBoldGray  menu-item-expandible marginLeft12 ">Alimentos consumidos:</div>
+
+          <!-- Lista de alimentos añadidos -->
+
+          <div class=" textBoldGray  menu-item-expandible marginLeft12 ">Alimentos consumidos:</div>
 
           <div class="row-left  menu-item-expandible colorGray">
-            <div class="row-left listaIngredientes" >
-              <!-- <div class=" widthMenu"> -->
-                <!-- <div class="row-left"> -->
-                  <!-- <div> -->
+              <div class="row-left listaIngredientes" >
                     <ul >
                       <li *ngFor="let ingredient of listaIngredientes; let i = index" class=" ingredientLine">
                         <mat-icon class="quitarIngrediente iconSizeGray " svgIcon='close' (click)='quitarIngrediente(i)'></mat-icon>
                         {{ingredient.peso | gramos}} de {{ingredient.ingrediente}} 
                       </li>
                     </ul>
-                <!-- </div> -->
-              
-                <!-- </div> -->
-        
-              <!-- </div> -->
-            </div>
-        </div>
-
+              </div>
+          </div>
+        <!-- Fin de lista de alimentos añadidos -->  
         <div class="row-center"><button class="button-blue colorDark" (click)='registrarIngesta()' >Registrar</button></div>
 
+    </div>
+   
+
+        <!-- Guardar favoritos -->
+
+      <div  *ngIf="hiddenIngesta">
         
-        <!-- //////// tarjeta anadir pasos 
+          <div class="mensaje-container textBlueRegular16" >
+            ¡Consumo registrado!
+            <a class="link" (click)="guardarFavorito()">¿Guardar como favorito?</a>
+          </div>
+
+          
+          <div class=" widtMenu" *ngIf="showGuardarFavorito">
+              <div class="rowInputs-nombre">
+                
+                  <input class="inputIngrediente" type="text"  #nombreReceta placeholder="Nombre">
+              </div>
+               
+            
+              
+              <div class="row-center marginBottom10">
+                <button class="boton-guardar colorWhite dosis-bold backgroundBlue marginLeft10 " 
+                (click)='anadirFavorito()'>guardar</button>
+              </div>
+          </div>
+      </div>
+</div>
+
+
+
+
+      <!-- //////// tarjeta anadir pasos 
         -->
         <!-- <div></div>
         <div *ngIf="isRecAnadida">
@@ -127,45 +151,3 @@
         <div class="row-center textGuardarReceta" (click)='registrarReceta(pasos,nombreReceta,Imagenurl)' *ngIf='isRecAnadida' routerLink="../">Guardar Receta</div> -->
 
   <!-- /////////////// anadir favorito -->
-    </div>
-  </div>
-
-
-        <div  *ngIf="hiddenIngesta">
-          <div class="mensaje-container textBlueRegular16" >
-            ¡Consumo registrado!
-            <a class="link" (click)="guardarFavorito()">¿Guardar como favorito?</a>
-          </div>
-
-          
-            <div class=" widtMenu" *ngIf="showGuardarFavorito">
-              <div class="col-left">
-                
-                  <input type="text"  #nombreReceta placeholder="Nombre">
-              </div>
-               
-            
-              </div>
-              <div class="row-center marginBottom10">
-                <div class="marginRight10 ">
-                <button class="boton-anadir colorWhite dosis-bold backgroundGray marginleft10  " (click)='crearIngrediente(ingrediente.value, peso.valueAsNumber)'>NO</button>
-              </div>
-                <button class="boton-guardar colorWhite dosis-bold backgroundBlue marginLeft10 " (click)='crearIngrediente(ingrediente.value, peso.valueAsNumber)'>SI</button>
-              </div>
-             
-
-      
-          </div>
-
-
-
-
-
-
-
-
-          
-
-
-
-</div>
