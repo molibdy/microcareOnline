@@ -13,7 +13,6 @@ input{
 .tarjeta{
     width: 100%;
     border: 30px;
-    height: 705px;
     font-size: 16px;
     font-weight: 500;
     background-color:white;
@@ -22,10 +21,12 @@ input{
     cursor: pointer;
     outline: none;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     position: relative;
+    margin-top:40px;
+    padding-bottom:20px;
 }
 
 .burger{
@@ -133,7 +134,7 @@ input{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -40px;
+    margin-top: -80px;
 }
     
 
@@ -154,7 +155,7 @@ input{
 }
 
 .sub-titulo{
-    margin-left: 10px;
+    margin-left: 15px;
     font-size: 21px;
     color: #667a92;
     text-align: left;
@@ -162,8 +163,7 @@ input{
 }
 
 .br{
-    padding-top: 10px;
-    padding-bottom: 10px;
+   height: 15px
 }
 
 .cuerpo{

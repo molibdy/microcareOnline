@@ -9,7 +9,6 @@
 .tarjeta{
     width: 100%;
     border: 30px;
-    height: 705px;
     font-size: 16px;
     font-weight: 500;
     background-color:white;
@@ -18,10 +17,12 @@
     cursor: pointer;
     outline: none;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     position: relative;
+    margin-top: 40px;
+    padding-bottom: 20px;
     
 }
 
@@ -44,6 +45,7 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    margin-left: 10px;
 }
 
 .circle{
@@ -114,7 +116,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -40px;
+    margin-top: -80px;
     
 }
     
@@ -125,6 +127,14 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     width: 220px;
+}
+
+.custom-hr
+{
+    width: 300px;
+    border-bottom: solid 2px rgba(178, 193, 198, 0.185); 
+    position: relative;
+    align-self: center;
 }
 
 .titulo{
@@ -149,8 +159,7 @@
 }
 
 .br{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: 10px
 }
 
 .sub-titulo{

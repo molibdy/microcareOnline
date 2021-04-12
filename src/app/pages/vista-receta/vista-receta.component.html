@@ -1,171 +1,174 @@
-
-
-<div class="banner">
-    <img [src]="imgUrl" [alt]="nombre">
-</div>
-
-
-<div class="col-center 100 iphoneCard">
-   
-    <app-botton-cruz></app-botton-cruz>
-    <div class="col-left menu-item">
-        <div class="row-center">
-                <div class="title">
-                    Receta name
-                </div>
-        </div>
+<div class="container">
+    
+    <div class="banner">
+        <img [src]="imgUrl" [alt]="nombre">
+        <app-botton-cruz></app-botton-cruz>
     </div>
-    <!-- <div class="hr"></div> -->
 
-
-
-    <div class="col-left button-item">
-        <div class="row-left">
-                <button [ngClass]="!showDatePicker || isDateSelected ? 'mybutton-blue-white' : 'mybutton-soft'" (click)="selectDate()">
-                    <div class=" textButton" >
-                        <mat-icon class="iconoMedian"  [inline]='true'  svgIcon="calendario"></mat-icon> 
-                        <div class="separador10" > </div> 
-                        Planear 
-                    </div> 
-                </button>
-                <div class="separador"></div>
-                <button [ngClass]="!showDatePicker || isDateSelected ? 'mybutton-blue' : 'mybutton-soft'" (click)="addRegistro()">
-                    <div class=" textButton">
-                        <mat-icon class="iconoMedian"  [inline]='true'>done</mat-icon> 
-                        <div class="separador10" > </div> 
-                        <div>¡Consumida!</div> 
-                    </div> 
-                </button>
-        </div>
-
-
+    <div class="col-center 100 iphoneCard">
        
-  <!-- desplegable para elegir la fecha al clickar en PLANEAR -->
-  <div class="datePicker-container" *ngIf="showDatePicker">
-    <div class="hr"></div>
-    <mat-icon class="iconSizeGray derecha" svgIcon='close' (click)="cerrarDatePicker()"></mat-icon>
-
-    <div class="row-center">
-          <mat-form-field appearance="none" >
-              <div class="datePicker">
-                    <div class="row-center dateInput">
-                        <div>
-                        <mat-label class="textGraySemi16">¿Para qué día?</mat-label>
-                        <input matInput #dateInput [matDatepicker]="picker">
-                        </div>
-                    <mat-datepicker-toggle matSuffix [for]="picker">
-                        <mat-icon class="iconoGrande" matDatepickerToggleIcon [inline]='true'  svgIcon="calendario"></mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    </div>
-    
-                    <div class="separador20"> </div> 
-    
-                <button class="mybutton-blue-white" (click)="addToDay(dateInput)">
-                    Añadir al plan
-                </button>
-              </div>
-             
-            </mat-form-field>
-
-    </div>
-   
-  </div>
-
-
-      <!-- mensaje al seleccionar fecha  -->
-<div class="datePicker-container" *ngIf="isDateSelected">
-    <div class="hr"></div>
-    <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
-        <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
-        Receta añadida al plan del día {{selectedDate}}
-        <a class="link" [routerLink]="goToPlan">Ver plan</a>
-    </div>
-    
-</div>
-   
-
-      <!-- mensaje al CONSUMIR receta -->
-    <div class="datePicker-container" *ngIf="isConsumed && !alreadyConsumed">
-        <div class="hr"></div>
-        <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
-            <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
-            ¡Consumo registrado en tu progreso de hoy!
-        </div>
-            
-    </div>
-
-    <!-- mensaje al CONSUMIR receta si ya estaba consumida--> 
-    <div class="datePicker-container" *ngIf="showAlreadyConsumed">
-        <div class="hr"></div>
-        <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
-            <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
-            Esta receta ya ha sido consumida hoy!
-        </div>
-            
-    </div>
-    
-
-    <!-- Fin de la parte de los botones -->
-
-
-    <div class="hr"></div>
-
-
-    <div class="col-left chart-container">
-        <div class="row-left">
-                <div class="subtitle textBlueBold22">
-                    Micronutrientes más abundantes:
-                </div>
-        </div>
-        <app-micro-score></app-micro-score>
-    </div>
-
-     
-
-
-    <div class="hr"></div>
-  
-
-    <div class="col-left menu-item">
-        <div class="row-left">
-                <div class="subtitle textBlueBold22">
-                    Ingredientes
-                </div>
-        </div>
-    </div>
-
-    <div class="col-center menu-item" *ngFor="let ingrediente of ingredientes">
-        <div class="row-left row-item">
-            <div class="check"></div>
-            <div class="text">
-                {{ingrediente.cantidad}} {{ingrediente.unidad}} de {{ingrediente.nombre}}
-            </div>
-        </div>
-    </div>
-   
-
-    <div class=" container-pasos">
-        <div class="col-left ">
-            <div class="row-left row-item">
-                    <div class="subtitle textBlueBold20">
-                        Pasos
+        
+        <div class="col-left menu-item">
+            <div class="row-center">
+                    <div class="title">
+                        Receta name
                     </div>
             </div>
+        </div>
+        <!-- <div class="hr"></div> -->
+    
+    
+    
+        <div class="col-left button-item">
             <div class="row-left">
-                <div class="text pasos" [innerHtml]="pasos">
-                    <!-- {{pasos}} -->
-                </div>
+                    <button [ngClass]="!showDatePicker || isDateSelected ? 'mybutton-blue-white' : 'mybutton-soft'" (click)="selectDate()">
+                        <div class=" textButton" >
+                            <mat-icon class="iconoMedian"  [inline]='true'  svgIcon="calendario"></mat-icon> 
+                            <div class="separador10" > </div> 
+                            Planear 
+                        </div> 
+                    </button>
+                    <div class="separador"></div>
+                    <button [ngClass]="!showDatePicker || isDateSelected ? 'mybutton-blue' : 'mybutton-soft'" (click)="addRegistro()">
+                        <div class=" textButton">
+                            <mat-icon class="iconoMedian"  [inline]='true'>done</mat-icon> 
+                            <div class="separador10" > </div> 
+                            <div>¡Consumida!</div> 
+                        </div> 
+                    </button>
+            </div>
+    
+    
+           
+      <!-- desplegable para elegir la fecha al clickar en PLANEAR -->
+      <div class="datePicker-container" *ngIf="showDatePicker">
+        <div class="hr"></div>
+        <mat-icon class="iconSizeGray derecha" svgIcon='close' (click)="cerrarDatePicker()"></mat-icon>
+    
+        <div class="row-center">
+              <mat-form-field appearance="none" >
+                  <div class="datePicker">
+                        <div class="row-center dateInput">
+                            <div>
+                            <mat-label class="textGraySemi16">¿Para qué día?</mat-label>
+                            <input matInput #dateInput [matDatepicker]="picker">
+                            </div>
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                            <mat-icon class="iconoGrande" matDatepickerToggleIcon [inline]='true'  svgIcon="calendario"></mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        </div>
+        
+                        <div class="separador20"> </div> 
+        
+                    <button class="mybutton-blue-white" (click)="addToDay(dateInput)">
+                        Añadir al plan
+                    </button>
+                  </div>
+                 
+                </mat-form-field>
+    
+        </div>
+       
+      </div>
+    
+    
+          <!-- mensaje al seleccionar fecha  -->
+    <div class="datePicker-container" *ngIf="isDateSelected">
+        <div class="hr"></div>
+        <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
+            <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
+            Receta añadida al plan del día {{selectedDate}}
+            <a class="link" [routerLink]="goToPlan">Ver plan</a>
+        </div>
+        
+    </div>
+       
+    
+          <!-- mensaje al CONSUMIR receta -->
+        <div class="datePicker-container" *ngIf="isConsumed && !alreadyConsumed">
+            <div class="hr"></div>
+            <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
+                <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
+                ¡Consumo registrado en tu progreso de hoy!
+            </div>
+                
+        </div>
+    
+        <!-- mensaje al CONSUMIR receta si ya estaba consumida--> 
+        <div class="datePicker-container" *ngIf="showAlreadyConsumed">
+            <div class="hr"></div>
+            <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
+                <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
+                Esta receta ya ha sido consumida hoy!
+            </div>
+                
+        </div>
+        
+    
+        <!-- Fin de la parte de los botones -->
+    
+    
+        <div class="hr"></div>
+    
+    
+        <div class="col-left chart-container">
+            <div class="row-left">
+                    <div class="subtitle textBlueBold22">
+                        Micronutrientes más abundantes:
+                    </div>
+            </div>
+            <app-micro-score></app-micro-score>
+        </div>
+    
+         
+    
+    
+        <div class="hr"></div>
+      
+    
+        <div class="col-left menu-item">
+            <div class="row-left">
+                    <div class="subtitle textBlueBold22">
+                        Ingredientes
+                    </div>
             </div>
         </div>
     
+        <div class="col-center menu-item" *ngFor="let ingrediente of ingredientes">
+            <div class="row-left row-item">
+                <div class="check"></div>
+                <div class="text">
+                    {{ingrediente.cantidad}} {{ingrediente.unidad}} de {{ingrediente.nombre}}
+                </div>
+            </div>
+        </div>
        
+    
+        <div class=" container-pasos">
+            <div class="col-left ">
+                <div class="row-left row-item">
+                        <div class="subtitle textBlueBold20">
+                            Pasos
+                        </div>
+                </div>
+                <div class="row-left">
+                    <div class="text pasos" [innerHtml]="pasos">
+                        <!-- {{pasos}} -->
+                    </div>
+                </div>
+            </div>
+        
+           
+        </div>
+        
+        <div class="footer"></div>
+        <div class="footer"></div>
+    
     </div>
     
-    <div class="footer"></div>
-    <div class="footer"></div>
-
 </div>
+
 
 
 
