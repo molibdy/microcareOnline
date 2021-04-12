@@ -1,3 +1,4 @@
+@import '~swiper/swiper-bundle';
 
   .html100
   {
@@ -519,7 +520,7 @@
     -webkit-align-items: center;
     align-items: center;
   }
-  @import '~swiper/swiper-bundle';
+ 
   
   .swiper {
     height: 400px;

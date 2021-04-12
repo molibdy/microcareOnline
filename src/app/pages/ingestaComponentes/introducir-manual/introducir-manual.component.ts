@@ -17,7 +17,7 @@ export class IntroducirManualComponent implements OnInit {
   ///// formulario autocompletado
 
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
+  options: string[] = ['Pollo', 'Patata', 'Zanahoria','Cebolla'];
   filteredOptions: Observable<string[]>;
   
   public ingestas:object[] = []
@@ -101,6 +101,10 @@ export class IntroducirManualComponent implements OnInit {
 
   public guardarFavorito(){
     this.showGuardarFavorito=true
+  }
+
+  public anadirFavorito(){
+    
   }
 
 ///////// Recogida de datos //////////////
