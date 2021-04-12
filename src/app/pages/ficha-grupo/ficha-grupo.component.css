@@ -7,7 +7,7 @@
 }
   
 .tarjeta{
-    width: 375px;
+    width: 100%;
     border: 30px;
     height: 705px;
     font-size: 16px;
@@ -146,4 +146,17 @@
 
 .wrap{
     flex-wrap: wrap;
+}
+
+.br{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.sub-titulo{
+    margin-left: 10px;
+    font-size: 21px;
+    color: #667a92;
+    text-align: left;
+    justify-content: left;
 }

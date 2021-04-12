@@ -53,28 +53,6 @@
 }
 
 
-.row-center{
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-self: center;
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
-}
-
-.row-right{
-    display: flex;
-    flex-direction: row;
-    text-align: right;
-    align-self: right;
-    align-items: right;
-    justify-items: right;
-    justify-content: flex-end;
-    padding-right: 10%;
-    
-}
-
 .row-left{
     display: flex;
     flex-direction: row;
@@ -86,37 +64,6 @@
     padding-left: 10%;
 }
 
-.col-center{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-self: center;
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
-}
-
-.col-right{
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-    align-self: right;
-    align-items: right;
-    justify-items: right;
-    justify-content: right;
-    padding-right: 10%;
-}
-
-.col-left{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    align-self: left;
-    align-items: left;
-    justify-items: left;
-    justify-content: left;
-    padding-left: 10%;
-}
 
 input{
     border:none;
@@ -141,7 +88,7 @@ justify-content: center;
 }
 
 .tarjeta{
-    width: 375px;
+    width: 100%;
     border: 30px;
     height: 705px;
     font-size: 16px;
@@ -166,4 +113,9 @@ justify-content: center;
     width: 130px;
     border: solid 8px rgb(255, 255, 255);
     border-radius: 50%;
+}
+
+.br{
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
