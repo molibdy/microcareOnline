@@ -293,7 +293,9 @@ body{
 .header{
     height: 60px;
 }
-
+*:focus {
+    outline: none
+}
 .footer{
     height: 60px;
 }

@@ -1,4 +1,4 @@
-    <div class=" row-left marginTop10"> 
+    <div class=" row-left marginTop10 "> 
         <div class=" text20 widthMenu  " >Favoritos</div>
     </div>
 
@@ -12,7 +12,7 @@
                <div class="fondo-cerrar" (click)='quitarFavorito(i)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
                     {{favorito.nombre}}
                     
-                    <mat-chip-list aria-label="Fish selection" >
+                    <mat-chip-list aria-label="Fish selection" class="marginTop10" >
                         <mat-chip *ngFor="let micronutriente of favorito.score"  class="chip-material">{{micronutriente.nombre}}</mat-chip>
                       </mat-chip-list>
 
