@@ -14,11 +14,13 @@ export class VistaRecetaComponent implements OnInit {
   public imgUrl:string;
   public microscore:string[]
 
+  // boton planear
   public showDatePicker:boolean;
   public selectedDate:string
   public isDateSelected:boolean;
   public goToPlan:string;
 
+  //boton consumida
   public isConsumed:boolean;
   public alreadyConsumed:boolean
   public showAlreadyConsumed:boolean
