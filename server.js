@@ -3,9 +3,9 @@ const app = express();
 
 app.use(express.static(__dirname + '/dist/microcareApp'));
 app.get('/*',function(req,res){
-    // res.sendFile("index.html", {root:__dirname + '/dist/microcareApp/'});
+    res.sendFile("index.html", {root:__dirname + '/dist/microcareApp/'});
     
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
+    // res.sendFile(path.join(__dirname + '/dist/index.html'));
     // res.sendFile(path.join(__dirname + '/dist/microcareApp/index.html'));
 });
 
