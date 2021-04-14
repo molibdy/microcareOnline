@@ -4,28 +4,28 @@
     <mat-icon class="iconSize colorBlue"  svgIcon="logo"></mat-icon>
     <div>
         <form [formGroup]="myForm">
-            <div class="form-group">
+        
                 <div class="input">
-                    <input type="text" class="form-control" formControlName="usuario" placeholder="Nombre de usuario"
-                    [ngClass]="{'is-invalid': !myForm.get('usuario').valid}">
-                </div>
-                <div *ngIf="!myForm.get('usuario').valid" class="invalid-feedback">
+                    <!-- <input type="text" class="form-control" formControlName="usuario" placeholder="Nombre de usuario"
+                    [ngClass]="{'is-invalid': !myForm.get('usuario').valid}"> -->
+                    <input type="text"  class="form-control"  formControlName="username" placeholder="Nombre de usuario">
+                </div>  
+                <!-- <div *ngIf="!myForm.get('usuario').valid" class="invalid-feedback">
                     El usuario es necesario
-                </div>
-            </div>
+                </div> -->
         <br>
         <div class="input">
-            <input placeholder="E-mail">
+            <input type="text"  class="form-control" formControlName="email"  placeholder="E-mail">
         </div>
         <br>
         <div class="input">
-            <input placeholder="Contraseña">
+            <input placeholder="Contraseña" type="text"  class="form-control" formControlName="password" >
         </div>
         <br>
         <br>
-        <div class="form-group">
-            <button class="button-blue" [disabled]="myForm.invalid" routerLink="../login">crear cuenta</button>
-        </div>       
+        
+            <button class="button-blue" routerLink="../login" (click)="registrarUsuario(myForm)">crear cuenta</button>
+             
         <br>
         <br>
         <div class="col-center">
