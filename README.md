@@ -29,3 +29,5 @@ Moli 11/04 18:30 Componente "introducir manual" re-estructurado y con botón de 
 
 
 Moli 11/04 22:00 CREACION de nuevo repositorio que contiene sólo el proyecto Angular para que funcione el deployment
+
+Fran 14/04 Funcionalidad de registro terminada 
