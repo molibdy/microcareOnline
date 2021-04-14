@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoginInfoService } from 'src/app/shared/login-info.service';
 
 @Component({
@@ -9,16 +10,30 @@ import { LoginInfoService } from 'src/app/shared/login-info.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public LoginInfoService:LoginInfoService) { 
+public loginForm: FormGroup
+  constructor(private formBuilder: FormBuilder, private apiService: LoginInfoService) { 
+ this.buildForm()
  
+  }
+  ngOnInit(): void {
+  
   }
 
   public entrar(){
-    this.LoginInfoService.isDentro=true
-  }
-  
-
-  ngOnInit(): void {
+    this.apiService.isDentro=true
   }
 
+  buildForm(){
+    this.loginForm = this.formBuilder.group({
+      username: [],
+      password: [],
+    })
+
+
+// logearse(){
+ 
+// }
+
+
+}
 }

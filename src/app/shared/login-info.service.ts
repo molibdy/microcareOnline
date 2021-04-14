@@ -28,4 +28,12 @@ export class LoginInfoService{
    return this.http.get(this.url + '?username=' + username)
  }
 
+
+
+  loginUsuario(username:string , password:string){
+  return this.http.post(this.url + '/login' + username , password)
+  }
+
+
+
 }
