@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoginInfoService {
   public isDentro:boolean
+  public user={user_id:1,username:'pepe'}
   constructor() { 
     this.isDentro=false
   }

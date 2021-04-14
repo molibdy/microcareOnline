@@ -9,6 +9,8 @@ import {
   ApexStroke,
   
 } from "ng-apexcharts";
+import { Group } from 'src/app/models/group';
+import { ProgressService } from 'src/app/shared/progress.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -29,9 +31,14 @@ export type ChartOptions = {
 export class AminoacidChartComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  constructor() { 
+  public groupData:Group;
+  constructor(public progressService:ProgressService) { 
+    
+    this.groupData=this.progressService.aminoacidos;
+    console.log(this.groupData)
+
     this.chartOptions = {
-      series: [75],         //DEPENDIENTE DE CLASE
+      series: [this.groupData.percent],         //DEPENDIENTE DE CLASE
       chart: {
         height: 190,
         type: "radialBar",
@@ -92,13 +99,13 @@ export class AminoacidChartComponent implements OnInit {
         }
       },
       fill: {
-        colors:["#734fe9"],   //DEPENDIENTE DE CLASE
+        colors:[this.groupData.color2],   //DEPENDIENTE DE CLASE
         type: "gradient",
         gradient: {
           shade: "dark",
           type: "horizontal",
           shadeIntensity: 0.5,
-          gradientToColors: ["#A18CE8"],    //DEPENDIENTE DE CLASE
+          gradientToColors: [this.groupData.color],    //DEPENDIENTE DE CLASE
           inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
@@ -108,11 +115,12 @@ export class AminoacidChartComponent implements OnInit {
       stroke: {
         lineCap: "round"
       },
-      labels: ["Aminoácidos"]     //DEPENDIENTE DE CLASE
+      labels: [this.groupData.name]     //DEPENDIENTE DE CLASE
     };
   }
 
   ngOnInit(): void {
+    
   }
 
 }
