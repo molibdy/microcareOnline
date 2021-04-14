@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
     this.respuestaNegativa =""
   }
  
-
   ngOnInit(): void {
   }
 
@@ -46,22 +45,25 @@ buildForm(){
   // }
 
 
-  registrarUsuario(form:FormGroup){
-    this.apiService.getUsuario(form.value.username, form.value.email).subscribe((data:any)=>
+  registrarUsuario(){
+    console.log(this.myForm.value.username);
+    this.apiService.getUsuario(this.myForm.value.username).subscribe((data:any)=>
     {
       console.log(data)
-      if(data.type == -1 || data.type == -2){
-        this.respuestaNegativa = "El usuario o el e-mail ya existen"
-      }else{
-        this.apiService.postUsuario(data).subscribe((data:any)=>
+      if(data.type == 1){
+        this.apiService.postUsuario(data.message).subscribe((data2:any)=>
         {
-          if(data.affectedrows=0){
-            this.respuestaNegativa = "El usuario o el e-mail ya existen"
+          if(data2.affectedrows=0){
+            this.respuestaNegativa = data2.message  + "El usuario ya existe"
           }else{
-            console.log(data);
-            this.respuestaPositiva = "La cuenta ha sido creada"
+            console.log(data2);
+            this.respuestaPositiva = data2.message  + "La cuenta ha sido creada"
           }
       })
+    }else if(data.type == -1 || data.type == -2){
+      this.respuestaNegativa = data.message  + "El usuario ya existe"
+    }else{
+      this.respuestaNegativa = data.message
     }
   })
 }}
