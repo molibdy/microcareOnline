@@ -13,7 +13,7 @@ export class LoginInfoService{
   // private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
-  public user:User = new User(0,"","","")
+  public user:User = new User(2,"","","")
   
   
   constructor(private http:HttpClient) { 
@@ -44,7 +44,7 @@ datosLogin(username:string , password:string){
   {
     console.log(data.message)
     this.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password, data.message[0].email)
-    console.log(data.message)
+    console.log(this.user)
   })
 }
 

@@ -37,4 +37,54 @@ export class ProgressService {
     return this.http.post(this.url,{"user_id":user_id, "date":dateString});
   }
   
+
+
+  public rellenarGrupos(user_id:number,date:string){
+
+    //Rellena el atributo groups de progressService para rellenar los chart-components
+    this.getGroups(user_id,date)
+    .subscribe((grupos:any)=>{
+        if(grupos.type==1){
+          this.groups=grupos.message;
+          for(let i=0;i<this.groups.length;i++){
+            if(this.groups[i].name=='vitaminas'){
+              this.vitaminas=this.groups[i] 
+            }
+            else if(this.groups[i].name=='minerales'){
+              this.minerales=this.groups[i]
+            }
+            else if(this.groups[i].name=='aminoácidos'){
+              this.aminoacidos=this.groups[i]
+            }
+            else if(this.groups[i].name=='oligoelementos'){
+              this.oligoelementos=this.groups[i]
+            }
+          }
+        }
+        console.log(grupos.message)
+    });
+  }
+
+
+
+  public startAll(user_id:number,date:string){
+    this.getProgress(user_id,date)
+    .subscribe((data:any)=>{
+      if(data.type==1){
+        this.totalProgress=data.message
+        this.rellenarGrupos(user_id,date)
+      }
+      else if(data.type==-1){
+        for(let i=1;i<38;i++){
+          let progreso=new Progress(user_id,date,i,20)
+          this.startProgress(progreso)
+          .subscribe((added:any)=>{
+            console.log(added.message)
+          })
+        }
+        this.rellenarGrupos(user_id,date)
+      }
+    })
+  }
+  
 }
