@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
 
   public respuestaPositiva:string
   public respuestaNegativa:string
+  public cuentaCreada:boolean = false
+  public usuarioExistente:boolean = false
   
   constructor(private formBuilder: FormBuilder, private apiService: LoginInfoService) { 
     this.buildForm()
@@ -46,24 +48,22 @@ buildForm(){
 
 
   registrarUsuario(){
-    console.log(this.myForm.value.username);
-    this.apiService.getUsuario(this.myForm.value.username).subscribe((data:any)=>
-    {
-      console.log(data)
-      if(data.type == 1){
-        this.apiService.postUsuario(data.message).subscribe((data2:any)=>
+        this.apiService.postUsuario(this.myForm.value).subscribe((data2:any)=>
         {
-          if(data2.affectedrows=0){
-            this.respuestaNegativa = data2.message  + "El usuario ya existe"
-          }else{
+          console.log(this.myForm.value);
+          
+          console.log(data2.type);
+          
+          if(data2.type == 1){
             console.log(data2);
-            this.respuestaPositiva = data2.message  + "La cuenta ha sido creada"
+            this.respuestaPositiva = "La cuenta ha sido creada"
+            this.cuentaCreada = true
+          }else{
+            this.respuestaNegativa = "El usuario ya existe"
+            this.usuarioExistente = true
           }
       })
-    }else if(data.type == -1 || data.type == -2){
-      this.respuestaNegativa = data.message  + "El usuario ya existe"
-    }else{
-      this.respuestaNegativa = data.message
     }
-  })
-}}
+
+
+}

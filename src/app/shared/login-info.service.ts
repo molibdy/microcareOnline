@@ -20,12 +20,13 @@ export class LoginInfoService{
   /////////////////////////metodos de registro
 
 
- postUsuario(newUser:User){
-   return this.http.post(this.url, newUser)
- }
+
 
  getUsuario(username:string){
    return this.http.get(this.url + '?username=' + username)
  }
+ postUsuario(newUser:User){
+  return this.http.post(this.url + "/registro", newUser)
+}
 
 }

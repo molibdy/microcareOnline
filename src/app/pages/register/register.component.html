@@ -2,7 +2,14 @@
 <div class="col-center">
     <br>
     <mat-icon class="iconSize colorBlue"  svgIcon="logo"></mat-icon>
-    <div>
+    <div *ngIf="usuarioExistente">
+        <div class="bordeEliminar textBlueSemi20  col-center marginBottom10">
+            <div class="paddingRespuesta marginTop10 marginBottom10" (click)="usuarioExistente = false">{{respuestaNegativa}}, prueba con otro username <br></div>
+        </div>
+
+
+    </div>
+    <div *ngIf="!cuentaCreada">
         <form [formGroup]="myForm">
         
                 <div class="input">
@@ -19,12 +26,12 @@
         </div>
         <br>
         <div class="input">
-            <input placeholder="Contraseña" type="text"  class="form-control" formControlName="password" >
+            <input placeholder="Contraseña" type="password"  class="form-control" formControlName="password" >
         </div>
         <br>
         <br>
         
-            <button class="button-blue" routerLink="../login" (click)="registrarUsuario()">crear cuenta</button>
+            <button class="button-blue" (click)="registrarUsuario()">crear cuenta</button>
              
         <br>
         <br>
@@ -37,5 +44,13 @@
             <p class="text">Ya tengo cuenta,</p> <p class="link" routerLink="../login"> Entrar</p>
         </div>
         </form>
+    </div>
+    <div *ngIf="cuentaCreada">
+        <div class="bordeAnadir textBlueSemi20  col-center ">
+            <div class="paddingRespuesta marginTop22 marginBottom22">{{respuestaPositiva}} <br></div>
+        </div>
+        <div class=" button-blue marginTop22" routerLink="../login"> Logueate con tu cuenta</div>
+
+
     </div>
 </div>
