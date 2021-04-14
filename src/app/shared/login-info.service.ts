@@ -9,7 +9,8 @@ import { User } from '../models/user';
 
 export class LoginInfoService{
   
-  private url = 'http://localhost:300/usuario'
+  private url = 'https://api-rest-microcare.herokuapp.com/usuario'
+  // private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
   public user:User = new User(0,"","","")
