@@ -12,7 +12,8 @@ export class LoginInfoService{
   private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
-  public user:User
+  public user:User = new User(0,"","","")
+  
   
   constructor(private http:HttpClient) { 
   }
@@ -30,9 +31,20 @@ export class LoginInfoService{
 
 
 
-  loginUsuario(username:string , password:string){
-  return this.http.post(this.url + '/login' + username , password)
+  obtenerUsuario(user:User){
+  return this.http.post(this.url + '/login' , user)
   }
+
+datosLogin(username:string , password:string){
+  this.user.username = username
+  this.user.password = password
+  this.obtenerUsuario(this.user).subscribe((data:any)=>
+  {
+    console.log(data.message)
+    this.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password, data.message[0].email)
+    console.log(data.message)
+  })
+}
 
 
 

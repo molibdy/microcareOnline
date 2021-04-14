@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoginInfoService } from 'src/app/shared/login-info.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,17 +24,18 @@ public loginForm: FormGroup
     this.apiService.isDentro=true
   }
 
+ 
   buildForm(){
     this.loginForm = this.formBuilder.group({
       username: [],
       password: [],
     })
 
+  }
 
-// logearse(){
- 
-// }
+  logearse(){
+    this.apiService.datosLogin(this.loginForm.value.username,this.loginForm.value.password)
+  }
 
 
-}
 }
