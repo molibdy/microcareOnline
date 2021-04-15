@@ -14,16 +14,15 @@ export class LoginInfoService{
   // private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
-<<<<<<< HEAD
+
+  
   public router:Router;
   public isNonRegistered:boolean = false
-  public user:User = new User("","","")
 
-
-=======
-  public user:User = new User(2,"","","")
   
->>>>>>> 2b75bfcfdb0a988827e564a79f9d4c4541bdeb20
+  public user:User = new User(0,"","","")
+
+  
   
   constructor(private http:HttpClient,  private _router:Router) { 
     this.router = _router
@@ -48,8 +47,6 @@ export class LoginInfoService{
     }
 
 
-<<<<<<< HEAD
-=======
 datosLogin(username:string , password:string){
   this.user.username = username
   this.user.password = password
@@ -60,7 +57,6 @@ datosLogin(username:string , password:string){
     console.log(this.user)
   })
 }
->>>>>>> 2b75bfcfdb0a988827e564a79f9d4c4541bdeb20
 
 
 
