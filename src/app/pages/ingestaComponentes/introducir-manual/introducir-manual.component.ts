@@ -112,7 +112,7 @@ export class IntroducirManualComponent implements OnInit {
 
   guardarFavorito(favorito){
     let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
-    let favoritoObject = {user_id: userSession, nombre: favorito, intake_id: this.ingestaService.intakeID}
+    let favoritoObject = {user_id: userSession, name: favorito, intake_id: this.ingestaService.intakeID}
     this.showGuardarFavorito=true
     this.ingestaService.guardarFavoritos(favoritoObject).subscribe((data:any) => {
 

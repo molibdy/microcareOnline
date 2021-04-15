@@ -14,16 +14,17 @@
 <!-- <app-preferencias></app-preferencias>
  -->
 
-<router-outlet></router-outlet> 
+
 
 <div *ngIf="LoginInfoService.user.user_id>0; else login">
+<router-outlet></router-outlet> 
 <app-nav-bar></app-nav-bar>
 </div>
 
-<div #login>
+<ng-template #login>
     <!-- Aquí habría un componente padre que contiene tres componentes hijos: login, register y loading-->
     <app-auth></app-auth>
-</div>
+</ng-template>
 
 
 
