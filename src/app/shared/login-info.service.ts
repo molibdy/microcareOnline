@@ -13,7 +13,7 @@ export class LoginInfoService{
   // private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
-  public user:User = new User(2,"","","")
+  public user:User = new User(0,"","","")
   
   
   constructor(private http:HttpClient) { 

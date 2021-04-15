@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './pages/auth/auth.component';
 import { BurgerMenuComponent } from './pages/burger-menu/burger-menu.component';
 import { BuscadorRecetasComponent } from './pages/buscador-recetas/buscador-recetas.component';
 import { BarraBuscadorComponent } from './pages/buscador/barra-buscador/barra-buscador.component';
@@ -26,8 +27,8 @@ BarraBuscadorComponent
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'dia', component:CalendarioComponent},
-  {path:'register', component:RegisterComponent},
-  {path:'login', component:LoginComponent},
+  // {path:'register', component:RegisterComponent},
+  // {path:'login', component:LoginComponent},
   {path:'menu', component:BurgerMenuComponent},
   {path:'home/grupo', component:FichaGrupoComponent},
   {path:'buscar-receta', component:BuscadorRecetasComponent},
@@ -48,7 +49,15 @@ const routes: Routes = [
   {path:'intro3', component:Intro3Component},
   {path:'intro4', component:Intro4Component},
   {path:'menu/preferencias', component:PreferenciasComponent},
- 
+  {
+    path: '**',
+    component: AuthComponent, 
+    children: [
+      {path:'login', component:LoginComponent},
+      {path:'register', component:RegisterComponent},
+      {path:'**', component:LoginComponent},
+    ]
+  },
 
 ];
 
