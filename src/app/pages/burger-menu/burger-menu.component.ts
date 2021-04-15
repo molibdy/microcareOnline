@@ -43,13 +43,10 @@ export class BurgerMenuComponent implements OnInit {
   ngOnInit(): void {
     if(this.apiService.micronutrientes.length == 0 ){
     this.apiService.getMicros().subscribe((data:any)=>
-    { console.log(data.message)
+    { console.log(data.type)
       if(data.type = 1){
-        
       this.apiService.micronutrientes = data.res
       }
-      console.log("Acabo de cargar getMicros")
-      console.log(data.res)
     })
     }
     if(this.servicioReceta.recetas.length == 0){
@@ -58,8 +55,6 @@ export class BurgerMenuComponent implements OnInit {
         if(data.type = 1){
         this.servicioReceta.recetas = data.res
         }
-        console.log("Acabo de cargar recetas")
-        console.log(data.res)
       })
     }
   }

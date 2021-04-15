@@ -33,21 +33,19 @@
                             <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20" >
                                 Micronutrientes:
                             </div> 
-
-
                                 <div *ngFor="let micronutriente of micronutrientes">
                                         <div class="row-left widthMenu100">
                                             
                                                 
                                                 <div class=" widthMenu100 col-left   menu-item-busqueda   textBlueSemi20">
-                                                    <p class="marginLeft32">{{micronutriente.nombre}}</p> 
+                                                    <p class="marginLeft32">{{micronutriente.micronutrient_name}}</p> 
                                                 </div>                                                       
                                         </div>
-                            </div>
+                                </div>
                             <div class="custom-hr"></div>
                         </div>
-<!--                          ////////// elemento ingredientes ////////
- -->                <div *ngIf="inputSearch.length > 0 && ingredientes.length > 0"> 
+                          <!-- ////////// elemento ingredientes //////// -->
+                <!-- <div *ngIf="inputSearch.length > 0 && ingredientes.length > 0"> 
          
                         
                         <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20">
@@ -65,11 +63,11 @@
                                     </div>
                             </div>
                             <div class="custom-hr"></div>
-                        </div> 
+                        </div>  -->
                         
 <!--                          //////// elemento recetas ///////
  
- -->            <div *ngIf="inputSearch.length > 0 && recetas.length > 0">  
+ -->            <div *ngIf="inputSearch.length > 0 && recetasServicio.recetas">  
 
                     <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20">
                             Recetas:

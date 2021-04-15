@@ -8,11 +8,13 @@ import { Injectable } from '@angular/core';
 })
 export class RecetasService {
 
-  public recetas=[]
+  public recetas
   //private url = 'https://api-rest-microcare.herokuapp.com/recetas'
   private url = 'http://localhost:300/recetas'
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    this.recetas = []
+   }
 
 
   getRecetas(){

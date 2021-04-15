@@ -6,11 +6,13 @@ import { Injectable } from '@angular/core';
 })
 export class MicronutrientesService {
 
-  public micronutrientes=[]
+  public micronutrientes
   // private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
   private url = 'http://localhost:300/micronutrientes'
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { 
+    this.micronutrientes = []
+  }
 
 
   getMicros(){

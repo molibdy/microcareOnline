@@ -41,17 +41,9 @@ export class LoginInfoService{
   }
 
 
-<<<<<<< HEAD
-
-    obtenerUsuario(user:User){
-    return this.http.post(this.url + '/login' , user)
-    }
-
-=======
   obtenerUsuario(user:User){
   return this.http.post(this.url + '/login' , user)
   }
->>>>>>> rodri
 
 datosLogin(username:string , password:string){
   this.user.username = username
