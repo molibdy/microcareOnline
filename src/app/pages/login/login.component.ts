@@ -4,6 +4,7 @@ import { LoginInfoService } from 'src/app/shared/login-info.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 
+import { ProgressService } from 'src/app/shared/progress.service';
 
 
 @Component({
@@ -17,7 +18,9 @@ public loginForm: FormGroup
 public isNonRegisteredC:boolean = false
   router: any;
 
-  constructor(private formBuilder: FormBuilder, private apiService: LoginInfoService) { 
+public date=new Date()
+public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
+  constructor(private formBuilder: FormBuilder, private apiService: LoginInfoService, public progressService:ProgressService) { 
  this.buildForm()
  
   }
@@ -54,8 +57,7 @@ public isNonRegisteredC:boolean = false
     
       if(data.type == 1){
         console.log(data.message)
-        this.apiService.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password)
-        this.apiService.user.email = data.message[0].email
+        this.apiService.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password,data.message[0].email)
         sessionStorage.setItem('userSession',JSON.stringify(this.apiService.user))
         console.log(data.message)
         this.router.navigate(['home']);
@@ -70,6 +72,13 @@ public isNonRegisteredC:boolean = false
   
     
 
+
+    // Lo siguiente sólo debería ocurrir cuando el user está rellenado con los datos de obtenerUsuario()
+    
+      //1.
+      this.progressService.startAll(this.apiService.user.user_id,this.dateString)
+
+      //2. Routing a home desde controlador
   }
 
 

@@ -10,14 +10,20 @@ import { Router } from '@angular/router';
 
 export class LoginInfoService{
   
-  private url = 'http://localhost:300/usuario'
+  private url = 'https://api-rest-microcare.herokuapp.com/usuario'
+  // private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
+<<<<<<< HEAD
   public router:Router;
   public isNonRegistered:boolean = false
   public user:User = new User("","","")
 
 
+=======
+  public user:User = new User(2,"","","")
+  
+>>>>>>> 2b75bfcfdb0a988827e564a79f9d4c4541bdeb20
   
   constructor(private http:HttpClient,  private _router:Router) { 
     this.router = _router
@@ -42,6 +48,19 @@ export class LoginInfoService{
     }
 
 
+<<<<<<< HEAD
+=======
+datosLogin(username:string , password:string){
+  this.user.username = username
+  this.user.password = password
+  this.obtenerUsuario(this.user).subscribe((data:any)=>
+  {
+    console.log(data.message)
+    this.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password, data.message[0].email)
+    console.log(this.user)
+  })
+}
+>>>>>>> 2b75bfcfdb0a988827e564a79f9d4c4541bdeb20
 
 
 
