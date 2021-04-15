@@ -32,7 +32,6 @@ export class LoginInfoService{
 }
 
 
-
   obtenerUsuario(user:User){
   return this.http.post(this.url + '/login' , user)
   }

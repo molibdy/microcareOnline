@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
+
+import { RecetasService } from 'src/app/shared/recetas.service';
+
+
 
 @Component({
   selector: 'app-burger-menu',
@@ -12,10 +17,9 @@ export class BurgerMenuComponent implements OnInit {
   public coincidencia:string[] = ['','Hey como estas',"adios amigo","sss","dd"]
   public imageProfile:string = 'https://media-exp1.licdn.com/dms/image/C5603AQHgQm5806sx2A/profile-displayphoto-shrink_200_200/0/1541434175803?e=1621468800&v=beta&t=MOKmnJRHHZuVXWS2uTrRQvfKVEl3nVDhvMssTmYw79o'
 
-  constructor(
 
-  ) {
-   }
+  constructor(private apiService:MicronutrientesService, private servicioReceta:RecetasService) 
+  {}
 
    
    onFocusEvent(event: any)
@@ -35,20 +39,30 @@ export class BurgerMenuComponent implements OnInit {
      this.focoBuscador = true
    }
 
-  ngOnInit(): void {
-    console.log(this.inputText);
-    if(this.inputText.length>=1)
-    {
-      this.foco = true;
-    }
-    else
-    {
-      this.foco = false;
-    }
-    
-    
-  }
 
+  ngOnInit(): void {
+    if(this.apiService.micronutrientes.length == 0 ){
+    this.apiService.getMicros().subscribe((data:any)=>
+    { console.log(data.message)
+      if(data.type = 1){
+        
+      this.apiService.micronutrientes = data.res
+      }
+      console.log("Acabo de cargar getMicros")
+      console.log(data.res)
+    })
+    }
+    if(this.servicioReceta.recetas.length == 0){
+      this.servicioReceta.getRecetas().subscribe((data:any)=>
+      {
+        if(data.type = 1){
+        this.servicioReceta.recetas = data.res
+        }
+        console.log("Acabo de cargar recetas")
+        console.log(data.res)
+      })
+    }
+  }
 }
 
 
