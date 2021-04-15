@@ -10,6 +10,8 @@ import {
   ApexTooltip,
   ApexStroke
 } from "ng-apexcharts";
+import { LoginInfoService } from "src/app/shared/login-info.service";
+import { ProgressService } from "src/app/shared/progress.service";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -30,17 +32,56 @@ export class GraficaOthersComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
-  constructor() {
+  public userDates:number[];
+  public userPercents:[number,number][];
+  public othersPercents:[number,number][];
+
+  constructor(private progressService:ProgressService, private userService:LoginInfoService) {
+
+    this.userDates=[]
+    this.userPercents=[]
+
+    for(let i=0;i<this.progressService.averageProgress.length;i++){
+      console.log(typeof this.progressService.averageProgress[i].date)
+      this.userDates.push(this.progressService.averageProgress[i].date.slice(0,10))
+      console.log(this.userDates)
+      let fecha=Date.parse(this.progressService.averageProgress[i].date)
+      this.userPercents.push([fecha,this.progressService.averageProgress[i].percent])
+      
+    }
+
+    this.othersPercents=[]
+    for(let i=0;i<this.progressService.averageProgressTotal.length;i++){
+      let fecha=Date.parse(this.progressService.averageProgressTotal[i].date)
+      this.othersPercents.push([fecha,this.progressService.averageProgressTotal[i].percent])
+    }
+    
+
+    // for(let i=0;i<this.progressService.averageProgress.length;i++){
+    //   // let fecha=this.progressService.averageProgress[i].date.slice(0,10)
+    //   console.log(typeof this.progressService.averageProgress[i].date)
+    //   this.userDates.push(this.progressService.averageProgress[i].date)
+    //   this.userPercents.push(this.progressService.averageProgress[i].percent)
+    // }
+
+    // this.othersPercents=[]
+    // for(let i=0;i<this.progressService.averageProgressTotal.length;i++){
+    //   // let fecha=this.progressService.averageProgressTotal[i].date.slice(0,10)
+    //   if(this.userDates.includes(this.progressService.averageProgressTotal[i].date)){
+    //     this.othersPercents.push(this.progressService.averageProgressTotal[i].percent)
+    //   }
+    // }
+
     this.chartOptions = {
       series: [
         {
-          name: "userName",   // DEPENDE DE USER
-          data: [31, 40, 28, 51, 42, 99, 100],   // DEPENDE DE USER
+          name: this.userService.user.username,   // username
+          data: this.userPercents,   // Array de average progress del user
           color:"#5ce1e6"
         },
         {
-          name: "otros usuarios",     // RELLENAR
-          data: [11, 32, 45, 32, 34, 52, 41],     // RELLENAR
+          name: "otros usuarios",     // 
+          data: this.othersPercents,     // Array de average progress Total
           color:"#B2C1C6"
         }
       ],
@@ -69,20 +110,14 @@ export class GraficaOthersComponent implements OnInit {
       },
       xaxis: {
         type: "datetime",
-        categories: [
-          "2021-09-18",     // RELLENAR
-          "2021-09-19",
-          "2021-09-20",
-          "2021-09-21",
-          "2021-09-22",
-          "2021-09-23",
-          "2021-09-24"
-        ]
+        // categories: this.userDates,
+        labels: {
+          format: 'd MMM',
+        }
+        // ["2021-09-18", "2021-09-19","2021-09-20","2021-09-21","2021-09-22","2021-09-23","2021-09-24"]
       },
       tooltip: {
-        x: {
-          format: "dd MMM"
-        }
+        enabled: false
       }
     };
   }

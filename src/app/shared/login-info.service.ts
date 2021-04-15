@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 
 export class LoginInfoService{
   
-  private url = 'https://api-rest-microcare.herokuapp.com/usuario'
-  // private url = 'http://localhost:300/usuario'
+  // private url = 'https://api-rest-microcare.herokuapp.com/usuario'
+  private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
 
@@ -20,7 +20,7 @@ export class LoginInfoService{
   public isNonRegistered:boolean = false
 
   
-  public user:User = new User(0,"","","")
+  public user:User = new User(0,"","")
 
   
   
@@ -36,27 +36,18 @@ export class LoginInfoService{
   getUsuario(username:string){
     return this.http.get(this.url + '?username=' + username)
   }
-  postUsuario(newUser:User){
-    return this.http.post(this.url + "/registro", newUser)
+  postUsuario(signUpInfo){
+    return this.http.post(this.url + "/registro", signUpInfo)
   }
 
 
 
-    obtenerUsuario(user:User){
-    return this.http.post(this.url + '/login' , user)
+    obtenerUsuario(loginInfo:any){
+    return this.http.post(this.url + '/login' , loginInfo)
     }
 
 
-datosLogin(username:string , password:string){
-  this.user.username = username
-  this.user.password = password
-  this.obtenerUsuario(this.user).subscribe((data:any)=>
-  {
-    console.log(data.message)
-    this.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password, data.message[0].email)
-    console.log(this.user)
-  })
-}
+
 
 
 

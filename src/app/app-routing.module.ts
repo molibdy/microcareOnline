@@ -50,14 +50,14 @@ const routes: Routes = [
   {path:'intro4', component:Intro4Component},
   {path:'menu/preferencias', component:PreferenciasComponent},
   {
-    path: '**',
-    component: AuthComponent, 
+    path: 'inicio', component: AuthComponent, 
     children: [
       {path:'login', component:LoginComponent},
       {path:'register', component:RegisterComponent},
-      {path:'**', component:LoginComponent},
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ]
   },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
 
 ];
 
