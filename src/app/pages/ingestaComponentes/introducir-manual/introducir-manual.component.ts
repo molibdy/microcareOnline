@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { IngestaService } from 'src/app/shared/ingesta.service';
 
 
 
@@ -27,9 +28,11 @@ export class IntroducirManualComponent implements OnInit {
   public recetas:object[] = []
   public isRecAnadida:boolean = false
   public hiddenIngesta:boolean = false;
+  public date=new Date()
+  public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
 
   public showGuardarFavorito:boolean=false;
-  constructor() { }
+  constructor(private ingestaService:IngestaService) { }
   
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -59,12 +62,20 @@ export class IntroducirManualComponent implements OnInit {
   }
   registrarIngesta()
   {
-    if(this.listaIngredientes.length >0)
+    if(true)
     {
+      let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
+      console.log(userSession);
       
+      let intake = {user_id:  userSession, date: this.dateString, ingredientes: this.listaIngredientes}
+      this.ingestaService.postIntake(intake).subscribe((data:any)=>{
+        console.log('callback de la ingesta');
+        console.log(data);
+        this.ingestaService.intakeID = data.message
+        this.hiddenIngesta = true;
+
+      })
       console.log(this.listaIngredientes);
-      this.hiddenIngesta = true;
-      this.ingestas.push(this.listaIngredientes)
     }
     else
     {
@@ -99,13 +110,21 @@ export class IntroducirManualComponent implements OnInit {
   }
 
 
-  public guardarFavorito(){
+  guardarFavorito(favorito){
+    let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
+    let favoritoObject = {user_id: userSession, nombre: favorito, intake_id: this.ingestaService.intakeID}
     this.showGuardarFavorito=true
+    this.ingestaService.guardarFavoritos(favoritoObject).subscribe((data:any) => {
+
+
+    })
+  }
+  anadirFavorito(){
+    this.showGuardarFavorito = true
   }
 
-  public anadirFavorito(){
-    
-  }
+
+  
 
 ///////// Recogida de datos //////////////
 

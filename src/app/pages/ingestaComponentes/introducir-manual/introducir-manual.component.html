@@ -87,7 +87,7 @@
         
           <div class="mensaje-container textBlueRegular16" >
             ¡Consumo registrado!
-            <a class="link" (click)="guardarFavorito()">¿Guardar como favorito?</a>
+            <a class="link" (click)="anadirFavorito()">¿Guardar como favorito?</a>
           </div>
 
           
@@ -101,7 +101,7 @@
               
               <div class="row-center marginBottom10">
                 <button class="boton-guardar colorWhite dosis-bold backgroundBlue marginLeft10 " 
-                (click)='anadirFavorito()'>guardar</button>
+                (click)='guardarFavorito(nombreReceta.value)'>guardar</button>
               </div>
           </div>
       </div>

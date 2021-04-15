@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 
 import { ProgressService } from 'src/app/shared/progress.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,11 +17,13 @@ export class LoginComponent implements OnInit {
 
 public loginForm: FormGroup
 public isNonRegisteredC:boolean = false
-  router: any;
+ public  router: Router;
 
 public date=new Date()
 public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
-  constructor(private formBuilder: FormBuilder, private apiService: LoginInfoService, public progressService:ProgressService) { 
+  constructor(private formBuilder: FormBuilder, private apiService: LoginInfoService, public progressService:ProgressService, private _router:Router) { 
+    this.router = _router
+
  this.buildForm()
  
   }
@@ -54,16 +57,25 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
 
     this.apiService.obtenerUsuario(this.apiService.user).subscribe((data:any)=>
     { console.log("primer filtro");
-    
+      console.log('aqui');
+      
+      
       if(data.type == 1){
-        console.log(data.message)
+        console.log('hey')
         this.apiService.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password,data.message[0].email)
         sessionStorage.setItem('userSession',JSON.stringify(this.apiService.user))
+        
+        
         console.log(data.message)
         this.router.navigate(['home']);
       }else if(data.type == -1){
-        console.log(data.message[0]);
+        console.log(data.message);
         console.log('error');
+        sessionStorage.setItem('userSession',JSON.stringify(this.apiService.user))
+        console.log(sessionStorage.getItem('userSession'));
+        this.router.navigate(['home']);
+
+
         
           this.isNonRegisteredC = true 
       }
