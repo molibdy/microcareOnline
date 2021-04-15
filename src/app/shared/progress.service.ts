@@ -37,7 +37,8 @@ export class ProgressService {
 
 
   public getProgress(user_id:number,dateString:string){
-    return this.http.get(`${this.url}?user_id=${user_id}?date=${dateString}`);
+    console.log(dateString)
+    return this.http.get(`${this.url}?user_id=${user_id}&date=${dateString}`);
   }
 
   public getAverageProgress(user_id:number){

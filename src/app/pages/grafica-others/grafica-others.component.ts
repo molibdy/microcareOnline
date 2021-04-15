@@ -8,7 +8,8 @@ import {
   ApexXAxis,
   ApexDataLabels,
   ApexTooltip,
-  ApexStroke
+  ApexStroke,
+  ApexYAxis
 } from "ng-apexcharts";
 import { LoginInfoService } from "src/app/shared/login-info.service";
 import { ProgressService } from "src/app/shared/progress.service";
@@ -20,6 +21,7 @@ export type ChartOptions = {
   stroke: ApexStroke;
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
+  yaxis: ApexYAxis
 };
 
 
@@ -115,6 +117,15 @@ export class GraficaOthersComponent implements OnInit {
           format: 'd MMM',
         }
         // ["2021-09-18", "2021-09-19","2021-09-20","2021-09-21","2021-09-22","2021-09-23","2021-09-24"]
+      },
+      yaxis:{
+        min: 0,
+        max: 100,
+        title:{
+          style:{
+            fontFamily: 'dosis-regular'
+          }
+        },
       },
       tooltip: {
         enabled: false

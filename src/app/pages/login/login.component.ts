@@ -71,6 +71,7 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
               if(averageTotal.type==1){
                 this.progressService.averageProgressTotal=averageTotal.message
                 console.log(this.progressService.averageProgressTotal)
+                console.log('dateString antes de get Progress: ' + this.dateString)
                 this.progressService.getProgress(this.apiService.user.user_id,this.dateString) //Obtiene el progreso para cada micronutriente del user hoy
                 .subscribe((progresoUser:any)=>{
                   console.log(`Obtener progreso: ${progresoUser.type}`);
