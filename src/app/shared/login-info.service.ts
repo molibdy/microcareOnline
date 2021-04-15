@@ -10,22 +10,19 @@ import { Router } from '@angular/router';
 
 export class LoginInfoService{
   
-  private url = 'https://api-rest-microcare.herokuapp.com/usuario'
-  // private url = 'http://localhost:300/usuario'
-  
+  // private url = 'https://api-rest-microcare.herokuapp.com/usuario' 
+ private url = 'http://localhost:300/usuario'
+ 
   public isDentro:boolean = false
-
-  
   public router:Router;
   public isNonRegistered:boolean = false
+  public user:User = new User(0,"","","")
 
   
   public user:User = new User(0,"","","")
 
   
-  
-  constructor(private http:HttpClient,  private _router:Router) { 
-    this.router = _router
+  constructor(private http:HttpClient) { 
   }
 
   /////////////////////////metodos de registro
@@ -55,6 +52,9 @@ datosLogin(username:string , password:string){
     console.log(this.user)
   })
 }
+   
+
+
 
 
 
