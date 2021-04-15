@@ -2,18 +2,27 @@
 <div class="col-center">
     <br>
     <mat-icon class="iconSize colorBlue"  svgIcon="logo"></mat-icon>
-
-    <form [formGroup]= "loginForm">
-        <div class="input">
-            <input type="text" formControlName="username" placeholder="Nombre de usuario">
+    
+    <div *ngIf="isNonRegisteredC">
+        <div class="bordeEliminar textBlueSemi20  col-center marginBottom10">
+            <div class="paddingRespuesta marginTop10 marginBottom10" (click)="this.apiisNonRegisteredC = false">La contraseña o el nombre de usuario no son correctos <br></div>
         </div>
+
+
+    </div>
+    <form [formGroup]= "loginForm">
+        <div class="input" [ngClass]="{'sombra' : !loginForm.get('username').valid}" >
+            <input type="text" formControlName="username"  placeholder="Nombre de usuario">
+        </div>
+        <div class="bordeEliminar" *ngIf="loginForm.controls.username.valid" >hey</div>
+
         <br>
         <div class="input">
             <input type="password" formControlName="password" placeholder="Contraseña">
         </div>
     
         <br>
-        <button class="button-blue" routerLink="../home" (click)='logearse()'>entrar</button>
+        <button class="button-blue" (click)='logearse()' [disabled]="loginForm.valid">entrar</button>
         <br>
         <br>
         <br>

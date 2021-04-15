@@ -11,7 +11,13 @@
   text-decoration: underline;
   text-align: right;
 }
+.bordeEliminar{
+  width: 330px;
+  border-radius: 20px;
+  border: 2px solid #FF96A3 ;
+  background-color: white;
 
+}
 
 input{
   border:none;
@@ -34,6 +40,16 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
+.sombra{
+  width: 340px;
+  border: solid 2px #ff96a279 ;
+  height: 53px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 9px;
+  box-shadow: 0px 6px 16px #ff96a28b;
+  outline: none;
+  }
 
 .iconSize{
   height: 100%;

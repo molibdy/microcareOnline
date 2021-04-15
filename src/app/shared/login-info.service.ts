@@ -1,6 +1,7 @@
+import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,10 +13,14 @@ export class LoginInfoService{
   private url = 'http://localhost:300/usuario'
   
   public isDentro:boolean = false
-  public user:User = new User(0,"","","")
+  public router:Router;
+  public isNonRegistered:boolean = false
+  public user:User = new User("","","")
+
+
   
-  
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,  private _router:Router) { 
+    this.router = _router
   }
 
   /////////////////////////metodos de registro
@@ -23,29 +28,20 @@ export class LoginInfoService{
 
 
 
- getUsuario(username:string){
-   return this.http.get(this.url + '?username=' + username)
- }
- postUsuario(newUser:User){
-  return this.http.post(this.url + "/registro", newUser)
-}
-
-
-
-  obtenerUsuario(user:User){
-  return this.http.post(this.url + '/login' , user)
+  getUsuario(username:string){
+    return this.http.get(this.url + '?username=' + username)
+  }
+  postUsuario(newUser:User){
+    return this.http.post(this.url + "/registro", newUser)
   }
 
-datosLogin(username:string , password:string){
-  this.user.username = username
-  this.user.password = password
-  this.obtenerUsuario(this.user).subscribe((data:any)=>
-  {
-    console.log(data.message)
-    this.user = new User(data.message[0].user_id, data.message[0].username, data.message[0].password, data.message[0].email)
-    console.log(data.message)
-  })
-}
+
+
+    obtenerUsuario(user:User){
+    return this.http.post(this.url + '/login' , user)
+    }
+
+
 
 
 
