@@ -5,15 +5,15 @@
     <div class=" row-left-wrap" *ngIf="!isBorrando">
         <div class=" bordeAnadir marginTop10" *ngIf="isAnadiendo" (click)="isAnadiendo = false">
             <div class="textDarkSemi18  padding10">
-            Has consumido <span class="textDarkSemi18Bold">{{anadiendo.nombre}}</span>, <a class="link">Deshacer</a>
+            Has consumido <span class="textDarkSemi18Bold">{{anadiendo.name}}</span>, <a class="link">Deshacer</a>
             </div> 
             </div>
             <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of favoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)">
-               <div class="fondo-cerrar" (click)='quitarFavorito(i)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
+               <div class="fondo-cerrar" (click)='quitarFavorito(id, favorito.favourite_id)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
                     {{favorito.name}}
                     
                     <mat-chip-list aria-label="Fish selection" class="marginTop10" >
-                        <mat-chip *ngFor="let micronutriente of favorito.score"  class="chip-material">{{micronutriente.nombre}}</mat-chip>
+                        <mat-chip *ngFor="let micronutriente of favorito.score"  class="chip-material">{{micronutriente.name}}</mat-chip>
                       </mat-chip-list>
 
 
@@ -23,7 +23,7 @@
 
     <div class="col-center bordeEliminar marginTop10" *ngIf="isBorrando">
         <div class="textDarkSemi18 padding ">
-            Seguro que quieres eliminar <span class="textDarkSemi18Bold">{{borrando.nombre}}</span>?
+            Seguro que quieres eliminar <span class="textDarkSemi18Bold">{{borrando.name}}</span>?
         </div>
         <div class="row-center textDarkSemi18 padding">
             <button  (click)="cancelarBorrado()" class="mybutton-gray">

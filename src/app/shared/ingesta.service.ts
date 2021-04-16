@@ -28,6 +28,9 @@ export class IngestaService {
   mostrarFavoritos(){
     return this.http.get(this.url + "/favoritos")
   }
+  quitarFavoritos(id_favorito){
+    return this.http.delete(this.url + "/favorito", id_favorito)
+  }
 
 
 }

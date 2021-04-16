@@ -10,11 +10,12 @@ import { IngestaService } from 'src/app/shared/ingesta.service';
 export class FavoritosComponent implements OnInit {
   public isBorrando:boolean = false 
   public indiceBorrando:number;
-  public borrando:object = {}
+  public borrando:Favourites;
   public favoritos:Favourites[]  = []
   public isAnadiendo:boolean = false
   public anadiendo:object = {}
   public indiceAnadiendo:number = 0
+  public idBorrando:number = 0
 
 
   
@@ -23,7 +24,8 @@ export class FavoritosComponent implements OnInit {
   ngOnInit(): void {
     this.apiIngesta.mostrarFavoritos().subscribe((data:any)=>{
       console.log(data);
-      this.favoritos = this.apiIngesta.listaFavoritos
+      this.apiIngesta.listaFavoritos = data.message;
+      this.favoritos = this.apiIngesta.listaFavoritos;
       
     
     }) 
@@ -42,14 +44,21 @@ export class FavoritosComponent implements OnInit {
     this.isBorrando=false
 
   }
-  quitarFavorito(i:number){
+  quitarFavorito(i:number, favourite_id){
     this.isBorrando=true
     this.indiceBorrando = i
+    this.idBorrando = favourite_id;
     this.borrando = this.favoritos[i]
   }
   quitarFavoritoDefinitivo(){
 
-    this.favoritos.splice(this.indiceBorrando,1)
+    this.apiIngesta.quitarFavoritos(this.idBorrando).subscribe((data)=>{
+      console.log(this.idBorrando);
+       
+      console.log(data);
+      
+      this.apiIngesta.listaFavoritos.splice(this.indiceBorrando,1)
+    })
     this.isBorrando=false
   }
 
