@@ -12,6 +12,7 @@ export class MicronutrientesService {
 
   constructor(private http:HttpClient) { 
     this.micronutrientes = []
+    console.log(this.micronutrientes)
   }
 
 
