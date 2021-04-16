@@ -21,6 +21,10 @@ export class RecetasService {
     return this.http.get(this.url)
   }
 
+  rutaReceta(){
+    return
+  }
+
 }
 
 

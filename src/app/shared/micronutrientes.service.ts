@@ -13,6 +13,7 @@ export class MicronutrientesService {
   constructor(private http:HttpClient) { 
     this.micronutrientes = []
     console.log(this.micronutrientes)
+
   }
 
 
@@ -20,6 +21,9 @@ export class MicronutrientesService {
     return this.http.get(this.url)
   }
 
+  rutaMicro(){
+     
+  }
 
 
 }
