@@ -13,7 +13,7 @@ export class ProgressService {
   public aminoacidos:Group=new Group();
   public oligoelementos:Group=new Group();
 
-  public totalProgress:Progress[]=[]
+  public totalProgress:Progress=new Progress(0,'',[])
   public averageProgress:any[]=[]
   public averageProgressTotal:any[]=[]
 
@@ -47,6 +47,13 @@ export class ProgressService {
   public getAverageProgressTotal(){
     return this.http.get(this.url);
   }
+
+
+  public updateProgress(progreso:Progress){
+    return this.http.put(this.url,progreso);
+  }
+  
+
   
 
 

@@ -100,7 +100,7 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
                     .subscribe((progresoUser:any)=>{
                       console.log(`Obtener progreso: ${progresoUser.type}`);
                       if(progresoUser.type==1){
-                        this.progressService.totalProgress=progresoUser.message  //Rellena totalProgress con el array de jsons del progreso de cada micronutriente
+                        this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   //Rellena totalProgress con el array de jsons del progreso de cada micronutriente
                         sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
                         this.progressService.getGroups(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)   //Obtiene la media de progreso para cada grupo y rellena el atributo groups
                         .subscribe((grupos:any)=>{

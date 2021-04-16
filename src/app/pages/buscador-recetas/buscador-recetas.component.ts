@@ -1,7 +1,9 @@
 
 import { Component, NgModule, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuscadorRecetasPipe } from 'src/app/pipes/buscador-recetas.pipe';
+import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
+import { RecetasService } from 'src/app/shared/recetas.service';
 
 
 
@@ -33,13 +35,28 @@ public listaNuevas : object[] = [this.receta4, this.receta5, this.receta6]
 public term:BuscadorRecetasComponent;
 public todas : object[] = [this.receta1, this.receta2,this.receta3,this.receta4, this.receta5, this.receta6]
 
-  constructor() {
+  constructor(
+    public recetaService:RecetasService,
+    public micronutrientService:MicronutrientesService,
+    private router:Router
+  ) {
+    this.router=router
     this.receta1
     this.receta2
    }
 
  
+   verReceta(recipe_id:number){
+     this.recetaService.selectedReceta_id=recipe_id
+    this.micronutrientService.getMicrosReceta(recipe_id).subscribe((micronutrientes:any)=>{
+      if(micronutrientes.type==1 || micronutrientes.type==-1){
+        this.micronutrientService.microsReceta=micronutrientes.message;
+        this.router.navigate(['receta']);
+      }
+    })
+   }
 
+   
 
 
   ngOnInit(): void {
