@@ -34,7 +34,8 @@ export class MineralChartComponent implements OnInit {
   public groupData:Group;
   constructor(public progressService:ProgressService) { 
     
-    this.groupData=this.progressService.minerales;
+    this.groupData=JSON.parse(sessionStorage.getItem('minerales'));
+    // this.groupData=this.progressService.minerales;
 
     this.chartOptions = {
       series: [this.groupData.percent],         //DEPENDIENTE DE CLASE

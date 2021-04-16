@@ -2,6 +2,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LoginInfoService } from './shared/login-info.service';
+import { User } from './models/user';
 
 
 
@@ -13,13 +14,15 @@ import { LoginInfoService } from './shared/login-info.service';
 })
 export class AppComponent {
 
-
+  public user:User
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer : DomSanitizer,
     public LoginInfoService:LoginInfoService
   )
   {
+
+    this.user=JSON.parse(sessionStorage.getItem('userSession'))
 /*    //////////////////// CREAR ICONOS //////////////////////// */
 
     this.matIconRegistry.addSvgIcon("grafica",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/spreadsheet-app.svg"));
