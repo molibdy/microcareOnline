@@ -21,6 +21,9 @@ export class RecetasService {
     return this.http.get(this.url)
   }
 
+
+  getPlannedRecetas(user_id:number){}
+
 }
 
 
