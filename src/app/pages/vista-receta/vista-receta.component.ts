@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Progress } from 'src/app/models/progress';
+import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
+import { ProgressService } from 'src/app/shared/progress.service';
 
 
 
@@ -25,7 +28,16 @@ export class VistaRecetaComponent implements OnInit {
   public alreadyConsumed:boolean
   public showAlreadyConsumed:boolean
 
-  constructor() { 
+
+  public date=new Date()
+  public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
+
+
+  constructor(
+    public micronutrientService:MicronutrientesService,
+    public progressService:ProgressService
+    ) { 
+
     this.nombre='Pollo con almendras'
     this.imgUrl="https://carneentucasa.com/archivos/Noticias/983.jpg"
     this.ingredientes=[
@@ -68,9 +80,18 @@ export class VistaRecetaComponent implements OnInit {
       this.alreadyConsumed=true
       this.showAlreadyConsumed=true
     }else{
-      this.isConsumed=true;
-      //Añade la microscore de la receta al progreso del user
-      //Añade receta al día del user
+      
+       //Añade la microscore de la receta al progreso del user
+      this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.micronutrientService.microsReceta))
+      .subscribe((updated:any)=>{
+        if(updated.type==1 || updated.type==2){
+
+          //Añade receta al día del user
+          this.isConsumed=true;
+        }
+      })
+     
+      
     }
     this.isDateSelected=false
     this.showDatePicker=false
@@ -88,9 +109,9 @@ export class VistaRecetaComponent implements OnInit {
     }
   }
 
-  private dateString(date:string):string{
-    return date.replace(/\//g,'')
-  }
+  // private dateToString(date:string):string{
+  //   return date.replace(/\//g,'')
+  // }
 
   public cerrarDatePicker(){
     this.showDatePicker=false;
@@ -102,8 +123,10 @@ export class VistaRecetaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
     // Tiene que haber un microscoreService que recibe los datos del microscore 
     // de la receta y es accedido por el componente microscoreChart
+    // ESTÁ EN LA BUSQUEDA DE RECETAS
   }
 
 }
