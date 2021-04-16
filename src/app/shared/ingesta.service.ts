@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Favourites } from '../models/favourites';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class IngestaService {
   public intakeID:number = 0
  // private url = 'https://api-rest-microcare.herokuapp.com/ingestas'
  private url = 'http://localhost:300/ingestas'
+ public listaFavoritos:Favourites[] = []
 
 
   constructor(private http:HttpClient) { 
@@ -22,6 +24,9 @@ export class IngestaService {
   }
   guardarFavoritos(favorito){
     return this.http.post(this.url + '/favoritos', favorito )
+  }
+  mostrarFavoritos(){
+    return this.http.get(this.url + "/favoritos")
   }
 
 

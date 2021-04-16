@@ -10,7 +10,7 @@
             </div>
             <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of favoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)">
                <div class="fondo-cerrar" (click)='quitarFavorito(i)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
-                    {{favorito.nombre}}
+                    {{favorito.name}}
                     
                     <mat-chip-list aria-label="Fish selection" class="marginTop10" >
                         <mat-chip *ngFor="let micronutriente of favorito.score"  class="chip-material">{{micronutriente.nombre}}</mat-chip>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Favourites } from 'src/app/models/favourites';
+import { IngestaService } from 'src/app/shared/ingesta.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -9,20 +11,22 @@ export class FavoritosComponent implements OnInit {
   public isBorrando:boolean = false 
   public indiceBorrando:number;
   public borrando:object = {}
-  public favoritos:object[]  = [{nombre: "Desayuno", score: [{nombre:'a'},{nombre:'molibdeno'}], class: 'gradientGO', numConsum: 3},
-                                {nombre: "Merienda", score: "A,B,B",class: 'gradientPO', numConsum: 3},
-                                {nombre: "Cena", score: "A,B,B",class: 'gradientOG', numConsum: 0},
-                                {nombre: "Pan tumaca", score: "A,B,B",class: 'gradientPG', numConsum: 0}]
+  public favoritos:Favourites[]  = []
   public isAnadiendo:boolean = false
   public anadiendo:object = {}
   public indiceAnadiendo:number = 0
-  
+
 
   
-  constructor() { }
+  constructor(private apiIngesta:IngestaService) { }
 
   ngOnInit(): void {
-   
+    this.apiIngesta.mostrarFavoritos().subscribe((data:any)=>{
+      console.log(data);
+      this.favoritos = this.apiIngesta.listaFavoritos
+      
+    
+    }) 
   }
   consumirFavorito(i)
   {
