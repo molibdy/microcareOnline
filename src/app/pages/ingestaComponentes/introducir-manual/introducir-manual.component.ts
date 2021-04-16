@@ -72,6 +72,10 @@ export class IntroducirManualComponent implements OnInit {
         console.log('callback de la ingesta');
         console.log(data);
         this.ingestaService.intakeID = data.message
+        console.log(data.message);
+        
+        console.log(this.ingestaService.intakeID);
+        
         this.hiddenIngesta = true;
 
       })
@@ -112,10 +116,14 @@ export class IntroducirManualComponent implements OnInit {
 
   guardarFavorito(favorito){
     let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
+    console.log(favorito);
+    
     let favoritoObject = {user_id: userSession, name: favorito, intake_id: this.ingestaService.intakeID}
     this.showGuardarFavorito=true
     this.ingestaService.guardarFavoritos(favoritoObject).subscribe((data:any) => {
-
+      console.log(data);
+      this.ingestaService.intakeID = data.message
+      
 
     })
   }
