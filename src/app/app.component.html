@@ -16,7 +16,7 @@
 
 
 
-<div *ngIf="user.user_id>0; else login">
+<div *ngIf="user.user_id>0 || LoginInfoService.user_id>0; else login">
 <router-outlet></router-outlet> 
 <app-nav-bar></app-nav-bar>
 </div>
