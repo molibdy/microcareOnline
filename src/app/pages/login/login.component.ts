@@ -62,13 +62,13 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
         this.progressService.getAverageProgress(this.apiService.user.user_id)  //  Obtiene la media del progreso del user por fechas
         .subscribe((average:any)=>{
           console.log(`Obtener average progress: ${average.type}`);
-          if(average.type==1){
+          if(average.type==1 || average.type== -1){
             this.progressService.averageProgress=average.message
             console.log(this.progressService.averageProgress)
             this.progressService.getAverageProgressTotal()         //Obtiene la media del progreso de todos los users por fechas
             .subscribe((averageTotal:any)=>{
               console.log(`Obtener average progress total: ${averageTotal.type}`);
-              if(averageTotal.type==1){
+              if(averageTotal.type==1 || average.type== -1){
                 this.progressService.averageProgressTotal=averageTotal.message
                 console.log(this.progressService.averageProgressTotal)
                 console.log('dateString antes de get Progress: ' + this.dateString)
