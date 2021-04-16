@@ -10,9 +10,11 @@ import { RecetasService } from 'src/app/shared/recetas.service';
 })
 export class BarraBuscadorComponent implements OnInit {
 
-public micronutrientes: any[]
+public micronutrientes:any[]
 public recetas: any[]
-
+public mySwitch: boolean = false
+public recetasBuscar=[]
+public micronutrientesBuscar = []
 
   public inputSearch:string = ""
   
@@ -50,6 +52,32 @@ public recetas: any[]
 
   //   }
   // }
+
+buscar(){
+this.recetasBuscar=[]
+this.micronutrientesBuscar = []
+
+  let input = this.inputSearch.toUpperCase();
+  for(let i=0; i < this.micronutrientes.length; i++){
+    if(this.micronutrientes[i].micronutrient_name.toUpperCase().indexOf(input) > -1){
+      this.micronutrientesBuscar.push(this.micronutrientes[i])
+    }
+  }
+
+  let entrada = this.inputSearch.toUpperCase();
+  for(let i=0; i < this.recetas.length; i++){
+    if(this.recetas[i].recipe_name.toUpperCase().indexOf(entrada) > -1){
+      this.recetasBuscar.push(this.recetas[i])
+    }
+  }
+
+  this.mySwitch = true
+
+}
+
+  rutaMicro(){
+
+  }
 
 
   ngOnInit(): void {
