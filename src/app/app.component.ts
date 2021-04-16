@@ -21,8 +21,12 @@ export class AppComponent {
     public LoginInfoService:LoginInfoService
   )
   {
-
-    this.user=JSON.parse(sessionStorage.getItem('userSession'))
+    if(sessionStorage.getItem('userSession')){
+      this.user=JSON.parse(sessionStorage.getItem('userSession'));
+    }else{
+      this.user=this.LoginInfoService.user;
+    }
+    
 /*    //////////////////// CREAR ICONOS //////////////////////// */
 
     this.matIconRegistry.addSvgIcon("grafica",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/spreadsheet-app.svg"));
