@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 
 import { RecetasService } from 'src/app/shared/recetas.service';
@@ -41,23 +42,23 @@ export class BurgerMenuComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(this.apiService.micronutrientes.length == 0 ){
+  
     this.apiService.getMicros().subscribe((data:any)=>
-    { console.log(data.type)
-      if(data.type = 1){
-      this.apiService.micronutrientes = data.res
+    {console.log(data.type)
+      if(data.type == 1){
+      this.apiService.micronutrientes = data.message
+      console.log(this.apiService.micronutrientes)
       }
     })
-    }
-    if(this.servicioReceta.recetas.length == 0){
+    
       this.servicioReceta.getRecetas().subscribe((data:any)=>
       {
-        if(data.type = 1){
-        this.servicioReceta.recetas = data.res
-        }
+        if(data.type == 1){
+        this.servicioReceta.recetas = data.message
+              }
       })
-    }
-  }
+  }  
+
 }
 
 

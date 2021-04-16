@@ -25,6 +25,9 @@ public recetas: []
     this.recetas = this.recetasServicio.recetas
     
     this.micronutrientes = this.micronutrientesServicio.micronutrientes
+    console.log("hola")
+    console.log(this.micronutrientes)
+
 
    }
 
