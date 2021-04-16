@@ -38,6 +38,7 @@ public todas : object[] = [this.receta1, this.receta2,this.receta3,this.receta4,
     this.receta2
    }
 
+ 
 
 
 

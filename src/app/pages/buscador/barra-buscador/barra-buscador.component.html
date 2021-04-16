@@ -18,7 +18,8 @@
                                             </div>
                                             <div class="separadorMenu"></div>
                                             <div class="buscarNavbar ">
-                                                <input  [(ngModel)]='inputSearch' class="text  marginLeft32 " placeholder="buscar" >
+                                                <!-- <input  [(ngModel)]='inputSearch' class="text  marginLeft32 " placeholder="buscar" > -->
+                                                <input type="text" class="text  marginLeft32" id="myInput" onkeyup="filtrar()" placeholder="buscar">
                                            </div>
                                             <div class="separadorMenu"></div>
                             </div>
@@ -33,13 +34,15 @@
                             <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20" >
                                 Micronutrientes:
                             </div> 
+                            <ul id="myUL">
                                 <div *ngFor="let micronutriente of micronutrientes">
                                         <div class="row-left widthMenu100">
                                                 <div class=" widthMenu100 col-left   menu-item-busqueda   textBlueSemi20">
-                                                    <p class="marginLeft32">{{micronutriente.micronutrient_name}}</p> 
+                                                    <li class="marginLeft32">{{micronutriente.micronutrient_name}}</li> 
                                                 </div>                                                       
                                         </div>
                                 </div>
+                            </ul> 
                             <div class="custom-hr"></div>
                         </div>
                           <!-- ////////// elemento ingredientes //////// -->
