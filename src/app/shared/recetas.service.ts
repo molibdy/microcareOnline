@@ -21,14 +21,11 @@ export class RecetasService {
     return this.http.get(this.url)
   }
 
-<<<<<<< HEAD
 
   getPlannedRecetas(user_id:number){}
-=======
   rutaReceta(){
     return
   }
->>>>>>> rodri
 
 }
 
