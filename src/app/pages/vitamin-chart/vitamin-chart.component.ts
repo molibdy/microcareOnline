@@ -34,8 +34,9 @@ export class VitaminChartComponent implements OnInit {
   public chartOptions: Partial<ChartOptions>;
   public groupData:Group;
   constructor(public progressService:ProgressService) { 
-    
-    this.groupData=this.progressService.vitaminas;
+
+    this.groupData=JSON.parse(sessionStorage.getItem('vitaminas'));
+    // this.groupData=this.progressService.vitaminas;
 
     this.chartOptions = {
       series: [this.groupData.percent],         //DEPENDIENTE DE CLASE

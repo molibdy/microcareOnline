@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Group } from '../models/group';
 import { Progress } from '../models/progress';
-import { LoginInfoService } from './login-info.service';
 
 @Injectable({
   providedIn: 'root'

@@ -35,8 +35,9 @@ export class OmegasChartComponent implements OnInit {
 
   public groupData:Group;
   constructor(public progressService:ProgressService) { 
-    
-    this.groupData=this.progressService.oligoelementos;
+
+    this.groupData=JSON.parse(sessionStorage.getItem('oligoelementos'));
+    // this.groupData=this.progressService.oligoelementos;
 
     this.chartOptions = {
       series: [this.groupData.percent],         //DEPENDIENTE DE CLASE

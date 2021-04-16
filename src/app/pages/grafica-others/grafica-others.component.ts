@@ -34,50 +34,56 @@ export class GraficaOthersComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
+  public averageProgress:any;
+  public averageProgressTotal:any;
+
   public userDates:number[];
   public userPercents:[number,number][];
   public othersPercents:[number,number][];
 
   constructor(private progressService:ProgressService, private userService:LoginInfoService) {
-
+    this.averageProgress=JSON.parse(sessionStorage.getItem('averageProgress'));
+    this.averageProgressTotal=JSON.parse(sessionStorage.getItem('averageProgressTotal'));
     this.userDates=[]
     this.userPercents=[]
+    this.othersPercents=[]
 
-    for(let i=0;i<this.progressService.averageProgress.length;i++){
-      console.log(typeof this.progressService.averageProgress[i].date)
-      this.userDates.push(this.progressService.averageProgress[i].date.slice(0,10))
+    for(let i=0;i<this.averageProgress.length;i++){
+      console.log(typeof this.averageProgress[i].date)
+      this.userDates.push(this.averageProgress[i].date.slice(0,10))
       console.log(this.userDates)
-      let fecha=Date.parse(this.progressService.averageProgress[i].date)
-      this.userPercents.push([fecha,this.progressService.averageProgress[i].percent])
+      let fecha=Date.parse(this.averageProgress[i].date)
+      this.userPercents.push([fecha,this.averageProgress[i].percent])
       
     }
 
-    this.othersPercents=[]
-    for(let i=0;i<this.progressService.averageProgressTotal.length;i++){
-      let fecha=Date.parse(this.progressService.averageProgressTotal[i].date)
-      this.othersPercents.push([fecha,this.progressService.averageProgressTotal[i].percent])
-    }
     
+    for(let i=0;i<this.averageProgressTotal.length;i++){
+      let fecha=Date.parse(this.averageProgressTotal[i].date)
+      this.othersPercents.push([fecha,this.averageProgressTotal[i].percent])
+    }
 
     // for(let i=0;i<this.progressService.averageProgress.length;i++){
-    //   // let fecha=this.progressService.averageProgress[i].date.slice(0,10)
     //   console.log(typeof this.progressService.averageProgress[i].date)
-    //   this.userDates.push(this.progressService.averageProgress[i].date)
-    //   this.userPercents.push(this.progressService.averageProgress[i].percent)
+    //   this.userDates.push(this.progressService.averageProgress[i].date.slice(0,10))
+    //   console.log(this.userDates)
+    //   let fecha=Date.parse(this.progressService.averageProgress[i].date)
+    //   this.userPercents.push([fecha,this.progressService.averageProgress[i].percent])
+      
     // }
 
     // this.othersPercents=[]
     // for(let i=0;i<this.progressService.averageProgressTotal.length;i++){
-    //   // let fecha=this.progressService.averageProgressTotal[i].date.slice(0,10)
-    //   if(this.userDates.includes(this.progressService.averageProgressTotal[i].date)){
-    //     this.othersPercents.push(this.progressService.averageProgressTotal[i].percent)
-    //   }
+    //   let fecha=Date.parse(this.progressService.averageProgressTotal[i].date)
+    //   this.othersPercents.push([fecha,this.progressService.averageProgressTotal[i].percent])
     // }
+    
+
 
     this.chartOptions = {
       series: [
         {
-          name: this.userService.user.username,   // username
+          name: JSON.parse(sessionStorage.getItem('userSession')).username,   // username
           data: this.userPercents,   // Array de average progress del user
           color:"#5ce1e6"
         },

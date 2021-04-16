@@ -33,8 +33,8 @@ export class AminoacidChartComponent implements OnInit {
   public chartOptions: Partial<ChartOptions>;
   public groupData:Group;
   constructor(public progressService:ProgressService) { 
-    
-    this.groupData=this.progressService.aminoacidos;
+    this.groupData=JSON.parse(sessionStorage.getItem('aminoacidos'));
+    // this.groupData=this.progressService.aminoacidos;
     console.log(this.groupData)
 
     this.chartOptions = {
