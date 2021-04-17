@@ -19,6 +19,7 @@ import { Intro4Component } from './pages/intro4/intro4.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PreferenciasComponent } from './pages/preferencias/preferencias.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { UsdaComponent } from './pages/usda/usda.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { VistaRecetaComponent } from './pages/vista-receta/vista-receta.component';
 
@@ -58,6 +59,7 @@ const routes: Routes = [
     ]
   },
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  {path:'usda', component:UsdaComponent},
 
 ];
 

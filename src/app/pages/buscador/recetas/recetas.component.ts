@@ -4,6 +4,7 @@ import { Recipes } from 'src/app/models/recipes';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 import { RecetasService } from 'src/app/shared/recetas.service';
 
+
 @Component({
   selector: 'app-recetas',
   templateUrl: './recetas.component.html',
@@ -64,6 +65,10 @@ rutaReceta(i){
   console.log(this.recetasService.selectedReceta.photo_url)
  })
 }
+
+
+
+
 
 
   ngOnInit(): void {

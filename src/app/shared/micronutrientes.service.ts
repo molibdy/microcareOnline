@@ -45,6 +45,10 @@ export class MicronutrientesService {
     return this.http.get(`${this.url}/receta?recipe_id=${recipe_id}`)
   }
 
+  getMicrosRecetas(){
+    return this.http.get(`${this.url}/receta`)
+  }
+
   getMicrosIngesta(intake_id:number){
     return this.http.get(`${this.url}/ingesta?intake_id=${intake_id}`)
   }

@@ -20,30 +20,30 @@
         <div class="br"></div>
 
         <div  class="wrapper">
-            <div *ngFor="let receta of listaParaTi" class="item" routerLink="receta">
+            <div *ngFor="let receta of listaParaTi; let i=index" class="item" (click)="verRecetaParaTi(i)">
                 <div class="row-left"> 
-                    <div class="chip1">
-                        {{receta.preferencia1}}
+                    <div class="chip1" *ngIf="receta.dietas.length>0">
+                        {{receta.dietas[0]}}
                     </div>
-                    <div class="chip2">
-                        {{receta.preferencia2}}
+                    <div class="chip2" *ngIf="receta.dietas.length>1">
+                        {{receta.dietas[1]}}
                     </div>
                 </div>
                 <div class="foto">
-                    <img [src]="receta.foto">
+                    <img [src]="receta.photo_url">
                 </div>
                 <div class="row-center">
                     <div class="row-center">
                         <div class="nombre-receta">
-                            {{receta.nombre}}
+                            {{receta.recipe_name}}
                         </div>
                     </div>
                     <div class="row-center">
                         <div class="chip-micro1">
-                            {{receta.chip1}}
+                            {{receta.microscore[0].acronym}}
                         </div>
                         <div class="chip-micro2">
-                            {{receta.chip2}}
+                            {{receta.microscore[1].acronym}}
                         </div> 
                     </div>
                 </div>
@@ -61,30 +61,30 @@
             <div class="br"></div>
 
     <div class="wrapper">
-        <div *ngFor="let receta of listaNuevas" class="item" routerLink="receta">
+        <div *ngFor="let receta of listaNuevas; let i=index" class="item" (click)="verRecetaNuevas(i)">
             <div class="row-left"> 
-                <div class="chip1">
-                    {{receta.preferencia1}}
+                <div class="chip1" *ngIf="receta.dietas.length>0">
+                    {{receta.dietas[0]}}
                 </div>
-                <div class="chip2">
-                    {{receta.preferencia2}}
+                <div class="chip2" *ngIf="receta.dietas.length>1">
+                    {{receta.dietas[1]}}
                 </div>
             </div>
             <div class="foto">
-                <img [src]="receta.foto"/>
+                <img [src]="receta.photo_url">
             </div>
             <div class="row-center">
                 <div class="row-center">
                     <div class="nombre-receta">
-                        {{receta.nombre}}
+                        {{receta.recipe_name}}
                     </div>
                 </div>
                 <div class="row-center">
                     <div class="chip-micro1">
-                        {{receta.chip1}}
+                        {{receta.microscore[0].acronym}}
                     </div>
                     <div class="chip-micro2">
-                        {{receta.chip2}}
+                        {{receta.microscore[1].acronym}}
                     </div> 
                 </div>
             </div>
