@@ -10,7 +10,7 @@ export class ProgressService {
   public groups:Group[]=[]
   public vitaminas:Group=new Group();
   public minerales:Group=new Group();
-  public aminoacidos:Group=new Group();
+  public omegas:Group=new Group();
   public oligoelementos:Group=new Group();
 
   public totalProgress:Progress=new Progress(0,'',[])
