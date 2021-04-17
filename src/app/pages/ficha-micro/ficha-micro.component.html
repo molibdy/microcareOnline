@@ -9,13 +9,13 @@
     <div class="br"></div>
 
     <div class="row-center ancho100">
-        <div class="text">{{grupos[0]}}
+        <div class="text">{{this.MicronutrientesService.selectedMicronutriente.micronutrient_name}}
         </div>
     </div>
 
      <div class="br"></div>
     <div class="sub-titulo">
-        Ingredientes ricos en {{grupos[0]}}
+        Ingredientes ricos en {{this.MicronutrientesService.selectedMicronutriente.micronutrient_name}}
     </div>
     <div class="br"></div>
     <div class="row-left wrap ancho100 chip-container">
@@ -31,7 +31,7 @@
 
 
     <div class="sub-titulo">
-        Recetas ricas en {{grupos[0]}}
+        Recetas ricas en {{this.MicronutrientesService.selectedMicronutriente.micronutrient_name}}
     </div>
 
      <div class="br"></div>
@@ -46,12 +46,12 @@
                 </div>
             </div>
             <div class="foto">
-                <img src="https://carneentucasa.com/archivos/Noticias/983.jpg">
+                <img src="{{this.RecetasService.selectedReceta.recipe_photo}}">
             </div>
             <div class="row-center">
                 <div class="row-center">
                     <div class="nombre-receta">
-                        Cocido Madrileño
+                        {{this.RecetasService.selectedReceta.recipe_name}}
                     </div>
                 </div>
                 <div class="row-center">

@@ -1,7 +1,7 @@
 <div class="col-center"> 
     <div class="input left-padding">                                         
         <input  [(ngModel)]='inputSearch' placeholder="buscar">
-        <button class="mas"><mat-icon class="colorDark" true svgIcon="search"></mat-icon></button>
+        <button class="mas" (click)="buscar()"><mat-icon class="colorDark" true svgIcon="search"></mat-icon></button>
     </div>
    
     <div class="custom-hr"></div>
@@ -9,21 +9,21 @@
     <div class= "br"></div>                    
     
     <!--                    /////// elemento micronutriente -->
-    <div *ngIf="inputSearch.length > 0 && micronutrientes.length > 0">   
+    <div *ngIf="mySwitch == true && inputSearch.length>0">   
         <div class="iphoneCard"> 
-            <div *ngFor="let receta of todas">
-                <div class="row-left widthMenu100">
-                    <div class=" widthMenu100 col-left   menu-item-busqueda   textBlueSemi20">
-                        <p class=" titulo">{{receta.nombre}}</p> 
+            <div *ngFor="let receta of this.recetasBuscar, let i = index">
+                    <div class=" widthMenu100 padding-top menu-item-busqueda textBlueSemi20 row-center" (click)= rutaReceta(i)>
                         <!-- <p class="text">{{receta.preferencia1}}</p> 
                         <p class="text">{{receta.preferencia2}}</p> 
                         <p class="text">{{receta.chip1}}</p> 
                         <p class="text">{{receta.chip1}}</p>  -->
                         <div class="foto">
-                            <img  [src]="receta.foto">
+                            <img [src]="receta.photo_url">
+                        </div>
+                        <div class="col-right titulo col">
+                            {{receta.recipe_name}}
                         </div>
                     </div>                                                       
-                </div>
                 <div class="br"></div>
                 <div class="custom-hr"></div>
             </div>
