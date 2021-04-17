@@ -23,9 +23,15 @@ export class FavoritosComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiIngesta.mostrarFavoritos().subscribe((data:any)=>{
+      console.log(data.type);
       console.log(data);
-      this.apiIngesta.listaFavoritos = data.message;
+      
+      
+      if(data.type ==1 || data.type == -2){
+        this.apiIngesta.listaFavoritos = data.message;
       this.favoritos = this.apiIngesta.listaFavoritos;
+      }
+  
       
     
     }) 
@@ -44,16 +50,16 @@ export class FavoritosComponent implements OnInit {
     this.isBorrando=false
 
   }
-  quitarFavorito(i:number, favourite_id){
+  quitarFavorito(i:number){
     this.isBorrando=true
     this.indiceBorrando = i
-    this.idBorrando = favourite_id;
-    this.borrando = this.favoritos[i]
+/*     this.Borrando = {favourite_id}
+ */    this.borrando = this.favoritos[i]
   }
   quitarFavoritoDefinitivo(){
 
-    this.apiIngesta.quitarFavoritos(this.idBorrando).subscribe((data)=>{
-      console.log(this.idBorrando);
+    this.apiIngesta.quitarFavoritos(this.borrando).subscribe((data)=>{
+      console.log(this.borrando);
        
       console.log(data);
       

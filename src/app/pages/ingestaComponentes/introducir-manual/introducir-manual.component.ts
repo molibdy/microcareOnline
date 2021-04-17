@@ -123,7 +123,8 @@ export class IntroducirManualComponent implements OnInit {
     this.ingestaService.guardarFavoritos(favoritoObject).subscribe((data:any) => {
       console.log(data);
       this.ingestaService.intakeID = data.message
-      
+       this.ingestaService.introducirRecetaBooleano = false;
+
 
     })
   }

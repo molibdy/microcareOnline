@@ -32,7 +32,7 @@
                     <div class=" col-center custom-hr"></div>
 
                     
-                    <div class=" col-center menu-item-expandible colorWhite" *ngIf="introducirRecetaBooleano">
+                    <div class=" col-center menu-item-expandible colorWhite" *ngIf="apiIngesta.introducirRecetaBooleano">
                         <div class="row-left widthMenu" >
                             
                                      <app-introducir-manual></app-introducir-manual>
@@ -43,7 +43,7 @@
                     <div class=" col-center  custom-hr"></div>
 <!--                     //// otro item //// 
 <<<<<<< HEAD
- -->                        <div class=" col-center  menu-item-abajo colorWhite" routerLink="../buscar-receta" *ngIf="!introducirRecetaBooleano">
+ -->                        <div class=" col-center  menu-item-abajo colorWhite" routerLink="../buscar-receta" *ngIf="!apiIngesta.introducirRecetaBooleano">
 
                             <div class="row-left widthMenu" >
                         
@@ -58,7 +58,7 @@
  --><!--                 //// bara final
  -->              
 <!--  <div class=" col-center  custom-hr" style="width: 90%; justify-content: center; bottom: 0.5px;" ></div>
- -->                <app-favoritos *ngIf="!introducirRecetaBooleano"></app-favoritos>
+ -->                <app-favoritos *ngIf="!apiIngesta.introducirRecetaBooleano"></app-favoritos>
 
                 </div>
         </div>
