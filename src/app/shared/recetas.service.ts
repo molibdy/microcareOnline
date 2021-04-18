@@ -15,10 +15,13 @@ export class RecetasService {
   //private url = 'https://api-rest-microcare.herokuapp.com/recetas'
   private url = 'http://localhost:300/recetas'
 
+  public recetasRicas: Recipes[]
+
   constructor(private http:HttpClient) {
     this.recetas = []
     this.recetasParaTi=[]
     this.selectedReceta=new Recipes()
+    this.recetasRicas = []
    }
 
  
