@@ -36,62 +36,36 @@
 
      <div class="br"></div>
     <div class="wrapper">
-        <div class="item" routerLink="../../../buscar-receta/receta">
-            <div class="row-left"> 
-                <div class="chip1">
-                    Vegano
-                </div>
-                <div class="chip2">
-                    Vegetariano
-                </div>
-            </div>
-            <div class="foto">
-                <img src="{{this.RecetasService.selectedReceta.recipe_photo}}">
-            </div>
-            <div class="row-center">
-                <div class="row-center">
-                    <div class="nombre-receta">
-                        {{this.RecetasService.selectedReceta.recipe_name}}
+        <div  *ngFor="let receta of this.recetas, let i = index">
+            <div class="item" routerLink="../receta">
+                <div class="row-left"> 
+                    <div class="chip1">
+                        Vegano
+                    </div>
+                    <div class="chip2">
+                        Vegetariano
                     </div>
                 </div>
-                <div class="row-center">
-                    <div class="chip-micro1">
-                        B
-                    </div>
-                    <div class="chip-micro2">
-                            Mo
-                    </div> 
-                </div>
-            </div>
-        </div>
-        <div class="item" routerLink="../receta">
-            <div class="row-left"> 
-                <div class="chip1">
-                    Vegano
-                </div>
-                <div class="chip2">
-                    Vegetariano
-                </div>
-            </div>
-            <div class="foto">
-                <img src="https://carneentucasa.com/archivos/Noticias/983.jpg">
-            </div>
-            <div class="row-center">
-                <div class="row-center">
-                    <div class="nombre-receta">
-                        Cocido Madrileño
-                    </div>
+                <div class="foto">
+                    <img src="{{receta.photo_url}}">
                 </div>
                 <div class="row-center">
-                    <div class="chip-micro1">
-                        B
+                    <div class="row-center">
+                        <div class="nombre-receta">
+                            {{receta.recipe_name}}
+                        </div>
                     </div>
-                    <div class="chip-micro2">
-                            Mo
-                    </div> 
+                    <div class="row-center">
+                        <div class="chip-micro1">
+                            B
+                        </div>
+                        <div class="chip-micro2">
+                                Mo
+                        </div> 
+                    </div>
                 </div>
             </div>
-        </div>
+        </div>    
     </div>
 </div>
 <div class="footer"></div>

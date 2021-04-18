@@ -19,14 +19,14 @@ export class FichaMicroComponent implements OnInit {
   public recetas:Recipes[]
 
 
+
   public selectedMicronutriente: Micronutrients
   
     constructor(private route:ActivatedRoute, public MicronutrientesService: MicronutrientesService, public RecetasService:RecetasService) {
 
     this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
 
-    this.recetas = JSON.parse(sessionStorage.getItem('recetas'))
-    
+    this.recetas = RecetasService.recetasRicas
 
     this.grupos=["nombreGrupo","micronutrientes","color", "propiedades", "score"]
   
@@ -36,7 +36,8 @@ export class FichaMicroComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+ console.log(this.recetas)
+ console.log(this.RecetasService.recetas)
     // this.route.queryParamMap.subscribe(params=>
     // { console.log(params)
     //   for(let i=0; i < this.micronutrientes.length; i++){

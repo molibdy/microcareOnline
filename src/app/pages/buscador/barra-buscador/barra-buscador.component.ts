@@ -86,6 +86,7 @@ this.micronutrientesBuscar = []
 rutaMicro(i){
 
   this.micronutrientesServicio.selectedMicronutriente = this.micronutrientesBuscar[i]
+  this.recetasServicio.recetasRicas = this.recetasServicio.recetas ///!! HAY QUE HACER UNA QUERY!!!!!!///
   // this.micronutrientesBuscar[i] = this.micronutrientesServicio.linkMicro()
   this.router.navigate(["home/grupo/micro"], {queryParams: {micronutrient_id : this.micronutrientesBuscar[i].micronutrient_id}})
   console.log(this.micronutrientesBuscar)
