@@ -40,20 +40,24 @@ export class OmegasChartComponent implements OnInit {
   public averagePercent:number;
   constructor(public progressService:ProgressService) { 
     this.groups=JSON.parse(sessionStorage.getItem('groups'));
+    // this.totalProgress=this.progressService.totalProgress
     this.totalProgress=JSON.parse(sessionStorage.getItem('totalProgress'));
-    this.groupProgress=this.totalProgress
-    this.groupProgress.percents=[]
+    this.groupProgress=new Progress(this.totalProgress.user_id,this.totalProgress.date,[])
+    this.groupData=new Group()
 
     // obtener datos del grupo concreto
     for(let i=0;i<this.groups.length;i++){
+      console.log('group.name' + this.groups[i].name)
       if(this.groups[i].name=='ácidos grasos'){
         this.groupData=this.groups[i];
+        
       }
     }
 
     //obtener progreso del grupo concreto
     let sumPercent:number=0
     for(let i=0; i<this.totalProgress.percents.length;i++){
+      console.log('id totalProgress[i]' + this.totalProgress.percents[i].group_id)
       if(this.totalProgress.percents[i].group_id==this.groupData.group_id){
         this.groupProgress.percents.push(this.totalProgress.percents[i])
         sumPercent+=this.totalProgress.percents[i].percent

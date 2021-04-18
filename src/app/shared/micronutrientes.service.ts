@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Group } from '../models/group';
 import { Micronutrients } from '../models/micronutrient';
 
 
@@ -12,24 +13,26 @@ export class MicronutrientesService {
     throw new Error('Method not implemented.');
   }
 
-  public micronutrientes
+  public micronutrientes: Micronutrients[]
   public microsReceta:any[];
   public microsIngesta:any[];
   public microsReto:any[];
-  public selectedMicronutriente: Micronutrients 
+  public selectedMicronutriente: Micronutrients; 
+  public groups:Group[]
  
 
-  // private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
-  private url = 'http://localhost:300/micronutrientes'
+  private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
+  // private url = 'http://localhost:300/micronutrientes'
 
 
   constructor(private http:HttpClient, ) { 
 
-    this.microsReceta=[];
-    this.microsIngesta=[];
-    this.microsReto=[];
-    this.selectedMicronutriente = new Micronutrients() 
-    this.micronutrientes = []
+    // this.microsReceta=[];
+    // this.microsIngesta=[];
+    // this.microsReto=[];
+    // this.selectedMicronutriente = new Micronutrients() 
+    // this.micronutrientes = []
+    
     console.log(this.micronutrientes)
 
   }

@@ -159,15 +159,17 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
                             this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
                             .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
                               console.log(`Obtener progreso: ${progresoUser.type}`);
+                              console.log(progresoUser.message);
                               if(progresoUser.type==1){             //Rellena totalProgress con el array de jsons del progreso de cada micronutriente
                                 this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
                                 sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+                                console.log(this.progressService.totalProgress);
                                 this.micronutrientService.getGrupos()   
                                 .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
                                   console.log(`Obtener grupos: ${grupos.type}`);
                                   if(grupos.type==1 || grupos.type==-1){
-                                    this.progressService.groups=grupos.message;
-                                    sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
+                                    this.micronutrientService.groups=grupos.message;
+                                    sessionStorage.setItem('groups',JSON.stringify(this.micronutrientService.groups))
                                     ///  Y por fin entra
                                     this.router.navigate(['home']);
                                   }
@@ -183,12 +185,15 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
                                     this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
                                     .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
                                       console.log(`Obtener progreso: ${progresoUser.type}`);
+                                      this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
+                                      sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+                                      console.log(this.progressService.totalProgress);
                                       this.micronutrientService.getGrupos()   
                                       .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
                                         console.log(`Obtener grupos: ${grupos.type}`);
                                         if(grupos.type==1 || grupos.type==-1){
-                                          this.progressService.groups=grupos.message;
-                                          sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
+                                          this.micronutrientService.groups=grupos.message;
+                                          sessionStorage.setItem('groups',JSON.stringify(this.micronutrientService.groups))
                                           ///  Y por fin entra
                                           this.router.navigate(['home']);
                                         }
