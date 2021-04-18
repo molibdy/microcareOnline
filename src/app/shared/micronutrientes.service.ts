@@ -35,7 +35,8 @@ export class MicronutrientesService {
     // this.micronutrientes = []
     
     console.log(this.micronutrientes)
-    this.grupos = JSON.parse(sessionStorage.getItem('groups'))
+    // this.grupos = JSON.parse(sessionStorage.getItem('groups'))
+    this.grupos=[]
     this.selectedGroup = this.grupos[0]
 
   }
