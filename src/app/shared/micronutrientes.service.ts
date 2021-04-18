@@ -28,7 +28,7 @@ export class MicronutrientesService {
     this.microsReceta=[];
     this.microsIngesta=[];
     this.microsReto=[];
-    this.selectedMicronutriente = new Micronutrients(0,"","","") 
+    this.selectedMicronutriente = new Micronutrients() 
     this.micronutrientes = []
     console.log(this.micronutrientes)
 

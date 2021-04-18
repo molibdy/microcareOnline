@@ -77,155 +77,168 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
           .subscribe((recipes:any)=>{
             console.log(`Obtener recetas: ${recipes.type}`);
             if(recipes.type == 1 || recipes.type == -2){
-            this.recetaService.recetas = recipes.message
-            console.log(this.recetaService.recetas)
+              this.recetaService.recetas = recipes.message
+              console.log(this.recetaService.recetas)
 
-            for(let j=0;j<this.recetaService.recetas.length;j++){  // Crear campos en las recetas para 
-              this.recetaService.recetas[j].ingredientes=[];      // array de ingredientes
-              this.recetaService.recetas[j].dietas=[];      // array de dietas
-              this.recetaService.recetas[j].microscore=[];      // array de microscores (ordenadas de mayor a menor)
-            }
-            this.micronutrientService.getMicrosRecetas()
-            .subscribe((micros:any)=>{           //obtener microscore de cada receta
-              console.log(`Obtener microscores: ${micros.type}`);
-              for(let i=0; i<micros.message.length;i++){
-                for(let j=0;j<this.recetaService.recetas.length;j++){
-                  if(this.recetaService.recetas[j].recipe_id==micros.message[i].recipe_id){
-                    this.recetaService.recetas[j].microscore
-                    .push({
-                      micronutrient_id:micros.message[i].micronutrient_id,
-                      micronutrient_name:micros.message[i].micronutrient_name,
-                      acronym:micros.message[i].acronym,
-                      color:micros.message[i].color,
-                      percent:micros.message[i].percent
-                    })
-                  }
-                }
-              } 
-              this.recetaService.getRecetasDetails()       // Obtener ingredientes y dietas de cada receta
-              .subscribe((detalles:any)=>{
-                console.log(`Obtener dietas e ingredientes: ${detalles.type}`);
-                for(let i=0; i<detalles.message.length;i++){
+              for(let j=0;j<this.recetaService.recetas.length;j++){  // Crear campos en las recetas para 
+                this.recetaService.recetas[j].ingredientes=[];      // array de ingredientes
+                this.recetaService.recetas[j].dietas=[];      // array de dietas
+                this.recetaService.recetas[j].microscore=[];      // array de microscores (ordenadas de mayor a menor)
+              }
+              this.micronutrientService.getMicrosRecetas()
+              .subscribe((micros:any)=>{           //obtener microscore de cada receta
+                console.log(`Obtener microscores: ${micros.type}`);
+                for(let i=0; i<micros.message.length;i++){
                   for(let j=0;j<this.recetaService.recetas.length;j++){
-                    if(this.recetaService.recetas[j].recipe_id==detalles.message[i].recipe_id){  
-                      if(!this.recetaService.recetas[j].ingredientes.some(function (ingrediente){
-                        return ingrediente.ingredient_name==detalles.message[i].ingredient_name     
-                      })){                                      //añadir ingredientes si no están en la lista de ingredientes
-                        this.recetaService.recetas[j].ingredientes.push({
-                          ingredient_name:detalles.message[i].ingredient_name,
-                          amount:detalles.message[i].amount,
-                          unit:detalles.message[i].unit,
-                          total_grams:detalles.message[i].total_grams})
-                      }                                    //añadir dietas si no están en la lista de dietas
-                      if(!this.recetaService.recetas[j].dietas.includes(detalles.message[i].diet_name)){
-                        this.recetaService.recetas[j].dietas.push(detalles.message[i].diet_name)
-                      } 
+                    if(this.recetaService.recetas[j].recipe_id==micros.message[i].recipe_id){
+                      this.recetaService.recetas[j].microscore
+                      .push({
+                        micronutrient_id:micros.message[i].micronutrient_id,
+                        micronutrient_name:micros.message[i].micronutrient_name,
+                        acronym:micros.message[i].acronym,
+                        color:micros.message[i].color,
+                        percent:micros.message[i].percent
+                      })
                     }
                   }
-                }
-                console.log(this.recetaService.recetas)
-                sessionStorage.setItem('recetas',JSON.stringify(this.recetaService.recetas))
-
-                this.progressService.getAverageProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id)
-                .subscribe((average:any)=>{           //  Obtiene la media del progreso del user por fechas
-                  console.log(`Obtener average progress: ${average.type}`);
-                  if(average.type==1 || average.type== -1){
-                    this.progressService.averageProgress=average.message
-                    sessionStorage.setItem('averageProgress',JSON.stringify(this.progressService.averageProgress))
-                    console.log(this.progressService.averageProgress)
-                    this.progressService.getAverageProgressTotal()        
-                    .subscribe((averageTotal:any)=>{          //Obtiene la media del progreso de todos los users por fechas
-                      console.log(`Obtener average progress total: ${averageTotal.type}`);
-                      if(averageTotal.type==1 || average.type== -1){
-                        this.progressService.averageProgressTotal=averageTotal.message
-                        sessionStorage.setItem('averageProgressTotal',JSON.stringify(this.progressService.averageProgressTotal))
-                        console.log(this.progressService.averageProgressTotal)
-                        console.log('dateString antes de get Progress: ' + this.dateString)
-                        this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
-                        .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
-                          console.log(`Obtener progreso: ${progresoUser.type}`);
-                          if(progresoUser.type==1){             //Rellena totalProgress con el array de jsons del progreso de cada micronutriente
-                            this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
-                            sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
-                            this.progressService.getGroups(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)   
-                            .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
-                              console.log(`Obtener grupos: ${grupos.type}`);
-                              if(grupos.type==1){
-                                this.progressService.groups=grupos.message;
-                                sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
-                                for(let i=0;i<this.progressService.groups.length;i++){
-                                  if(this.progressService.groups[i].name=='vitaminas'){
-                                    this.progressService.vitaminas=this.progressService.groups[i] 
-                                    sessionStorage.setItem('vitaminas',JSON.stringify(this.progressService.vitaminas))
-                                  }
-                                  else if(this.progressService.groups[i].name=='minerales'){
-                                    this.progressService.minerales=this.progressService.groups[i]
-                                    sessionStorage.setItem('minerales',JSON.stringify(this.progressService.minerales))
-                                  }
-                                  else if(this.progressService.groups[i].name=='ácidos grasos'){
-                                    this.progressService.omegas=this.progressService.groups[i]
-                                    sessionStorage.setItem('omegas',JSON.stringify(this.progressService.omegas))
-                                  }
-                                  else if(this.progressService.groups[i].name=='oligoelementos'){
-                                    this.progressService.oligoelementos=this.progressService.groups[i]
-                                    sessionStorage.setItem('oligoelementos',JSON.stringify(this.progressService.oligoelementos))
-                                  }
-                                }
-                                this.router.navigate(['home']);
-                              }
-                              console.log(grupos.message)
-                            });
-                          
-                          }
-                          else if(progresoUser.type==-1){
-                              let progreso={user_id: JSON.parse(sessionStorage.getItem('userSession')).user_id,date: this.dateString,percent: 0}
-                              this.progressService.startProgress(progreso)  //inserta un nuevo registro de progreso para cada micronutriente en fecha hoy y percent=0
-                              .subscribe((added:any)=>{
-                                console.log(`start progress: ${added.type}`);
-                                console.log(added.message)
-                                this.progressService.getGroups(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)   //Obtiene la media de progreso para cada grupo y rellena el atributo groups
-                            .subscribe((grupos:any)=>{
-                              console.log(`Obtener grupos: ${grupos.type}`);
-                              if(grupos.type==1){
-                                this.progressService.groups=grupos.message;
-                                sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
-                                for(let i=0;i<this.progressService.groups.length;i++){
-                                  if(this.progressService.groups[i].name=='vitaminas'){
-                                    this.progressService.vitaminas=this.progressService.groups[i] 
-                                    sessionStorage.setItem('vitaminas',JSON.stringify(this.progressService.vitaminas))
-                                  }
-                                  else if(this.progressService.groups[i].name=='minerales'){
-                                    this.progressService.minerales=this.progressService.groups[i]
-                                    sessionStorage.setItem('minerales',JSON.stringify(this.progressService.minerales))
-                                  }
-                                  else if(this.progressService.groups[i].name=='ácidos grasos'){
-                                    this.progressService.omegas=this.progressService.groups[i]
-                                    sessionStorage.setItem('omegas',JSON.stringify(this.progressService.omegas))
-                                  }
-                                  else if(this.progressService.groups[i].name=='oligoelementos'){
-                                    this.progressService.oligoelementos=this.progressService.groups[i]
-                                    sessionStorage.setItem('oligoelementos',JSON.stringify(this.progressService.oligoelementos))
-                                  }
-                                }
-                                this.router.navigate(['home']);
-                              }
-                              console.log(grupos.message)
-                                });
-                              })
-                          }
-                        })
-                      }  
-                    })
+                } 
+                this.recetaService.getRecetasDetails()       // Obtener ingredientes y dietas de cada receta
+                .subscribe((detalles:any)=>{
+                  console.log(`Obtener dietas e ingredientes: ${detalles.type}`);
+                  for(let i=0; i<detalles.message.length;i++){
+                    for(let j=0;j<this.recetaService.recetas.length;j++){
+                      if(this.recetaService.recetas[j].recipe_id==detalles.message[i].recipe_id){  
+                        if(!this.recetaService.recetas[j].ingredientes.some(function (ingrediente){
+                          return ingrediente.ingredient_name==detalles.message[i].ingredient_name     
+                        })){                                      //añadir ingredientes si no están en la lista de ingredientes
+                          this.recetaService.recetas[j].ingredientes.push({
+                            ingredient_id:detalles.message[i].ingredient_id,
+                            ingredient_name:detalles.message[i].ingredient_name,
+                            amount:detalles.message[i].amount,
+                            unit:detalles.message[i].unit,
+                            total_grams:detalles.message[i].total_grams})
+                        }                                    //añadir dietas si no están en la lista de dietas
+                        if(!this.recetaService.recetas[j].dietas.includes(detalles.message[i].diet_name)){
+                          this.recetaService.recetas[j].dietas.push(detalles.message[i].diet_name)
+                        } 
+                      }
+                    }
                   }
+                  console.log(this.recetaService.recetas)
+                  sessionStorage.setItem('recetas',JSON.stringify(this.recetaService.recetas))
+
+                  this.recetaService.getRecetasParaTi(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+                  .subscribe((recetas:any)=>{        // Lista recetas para ti
+                    console.log(`Obtener recetas para ti: ${recetas.type}`);
+                    for(let i=0;i<this.recetaService.recetas.length;i++){
+                      let allRecipes=this.recetaService.recetas[i]
+                      if(recetas.message.some(function(receta){
+                        return receta.recipe_id==allRecipes.recipe_id
+                      })){
+                        this.recetaService.recetasParaTi.push(this.recetaService.recetas[i])
+                      } 
+                    } console.log(this.recetaService.recetasParaTi)
+                    sessionStorage.setItem('recetasParaTi',JSON.stringify(this.recetaService.recetasParaTi))
+                    
+                    this.progressService.getAverageProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id)
+                    .subscribe((average:any)=>{           //  media del progreso del user por fechas
+                      console.log(`Obtener average progress: ${average.type}`);
+                      if(average.type==1 || average.type== -1){
+                        this.progressService.averageProgress=average.message
+                        sessionStorage.setItem('averageProgress',JSON.stringify(this.progressService.averageProgress))
+                        console.log(this.progressService.averageProgress)
+                        this.progressService.getAverageProgressTotal()        
+                        .subscribe((averageTotal:any)=>{          //media del progreso de todos los users por fechas
+                          console.log(`Obtener average progress total: ${averageTotal.type}`);
+                          if(averageTotal.type==1 || average.type== -1){
+                            this.progressService.averageProgressTotal=averageTotal.message
+                            sessionStorage.setItem('averageProgressTotal',JSON.stringify(this.progressService.averageProgressTotal))
+                            console.log(this.progressService.averageProgressTotal)
+                            console.log('dateString antes de get Progress: ' + this.dateString)
+                            this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
+                            .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
+                              console.log(`Obtener progreso: ${progresoUser.type}`);
+                              if(progresoUser.type==1){             //Rellena totalProgress con el array de jsons del progreso de cada micronutriente
+                                this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
+                                sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+                                this.progressService.getGroups(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)   
+                                .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
+                                  console.log(`Obtener grupos: ${grupos.type}`);
+                                  if(grupos.type==1){
+                                    this.progressService.groups=grupos.message;
+                                    sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
+                                    for(let i=0;i<this.progressService.groups.length;i++){
+                                      if(this.progressService.groups[i].name=='vitaminas'){
+                                        this.progressService.vitaminas=this.progressService.groups[i] 
+                                        sessionStorage.setItem('vitaminas',JSON.stringify(this.progressService.vitaminas))
+                                      }
+                                      else if(this.progressService.groups[i].name=='minerales'){
+                                        this.progressService.minerales=this.progressService.groups[i]
+                                        sessionStorage.setItem('minerales',JSON.stringify(this.progressService.minerales))
+                                      }
+                                      else if(this.progressService.groups[i].name=='ácidos grasos'){
+                                        this.progressService.omegas=this.progressService.groups[i]
+                                        sessionStorage.setItem('omegas',JSON.stringify(this.progressService.omegas))
+                                      }
+                                      else if(this.progressService.groups[i].name=='oligoelementos'){
+                                        this.progressService.oligoelementos=this.progressService.groups[i]
+                                        sessionStorage.setItem('oligoelementos',JSON.stringify(this.progressService.oligoelementos))
+                                      }
+                                    }
+                                    this.router.navigate(['home']);
+                                  }
+                                  console.log(grupos.message)
+                                });
+                              
+                              }
+                              else if(progresoUser.type==-1){
+                                  let progreso={user_id: JSON.parse(sessionStorage.getItem('userSession')).user_id,date: this.dateString,percent: 0}
+                                  this.progressService.startProgress(progreso)  //inserta un nuevo registro de progreso para cada micronutriente en fecha hoy y percent=0
+                                  .subscribe((added:any)=>{
+                                    console.log(`start progress: ${added.type}`);
+                                    console.log(added.message)
+                                    this.progressService.getGroups(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)   //Obtiene la media de progreso para cada grupo y rellena el atributo groups
+                                .subscribe((grupos:any)=>{
+                                  console.log(`Obtener grupos: ${grupos.type}`);
+                                  if(grupos.type==1){
+                                    this.progressService.groups=grupos.message;
+                                    sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
+                                    for(let i=0;i<this.progressService.groups.length;i++){
+                                      if(this.progressService.groups[i].name=='vitaminas'){
+                                        this.progressService.vitaminas=this.progressService.groups[i] 
+                                        sessionStorage.setItem('vitaminas',JSON.stringify(this.progressService.vitaminas))
+                                      }
+                                      else if(this.progressService.groups[i].name=='minerales'){
+                                        this.progressService.minerales=this.progressService.groups[i]
+                                        sessionStorage.setItem('minerales',JSON.stringify(this.progressService.minerales))
+                                      }
+                                      else if(this.progressService.groups[i].name=='ácidos grasos'){
+                                        this.progressService.omegas=this.progressService.groups[i]
+                                        sessionStorage.setItem('omegas',JSON.stringify(this.progressService.omegas))
+                                      }
+                                      else if(this.progressService.groups[i].name=='oligoelementos'){
+                                        this.progressService.oligoelementos=this.progressService.groups[i]
+                                        sessionStorage.setItem('oligoelementos',JSON.stringify(this.progressService.oligoelementos))
+                                      }
+                                    }
+                                    this.router.navigate(['home']);
+                                  }
+                                  console.log(grupos.message)
+                                    });
+                                  })
+                              }
+                            })
+                          }  
+                        })
+                      }
+                    })
+                  })   
                 })
               })
-            })
-          
-          }
+            }
           })
-
-          }
-        })
+        }
+      })
         
           
 

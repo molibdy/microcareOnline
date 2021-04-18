@@ -1,7 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Recipe } from '../models/recipe';
+import { Recipes } from '../models/recipes';
 
 
 @Injectable({
@@ -9,14 +9,16 @@ import { Recipe } from '../models/recipe';
 })
 export class RecetasService {
 
-  public recetas:any[];
-  public selectedReceta:Recipe;
+  public recetas:Recipes[];
+  public recetasParaTi:Recipes[]
+  public selectedReceta:Recipes;
   //private url = 'https://api-rest-microcare.herokuapp.com/recetas'
   private url = 'http://localhost:300/recetas'
 
   constructor(private http:HttpClient) {
     this.recetas = []
-    this.selectedReceta=new Recipe()
+    this.recetasParaTi=[]
+    this.selectedReceta=new Recipes()
    }
 
  
@@ -25,8 +27,8 @@ export class RecetasService {
     return this.http.get(this.url)
   }
 
-  getRecetasParaTi(user_id:number){
-    return this.http.get(this.url + '/parati')
+  getRecetasParaTi(user_id:number,date:string){
+    return this.http.get(`${this.url}/parati?user_id=${user_id}&date=${date}`)
   }
 
 
