@@ -36,7 +36,6 @@ export class ProgressService {
 
 
   public getProgress(user_id:number,dateString:string){
-    console.log(dateString)
     return this.http.get(`${this.url}?user_id=${user_id}&date=${dateString}`);
   }
 

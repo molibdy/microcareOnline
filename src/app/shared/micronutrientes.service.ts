@@ -35,6 +35,10 @@ export class MicronutrientesService {
   }
 
 
+  getGrupos(){
+    return this.http.get(`${this.url}/grupos`)
+  }
+
   getMicros(){
     return this.http.get(this.url)
   }

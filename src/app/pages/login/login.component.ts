@@ -97,7 +97,8 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
                         micronutrient_name:micros.message[i].micronutrient_name,
                         acronym:micros.message[i].acronym,
                         color:micros.message[i].color,
-                        percent:micros.message[i].percent
+                        percent:micros.message[i].percent,
+                        group_id:micros.message[i].group_id
                       })
                     }
                   }
@@ -161,80 +162,50 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
                               if(progresoUser.type==1){             //Rellena totalProgress con el array de jsons del progreso de cada micronutriente
                                 this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
                                 sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
-                                this.progressService.getGroups(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)   
+                                this.micronutrientService.getGrupos()   
                                 .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
                                   console.log(`Obtener grupos: ${grupos.type}`);
-                                  if(grupos.type==1){
+                                  if(grupos.type==1 || grupos.type==-1){
                                     this.progressService.groups=grupos.message;
                                     sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
-                                    for(let i=0;i<this.progressService.groups.length;i++){
-                                      if(this.progressService.groups[i].name=='vitaminas'){
-                                        this.progressService.vitaminas=this.progressService.groups[i] 
-                                        sessionStorage.setItem('vitaminas',JSON.stringify(this.progressService.vitaminas))
-                                      }
-                                      else if(this.progressService.groups[i].name=='minerales'){
-                                        this.progressService.minerales=this.progressService.groups[i]
-                                        sessionStorage.setItem('minerales',JSON.stringify(this.progressService.minerales))
-                                      }
-                                      else if(this.progressService.groups[i].name=='ácidos grasos'){
-                                        this.progressService.omegas=this.progressService.groups[i]
-                                        sessionStorage.setItem('omegas',JSON.stringify(this.progressService.omegas))
-                                      }
-                                      else if(this.progressService.groups[i].name=='oligoelementos'){
-                                        this.progressService.oligoelementos=this.progressService.groups[i]
-                                        sessionStorage.setItem('oligoelementos',JSON.stringify(this.progressService.oligoelementos))
-                                      }
-                                    }
+                                    ///  Y por fin entra
                                     this.router.navigate(['home']);
                                   }
                                   console.log(grupos.message)
                                 });
                               
-                              }
-                              else if(progresoUser.type==-1){
+                              }else if(progresoUser.type==-1){
                                   let progreso={user_id: JSON.parse(sessionStorage.getItem('userSession')).user_id,date: this.dateString,percent: 0}
                                   this.progressService.startProgress(progreso)  //inserta un nuevo registro de progreso para cada micronutriente en fecha hoy y percent=0
                                   .subscribe((added:any)=>{
                                     console.log(`start progress: ${added.type}`);
                                     console.log(added.message)
-                                    this.progressService.getGroups(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)   //Obtiene la media de progreso para cada grupo y rellena el atributo groups
-                                .subscribe((grupos:any)=>{
-                                  console.log(`Obtener grupos: ${grupos.type}`);
-                                  if(grupos.type==1){
-                                    this.progressService.groups=grupos.message;
-                                    sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
-                                    for(let i=0;i<this.progressService.groups.length;i++){
-                                      if(this.progressService.groups[i].name=='vitaminas'){
-                                        this.progressService.vitaminas=this.progressService.groups[i] 
-                                        sessionStorage.setItem('vitaminas',JSON.stringify(this.progressService.vitaminas))
-                                      }
-                                      else if(this.progressService.groups[i].name=='minerales'){
-                                        this.progressService.minerales=this.progressService.groups[i]
-                                        sessionStorage.setItem('minerales',JSON.stringify(this.progressService.minerales))
-                                      }
-                                      else if(this.progressService.groups[i].name=='ácidos grasos'){
-                                        this.progressService.omegas=this.progressService.groups[i]
-                                        sessionStorage.setItem('omegas',JSON.stringify(this.progressService.omegas))
-                                      }
-                                      else if(this.progressService.groups[i].name=='oligoelementos'){
-                                        this.progressService.oligoelementos=this.progressService.groups[i]
-                                        sessionStorage.setItem('oligoelementos',JSON.stringify(this.progressService.oligoelementos))
-                                      }
-                                    }
-                                    this.router.navigate(['home']);
-                                  }
-                                  console.log(grupos.message)
-                                    });
+                                    this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
+                                    .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
+                                      console.log(`Obtener progreso: ${progresoUser.type}`);
+                                      this.micronutrientService.getGrupos()   
+                                      .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
+                                        console.log(`Obtener grupos: ${grupos.type}`);
+                                        if(grupos.type==1 || grupos.type==-1){
+                                          this.progressService.groups=grupos.message;
+                                          sessionStorage.setItem('groups',JSON.stringify(this.progressService.groups))
+                                          ///  Y por fin entra
+                                          this.router.navigate(['home']);
+                                        }
+                                        console.log(grupos.message)
+                                      });
+                                    })
+                             
                                   })
-                              }
+                              }  
                             })
-                          }  
+                          }
                         })
                       }
-                    })
-                  })   
+                    })   
+                  })
                 })
-              })
+              })  
             }
           })
         }

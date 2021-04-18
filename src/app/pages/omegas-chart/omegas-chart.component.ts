@@ -11,6 +11,7 @@ import {
   
 } from "ng-apexcharts";
 import { Group } from 'src/app/models/group';
+import { Progress } from 'src/app/models/progress';
 import { ProgressService } from 'src/app/shared/progress.service';
 
 export type ChartOptions = {
@@ -32,15 +33,37 @@ export class OmegasChartComponent implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-
   public groupData:Group;
+  public groups:Group[];
+  public groupProgress:Progress;
+  public totalProgress:Progress;
+  public averagePercent:number;
   constructor(public progressService:ProgressService) { 
+    this.groups=JSON.parse(sessionStorage.getItem('groups'));
+    this.totalProgress=JSON.parse(sessionStorage.getItem('totalProgress'));
+    this.groupProgress=this.totalProgress
+    this.groupProgress.percents=[]
 
-    this.groupData=JSON.parse(sessionStorage.getItem('omegas'));
-    // this.groupData=this.progressService.omegas;
+    // obtener datos del grupo concreto
+    for(let i=0;i<this.groups.length;i++){
+      if(this.groups[i].name=='ácidos grasos'){
+        this.groupData=this.groups[i];
+      }
+    }
+
+    //obtener progreso del grupo concreto
+    let sumPercent:number=0
+    for(let i=0; i<this.totalProgress.percents.length;i++){
+      if(this.totalProgress.percents[i].group_id==this.groupData.group_id){
+        this.groupProgress.percents.push(this.totalProgress.percents[i])
+        sumPercent+=this.totalProgress.percents[i].percent
+      }
+    }
+    this.averagePercent=sumPercent/this.groupProgress.percents.length
+ 
 
     this.chartOptions = {
-      series: [this.groupData.percent],         //DEPENDIENTE DE CLASE
+      series: [this.averagePercent],         //DEPENDIENTE DE CLASE
       chart: {
         height: 190,
         type: "radialBar",
