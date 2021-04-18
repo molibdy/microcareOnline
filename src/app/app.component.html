@@ -15,14 +15,14 @@
  -->
 
 
-
+<!-- <app-usda></app-usda> -->
 <div *ngIf="user.user_id>0; else login">
 <router-outlet></router-outlet> 
 <app-nav-bar></app-nav-bar>
 </div>
 
 <ng-template #login>
-    <!-- Aquí habría un componente padre que contiene tres componentes hijos: login, register y loading-->
+
     <app-auth></app-auth>
 </ng-template>
 

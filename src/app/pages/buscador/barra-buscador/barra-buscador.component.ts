@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Micronutrients } from 'src/app/models/micronutrient';
+import { Recipes } from 'src/app/models/recipes';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 import { RecetasService } from 'src/app/shared/recetas.service';
+
+
 
 
 @Component({
@@ -10,18 +15,21 @@ import { RecetasService } from 'src/app/shared/recetas.service';
 })
 export class BarraBuscadorComponent implements OnInit {
 
-public micronutrientes:any[]
-public recetas: any[]
-public mySwitch: boolean = false
-public recetasBuscar=[]
-public micronutrientesBuscar = []
 
-  public inputSearch:string = ""
+public micronutrientes:any[]  
+public recetas: any[] /// va a contener todos las recetas de la bbdd
+public mySwitch: boolean = false
+public recetasBuscar: Recipes[] // va a contener la busqueda del input de recetas
+public micronutrientesBuscar: Micronutrients[]
+public inputSearch:string = ""
+ 
   
   // public ingredientes: object[] = [{nombre: "Pera"},{nombre: "Manzana"},{nombre: "Granada"}];
   
-  constructor(public micronutrientesServicio:MicronutrientesService, public recetasServicio:RecetasService) {
-    this.micronutrientesServicio.micronutrientes
+  constructor(public micronutrientesServicio:MicronutrientesService, public recetasServicio:RecetasService, public router:Router) {
+
+    this.micronutrientesServicio.micronutrientes 
+
     this.recetasServicio.recetas
     
    // this.recetas = this.recetasServicio.recetas
@@ -75,9 +83,28 @@ this.micronutrientesBuscar = []
 
 }
 
-  rutaMicro(){
+rutaMicro(i){
 
-  }
+  this.micronutrientesServicio.selectedMicronutriente = this.micronutrientesBuscar[i]
+  // this.micronutrientesBuscar[i] = this.micronutrientesServicio.linkMicro()
+  this.router.navigate(["home/grupo/micro"], {queryParams: {micronutrient_id : this.micronutrientesBuscar[i].micronutrient_id}})
+  console.log(this.micronutrientesBuscar)
+
+}
+
+   
+rutaReceta(i){
+  //  this.recetaService.selectedReceta_id=recipe_id  ESTO DEBERÍA SER OBJETO RECETA?
+  this.micronutrientesServicio.getMicrosReceta(this.recetasBuscar[i].recipe_id).subscribe((micronutrientes:any)=>{
+   if(micronutrientes.type==1 || micronutrientes.type==-1){
+     this.micronutrientesServicio.microsReceta=micronutrientes.message;
+   }
+   this.recetasServicio.selectedReceta = this.recetasBuscar[i]
+   // this.micronutrientesBuscar[i] = this.micronutrientesServicio.linkMicro()
+   this.router.navigate(['buscar-receta/receta']);
+   console.log(this.recetasBuscar)
+  })
+ }
 
 
   ngOnInit(): void {

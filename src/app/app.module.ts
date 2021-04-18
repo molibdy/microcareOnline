@@ -47,6 +47,7 @@ import { GramosPipe } from './pipes/gramos.pipe';
 import { BuscadorRecetasPipe } from './pipes/buscador-recetas.pipe';
 import { RecetasComponent } from './pages/buscador/recetas/recetas.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { UsdaComponent } from './pages/usda/usda.component';
 
 
 
@@ -90,6 +91,7 @@ import { AuthComponent } from './pages/auth/auth.component';
     BuscadorRecetasPipe,
     RecetasComponent,
     AuthComponent,
+    UsdaComponent,
   
   ],
   imports: [

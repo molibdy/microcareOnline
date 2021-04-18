@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Progress } from 'src/app/models/progress';
+import { Recipes } from 'src/app/models/recipes';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 import { ProgressService } from 'src/app/shared/progress.service';
+import { RecetasService } from 'src/app/shared/recetas.service';
 
 
 
@@ -11,11 +13,8 @@ import { ProgressService } from 'src/app/shared/progress.service';
   styleUrls: ['./vista-receta.component.css']
 })
 export class VistaRecetaComponent implements OnInit {
-  public nombre:string;
-  public ingredientes:object[];
-  public pasos:string;
-  public imgUrl:string;
-  public microscore:string[]
+
+  public selectedReceta:Recipes;
 
   // boton planear
   public showDatePicker:boolean;
@@ -35,22 +34,10 @@ export class VistaRecetaComponent implements OnInit {
 
   constructor(
     public micronutrientService:MicronutrientesService,
-    public progressService:ProgressService
+    public progressService:ProgressService,
+    public recetasService:RecetasService
     ) { 
-
-    this.nombre='Pollo con almendras'
-    this.imgUrl="https://carneentucasa.com/archivos/Noticias/983.jpg"
-    this.ingredientes=[
-      {cantidad: '3', unidad: 'pechugas', nombre:'pollo'},
-      {cantidad: '100', unidad: 'gr', nombre:'almendras'},
-      {cantidad: '1', unidad: 'ud', nombre:'cebolla grande'},
-      {cantidad: '3', unidad: 'cucharadas', nombre:'aceite de oliva'}
-    ]
-    this.pasos=`Corta el pollo en dados, del tamaño de un bocado. 
-    <br> Ponlos en un bol y añade la salsa de soja, el azúcar y el jengibre en polvo. 
-    <br> Mézclalo todo bien, para que el pollo se macere y aromatice. 
-    <br> Tapa el bol e introdúcelo en la nevera, al menos durante media hora, mientras preparas el resto de la receta.
-    <br> En una sartén a fuego medio-fuerte, pon un poco de aceite y saltea las almendras, hasta que se doren ligeramente. Resérvalas.`
+      this.selectedReceta=this.recetasService.selectedReceta
     
     this.showDatePicker=false
     this.selectedDate=''
@@ -76,14 +63,17 @@ export class VistaRecetaComponent implements OnInit {
   }
 
   public addRegistro(){
+    console.log('añadiendo registro')
     if(this.isConsumed){
+      console.log('ya consumida')
       this.alreadyConsumed=true
       this.showAlreadyConsumed=true
     }else{
-      
+      console.log('añadiendo progreso')
        //Añade la microscore de la receta al progreso del user
-      this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.micronutrientService.microsReceta))
+      this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.selectedReceta.microscore))
       .subscribe((updated:any)=>{
+        console.log('progreso añadido, type' + updated.type)
         if(updated.type==1 || updated.type==2){
 
           //Añade receta al día del user

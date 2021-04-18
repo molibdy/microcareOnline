@@ -10,6 +10,8 @@ import {
   ApexFill,
   ApexLegend
 } from "ng-apexcharts";
+import { Recipes } from "src/app/models/recipes";
+import { RecetasService } from "src/app/shared/recetas.service";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -29,18 +31,29 @@ export type ChartOptions = {
 export class MicroScoreComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+  public selectedReceta:Recipes;
 
-  constructor() {
+  constructor(public recetasService:RecetasService) {
+    this.selectedReceta=this.recetasService.selectedReceta;
+    let microData=[];
+    let microColors=[];
+    let microCategories=[];
+    for(let i=0;i<7;i++){
+      microData.push(this.selectedReceta.microscore[i].percent);
+      microColors.push(this.selectedReceta.microscore[i].color);
+      microCategories.push(this.selectedReceta.microscore[i].micronutrient_name[0].toUpperCase() + this.selectedReceta.microscore[i].micronutrient_name.substring(1));
+    }
+
     this.chartOptions = {
       series: [
         {
           name: "basic",
-          data: [40, 43, 60, 53,90, 80],
+          data: microData
 
         }
       ],
       fill:{
-        colors:["#DEFF88","#FFD38C","#FF96A3","#A18CE8","#A18CE8","#FF96A3"]
+        colors: microColors
       },
       chart: {
         type: "bar",
@@ -90,14 +103,7 @@ export class MicroScoreComponent implements OnInit {
         
       },
       xaxis: {
-        categories: [          // RESPONDE AL MICROSCORE SERVICE
-          "Potasio",
-          "Molibdeno",
-          "Vitamina C",
-          "Omega 6",
-          "Alanina",
-          "Serina"
-        ],
+        categories: microCategories,
         labels: {
           show: true,
           style: {

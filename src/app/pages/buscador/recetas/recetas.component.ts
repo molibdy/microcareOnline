@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Recipes } from 'src/app/models/recipes';
+import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
+import { RecetasService } from 'src/app/shared/recetas.service';
+
 
 @Component({
   selector: 'app-recetas',
@@ -10,7 +15,7 @@ export class RecetasComponent implements OnInit {
   public inputSearch:string = ""
   public micronutrientes: object[] = [{nombre:'Molibdeno'},{nombre:'Potasio'}]
   public ingredientes: object[] = [{nombre: "Pera"},{nombre: "Manzana"},{nombre: "Granada"}];
-  public recetas:object[] = [{nombre:'Lentejas con sardinas y queso'},{nombre:'Anchoas con la leche de Pascu condensada'}]
+  // public recetas:object[] = [{nombre:'Lentejas con sardinas y queso'},{nombre:'Anchoas con la leche de Pascu condensada'}]
 
   public receta1 : object ={preferencia1:"Vegano", preferencia2:"Vegetariano" , chip1: "Ma", chip2 :"Le", foto:"https://www.pequeocio.com/wp-content/uploads/elementor/thumbs/arroz-con-pollo-1-omev5dh7vnjdtchady0s9ynyb9lk18efx8mhc5dp3g.jpg", nombre: "Arroz con pollo"}
   public receta2 : object ={preferencia1:"Vegano", preferencia2:"Vegetariano" , chip1: "Po", chip2 :"Ma", foto:"https://1.bp.blogspot.com/-Wu9mvQH5yyI/XpGghtnH-iI/AAAAAAACi3I/KrzMGpdIvZo1vDMmoHAqU7GvSqQuJymSwCNcBGAsYHQ/s1600/paella%2Bde%2Bmarisco%2B%25281%2529.JPG",nombre: "Paella Valenciana"}
@@ -21,8 +26,50 @@ export class RecetasComponent implements OnInit {
   
   public todas : object[] = [this.receta1, this.receta2,this.receta3,this.receta4, this.receta5, this.receta6]
   
+  public recetas:Recipes[]
+  public mySwitch :boolean = false
+  public recetasBuscar:Recipes[]
 
-  constructor() { }
+  constructor(public recetasService:RecetasService, public micronutrienteServicio:MicronutrientesService, public router:Router) { 
+
+  
+    this.recetas = JSON.parse(sessionStorage.getItem('recetas'))
+
+  }
+
+
+  buscar(){
+    this.recetasBuscar=[]
+    let input = this.inputSearch.toUpperCase();
+    for(let i=0; i < this.recetas.length; i++){
+      if(this.recetas[i].recipe_name.toUpperCase().indexOf(input) > -1){
+        console.log(this.recetas[i].photo_url)
+        this.recetasBuscar.push(this.recetas[i])
+        
+      }
+    }  
+    
+    this.mySwitch = true
+  
+    }
+   
+rutaReceta(i){
+ //  this.recetaService.selectedReceta_id=recipe_id  ESTO DEBERÍA SER OBJETO RECETA?
+ this.micronutrienteServicio.getMicrosReceta(this.recetasBuscar[i].recipe_id).subscribe((micronutrientes:any)=>{
+  if(micronutrientes.type==1 || micronutrientes.type==-1){
+    this.micronutrienteServicio.microsReceta=micronutrientes.message;
+  }
+  this.recetasService.selectedReceta = this.recetasBuscar[i]
+  // this.micronutrientesBuscar[i] = this.micronutrientesServicio.linkMicro()
+  this.router.navigate(['buscar-receta/receta']);
+  console.log(this.recetasService.selectedReceta.photo_url)
+ })
+}
+
+
+
+
+
 
   ngOnInit(): void {
   }

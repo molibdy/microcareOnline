@@ -1,8 +1,8 @@
 <div class="container">
     
     <div class="banner">
-        <img [src]="imgUrl" [alt]="nombre">
-        <app-botton-cruz></app-botton-cruz>
+        <img [src]="selectedReceta.photo_url" [alt]="selectedReceta.recipe_name">
+        <app-botton-cruz routerLink="../"></app-botton-cruz>
     </div>
 
     <div class="col-center 100 iphoneCard">
@@ -11,7 +11,7 @@
         <div class="col-left menu-item">
             <div class="row-center">
                     <div class="title">
-                        Receta name
+                        {{selectedReceta.recipe_name}}
                     </div>
             </div>
         </div>
@@ -135,11 +135,11 @@
             </div>
         </div>
     
-        <div class="col-center menu-item" *ngFor="let ingrediente of ingredientes">
+        <div class="col-center menu-item" *ngFor="let ingrediente of selectedReceta.ingredientes">
             <div class="row-left row-item">
                 <div class="check"></div>
                 <div class="text">
-                    {{ingrediente.cantidad}} {{ingrediente.unidad}} de {{ingrediente.nombre}}
+                    {{ingrediente.amount}} {{ingrediente.unit}} de {{ingrediente.ingredient_name}} ({{ingrediente.total_grams}}gr)
                 </div>
             </div>
         </div>
@@ -149,11 +149,11 @@
             <div class="col-left ">
                 <div class="row-left row-item">
                         <div class="subtitle textBlueBold20">
-                            Pasos
+                            Pasos:
                         </div>
                 </div>
                 <div class="row-left">
-                    <div class="text pasos" [innerHtml]="pasos">
+                    <div class="text pasos" [innerHtml]="selectedReceta.instructions">
                         <!-- {{pasos}} -->
                     </div>
                 </div>
