@@ -4,4 +4,5 @@ export class Microscore {
     public acronym:string;
     public color:string;
     public percent:number;
+    public group_id:number
 }

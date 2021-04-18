@@ -75,7 +75,11 @@ export class VistaRecetaComponent implements OnInit {
       .subscribe((updated:any)=>{
         console.log('progreso añadido, type' + updated.type)
         if(updated.type==1 || updated.type==2){
-
+          this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+          .subscribe((progreso:any)=>{
+            this.progressService.totalProgress.percents=progreso.message
+            sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+          })
           //Añade receta al día del user
           this.isConsumed=true;
         }

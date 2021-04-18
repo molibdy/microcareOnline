@@ -13,7 +13,7 @@ export class MicronutrientesService {
     throw new Error('Method not implemented.');
   }
 
-  public micronutrientes
+  public micronutrientes: Micronutrients[]
   public microsReceta:any[];
   public microsIngesta:any[];
   public microsReto:any[];
@@ -22,23 +22,28 @@ export class MicronutrientesService {
   public selectedGroup: Group
  
 
-  // private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
-  private url = 'http://localhost:300/micronutrientes'
+  private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
+  // private url = 'http://localhost:300/micronutrientes'
 
 
   constructor(private http:HttpClient, ) { 
 
-    this.microsReceta=[];
-    this.microsIngesta=[];
-    this.microsReto=[];
-    this.selectedMicronutriente = new Micronutrients() 
-    this.micronutrientes = []
+    // this.microsReceta=[];
+    // this.microsIngesta=[];
+    // this.microsReto=[];
+    // this.selectedMicronutriente = new Micronutrients() 
+    // this.micronutrientes = []
+    
     console.log(this.micronutrientes)
     this.grupos = JSON.parse(sessionStorage.getItem('groups'))
     this.selectedGroup = this.grupos[0]
 
   }
 
+
+  getGrupos(){
+    return this.http.get(`${this.url}/grupos`)
+  }
 
   getMicros(){
     return this.http.get(this.url)

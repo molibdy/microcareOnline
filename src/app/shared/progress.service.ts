@@ -7,18 +7,14 @@ import { Progress } from '../models/progress';
   providedIn: 'root'
 })
 export class ProgressService {
-  public groups:Group[]=[]
-  public vitaminas:Group=new Group();
-  public minerales:Group=new Group();
-  public omegas:Group=new Group();
-  public oligoelementos:Group=new Group();
+  
 
-  public totalProgress:Progress=new Progress(0,'',[])
-  public averageProgress:any[]=[]
-  public averageProgressTotal:any[]=[]
+  public totalProgress:Progress;
+  public averageProgress:any[]
+  public averageProgressTotal:any[]
 
-  // private url='https://api-rest-microcare.herokuapp.com/progreso';
-  private url='http://localhost:300/progreso';
+  private url='https://api-rest-microcare.herokuapp.com/progreso';
+  // private url='http://localhost:300/progreso';
   constructor(private http:HttpClient ) { }
 
 
@@ -36,7 +32,6 @@ export class ProgressService {
 
 
   public getProgress(user_id:number,dateString:string){
-    console.log(dateString)
     return this.http.get(`${this.url}?user_id=${user_id}&date=${dateString}`);
   }
 

@@ -1,5 +1,6 @@
 import { Microscore } from "./microscore";
 
+
 export class Progress {
 
     public user_id:number;
