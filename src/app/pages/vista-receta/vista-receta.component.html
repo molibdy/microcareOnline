@@ -78,8 +78,8 @@
         <div class="hr"></div>
         <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
             <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
-            Receta añadida al plan del día {{selectedDate}}
-            <a class="link" [routerLink]="goToPlan">Ver plan</a>
+            Receta añadida al plan del día {{dateToString(selectedDate)}}
+            <!-- <a class="link" (click)="goToPlan()">Ver plan</a> -->
         </div>
         
     </div>

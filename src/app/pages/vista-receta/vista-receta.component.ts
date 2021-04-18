@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PlannedRecipe } from 'src/app/models/planned-recipe';
 import { Progress } from 'src/app/models/progress';
 import { Recipes } from 'src/app/models/recipes';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
@@ -20,7 +22,7 @@ export class VistaRecetaComponent implements OnInit {
   public showDatePicker:boolean;
   public selectedDate:string
   public isDateSelected:boolean;
-  public goToPlan:string;
+
 
   //boton consumida
   public isConsumed:boolean;
@@ -35,14 +37,15 @@ export class VistaRecetaComponent implements OnInit {
   constructor(
     public micronutrientService:MicronutrientesService,
     public progressService:ProgressService,
-    public recetasService:RecetasService
+    public recetasService:RecetasService,
+    private router:Router
     ) { 
       this.selectedReceta=this.recetasService.selectedReceta
     
     this.showDatePicker=false
     this.selectedDate=''
     this.isDateSelected=false
-    this.goToPlan=''
+
     this.isConsumed=false
     this.alreadyConsumed=false
     this.showAlreadyConsumed=false
@@ -79,9 +82,19 @@ export class VistaRecetaComponent implements OnInit {
           .subscribe((progreso:any)=>{
             this.progressService.totalProgress.percents=progreso.message
             sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+            
+            //Añade receta al día del user
+            let addRecipe=new PlannedRecipe();
+            addRecipe.date=this.dateString;
+            addRecipe.isConsumed=true;
+            addRecipe.recipe_id=this.selectedReceta.recipe_id
+            addRecipe.user_id=JSON.parse(sessionStorage.getItem('userSession')).user_id
+            this.recetasService.addRecipeToPlan(addRecipe).subscribe((addition:any)=>{
+              if(addition.type==1){
+                this.isConsumed=true;
+              }
+            })
           })
-          //Añade receta al día del user
-          this.isConsumed=true;
         }
       })
      
@@ -95,17 +108,32 @@ export class VistaRecetaComponent implements OnInit {
     if(date.value.length>0){
       this.selectedDate=date.value
       console.log(this.selectedDate)
-      this.goToPlan=`../dia`  // añadir /${this.dateString(this.selectedDate)} para ir al día concreto?
-      this.isDateSelected=true
-      this.showDatePicker=false
-      this.showAlreadyConsumed=false
+     
       //Añade el id de la receta a la tabla de RecetasPlaneadas
+      let addRecipe=new PlannedRecipe();
+      addRecipe.date=this.dateToString(this.selectedDate);
+      addRecipe.isConsumed=false;
+      addRecipe.recipe_id=this.selectedReceta.recipe_id
+      addRecipe.user_id=JSON.parse(sessionStorage.getItem('userSession')).user_id
+      this.recetasService.addRecipeToPlan(addRecipe).subscribe((addition:any)=>{
+        if(addition.type==1){
+          this.isDateSelected=true
+          this.showDatePicker=false
+          this.showAlreadyConsumed=false
+        }
+      })
     }
   }
 
-  // private dateToString(date:string):string{
-  //   return date.replace(/\//g,'')
+  // public goToPlan(){
+  //   this.recetasService.selectedDate=this.dateToString(this.selectedDate)
+  //   this.router.navigate(['/dia'])
   // }
+
+  private dateToString(date:string):string{
+    let splitDate=date.split('/')
+    return `${splitDate[2]}-${splitDate[0]}-${splitDate[1]}`
+  }
 
   public cerrarDatePicker(){
     this.showDatePicker=false;
@@ -114,6 +142,7 @@ export class VistaRecetaComponent implements OnInit {
     this.showAlreadyConsumed=false
     console.log('cerrar')
   }
+
 
   ngOnInit(): void {
 

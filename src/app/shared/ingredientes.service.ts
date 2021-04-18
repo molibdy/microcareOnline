@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class IngredientesService {
 
-  private url = 'https://api-rest-microcare.herokuapp.com/ingredientes'
-  // private url = 'http://localhost:300/ingredientes'
+  // private url = 'https://api-rest-microcare.herokuapp.com/ingredientes'
+  private url = 'http://localhost:300/ingredientes'
   
   constructor(private http:HttpClient) { }
 

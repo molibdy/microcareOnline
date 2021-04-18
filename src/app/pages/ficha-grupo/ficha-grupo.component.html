@@ -16,12 +16,12 @@
     <div class="br"></div>
     
     <div class="sub-titulo">
-        Micronutrientes ricos en {{selectedGroup.name}}
+        Los {{selectedGroup.name}} incluyen:
     </div>
     <div class="br"></div>
     <div class="row-left wrap ancho100 chip-container">
         <div *ngFor="let micro of micronutrientsGroup"> 
-            <div class="chip-grande" routerLink="micro">{{micro.name}}
+            <div class="chip-grande" routerLink="micro">{{micro.micronutrient_name}}
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
     <div class="tarjeta-peque ancho100">
         <div class="br"></div>
         <div class="titulo">
-            Beneficios del {{selectedGroup.name}} 
+            Descripción
         </div>
         <div class="br"></div>
         <div class="cuerpo">

@@ -30,11 +30,11 @@
     
         <div class="col-center menu-item" *ngFor="let receta of plannedRecipes">
             <div class="row-left row-item">
-                <div class="check" (click)="addRegister(receta.id)">
+                <div class="check" (click)="addRegister(receta.recipe_id,receta.planned_recipe_id)">
                     
                 </div>
                 <div class="text">
-                    {{receta}}
+                    {{receta.recipe_name}}
                 </div>
             </div>
         </div>
@@ -50,6 +50,41 @@
     </div>
 </div>
 </div>
+
+
+
+
+
+<!-- Consumiciones -->
+
+<div id="recetas" class="col-center">
+    <div class="iphoneCard">
+       
+        <div class="col-center menu-item-top">
+            <div class="row-left">
+                    <div class="title">
+                        Consumidas hoy
+                    </div>
+            </div>
+        </div>
+    
+        <div class="col-center menu-item" *ngFor="let receta of consumedRecipes">
+            <div class="row-left row-item">
+                <!-- <div class="check" (click)="addRegister(receta.planned_recipe_id)">
+                    
+                </div> -->
+                <div class="text">
+                    {{receta.recipe_name}}
+                </div>
+            </div>
+        </div>
+       
+    
+    
+   
+</div>
+</div>
+
 
 
 

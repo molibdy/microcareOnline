@@ -111,7 +111,10 @@ export class MicroScoreComponent implements OnInit {
               fontSize: '14px',
               fontFamily: "dosis-regular"
           }
-        }
+        },
+        min:0,
+        max:100,
+        tickAmount:5
       }
     };
   }

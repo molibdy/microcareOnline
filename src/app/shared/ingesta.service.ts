@@ -12,8 +12,8 @@ export class IngestaService {
   public introducirRecetaBooleano:boolean = false;
 
 
- private url = 'https://api-rest-microcare.herokuapp.com/ingestas'
-//  private url = 'http://localhost:300/ingestas'
+//  private url = 'https://api-rest-microcare.herokuapp.com/ingestas'
+ private url = 'http://localhost:300/ingestas'
  public listaFavoritos:Favourites[] = []
 
 

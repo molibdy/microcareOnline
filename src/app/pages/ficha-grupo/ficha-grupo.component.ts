@@ -27,12 +27,12 @@ public selectedGroup: Group
   console.log(this.selectedGroup)
   
 
-  for(let i = 0; this.micronutrientsGroup.length > 0 ; i++){
+  for(let i = 0; i<this.micronutrientes.length; i++){
     if(this.selectedGroup.group_id == this.micronutrientes[i].group_id){
       this.micronutrientsGroup.push(this.micronutrientes[i])
-     
-    }  console.log(this.micronutrientsGroup)
+    } 
   }
+  console.log(this.micronutrientsGroup)
 
 }
 

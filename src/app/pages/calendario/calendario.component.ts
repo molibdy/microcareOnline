@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { PlannedRecipe } from 'src/app/models/planned-recipe';
+import { Progress } from 'src/app/models/progress';
+import { Recipes } from 'src/app/models/recipes';
+import { ProgressService } from 'src/app/shared/progress.service';
+import { RecetasService } from 'src/app/shared/recetas.service';
 
 
 @Component({
@@ -10,16 +15,108 @@ export class CalendarioComponent implements OnInit {
  
   public date:Date;
   public fecha:string;
-  public plannedRecipes:string[];
+  public dateString:string;
+  public plannedRecipes:PlannedRecipe[];
+  public consumedRecipes:PlannedRecipe[];
   public retos:string[];
-  constructor() { 
+  constructor(public recetasService:RecetasService,
+    private progressService:ProgressService) { 
     this.date=new Date();
-    this.fecha=this.dateString()
-    this. plannedRecipes=['pollo al curry', 'pimientos rellenos', 'espinacas con beschamel']
+    this.fecha=this.dateToFecha()
+    this.dateString=this.dateToString(this.date)
+    // this.plannedRecipes=[]
+    // this.consumedRecipes=[]
+    this.getPlannedRecipes(this.dateString)
     this.retos=['2 kiwis','30g nueces','añade 10g de cúrcuma a una receta']
   }
 
-  public dateString():string{
+  getPlannedRecipes(date:string){
+    this.recetasService.getPlannedRecetas(JSON.parse(sessionStorage.getItem('userSession')).user_id,date)
+    .subscribe((recetas:any)=>{
+      if(recetas.type==1 || recetas.type==-1){
+        this.plannedRecipes=[]
+        this.consumedRecipes=[]
+        for(let i=0;i<recetas.message.length;i++){
+          if(recetas.message[i].isConsumed){
+            this.consumedRecipes.push(recetas.message[i])
+          }else{
+            this.plannedRecipes.push(recetas.message[i])
+          }
+        }
+      }
+    })
+  }
+
+
+  addRegister(recipe_id:number,planned_recipe_id){
+   //añade microscore de la receta/reto con el id indicado al registro del día
+   let selectedReceta=new Recipes();
+   for(let i=0;i<this.recetasService.recetas.length;i++){
+     console.log(this.recetasService.recetas[i].recipe_id)
+     if(this.recetasService.recetas[i].recipe_id==recipe_id){
+      selectedReceta=this.recetasService.recetas[i]
+     }
+   }
+   this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,selectedReceta.microscore))
+      .subscribe((updated:any)=>{
+        console.log('progreso añadido, type' + updated.type)
+        if(updated.type==1 || updated.type==2){
+
+          this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+          .subscribe((progreso:any)=>{
+            this.progressService.totalProgress.percents=progreso.message
+            sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+
+            this.recetasService.consumeRecipe(planned_recipe_id).subscribe((consumida:any)=>{
+              console.log('consumida, type ' + consumida.type)
+              this.getPlannedRecipes(this.dateToString(this.date))
+            })
+          })
+        }
+      })
+  }
+
+
+
+  public nextDay(){
+    this.date.setDate(this.date.getDate()+1)
+    this.fecha=this.dateToFecha()
+    this.getPlannedRecipes(this.dateToString(this.date))
+  }
+
+  public prevDay(){
+    this.date.setDate(this.date.getDate()-1)
+    this.fecha=this.dateToFecha()
+    this.getPlannedRecipes(this.dateToString(this.date))
+  }
+
+  public fillRecipes(){
+    // llama a todas las recetas de la tabla "plan" que tengan fecha= this.date 
+    //this.plannedRecipes= data.result
+  }
+
+  public fillRetos(){
+    // llama a todos los retos de la tabla "plan" que tengan fecha= this.date 
+    //this.retos=data.result
+  }
+
+
+
+
+
+  private dateToString(date:Date){
+    let mes=`${date.getMonth()+1}`
+    if(String(date.getMonth()+1).length==1){
+      mes=`0${date.getMonth()+1}`
+    }
+    let dia=`${date.getDate()}`
+    if(String(date.getDate()).length==1){
+      dia=`0${date.getDate()}`
+    }
+    return `${date.getFullYear()}-${mes}-${dia}`
+  }
+
+  private dateToFecha():string{
     let dia='';
     let mes='';
     switch(this.date.getDay()){
@@ -86,31 +183,6 @@ export class CalendarioComponent implements OnInit {
     }
 
     return `${dia}, ${this.date.getDate()} ${mes}`
-  }
-
-  public nextDay(){
-    this.date.setDate(this.date.getDate()+1)
-    this.fecha=this.dateString()
-  }
-
-  public prevDay(){
-    this.date.setDate(this.date.getDate()-1)
-    this.fecha=this.dateString()
-  }
-
-  public fillRecipes(){
-    // llama a todas las recetas de la tabla "plan" que tengan fecha= this.date 
-    //this.plannedRecipes= data.result
-  }
-
-  public fillRetos(){
-    // llama a todos los retos de la tabla "plan" que tengan fecha= this.date 
-    //this.retos=data.result
-  }
-
-
-  public addRegister(id:number){
-    //añade microscore de la receta/reto con el id indicado al registro del día
   }
 
 

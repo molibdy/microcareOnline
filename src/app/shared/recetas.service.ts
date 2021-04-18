@@ -1,6 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PlannedRecipe } from '../models/planned-recipe';
 import { Recipes } from '../models/recipes';
 
 
@@ -12,8 +13,12 @@ export class RecetasService {
   public recetas:Recipes[];
   public recetasParaTi:Recipes[]
   public selectedReceta:Recipes;
-  private url = 'https://api-rest-microcare.herokuapp.com/recetas'
-  // private url = 'http://localhost:300/recetas'
+
+  public plannedRecipes:Recipes[]
+  public selectedDate:string;
+
+  // private url = 'https://api-rest-microcare.herokuapp.com/recetas'
+  private url = 'http://localhost:300/recetas'
 
   public recetasRicas: Recipes[]
 
@@ -22,6 +27,7 @@ export class RecetasService {
     this.recetasParaTi=[]
     this.selectedReceta=new Recipes()
     this.recetasRicas = []
+    this.selectedDate=''
    }
 
  
@@ -35,9 +41,17 @@ export class RecetasService {
   }
 
 
-  getPlannedRecetas(user_id:number){}
-  rutaReceta(){
-    return
+  getPlannedRecetas(user_id:number,date:string){
+    return this.http.get(`${this.url}/planeadas?user_id=${user_id}&date=${date}`)
+  }
+
+
+  addRecipeToPlan(addRecipe:PlannedRecipe){
+    return this.http.post(`${this.url}/planeadas`, addRecipe)
+  }
+
+  consumeRecipe(planned_recipe_id:number){
+    return this.http.put(`${this.url}/planeadas`, {planned_recipe_id:planned_recipe_id, isConsumed:true})
   }
 
 

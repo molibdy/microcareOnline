@@ -167,13 +167,14 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
                                 this.micronutrientService.getGrupos()   
                                 .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
                                   console.log(`Obtener grupos: ${grupos.type}`);
+                                  console.log(grupos.message);
                                   if(grupos.type==1 || grupos.type==-1){
                                     this.micronutrientService.grupos=grupos.message;
                                     sessionStorage.setItem('groups',JSON.stringify(this.micronutrientService.grupos))
                                     ///  Y por fin entra
                                     this.router.navigate(['home']);
                                   }
-                                  console.log(grupos.message)
+                                  console.log(this.micronutrientService.grupos)
                                 });
                               
                               }else if(progresoUser.type==-1){
@@ -191,6 +192,7 @@ public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.d
                                       this.micronutrientService.getGrupos()   
                                       .subscribe((grupos:any)=>{           //Obtiene la media de progreso para cada grupo y rellena el atributo groups
                                         console.log(`Obtener grupos: ${grupos.type}`);
+                                        console.log(grupos.message);
                                         if(grupos.type==1 || grupos.type==-1){
                                           this.micronutrientService.grupos=grupos.message;
                                           sessionStorage.setItem('groups',JSON.stringify(this.micronutrientService.grupos))

@@ -40,10 +40,10 @@ export class VitaminChartComponent implements OnInit {
   public totalProgress:Progress;
   public averagePercent:number;
   constructor(public progressService:ProgressService, public micronutrientService:MicronutrientesService) { 
-    // this.groups=JSON.parse(sessionStorage.getItem('groups'));
-    this.groups=this.micronutrientService.grupos
-    this.totalProgress=this.progressService.totalProgress
-    // this.totalProgress=JSON.parse(sessionStorage.getItem('totalProgress'));
+    this.groups=JSON.parse(sessionStorage.getItem('groups'));
+    // this.groups=this.micronutrientService.grupos
+    // this.totalProgress=this.progressService.totalProgress
+    this.totalProgress=JSON.parse(sessionStorage.getItem('totalProgress'));
     this.groupProgress=new Progress(this.totalProgress.user_id,this.totalProgress.date,[])
     this.groupData=new Group()
 

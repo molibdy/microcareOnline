@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Group } from '../models/group';
@@ -22,8 +23,8 @@ export class MicronutrientesService {
   public selectedGroup: Group
  
 
-  private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
-  // private url = 'http://localhost:300/micronutrientes'
+  // private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
+  private url = 'http://localhost:300/micronutrientes'
 
 
   constructor(private http:HttpClient, ) { 
@@ -36,8 +37,8 @@ export class MicronutrientesService {
     
     console.log(this.micronutrientes)
     // this.grupos = JSON.parse(sessionStorage.getItem('groups'))
-    this.grupos=[]
-    this.selectedGroup = this.grupos[0]
+    // this.grupos=[]
+    // this.selectedGroup = this.grupos[0]
 
   }
 
