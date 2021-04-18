@@ -9,7 +9,7 @@
             </div> 
             </div>
             <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of favoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)">
-               <div class="fondo-cerrar" (click)='quitarFavorito(id, favorito.favourite_id)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
+               <div class="fondo-cerrar" (click)='quitarFavorito(i)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
                     {{favorito.name}}
                     
                     <mat-chip-list aria-label="Fish selection" class="marginTop10" >

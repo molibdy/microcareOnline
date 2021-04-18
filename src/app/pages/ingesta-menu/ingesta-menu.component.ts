@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IngestaService } from 'src/app/shared/ingesta.service';
 
 @Component({
   selector: 'app-ingesta-menu',
@@ -7,21 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IngestaMenuComponent implements OnInit {
   
-  public introducirRecetaBooleano:boolean = false;
 
-  constructor() { }
+  constructor(public apiIngesta:IngestaService) { }
 
   ngOnInit(): void {
   }
   switchIntReceta()
   {
-    if(this.introducirRecetaBooleano)
+    if(this.apiIngesta.introducirRecetaBooleano)
     {
-      this.introducirRecetaBooleano = false
+      this.apiIngesta.introducirRecetaBooleano = false
     }
     else
     {
-      this.introducirRecetaBooleano = true
+      this.apiIngesta.introducirRecetaBooleano = true
     }
 
   }

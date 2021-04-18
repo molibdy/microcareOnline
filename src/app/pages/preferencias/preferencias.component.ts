@@ -6,6 +6,7 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { LoginInfoService } from 'src/app/shared/login-info.service';
 
 @Component({
   selector: 'app-preferencias',
@@ -42,7 +43,7 @@ export class PreferenciasComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Lemon'];
+  fruits: string[] = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry', "crustaceo", "frutosSecos", "gluten", "huevo", "leche", "moluscos","mostaza", "pescado", "sesamo", "sulfitos", "altramuces"];
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -55,11 +56,11 @@ export class PreferenciasComponent implements OnInit {
 
   alergiasCtrl = new FormControl();
   filteredAlergias: Observable<string[]>;
-  alergias: string[] = ['altramuces'];
+  alergias: string[] = [];
   public totalAlergias:string[]=["apio","cacahuetes", "crustaceo", "frutosSecos", "gluten", "huevo", "leche", "moluscos","mostaza", "pescado", "sesamo", "sulfitos", "altramuces"]
 
 ///// contructor 
-  constructor() {
+  constructor(private loginService:LoginInfoService) {
   this.desplegable1
   this.desplegable2
   this.desplegable3
@@ -216,22 +217,55 @@ export class PreferenciasComponent implements OnInit {
 
   /// metodos recogida de datos
 
-  guardarPreferencias(){
-    if(this.isVegano){
-
+  guardarPreferencias(){  //// guarda toda la funcionalidad de guardar preferencias, funciona con llamadas a atributos del servicio
+    if(!this.isVegano && !this.isVegetariano){
+      this.loginService.tipoDieta = 0
+                                                  //Ni vegano ni vegetariano
     }
-    if(this.isVegetariano){
-
+    if(this.isVegetariano && !this.isVegano){
+      this.loginService.tipoDieta = 2
+    }                                             // Solo vegetariano
+    if(this.isVegano && this.isVegetariano){
+      this.loginService.tipoDieta = 3
     }
+    if(this.isVegano && !this.isVegetariano){
+      this.loginService.tipoDieta = 1
+                                                      /// Solo vegano
+    }
+    if(this.isVegetariano && !this.isVegano){
+      this.loginService.tipoDieta = 2
+    }
+    if(this.isVegano && this.isVegetariano){
+      this.loginService.tipoDieta = 3                    /// vegano y bvegeariano
+    }
+    this.loginService.ingredientesAvoid.push(this.fruits) /// aqui mete los ingredientes a evitar
+    this.loginService.alergenos.push(this.alergias) /// aqui mete los alergias a evitar
+  /*   console.log(this.loginService.ingredientesAvoid);
+    console.log(this.loginService.alergenos); */
+    console.log(this.loginService.tipoDieta);
+    
+
+    
+    
+
+
     
 
   }
   preferenciasDieta(i){
     if(i == 1){
-      this.isVegetariano = true
+      if(this.isVegetariano){
+        this.isVegetariano = false
+      }else{
+        this.isVegetariano = true
+      }
     }
     if(i==2){
-      this.isVegano = true
+      if(this.isVegano){
+        this.isVegano = false
+      }else{
+        this.isVegano = true
+      }    
     }
   }
   

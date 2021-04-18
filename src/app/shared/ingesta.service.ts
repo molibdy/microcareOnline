@@ -9,6 +9,8 @@ export class IngestaService {
   public date=new Date()
   public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
   public intakeID:number = 0
+  public introducirRecetaBooleano:boolean = false;
+
  // private url = 'https://api-rest-microcare.herokuapp.com/ingestas'
  private url = 'http://localhost:300/ingestas'
  public listaFavoritos:Favourites[] = []
@@ -28,8 +30,8 @@ export class IngestaService {
   mostrarFavoritos(){
     return this.http.get(this.url + "/favoritos")
   }
-  quitarFavoritos(id_favorito){
-    return this.http.delete(this.url + "/favorito", id_favorito)
+  quitarFavoritos(borrando:Favourites){
+    return this.http.delete(this.url + "/favorito?favourite_id=" + borrando.favourite_id)
   }
 
 
