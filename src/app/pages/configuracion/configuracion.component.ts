@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { LoginInfoService } from 'src/app/shared/login-info.service';
+
 
 @Component({
   selector: 'app-configuracion',
@@ -6,9 +10,55 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./configuracion.component.css']
 })
 export class ConfiguracionComponent implements OnInit {
-  public imageProfile:string = 'https://media-exp1.licdn.com/dms/image/C5603AQHgQm5806sx2A/profile-displayphoto-shrink_200_200/0/1541434175803?e=1621468800&v=beta&t=MOKmnJRHHZuVXWS2uTrRQvfKVEl3nVDhvMssTmYw79o'
+  
+  public user:User
+  public newName:string=null;
+  public newEmail:string='';
+  public newPassword:string='';
+  public newPhoto:string='';
+  public savedChanges:boolean=false;
+  public showChangePic:boolean=false;
+  constructor(
+    public userService:LoginInfoService,
+    private router:Router
+  ) { 
+    this.user=JSON.parse(sessionStorage.getItem('userSession'))
+    console.log(this.user)
+  }
 
-  constructor() { }
+
+  cambiarFoto(){
+    if(this.showChangePic){
+      this.showChangePic=false
+    }else{
+      this.showChangePic=true
+    }
+  }
+  
+
+  guardarCambios(){
+    let configuracion={user_id:JSON.parse(sessionStorage.getItem('userSession')).user_id, username:this.newName, email:this.newEmail, password:this.newPassword, profile_picture:this.newPhoto}
+    console.log(configuracion)
+    this.userService.putUsuario(configuracion).subscribe((modified:any)=>{
+      if(modified.type==1){
+        this.newName=null;
+        this.newEmail='';
+        this.newPassword='';
+        this.newPhoto='';
+        this.savedChanges=true
+        this.showChangePic=false
+        this.userService.getUsuarioChanged(JSON.parse(sessionStorage.getItem('userSession')).user_id).subscribe((newUserData:any)=>{
+          if(newUserData.type==1){
+            this.userService.user=newUserData.message[0]
+            sessionStorage.setItem('userSession',JSON.stringify(this.userService.user))
+            this.user=this.userService.user
+            console.log(this.user)
+            this.router.navigate(['/home'])
+          }
+        })
+      }
+    })
+  }
 
   ngOnInit(): void {
   }

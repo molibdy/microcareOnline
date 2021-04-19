@@ -50,13 +50,18 @@ export class RecetasService {
     return this.http.post(`${this.url}/planeadas`, addRecipe)
   }
 
-  consumeRecipe(planned_recipe_id:number){
-    return this.http.put(`${this.url}/planeadas`, {planned_recipe_id:planned_recipe_id, isConsumed:true})
+  updatePlannedRecipe(planned_recipe_id:number,isConsumed:boolean){
+    return this.http.put(`${this.url}/planeadas`, {planned_recipe_id:planned_recipe_id, isConsumed:isConsumed})
   }
 
 
   getRecetasDetails(){
     return this.http.get(this.url + '/detalles')
+  }
+
+
+  deletePlannedRecipe(planned_recipe_id:number){
+    return this.http.delete(`${this.url}/planeadas?planned_recipe_id=${planned_recipe_id}`)
   }
 
 }

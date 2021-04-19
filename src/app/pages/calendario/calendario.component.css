@@ -134,4 +134,41 @@ text-transform: capitalize;
 }
 
 
+.link{
+    text-decoration: none;
+    color: #5ce1e6;
+    font-family: dosis-regular;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+   
+}
 
+
+.row-spaced{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    /* align-self: left; */
+    align-items: center;   /* alinea elementos verticalmente a la izquierda */
+    /* justify-items: left; */
+    /* justify-content: flex-end;  sitúa elementos en la parte inferior de la columna */
+    justify-content: space-between;  /* sitúa elementos en la parte superior de la columna */
+
+}
+
+
+.cruz{
+    height:16px;
+    /* font-size: 16px; */
+    /* margin-right:10px;
+    margin-top:10px */
+    
+}
+.cruz-container{
+    height:16px;
+    /* font-size: 16px; */
+    margin-right:20px;
+    margin-top:5px;
+    cursor:pointer;
+}

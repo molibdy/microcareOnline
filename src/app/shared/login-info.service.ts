@@ -20,7 +20,6 @@ export class LoginInfoService{
   public ingredientesAvoid:Object[]
   public alergenos:object[]
   public user:User = new User(0,"","")
-
   
   constructor(private http:HttpClient) { 
     this.tipoDieta = 0
@@ -36,6 +35,11 @@ export class LoginInfoService{
   getUsuario(username:string){
     return this.http.get(this.url + '?username=' + username)
   }
+
+  getUsuarioChanged(user_id:number){
+    return this.http.get(this.url + '?user_id=' + user_id)
+  }
+
   postUsuario(signUpInfo){
     return this.http.post(this.url + "/registro", signUpInfo)
   }
@@ -47,6 +51,9 @@ export class LoginInfoService{
   }
 
 
+  putUsuario(configuracion){
+    return this.http.put(this.url + '/config' , configuracion)
+  }
 
 
 
