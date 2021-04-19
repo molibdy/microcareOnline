@@ -16,15 +16,16 @@
 
 
 <!-- <app-usda></app-usda> -->
-<div *ngIf="user.user_id>0; else login">
 <router-outlet></router-outlet> 
+
+<div *ngIf="showNavBar">
 <app-nav-bar></app-nav-bar>
 </div>
 
-<ng-template #login>
+<!-- <ng-template #login>
 
     <app-auth></app-auth>
-</ng-template>
+</ng-template> -->
 
 
 

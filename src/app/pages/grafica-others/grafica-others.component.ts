@@ -41,9 +41,12 @@ export class GraficaOthersComponent implements OnInit {
   public userPercents:[number,number][];
   public othersPercents:[number,number][];
 
-  constructor(private progressService:ProgressService, private userService:LoginInfoService) {
-    this.averageProgress=JSON.parse(sessionStorage.getItem('averageProgress'));
-    this.averageProgressTotal=JSON.parse(sessionStorage.getItem('averageProgressTotal'));
+  constructor(private progressService:ProgressService, 
+    private userService:LoginInfoService) {
+    // this.averageProgress=JSON.parse(sessionStorage.getItem('averageProgress'));
+    // this.averageProgressTotal=JSON.parse(sessionStorage.getItem('averageProgressTotal'));
+    this.averageProgress=this.progressService.averageProgress
+    this.averageProgressTotal=this.progressService.averageProgressTotal
     this.userDates=[]
     this.userPercents=[]
     this.othersPercents=[]
@@ -83,7 +86,7 @@ export class GraficaOthersComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: JSON.parse(sessionStorage.getItem('userSession')).username,   // username
+          name: userService.user.username,   // username
           data: this.userPercents,   // Array de average progress del user
           color:"#5ce1e6"
         },

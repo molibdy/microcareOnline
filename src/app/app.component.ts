@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LoginInfoService } from './shared/login-info.service';
 import { User } from './models/user';
+import { LoadingService } from './shared/loading.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -14,18 +16,35 @@ import { User } from './models/user';
 })
 export class AppComponent {
 
-  public user:User
+  // public user:User;
+  public showNavBar:boolean;
+
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer : DomSanitizer,
-    public LoginInfoService:LoginInfoService
-  )
-  {
-    if(sessionStorage.getItem('userSession')){
-      this.user=JSON.parse(sessionStorage.getItem('userSession'));
-    }else{
-      this.user=this.LoginInfoService.user;
+    public LoginInfoService:LoginInfoService,
+    public loadingService:LoadingService,
+    private router:Router,
+    private activeRoute: ActivatedRoute,
+
+  ){
+
+    this.showNavBar=false
+    if(this.router.url!='login' && this.router.url!='register'){
+      this.showNavBar=true
     }
+
+    if(JSON.parse(sessionStorage.getItem('userSession'))!=null){
+      console.log(JSON.parse(sessionStorage.getItem('userSession')).user_id)
+      this.LoginInfoService.user=JSON.parse(sessionStorage.getItem('userSession'));
+      this.loadingService.loadAll()
+    }else{
+      this.router.navigate(['login']);
+    }
+
+
+
+    
     
 /*    //////////////////// CREAR ICONOS //////////////////////// */
 
