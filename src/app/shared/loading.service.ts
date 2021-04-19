@@ -133,10 +133,13 @@ export class LoadingService {
                                   this.progressService.totalProgress=new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,progresoUser.message)   
                                   sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
                                   console.log(this.progressService.totalProgress);
-                              
+                                  console.log(this.router.url)
                                   ///  Si está en login: ir a Home
-                                  if(this.router.url=='login'){
+                                  if(this.router.url=='/login' && this.isLogeando){
+                                    console.log('ir a home')
                                     this.router.navigate(['home']);
+                                  }else{
+                                    this.router.navigate([this.router.url]);
                                   }
                             
                                 }else if(progresoUser.type==-1){
@@ -154,7 +157,8 @@ export class LoadingService {
                   
                                           
                                       ///  Si está en login: ir a Home
-                                      if(this.router.url=='login'){
+                                      if(this.router.url=='/login' && this.isLogeando){
+                                        console.log('ir a home')
                                         this.router.navigate(['home']);
                                       }
                                       else{

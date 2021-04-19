@@ -1,3 +1,4 @@
+
 import { MatIconRegistry } from '@angular/material/icon';
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -30,7 +31,7 @@ export class AppComponent {
   ){
 
     this.showNavBar=false
-    if(this.router.url!='login' && this.router.url!='register'){
+    if(this.router.url!='/login' && this.router.url!='/register'){
       this.showNavBar=true
     }
 
