@@ -14,7 +14,7 @@ export class MicronutrientesService {
     throw new Error('Method not implemented.');
   }
 
-  public micronutrientes: Micronutrients[]
+  public micronutrientes: Micronutrients[] = []
   public microsReceta:any[];
   public microsIngesta:any[];
   public microsReto:any[];

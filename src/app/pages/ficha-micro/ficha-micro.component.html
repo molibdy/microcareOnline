@@ -29,45 +29,43 @@
     <div class="custom-hr"></div>
     <div class="br"></div>
 
-
     <div class="sub-titulo">
         Recetas ricas en {{this.MicronutrientesService.selectedMicronutriente.micronutrient_name}}
     </div>
 
      <div class="br"></div>
     <div class="wrapper">
-        <div  *ngFor="let receta of this.recetas, let i = index">
-            <div class="item" routerLink="../receta">
-                <div class="row-left"> 
-                    <div class="chip1">
-                        Vegano
-                    </div>
-                    <div class="chip2">
-                        Vegetariano
-                    </div>
+        <div  *ngFor="let receta of this.recetas, let i = index,"  class="item" (click)="verRecetaMicro(i)">
+            <div class="row-left"> 
+                <div class="chip1">
+                    Vegano
                 </div>
-                <div class="foto">
-                    <img src="{{receta.photo_url}}">
+                <div class="chip2">
+                    Vegetariano
+                </div>
+            </div>
+            <div class="foto">
+                <img src="{{receta.photo_url}}">
+            </div>
+            <div class="row-center">
+                <div class="row-center">
+                    <div class="nombre-receta">
+                        {{receta.recipe_name}}
+                    </div>
                 </div>
                 <div class="row-center">
-                    <div class="row-center">
-                        <div class="nombre-receta">
-                            {{receta.recipe_name}}
-                        </div>
+                    <div class="chip-micro1">
+                        B
                     </div>
-                    <div class="row-center">
-                        <div class="chip-micro1">
-                            B
-                        </div>
-                        <div class="chip-micro2">
-                                Mo
-                        </div> 
-                    </div>
+                    <div class="chip-micro2">
+                            Mo
+                    </div> 
                 </div>
             </div>
         </div>    
     </div>
 </div>
+<div class="footer"></div>
 <div class="footer"></div>
 
 

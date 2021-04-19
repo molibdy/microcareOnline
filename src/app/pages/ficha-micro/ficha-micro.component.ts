@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Micronutrients } from 'src/app/models/micronutrient';
 import { Recipes } from 'src/app/models/recipes';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
@@ -20,11 +20,13 @@ export class FichaMicroComponent implements OnInit {
 
 
 
+
   public selectedMicronutriente: Micronutrients
   
-    constructor(private route:ActivatedRoute, public MicronutrientesService: MicronutrientesService, public RecetasService:RecetasService) {
+    constructor(private router:Router, public MicronutrientesService: MicronutrientesService, public RecetasService:RecetasService) {
 
-    this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
+      //this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
+    this.micronutrientes = MicronutrientesService.micronutrientes
 
     this.recetas = RecetasService.recetasRicas
 
@@ -34,10 +36,16 @@ export class FichaMicroComponent implements OnInit {
     
   }
 
+  verRecetaMicro(i:number){
+    this.RecetasService.selectedReceta=this.recetas[i]
+    this.router.navigate(['../../../buscar-receta/receta']);
+  }
+
   ngOnInit(): void {
 
- console.log(this.recetas)
- console.log(this.RecetasService.recetas)
+//  console.log(this.recetas)
+//  console.log(this.RecetasService.recetas)
+
     // this.route.queryParamMap.subscribe(params=>
     // { console.log(params)
     //   for(let i=0; i < this.micronutrientes.length; i++){
