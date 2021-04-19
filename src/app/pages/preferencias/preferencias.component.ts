@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {ElementRef, ViewChild} from '@angular/core';
@@ -7,6 +8,8 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { LoginInfoService } from 'src/app/shared/login-info.service';
+import { IngredientesService } from 'src/app/shared/ingredientes.service';
+import { Ingredient } from 'src/app/models/ingredient';
 
 @Component({
   selector: 'app-preferencias',
@@ -43,8 +46,10 @@ export class PreferenciasComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ["h"];
+  fruits: string[] = [];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry', "crustaceo", "frutosSecos", "gluten", "huevo", "leche", "moluscos","mostaza", "pescado", "sesamo", "sulfitos", "altramuces"];
+  ObjectsIngredients: Ingredient[] = [];
+
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -58,9 +63,18 @@ export class PreferenciasComponent implements OnInit {
   filteredAlergias: Observable<string[]>;
   alergias: string[] = [];
   public totalAlergias:string[]=["apio","cacahuetes", "crustaceo", "frutosSecos", "gluten", "huevo", "leche", "moluscos","mostaza", "pescado", "sesamo", "sulfitos", "altramuces"]
-
+  public ObjectAlergias:object[]=[{name: "apio"},{name: "cacahuetes"}, {name: "crustaceo"}, {name: "frutosSecos"}, {name: "gluten"}, {name: "huevo"}, {name: "leche"}, {name: "moluscos"},{name: "mostaza"}, {name: "pescado"}, {name: "sesamo"}, {name: "sulfitos"}, {name: "altramuces"}]
+  public ingredientesAnadidos:string[]=[]
 ///// contructor 
-  constructor(private loginService:LoginInfoService) {
+  constructor(private ingredientService:IngredientesService) {
+  for(let i =0;i<this.ingredientService.ingredientesAvoid.length;i++){
+    this.fruits.push(this.ingredientService.ingredientesAvoid[i].ingredient_name)
+  }
+  for(let i =0;i<this.ingredientService.alergenos.length;i++){
+    this.alergias.push(this.ingredientService.alergenos[i].allergen_name)
+    
+    this.getIngredientsAvoid()
+  }
   this.desplegable1
   this.desplegable2
   this.desplegable3
@@ -77,6 +91,7 @@ export class PreferenciasComponent implements OnInit {
       map((alergia: string | null) => alergia ? this._filter2(alergia) : this.totalAlergias.slice()));
 
 }
+
 
 /// funciones movimiento rodri
   pulsar1(){
@@ -134,25 +149,38 @@ export class PreferenciasComponent implements OnInit {
    }
 ////////////////////////////////
   ngOnInit(): void {
+
     
   }
 /////////// metodos autocompletar
+  getIngredientsAvoid(){    
+      this.ingredientService.getIngredientesAvoid().subscribe((data:any) => {
+      this.ingredientService.ingredientesAvoid = data.message
 
+      })
+  }
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push(value.trim());
+      if(!this.fruits.includes(value.trim())){
+        this.fruits.push(value.trim());
+        this.ingredientesAnadidos.push((value.trim()))
+      }
+      
     }
 
     // Reset the input value
     if (input) {
       input.value = '';
     }
+    
 
     this.fruitCtrl.setValue(null);
+    console.log(this.ingredientesAnadidos);
+
   }
 
   remove(fruit: string): void {
@@ -219,30 +247,38 @@ export class PreferenciasComponent implements OnInit {
 
   guardarPreferencias(){  //// guarda toda la funcionalidad de guardar preferencias, funciona con llamadas a atributos del servicio
     if(!this.isVegano && !this.isVegetariano){
-      this.loginService.tipoDieta = 0
+      this.ingredientService.tipoDieta = 0
                                                   //Ni vegano ni vegetariano
     }
     if(this.isVegetariano && !this.isVegano){
-      this.loginService.tipoDieta = 2
+      this.ingredientService.tipoDieta = 2
     }                                             // Solo vegetariano
     if(this.isVegano && this.isVegetariano){
-      this.loginService.tipoDieta = 3
+      this.ingredientService.tipoDieta = 3
     }
     if(this.isVegano && !this.isVegetariano){
-      this.loginService.tipoDieta = 1
+      this.ingredientService.tipoDieta = 1
                                                       /// Solo vegano
     }
-    if(this.isVegetariano && !this.isVegano){
-      this.loginService.tipoDieta = 2
+
+     /// aqui mete los ingredientes a evitar
+    for(let i =0; i<this.ingredientService.Ingredientes.length;i++){
+     if( this.fruits.includes(this.ingredientService.Ingredientes[i].ingredient_name)){
+       this.ingredientService.ingredientesAvoid.push(this.ingredientService.Ingredientes[i])
+     }else{}
     }
-    if(this.isVegano && this.isVegetariano){
-      this.loginService.tipoDieta = 3                    /// vegano y bvegeariano
+    if(this.ingredientService.ingredientesAvoid.length >0){
+      let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
+      let objetoIngredientes = {user_id: userSession, ingredientes: this.ingredientService.ingredientesAvoid}
+    
+      this.ingredientService.postIngredientesAvoid(objetoIngredientes).subscribe((data:any)=>{
+        console.log(data); 
+      })
     }
-    this.loginService.ingredientesAvoid.push(this.fruits) /// aqui mete los ingredientes a evitar
-    this.loginService.alergenos.push(this.alergias) /// aqui mete los alergias a evitar
-  /*   console.log(this.loginService.ingredientesAvoid);
-    console.log(this.loginService.alergenos); */
-    console.log(this.loginService.tipoDieta);
+    /* this.ingredientService.alergenos.push(this.alergias) */ /// aqui mete los alergias a evitar
+  /*   console.log(this.ingredientService.ingredientesAvoid);
+    console.log(this.ingredientService.alergenos); */
+    console.log(this.ingredientService.tipoDieta);
     
 
     
@@ -272,3 +308,7 @@ export class PreferenciasComponent implements OnInit {
   
 
 }
+function ingredient_name(ingredient_name: any) {
+  throw new Error('Function not implemented.');
+}
+

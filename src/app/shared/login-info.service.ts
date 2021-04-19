@@ -16,16 +16,12 @@ export class LoginInfoService{
   public isDentro:boolean = false
   public router:Router;
   public isNonRegistered:boolean = false
-  public tipoDieta:number;
-  public ingredientesAvoid:Object[]
-  public alergenos:object[]
+ 
   public user:User = new User(0,"","")
 
   
   constructor(private http:HttpClient) { 
-    this.tipoDieta = 0
-    this.ingredientesAvoid = []
-    this.alergenos = []
+ 
   }
 
   /////////////////////////metodos de registro
