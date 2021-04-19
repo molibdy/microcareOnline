@@ -14,11 +14,16 @@ export class IngredientesService {
   public tipoDieta:number;
   public ingredientesAvoid:Ingredient[]
   public alergenos:Allergen[]
+  public ingredientesRicos: Ingredient[] = []
   constructor(private http:HttpClient) {
     this.tipoDieta = 0
     this.ingredientesAvoid = []
     this.alergenos = []
    }
+
+ 
+  
+  
 
 
   getIngredientes(){
@@ -31,6 +36,10 @@ export class IngredientesService {
     return this.http.post(this.url + '/avoid', ingrediente)
   }
   
+
+  getIngredientesMicro(micronutrient_id){
+    return this.http.get(this.url + '/micronutrientes?micronutrient_id=' + micronutrient_id)
+  }
 
 }
 

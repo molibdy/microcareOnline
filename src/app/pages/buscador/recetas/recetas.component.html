@@ -1,6 +1,6 @@
 <div class="col-center"> 
     <div class="input left-padding">                                         
-        <input  [(ngModel)]='inputSearch' placeholder="buscar">
+        <input  [(ngModel)]='inputSearch' type="text" placeholder="buscar">
         <button class="mas" (click)="buscar()"><mat-icon class="colorDark" true svgIcon="search"></mat-icon></button>
     </div>
    
@@ -9,20 +9,22 @@
     <div class= "br"></div>                    
     
     <!--                    /////// elemento micronutriente -->
-    <div *ngIf="mySwitch == true && inputSearch.length>0">   
+    <div *ngIf="mySwitch && inputSearch.length>0">   
         <div class="iphoneCard"> 
-            <div *ngFor="let receta of this.recetasBuscar, let i = index">
-                    <div class=" widthMenu100 padding-top menu-item-busqueda textBlueSemi20 row-center" (click)= rutaReceta(i)>
+            pepito
+            <div *ngFor="let receta of recetasBuscar; let i = index">
+                    <div class=" widthMenu100 padding-top menu-item-busqueda textBlueSemi20 row-center" >
                         <!-- <p class="text">{{receta.preferencia1}}</p> 
                         <p class="text">{{receta.preferencia2}}</p> 
                         <p class="text">{{receta.chip1}}</p> 
                         <p class="text">{{receta.chip1}}</p>  -->
-                        <div class="foto">
+                        <div class="foto" (click)= rutaReceta(i)>
                             <img [src]="receta.photo_url">
                         </div>
                         <div class="col-right titulo col">
                             {{receta.recipe_name}}
                         </div>
+                        pepeit
                     </div>                                                       
                 <div class="br"></div>
                 <div class="custom-hr"></div>
