@@ -14,13 +14,13 @@ export class MicronutrientesService {
     throw new Error('Method not implemented.');
   }
 
-  public micronutrientes: Micronutrients[]
-  public microsReceta:any[];
-  public microsIngesta:any[];
-  public microsReto:any[];
-  public selectedMicronutriente: Micronutrients 
-  public grupos: Group[]
-  public selectedGroup: Group
+  public micronutrientes: Micronutrients[]=[];
+  public microsReceta:any[]=[];
+  public microsIngesta:any[]=[];
+  public microsReto:any[]=[];
+  public selectedMicronutriente: Micronutrients=new Micronutrients()
+  public grupos: Group[]=[];
+  public selectedGroup: Group=new Group()
  
 
   // private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'

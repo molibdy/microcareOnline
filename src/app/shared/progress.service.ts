@@ -9,9 +9,9 @@ import { Progress } from '../models/progress';
 export class ProgressService {
   
 
-  public totalProgress:Progress;
-  public averageProgress:any[]
-  public averageProgressTotal:any[]
+  public totalProgress:Progress=new Progress(0,'',[]);
+  public averageProgress:any[]=[];
+  public averageProgressTotal:any[]=[];
 
   // private url='https://api-rest-microcare.herokuapp.com/progreso';
   private url='http://localhost:300/progreso';

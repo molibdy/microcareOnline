@@ -11,6 +11,7 @@ import {
 } from "ng-apexcharts";
 import { Group } from 'src/app/models/group';
 import { Progress } from 'src/app/models/progress';
+import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 import { ProgressService } from 'src/app/shared/progress.service';
 
 export type ChartOptions = {
@@ -37,10 +38,12 @@ export class AminoacidChartComponent implements OnInit {
   public groupProgress:Progress
   public totalProgress:Progress
   public averagePercent:number;
-  constructor(public progressService:ProgressService) { 
-    this.groups=JSON.parse(sessionStorage.getItem('groups'));
-    // this.totalProgress=this.progressService.totalProgress
-    this.totalProgress=JSON.parse(sessionStorage.getItem('totalProgress'));
+  constructor(public progressService:ProgressService,
+    public micronutrientService:MicronutrientesService) { 
+    // this.groups=JSON.parse(sessionStorage.getItem('groups'));
+    this.totalProgress=this.progressService.totalProgress
+    this.groups=this.micronutrientService.grupos
+    // this.totalProgress=JSON.parse(sessionStorage.getItem('totalProgress'));
     this.groupProgress=new Progress(this.totalProgress.user_id,this.totalProgress.date,[])
     this.groupData=new Group()
 

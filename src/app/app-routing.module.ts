@@ -50,15 +50,18 @@ const routes: Routes = [
   {path:'intro3', component:Intro3Component},
   {path:'intro4', component:Intro4Component},
   {path:'menu/preferencias', component:PreferenciasComponent},
-  {
-    path: 'inicio', component: AuthComponent, 
-    children: [
-      {path:'login', component:LoginComponent},
-      {path:'register', component:RegisterComponent},
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
-    ]
-  },
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  {path:'login', component:LoginComponent},
+  {path:'register', component:RegisterComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full' },
+  // {
+  //   path: 'inicio', component: AuthComponent, 
+  //   children: [
+  //     {path:'login', component:LoginComponent},
+  //     {path:'register', component:RegisterComponent},
+  //     { path: '', redirectTo: 'login', pathMatch: 'full' },
+  //   ]
+  // },
+  // { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {path:'usda', component:UsdaComponent},
 
 ];
