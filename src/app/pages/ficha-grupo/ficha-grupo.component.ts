@@ -19,7 +19,9 @@ public selectedGroup: Group
 
   constructor(public micronutrientesServicio:MicronutrientesService, public recetasServicio:RecetasService, public router:Router ) {
 
-  this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
+  // this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
+
+  this.micronutrientes = this.micronutrientesServicio.micronutrientes
   
   this.selectedGroup = this.micronutrientesServicio.selectedGroup
 
@@ -37,14 +39,14 @@ public selectedGroup: Group
 }
 
 
-
-
 rutaMicro(i){
-
-  this.micronutrientesServicio.selectedMicronutriente = this.micronutrientes[i]
-  this.recetasServicio.recetasRicas = this.recetasServicio.recetas ///!! HAY QUE HACER UNA QUERY!!!!!!///
+  console.log()
+  console.log(this.micronutrientsGroup[i])
+  this.micronutrientesServicio.selectedMicronutriente = this.micronutrientsGroup[i]
+  this.recetasServicio.recetasRicas = this.recetasServicio.recetas ///!! HAY QUE HACER UNA QUERY!!!///
   // this.micronutrientes[i] = this.micronutrientesServicio.linkMicro()
-  this.router.navigate(["home/grupo/micro"], {queryParams: {micronutrient_id : this.micronutrientes[i].micronutrient_id}})
+  // this.router.navigate(["home/grupo/micro"], {queryParams: {micronutrient_id : this.micronutrientes[i].micronutrient_id}})
+  this.router.navigate(["home/grupo/micro"])
   console.log(this.micronutrientes)
 
 }

@@ -152,6 +152,7 @@
     text-align: left;
     justify-content: left;
     max-width: 345px;
+    text-transform:capitalize;
 }
 
 .wrap{
