@@ -64,7 +64,7 @@
                                 </mat-chip>
                                 
                                 </mat-chip-list>
-                                <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selected2($event)">
+                                <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selected2($event)" [displayWith]="displayFn">
                                 <mat-option *ngFor="let alergia of filteredAlergias | async" [value]="value">
                                     {{alergia}}
                                 </mat-option>
