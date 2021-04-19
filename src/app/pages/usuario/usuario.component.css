@@ -71,10 +71,17 @@
     position: absolute;
     
 }
+
+.imageProfile 
+{
+    margin-right: 4px;
+    
+    
+}
 .imageProfile img
 {
-    width: 60px;
-   border: solid 8px rgb(255, 255, 255);
+    width: 65px;
+   border: solid 2px #5ce1e694;
     border-radius: 50%;
 }
 

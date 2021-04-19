@@ -6,6 +6,8 @@ import { LoginInfoService } from './shared/login-info.service';
 import { User } from './models/user';
 import { LoadingService } from './shared/loading.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 
 
@@ -18,7 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AppComponent {
 
   // public user:User;
-  public showNavBar:boolean;
+  // public showNavBar:boolean=false;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -30,10 +32,13 @@ export class AppComponent {
 
   ){
 
-    this.showNavBar=false
-    if(this.router.url!='/login' && this.router.url!='/register'){
-      this.showNavBar=true
-    }
+    
+    // console.log(this.router.url)
+    // if(this.router.url=='/login' || this.router.url=='/register'){
+    //   this.loadingService.showNavBar=false
+    // }else{
+    //   this.loadingService.showNavBar=true
+    // }
 
     if(JSON.parse(sessionStorage.getItem('userSession'))!=null){
       console.log(JSON.parse(sessionStorage.getItem('userSession')).user_id)

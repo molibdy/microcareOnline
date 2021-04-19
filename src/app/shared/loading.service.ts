@@ -14,6 +14,8 @@ export class LoadingService {
   public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
   public isLogeando:boolean=false
 
+  public showNavBar:boolean=false;
+
   constructor(
     private apiService: LoginInfoService, 
     public progressService:ProgressService, 
@@ -21,10 +23,19 @@ export class LoadingService {
     public micronutrientService:MicronutrientesService,
     private router:Router,
     private activeRoute: ActivatedRoute,
-  ) { }
+  ) { 
+
+    
+
+  }
+
+  public getRuta(){
+    return this.activeRoute.snapshot.url
+  }
 
 
   public loadAll(){
+    this.apiService.user=JSON.parse(sessionStorage.getItem('userSession'))
     this.micronutrientService.getMicros()     //  Obtener array de micronutrientes
     .subscribe((micronutrients:any)=>{
       console.log(`Obtener micronutrientes: ${micronutrients.type}`);
@@ -135,11 +146,16 @@ export class LoadingService {
                                   console.log(this.progressService.totalProgress);
                                   console.log(this.router.url)
                                   ///  Si está en login: ir a Home
-                                  if(this.router.url=='/login' && this.isLogeando){
+                                  if(this.isLogeando){
                                     console.log('ir a home')
                                     this.router.navigate(['home']);
+                                    this.showNavBar=true
+                                    // setTimeout(()=>{
+                                    //   this.showNavBar=true
+                                    // },1000)
                                   }else{
                                     this.router.navigate([this.router.url]);
+                                      this.showNavBar=true
                                   }
                             
                                 }else if(progresoUser.type==-1){
@@ -160,9 +176,14 @@ export class LoadingService {
                                       if(this.router.url=='/login' && this.isLogeando){
                                         console.log('ir a home')
                                         this.router.navigate(['home']);
+                                        // setTimeout(()=>{
+                                        //   this.showNavBar=true
+                                        // },1000)
+                                        this.showNavBar=true
                                       }
                                       else{
                                         this.router.navigate([this.router.url]);
+                                          this.showNavBar=true
                                       }
                                     });
                                   })                             

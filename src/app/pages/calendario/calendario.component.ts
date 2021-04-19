@@ -52,7 +52,6 @@ export class CalendarioComponent implements OnInit {
    //añade microscore de la receta/reto con el id indicado al registro del día
    let selectedReceta=new Recipes();
    for(let i=0;i<this.recetasService.recetas.length;i++){
-     console.log(this.recetasService.recetas[i].recipe_id)
      if(this.recetasService.recetas[i].recipe_id==recipe_id){
       selectedReceta=this.recetasService.recetas[i]
      }
@@ -67,7 +66,7 @@ export class CalendarioComponent implements OnInit {
             this.progressService.totalProgress.percents=progreso.message
             sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
 
-            this.recetasService.consumeRecipe(planned_recipe_id).subscribe((consumida:any)=>{
+            this.recetasService.updatePlannedRecipe(planned_recipe_id,true).subscribe((consumida:any)=>{
               console.log('consumida, type ' + consumida.type)
               this.getPlannedRecipes(this.dateToString(this.date))
             })
@@ -76,6 +75,25 @@ export class CalendarioComponent implements OnInit {
       })
   }
 
+
+
+  deletePlan(planned_recipe_id:number){
+    console.log('entrando en deletion')
+    this.recetasService.deletePlannedRecipe(planned_recipe_id).subscribe((deletion:any)=>{
+      console.log(deletion)
+      if(deletion.type==1){
+        console.log(deletion)
+        this.getPlannedRecipes(this.dateToString(this.date))
+      }
+    })
+  }
+
+  deshacer(planned_recipe_id:number){
+    this.recetasService.updatePlannedRecipe(planned_recipe_id,false).subscribe((consumida:any)=>{
+      console.log('consumida, type ' + consumida.type)
+      this.getPlannedRecipes(this.dateToString(this.date))
+    })
+  }
 
 
   public nextDay(){

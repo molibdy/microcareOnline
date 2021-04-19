@@ -29,12 +29,17 @@
         </div>
     
         <div class="col-center menu-item" *ngFor="let receta of plannedRecipes">
-            <div class="row-left row-item">
-                <div class="check" (click)="addRegister(receta.recipe_id,receta.planned_recipe_id)">
-                    
+            <div class="row-spaced row-item">
+                <div class="row-left">
+                    <div class="check" (click)="addRegister(receta.recipe_id,receta.planned_recipe_id)">
+                    </div>
+                    <div class="text">
+                        {{receta.recipe_name}}
+                    </div>
                 </div>
-                <div class="text">
-                    {{receta.recipe_name}}
+                
+                <div class="cruz-container" (click)="deletePlan(receta.planned_recipe_id)"> 
+                    <mat-icon class="colorGray cruz"svgIcon="close"></mat-icon>
                 </div>
             </div>
         </div>
@@ -63,18 +68,22 @@
         <div class="col-center menu-item-top">
             <div class="row-left">
                     <div class="title">
-                        Consumidas hoy
+                        Recetas consumidas
                     </div>
             </div>
         </div>
     
         <div class="col-center menu-item" *ngFor="let receta of consumedRecipes">
-            <div class="row-left row-item">
+            <div class="row-spaced row-item">
                 <!-- <div class="check" (click)="addRegister(receta.planned_recipe_id)">
                     
                 </div> -->
                 <div class="text">
                     {{receta.recipe_name}}
+                </div>
+
+                <div class="link" (click)="deshacer(receta.planned_recipe_id)"> 
+                    deshacer
                 </div>
             </div>
         </div>

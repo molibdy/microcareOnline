@@ -1,10 +1,12 @@
 <div routerLink="configuracion" >
     <div class=" row-center">
 
-        <div class="imageProfile" style="margin-right: 2px;"> <img [src]=imageProfile alt="fran"> </div>
+        <div class="imageProfile" > 
+            <img [src]=user.profile_picture [alt]="user.username"> 
+        </div>
         <div>
-            <div class="row-left text">Fran Martinez</div>
-            <div class="row-left textSubtitle">perfil completado al 70%</div>
+            <div class="row-left text">{{user.username}}</div>
+            <div class="row-left textSubtitle">Bienvenido a MicroCare</div>
         </div>
     </div>
 </div>

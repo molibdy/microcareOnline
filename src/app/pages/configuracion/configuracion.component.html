@@ -12,16 +12,28 @@
     <div class="br"></div>
 
     <div class=col-center>
-        <div class="circlePic text"> <div class="imageProfile"> <img [src]=imageProfile alt="fran"></div>
+        <div class="circlePic " (click)="cambiarFoto()"> 
+            <div class="imageProfile"> <img [src]="user.profile_picture" [alt]="user.username"></div>
         </div>
     </div>
+
+    <div class="changePic" *ngIf="showChangePic">
+        <div class="row-left subtitle">Añade la url de tu foto</div>
+        <!-- <div class="br"></div> -->
+       <div class="col-center">
+           <div class="inputPhoto">
+               <input [(ngModel)]="newPhoto" placeholder="Cambiar foto">
+           </div>
+        </div>
+    </div>
+
      <div class="br"></div>
 
     <div class="row-left text">Nombre</div>
-     <div class="br"></div>
+     <!-- <div class="br"></div> -->
     <div class="col-center">
         <div class="input">
-            <input placeholder="Nuevo Nombre">
+            <input [(ngModel)]="newName" placeholder="Cambiar nombre de usuario">
         </div>
     </div>
 
@@ -29,10 +41,10 @@
      <div class="br"></div>
 
     <div class="row-left text">E-mail</div>
-     <div class="br"></div>
+     <!-- <div class="br"></div> -->
     <div class="col-center">
         <div class="input">
-            <input placeholder="Nuevo E-mail">
+            <input [(ngModel)]="newEmail" placeholder="Cambiar E-mail">
         </div>
     </div>
 
@@ -42,10 +54,10 @@
     <div class="row-left text">
         Contraseña
     </div>
-     <div class="br"></div>
+     <!-- <div class="br"></div> -->
     <div class="col-center">
         <div class="input">
-            <input placeholder="Nueva Contraseña">
+            <input [(ngModel)]="newPassword" placeholder="Nueva Contraseña">
         </div>
     </div>
     
@@ -53,6 +65,9 @@
      <div class="br"></div>
 
     <div class="col-center">
-        <button class=" button-blue">Actualizar</button>
+        <button class=" button-blue" (click)="guardarCambios()">Actualizar</button>
     </div>
+    
 </div>
+<div class="footer"></div>
+

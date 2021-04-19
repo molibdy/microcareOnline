@@ -49,8 +49,8 @@ export class RecetasService {
     return this.http.post(`${this.url}/planeadas`, addRecipe)
   }
 
-  consumeRecipe(planned_recipe_id:number){
-    return this.http.put(`${this.url}/planeadas`, {planned_recipe_id:planned_recipe_id, isConsumed:true})
+  updatePlannedRecipe(planned_recipe_id:number,isConsumed:boolean){
+    return this.http.put(`${this.url}/planeadas`, {planned_recipe_id:planned_recipe_id, isConsumed:isConsumed})
   }
 
   getRecetasDetails(){
@@ -59,6 +59,11 @@ export class RecetasService {
   
   getRecetasRicas(micronutrient_id:number){
     return this.http.get(this.url + '/ricas?micronutrient_id='+ micronutrient_id)
+  }
+
+
+  deletePlannedRecipe(planned_recipe_id:number){
+    return this.http.delete(`${this.url}/planeadas?planned_recipe_id=${planned_recipe_id}`)
   }
 
 }

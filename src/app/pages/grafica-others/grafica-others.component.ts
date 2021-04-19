@@ -86,7 +86,7 @@ export class GraficaOthersComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: userService.user.username,   // username
+          name: this.userService.user.username,   // username
           data: this.userPercents,   // Array de average progress del user
           color:"#5ce1e6"
         },
