@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Ingredient } from 'src/app/models/ingredient';
 import { Micronutrients } from 'src/app/models/micronutrient';
 import { Recipes } from 'src/app/models/recipes';
+import { IngredientesService } from 'src/app/shared/ingredientes.service';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 import { RecetasService } from 'src/app/shared/recetas.service';
 
@@ -13,26 +15,23 @@ import { RecetasService } from 'src/app/shared/recetas.service';
   styleUrls: ['./ficha-micro.component.css']
 })
 export class FichaMicroComponent implements OnInit {
-  public grupos:string[]
+ 
   public micronutrientes: Micronutrients[]
-  public ingredientesRicos:string[]
-  public recetas:Recipes[]
-
-
-
-
+  public recetas:Recipes[] = []
+  public recetasRespuesta
+  public ingredientes = []
+ 
   public selectedMicronutriente: Micronutrients
   
-    constructor(private router:Router, public MicronutrientesService: MicronutrientesService, public RecetasService:RecetasService) {
+    constructor(private router:Router, public MicronutrientesService: MicronutrientesService, public RecetasService:RecetasService, public IngredientesService:IngredientesService) {
 
       //this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
     this.micronutrientes = MicronutrientesService.micronutrientes
 
-    this.recetas = RecetasService.recetasRicas
-
-    this.grupos=["nombreGrupo","micronutrientes","color", "propiedades", "score"]
+    this.recetas = []
   
-    this.ingredientesRicos = ["Platano", "Huevo", "Nueces", "Manzana", "Pimiento"]
+    // this.ingredientesRicos()
+    // this.recetasRicas()
     
   }
 
@@ -41,7 +40,45 @@ export class FichaMicroComponent implements OnInit {
     this.router.navigate(['../../../buscar-receta/receta']);
   }
 
+  // ingredientesRicos(){
+  //   this.IngredientesService.getIngredientesMicro(this.MicronutrientesService.selectedMicronutriente.micronutrient_id).subscribe((ingredient:any)=>
+  //   {
+  //     if(ingredient.type == 1|| ingredient.type == -2){
+  //       this.IngredientesService.ingredientesRicos = ingredient.message
+  //       this.ingredientes = this.IngredientesService.ingredientesRicos 
+  //     }
+  //   })
+  // }
+
+  // recetasRicas(){
+  //   this.RecetasService.getRecetasRicas(this.MicronutrientesService.selectedMicronutriente.micronutrient_id).subscribe((recipe:any)=>
+  //   { console.log(recipe.message)
+      
+  //     if(recipe.type == 1|| recipe.type == -2){
+        
+  //       for(let i = 0; this.recetas.length>i ; i++){
+
+  //         for(let j = 0; recipe.message.length>j; j++){
+  //           if (this.RecetasService.recetas[i].recipe_id == recipe.message[j].recipe_id){
+  //             this.recetas = []
+  //             this.RecetasService.recetasRicas = []
+  //             this.recetas.push(this.RecetasService.recetas[i])
+  //             this.RecetasService.recetasRicas.push(this.RecetasService.recetas[i])
+  //           }
+  //         }
+  //       }console.log(this.recetas)
+  //     } 
+  //   })
+  // }
+
+
+    
+  
+
+
   ngOnInit(): void {
+
+  
 
 //  console.log(this.recetas)
 //  console.log(this.RecetasService.recetas)

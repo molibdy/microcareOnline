@@ -40,7 +40,6 @@ export class RecetasService {
     return this.http.get(`${this.url}/parati?user_id=${user_id}&date=${date}`)
   }
 
-
   getPlannedRecetas(user_id:number,date:string){
     return this.http.get(`${this.url}/planeadas?user_id=${user_id}&date=${date}`)
   }
@@ -54,11 +53,15 @@ export class RecetasService {
     return this.http.put(`${this.url}/planeadas`, {planned_recipe_id:planned_recipe_id, isConsumed:true})
   }
 
-
   getRecetasDetails(){
     return this.http.get(this.url + '/detalles')
   }
+  
+  getRecetasRicas(micronutrient_id:number){
+    return this.http.get(this.url + '/ricas?micronutrient_id='+ micronutrient_id)
+  }
 
 }
+
 
 

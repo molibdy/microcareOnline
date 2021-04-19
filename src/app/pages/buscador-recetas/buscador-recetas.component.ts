@@ -53,10 +53,7 @@ export class BuscadorRecetasComponent implements OnInit {
     this.router.navigate(['../buscar-receta/receta']);
    }
 
-   
-
-
-
+  
 
     
 

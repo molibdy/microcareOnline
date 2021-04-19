@@ -9,18 +9,18 @@
     <div class="br"></div>
 
     <div class="row-center ancho100">
-        <div class="text">{{this.MicronutrientesService.selectedMicronutriente.micronutrient_name}}
+        <div class="text">{{this.MicronutrientesService.selectedMicronutriente.micronutrient_name | uppercase}}
         </div>
     </div>
 
      <div class="br"></div>
     <div class="sub-titulo">
-        Ingredientes ricos en {{this.MicronutrientesService.selectedMicronutriente.micronutrient_name}}
+        Ingredientes ricos en {{this.MicronutrientesService.selectedMicronutriente.micronutrient_name}}:
     </div>
     <div class="br"></div>
     <div class="row-left wrap ancho100 chip-container">
-        <div *ngFor="let ingredientes of ingredientesRicos"> 
-            <div class="chip-grande">{{ingredientes}}
+        <div *ngFor="let ingredientes of ingredientes"> 
+            <div class="chip-grande">{{ingredientes.ingrediente_name}}
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
 
      <div class="br"></div>
     <div class="wrapper">
-        <div  *ngFor="let receta of this.recetas, let i = index,"  class="item" (click)="verRecetaMicro(i)">
+        <div  *ngFor="let receta of recetas, let i = index,"  class="item" (click)="verRecetaMicro(i)">
             <div class="row-left"> 
                 <div class="chip1">
                     Vegano

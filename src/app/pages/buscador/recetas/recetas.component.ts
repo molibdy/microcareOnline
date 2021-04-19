@@ -28,30 +28,39 @@ export class RecetasComponent implements OnInit {
   
   public recetas:Recipes[]
   public mySwitch :boolean = false
-  public recetasBuscar:Recipes[]
+  public recetasBuscar:Recipes[] = []
 
   constructor(public recetasService:RecetasService, public micronutrienteServicio:MicronutrientesService, public router:Router) { 
 
   
-    this.recetas = JSON.parse(sessionStorage.getItem('recetas'))
+    // this.recetas = JSON.parse(sessionStorage.getItem('recetas'))
+
+    this.recetas = recetasService.recetas
 
   }
 
 
   buscar(){
     this.recetasBuscar=[]
+    
+    console.log(this.recetas)
     let input = this.inputSearch.toUpperCase();
     for(let i=0; i < this.recetas.length; i++){
       if(this.recetas[i].recipe_name.toUpperCase().indexOf(input) > -1){
         console.log(this.recetas[i].photo_url)
         this.recetasBuscar.push(this.recetas[i])
-        
+        console.log(this.recetasBuscar)
+        console.log(this.recetas[i])
       }
     }  
+
+    console.log(this.recetasBuscar)
     
     this.mySwitch = true
   
     }
+
+    
    
 rutaReceta(i){
  //  this.recetaService.selectedReceta_id=recipe_id  ESTO DEBERÍA SER OBJETO RECETA?
