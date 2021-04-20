@@ -115,84 +115,77 @@ export class LoadingService {
                   this.progressService.getAverageProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id)
                   .subscribe((average:any)=>{           //  media del progreso del user por fechas
                     console.log(`Obtener average progress: ${average.type}`);
-                    if(average.type==1 || average.type== -1){
-                      this.progressService.averageProgress=average.message
-                      sessionStorage.setItem('averageProgress',JSON.stringify(this.progressService.averageProgress))
+                    if(average.type==1){
+                      this.progressService.averageProgress=average.userAverage
+                      // sessionStorage.setItem('averageProgress',JSON.stringify(this.progressService.averageProgress))
                       console.log(this.progressService.averageProgress)
-                      this.progressService.getAverageProgressTotal()        
-                      .subscribe((averageTotal:any)=>{          //media del progreso de todos los users por fechas
-                        console.log(`Obtener average progress total: ${averageTotal.type}`);
-                        if(averageTotal.type==1 || average.type== -1){
-                          this.progressService.averageProgressTotal=averageTotal.message
-                          sessionStorage.setItem('averageProgressTotal',JSON.stringify(this.progressService.averageProgressTotal))
-                          console.log(this.progressService.averageProgressTotal)
-                          console.log('dateString antes de get Progress: ' + this.dateString)
+                      this.progressService.averageProgressTotal=average.totalAverage
 
-                          this.micronutrientService.getGrupos()   
-                          .subscribe((grupos:any)=>{           //Micronutrient_groups
-                            console.log(`Obtener grupos: ${grupos.type}`);
-                            console.log(grupos.message);
-                            if(grupos.type==1 || grupos.type==-1){
-                              this.micronutrientService.grupos=grupos.message;
-                              sessionStorage.setItem('groups',JSON.stringify(this.micronutrientService.grupos))
 
-                              this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
-                              .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
-                                console.log(`Obtener progreso: ${progresoUser.type}`);
-                                console.log(progresoUser.message);
-                                if(progresoUser.type==1){             //totalProgress: objeto Progress con microscore del user
-                                  this.progressService.totalProgress=new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,progresoUser.message)   
+                      this.micronutrientService.getGrupos()   
+                      .subscribe((grupos:any)=>{           //Micronutrient_groups
+                        console.log(`Obtener grupos: ${grupos.type}`);
+                        console.log(grupos.message);
+                        if(grupos.type==1 || grupos.type==-1){
+                          this.micronutrientService.grupos=grupos.message;
+                          sessionStorage.setItem('groups',JSON.stringify(this.micronutrientService.grupos))
+
+                          this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
+                          .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
+                            console.log(`Obtener progreso: ${progresoUser.type}`);
+                            console.log(progresoUser.message);
+                            if(progresoUser.type==1){             //totalProgress: objeto Progress con microscore del user
+                              this.progressService.totalProgress=new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,progresoUser.message)   
+                              sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+                              console.log(this.progressService.totalProgress);
+                              console.log(this.router.url)
+                              ///  Si está en login: ir a Home
+                              if(this.isLogeando){
+                                console.log('ir a home')
+                                this.router.navigate(['home']);
+                                this.showNavBar=true
+                                // setTimeout(()=>{
+                                //   this.showNavBar=true
+                                // },1000)
+                              }else{
+                                this.router.navigate([this.router.url]);
+                                  this.showNavBar=true
+                              }
+                        
+                            }else if(progresoUser.type==-1){
+                              let progreso={user_id: JSON.parse(sessionStorage.getItem('userSession')).user_id,date: this.dateString,percent: 0}
+                              this.progressService.startProgress(progreso)  //inserta un nuevo registro de progreso para cada micronutriente en fecha hoy y percent=0
+                              .subscribe((added:any)=>{
+                                console.log(`start progress: ${added.type}`);
+                                console.log(added.message)
+                                this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
+                                .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
+                                  console.log(`Obtener progreso: ${progresoUser.type}`);
+                                  this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
                                   sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
                                   console.log(this.progressService.totalProgress);
-                                  console.log(this.router.url)
+              
+                                      
                                   ///  Si está en login: ir a Home
-                                  if(this.isLogeando){
+                                  if(this.router.url=='/login' && this.isLogeando){
                                     console.log('ir a home')
                                     this.router.navigate(['home']);
-                                    this.showNavBar=true
                                     // setTimeout(()=>{
                                     //   this.showNavBar=true
                                     // },1000)
-                                  }else{
+                                    this.showNavBar=true
+                                  }
+                                  else{
                                     this.router.navigate([this.router.url]);
                                       this.showNavBar=true
                                   }
-                            
-                                }else if(progresoUser.type==-1){
-                                  let progreso={user_id: JSON.parse(sessionStorage.getItem('userSession')).user_id,date: this.dateString,percent: 0}
-                                  this.progressService.startProgress(progreso)  //inserta un nuevo registro de progreso para cada micronutriente en fecha hoy y percent=0
-                                  .subscribe((added:any)=>{
-                                    console.log(`start progress: ${added.type}`);
-                                    console.log(added.message)
-                                    this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString) 
-                                    .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
-                                      console.log(`Obtener progreso: ${progresoUser.type}`);
-                                      this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
-                                      sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
-                                      console.log(this.progressService.totalProgress);
-                  
-                                          
-                                      ///  Si está en login: ir a Home
-                                      if(this.router.url=='/login' && this.isLogeando){
-                                        console.log('ir a home')
-                                        this.router.navigate(['home']);
-                                        // setTimeout(()=>{
-                                        //   this.showNavBar=true
-                                        // },1000)
-                                        this.showNavBar=true
-                                      }
-                                      else{
-                                        this.router.navigate([this.router.url]);
-                                          this.showNavBar=true
-                                      }
-                                    });
-                                  })                             
-                                }  
-                              })
-                            }
+                                });
+                              })                             
+                            }  
                           })
                         }
-                      })  
+                      })
+                        
                     }   
                   })
                 })

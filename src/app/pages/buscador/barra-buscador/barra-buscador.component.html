@@ -1,88 +1,80 @@
 <div class="col-center"> 
 
-<!--     <div class="col-center iphoneCard">
-         <div class="row-left text widthMenu marginLeft32 ">¿Qué has comido?</div>
- -->
- <!--             ///////////// barra menu Burger
- -->                                                            
-        
-                <!-- </div>  -->
-                <div class="iphoneCard " >
-                    <!--                     //// otro item //// 
- -->  
-                        <div class="col-right-buscar menu-item ">
-                            <div class="row-left widthMenu100 relative" >
-                                <!-- <div class="marginLeft32"> 
-                                    <mat-icon class="iconSize colorBlue" svgIcon="search"></mat-icon>
-                                </div> -->
-                                <!-- <div class="separadorMenu"></div> -->
-                                <div class="buscarNavbar input left-padding row-center">
-                                    <!-- <input  [(ngModel)]='inputSearch' class="text  marginLeft32 " placeholder="buscar" > -->
-                                    <input [(ngModel)]='inputSearch' type="text" class="text marginLeft32"  placeholder="buscar">
-                                    <button class="mas" (click)="buscar()"><mat-icon class="colorDark" svgIcon="search"></mat-icon></button>
-                                </div>         
-                                <!-- <div class="separadorMenu"></div> -->
-                            </div>                                                
-                            <!-- <div  class="absolutePressEnter marginRight32 textGraySemi20 " [ngClass]="inputSearch.length > 0 ? 'visible' : 'invisible'"> press enter <mat-icon svgIcon="enter" style="width: 20px;"></mat-icon></div> -->
-                        </div>
 
-                        <div class="custom-hr"></div>
+    <div class="iphoneCard "  >
+        <!--                     //// otro item //// 
+-->  
+        <div class="col-right-buscar"  >
+            <div class="row-left widthMenu100 relative"   >
+                <!-- <div class="marginLeft32"> 
+                    <mat-icon class="iconSize colorBlue" svgIcon="search"></mat-icon>
+                </div> -->
+                <!-- <div class="separadorMenu"></div> -->
+                <div class="buscarNavbar input left-padding row-center" >
+                    <!-- <input  [(ngModel)]='inputSearch' class="text  marginLeft32 " placeholder="buscar" > -->
+                    <input [(ngModel)]='inputSearch' type="text" class="text marginLeft32"  placeholder="buscar">
+                    <button class="mas" (click)="buscar()">
+                        <mat-icon class="colorDark" svgIcon="search"></mat-icon>
+                    </button>
+                </div>         
+                <!-- <div class="separadorMenu"></div> -->
+            </div>                                                
+            <!-- <div  class="absolutePressEnter marginRight32 textGraySemi20 " [ngClass]="inputSearch.length > 0 ? 'visible' : 'invisible'"> press enter <mat-icon svgIcon="enter" style="width: 20px;"></mat-icon></div> -->
+        </div>
+
+          
 <!--                         /////// elemento micronutriente
- -->                    <div *ngIf="mySwitch && (inputSearch.length > 0)">    
-                            <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20" >
-                                Micronutrientes:
-                            </div>
-                                <div *ngFor="let micronutriente of micronutrientesBuscar, let i = index">
-                                    <div class=" row-left widthMenu100" (click)="rutaMicro(i)">
-                                        <div class=" widthMenu100 col-left menu-item-busqueda textBlueSemi20">
-                                            <div class="marginLeft32">{{micronutriente.micronutrient_name}}</div>
-                                        </div>                                                       
-                                    </div>
-                                </div>
-                            <div class="custom-hr"></div>
-                        </div>
-                          <!-- ////////// elemento ingredientes //////// -->
-                <!-- <div *ngIf="inputSearch.length > 0 && ingredientes.length > 0"> 
-         
-                        
-                        <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20">
-                            Ingredientes:
-                            </div> 
-
-
-                            <div *ngFor="let ingrediente of ingredientes">
-                                    <div class="row-left widthMenu100">
-                                        
-                                            
-                                            <div class=" widthMenu100 col-left   menu-item-busqueda   textBlueSemi20">
-                                                <p class="marginLeft32 ">{{ingrediente.nombre}}</p> 
-                                            </div>                                                       
-                                    </div>
-                            </div>
-                            <div class="custom-hr"></div>
-                        </div>  -->
-                        
-<!--                          //////// elemento recetas ///////
- 
- -->            <div *ngIf="mySwitch && (inputSearch.length> 0)">  
-                    <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20">
-                            Recetas:
-                    </div> 
-                    <div *ngFor="let receta of recetasBuscar, let i = index">
-                        <div class="row-left widthMenu100" (click)="rutaReceta(i)">
+-->         <div *ngIf="mySwitch && (inputSearch.length > 0)">    
+                <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20" >
+                    Micronutrientes:
+                </div>
+                    <div *ngFor="let micronutriente of micronutrientesBuscar, let i = index">
+                        <div class=" row-left widthMenu100" (click)="rutaMicro(i)">
                             <div class=" widthMenu100 col-left menu-item-busqueda textBlueSemi20">
-                                <div class="marginLeft32">{{receta.recipe_name}}</div>
+                                <div class="marginLeft32">{{micronutriente.micronutrient_name}}</div>
                             </div>                                                       
                         </div>
                     </div>
-                    <div class="custom-hr"></div>
-                </div>   
-     
-    <!--                     //// otro item //// 
+                <div class="custom-hr"></div>
+            </div>
 
-                    
-                    <div class=" col-center custom-hr"></div>
-               <div class=" col-center  custom-hr"></div>
-    -->                <div class=" col-center  custom-hr" style="width: 90%; justify-content: center; bottom: 0.5px;" ></div>
+
+            
+<!--                   //////// elemento recetas ///////   --> 
+
+        <div *ngIf="mySwitch && (inputSearch.length> 0)">  
+            <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20">
+                    Recetas:
+            </div> 
+            <div *ngFor="let receta of recetasBuscar, let i = index">
+                <div class="row-left widthMenu100" (click)="rutaReceta(i)">
+                    <div class=" widthMenu100 col-left menu-item-busqueda textBlueSemi20">
+                        <div class="marginLeft32">{{receta.recipe_name}}</div>
+                    </div>                                                       
                 </div>
+            </div>
+            <!-- <div class="custom-hr"></div> -->
+        </div>   
+
+
+    <!-- ////////// elemento ingredientes //////// -->
+
+        <!-- <div *ngIf="inputSearch.length > 0 && ingredientes.length > 0"> 
+            <div class=" marginLeft12 marginTop5 marginBottom5 col-left menu-item-busqueda-title  textGrayRegular20">
+                Ingredientes:
+            </div> 
+
+
+            <div *ngFor="let ingrediente of ingredientes">
+                <div class="row-left widthMenu100">
+                    <div class=" widthMenu100 col-left   menu-item-busqueda   textBlueSemi20">
+                        <p class="marginLeft32 ">{{ingrediente.nombre}}</p> 
+                    </div>                                                       
+                </div>
+            </div>
+            <div class="custom-hr"></div>
+        </div>  -->
+ 
+                
+    </div>
 </div>
