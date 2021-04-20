@@ -1,7 +1,7 @@
 <div class="col-center"> 
     <div class="input left-padding">                                         
-        <input  [(ngModel)]='inputSearch' type="text" placeholder="buscar">
-        <button class="mas" (click)="buscar()"><mat-icon class="colorDark" true svgIcon="search"></mat-icon></button>
+        <input type="text" placeholder="buscar" #buscar4>
+        <button class="mas" (click)="buscar(buscar4.value)"><mat-icon class="colorDark" true svgIcon="search"></mat-icon></button>
     </div>
    
     <div class="custom-hr"></div>
@@ -9,10 +9,10 @@
     <div class= "br"></div>                    
     
     <!--                    /////// elemento micronutriente -->
-    <div *ngIf="mySwitch && inputSearch.length>0">   
+    <div *ngIf="mySwitch && (inputSearch.length > 0)">   
         <div class="iphoneCard"> 
             pepito
-            <div *ngFor="let receta of recetasBuscar; let i = index">
+            <div *ngFor="let receta of recetasBuscar; let i = index" >
                     <div class=" widthMenu100 padding-top menu-item-busqueda textBlueSemi20 row-center" >
                         <!-- <p class="text">{{receta.preferencia1}}</p> 
                         <p class="text">{{receta.preferencia2}}</p> 

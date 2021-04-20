@@ -5,7 +5,38 @@
 </div>
 <div class="br"></div>
 
-<app-recetas></app-recetas>
+<div class="col-center"> 
+    <div class="input left-padding">                                         
+        <input type="text" placeholder="buscar" #buscar4>
+        <button class="mas" (click)="buscar(buscar4.value)"><mat-icon class="colorDark" true svgIcon="search"></mat-icon></button>
+    </div>
+   
+    <div class="custom-hr"></div>
+
+    <div class= "br"></div>                    
+    
+    <!--                    /////// elemento micronutriente -->
+    <div *ngIf="mySwitch && (inputSearch.length > 0)">   
+        <div class="iphoneCard"> 
+            <div *ngFor="let receta of recetasBuscar; let i = index" (click)= rutaReceta(i)>
+                    <div class=" widthMenu100 padding-top menu-item-busqueda textBlueSemi20 row-center"  >
+                        <!-- <p class="text">{{receta.preferencia1}}</p> 
+                        <p class="text">{{receta.preferencia2}}</p> 
+                        <p class="text">{{receta.chip1}}</p> 
+                        <p class="text">{{receta.chip1}}</p>  -->
+                        <div class="fotoBuscar">
+                            <img [src]="receta.photo_url">
+                        </div>
+                        <div class="col-right titulo col">
+                            {{receta.recipe_name}}
+                        </div>
+                    </div>                                                       
+                <div class="br"></div>
+                <div class="custom-hr"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="br"></div>
 

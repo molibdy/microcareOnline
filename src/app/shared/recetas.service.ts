@@ -58,9 +58,9 @@ export class RecetasService {
   }
   
   getRecetasRicas(micronutrient_id:number){
+    console.log("haciendo get en servicio")
     return this.http.get(this.url + '/ricas?micronutrient_id='+ micronutrient_id)
   }
-
 
   deletePlannedRecipe(planned_recipe_id:number){
     return this.http.delete(`${this.url}/planeadas?planned_recipe_id=${planned_recipe_id}`)

@@ -16,19 +16,21 @@ import { RecetasService } from 'src/app/shared/recetas.service';
 })
 export class FichaMicroComponent implements OnInit {
  
-  public micronutrientes: Micronutrients[]
+  public ingredientes: Ingredient[]
   public recetas:Recipes[] = []
   public recetasRespuesta
-  public ingredientes = []
+ 
  
   public selectedMicronutriente: Micronutrients
   
     constructor(private router:Router, public MicronutrientesService: MicronutrientesService, public RecetasService:RecetasService, public IngredientesService:IngredientesService) {
 
       //this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
-    this.micronutrientes = MicronutrientesService.micronutrientes
+    this.ingredientes = this.IngredientesService.ingredientesRicos
+    console.log(this.ingredientes);
+    
 
-    this.recetas = []
+    this.recetas = this.RecetasService.recetasRicas
   
     // this.ingredientesRicos()
     // this.recetasRicas()
@@ -37,7 +39,7 @@ export class FichaMicroComponent implements OnInit {
 
   verRecetaMicro(i:number){
     this.RecetasService.selectedReceta=this.recetas[i]
-    this.router.navigate(['../../../buscar-receta/receta']);
+    this.router.navigate(['/buscar-receta/receta']);
   }
 
   // ingredientesRicos(){
