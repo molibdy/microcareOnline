@@ -36,12 +36,12 @@ export class ProgressService {
   }
 
   public getAverageProgress(user_id:number){
-    return this.http.get(`${this.url}?user_id=${user_id}`);
+    return this.http.get(`${this.url}/average?user_id=${user_id}`);
   }
 
-  public getAverageProgressTotal(){
-    return this.http.get(this.url);
-  }
+  // public getAverageProgressTotal(){
+  //   return this.http.get(this.url);
+  // }
 
 
   public updateProgress(progreso:Progress){

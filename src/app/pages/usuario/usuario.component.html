@@ -1,9 +1,9 @@
-<div routerLink="configuracion" >
+<div  >
     <div class=" row-center">
-
-        <div class="imageProfile" > 
+        <div class="imageProfile" routerLink="configuracion"> 
             <img [src]=user.profile_picture [alt]="user.username"> 
         </div>
+        
         <div>
             <div class="row-left text">{{user.username}}</div>
             <div class="row-left textSubtitle">Bienvenido a MicroCare</div>

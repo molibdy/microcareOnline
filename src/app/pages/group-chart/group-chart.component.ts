@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {
@@ -7,9 +6,11 @@ import {
   ApexChart,
   ApexFill,
   ChartComponent,
-  ApexStroke
+  ApexStroke,
+  
 } from "ng-apexcharts";
 import { Group } from 'src/app/models/group';
+import { Microscore } from 'src/app/models/microscore';
 import { Progress } from 'src/app/models/progress';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 import { ProgressService } from 'src/app/shared/progress.service';
@@ -25,47 +26,36 @@ export type ChartOptions = {
 
 
 @Component({
-  selector: 'app-mineral-chart',
-  templateUrl: './mineral-chart.component.html',
-  styleUrls: ['./mineral-chart.component.css']
+  selector: 'app-group-chart',
+  templateUrl: './group-chart.component.html',
+  styleUrls: ['./group-chart.component.css']
 })
 
-export class MineralChartComponent implements OnInit {
+
+export class GroupChartComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   public groupData:Group;
-  public groups:Group[];
-  public groupProgress:Progress;
-  public totalProgress:Progress;
+  public groupProgress:Microscore[]
+ 
   public averagePercent:number;
   constructor(public progressService:ProgressService,
     public micronutrientService:MicronutrientesService) { 
-    // this.groups=JSON.parse(sessionStorage.getItem('groups'));
-    // this.totalProgress=JSON.parse(sessionStorage.getItem('totalProgress'));
-    this.totalProgress=this.progressService.totalProgress
-    this.groups=this.micronutrientService.grupos
-    this.groupProgress=new Progress(this.totalProgress.user_id,this.totalProgress.date,[])
-    this.groupData=new Group()
 
-    // obtener datos del grupo concreto
-    for(let i=0;i<this.groups.length;i++){
-      console.log('group.name' + this.groups[i].name)
-      if(this.groups[i].name=='minerales'){
-        this.groupData=this.groups[i];
-        
-      }
-    }
+    this.groupProgress=[]
+
+    this.groupData=this.micronutrientService.selectedGroup
+
 
     //obtener progreso del grupo concreto
     let sumPercent:number=0
-    for(let i=0; i<this.totalProgress.percents.length;i++){
-      if(this.totalProgress.percents[i].group_id==this.groupData.group_id){
-        this.groupProgress.percents.push(this.totalProgress.percents[i])
-        sumPercent+=this.totalProgress.percents[i].percent
+    for(let i=0; i<this.progressService.totalProgress.percents.length;i++){
+      if(this.progressService.totalProgress.percents[i].group_id==this.groupData.group_id){
+        this.groupProgress.push(this.progressService.totalProgress.percents[i])
+        sumPercent+=this.progressService.totalProgress.percents[i].percent
       }
     }
-    this.averagePercent=sumPercent/this.groupProgress.percents.length
- 
+    this.averagePercent=sumPercent/this.groupProgress.length
 
     this.chartOptions = {
       series: [this.averagePercent],         //DEPENDIENTE DE CLASE
@@ -149,6 +139,7 @@ export class MineralChartComponent implements OnInit {
       labels: [this.groupData.name]     //DEPENDIENTE DE CLASE
     };
   }
+
 
   ngOnInit(): void {
   }

@@ -48,6 +48,7 @@ import { BuscadorRecetasPipe } from './pipes/buscador-recetas.pipe';
 import { RecetasComponent } from './pages/buscador/recetas/recetas.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { UsdaComponent } from './pages/usda/usda.component';
+import { GroupChartComponent } from './pages/group-chart/group-chart.component';
 
 
 
@@ -92,6 +93,7 @@ import { UsdaComponent } from './pages/usda/usda.component';
     RecetasComponent,
     AuthComponent,
     UsdaComponent,
+    GroupChartComponent,
   
   ],
   imports: [

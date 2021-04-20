@@ -10,6 +10,8 @@ import {
   ApexStroke,
   
 } from "ng-apexcharts";
+import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
+import { ProgressService } from 'src/app/shared/progress.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -25,20 +27,30 @@ export type ChartOptions = {
   templateUrl: './micronutrient-chart.component.html',
   styleUrls: ['./micronutrient-chart.component.css']
 })
+
+
 export class MicronutrientChartComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  constructor() { 
 
-// importar Service de micronutriente seleccionado:
-// Sus atributos son: {
-//  nombre:string  
-//  porcentaje:number,
-//  colores:string[]  ->  primer elemento: color suave, segundo elemento: color fuerte
-//  }
+  public colors:string[];
+  public percent:number;
+  constructor(public progressService:ProgressService,
+    public micronutrientService:MicronutrientesService) { 
+    
+    this.percent=0;
+    for(let i=0;i<this.progressService.totalProgress.percents.length;i++){
+      if(this.progressService.totalProgress.percents[i].micronutrient_id==this.micronutrientService.selectedMicronutriente.micronutrient_id){
+        this.percent=this.progressService.totalProgress.percents[i].percent
+      }
+    }
+
+    this.colors=[this.micronutrientService.selectedGroup.color,this.micronutrientService.selectedGroup.color2]
+
+
 
     this.chartOptions = {
-      series: [75],         //DEPENDIENTE DE SERVICE
+      series: [this.percent],         //DEPENDIENTE DE SERVICE
       chart: {
         height: 190,
         type: "radialBar",
@@ -92,6 +104,7 @@ export class MicronutrientChartComponent implements OnInit {
               },
               offsetY: 8,
               color: " #667a92",
+              fontFamily: 'dosis-bold',
               fontSize: "30px",
               show: true
             }
@@ -99,13 +112,13 @@ export class MicronutrientChartComponent implements OnInit {
         }
       },
       fill: {
-        colors:["#734fe9"],   //DEPENDIENTE DE SERVICE
+        colors:[this.colors[1]],   //DEPENDIENTE DE SERVICE
         type: "gradient",
         gradient: {
           shade: "dark",
           type: "horizontal",
           shadeIntensity: 0.5,
-          gradientToColors: ["#A18CE8"],    //DEPENDIENTE DE SERVICE
+          gradientToColors: [this.colors[0]],    //DEPENDIENTE DE SERVICE
           inverseColors: false,
           opacityFrom: 1,
           opacityTo: 1,
@@ -114,8 +127,7 @@ export class MicronutrientChartComponent implements OnInit {
       },
       stroke: {
         lineCap: "round"
-      },
-      labels: ["Micronutrient.nombre"]     //DEPENDIENTE DE SERVICE
+      }
     };
   }
 

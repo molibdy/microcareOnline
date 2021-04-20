@@ -9,7 +9,8 @@ import {
   ApexDataLabels,
   ApexTooltip,
   ApexStroke,
-  ApexYAxis
+  ApexYAxis,
+  ApexLegend
 } from "ng-apexcharts";
 import { LoginInfoService } from "src/app/shared/login-info.service";
 import { ProgressService } from "src/app/shared/progress.service";
@@ -21,7 +22,8 @@ export type ChartOptions = {
   stroke: ApexStroke;
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
-  yaxis: ApexYAxis
+  yaxis: ApexYAxis;
+  legend: ApexLegend
 };
 
 
@@ -124,20 +126,46 @@ export class GraficaOthersComponent implements OnInit {
         // categories: this.userDates,
         labels: {
           format: 'd MMM',
+          style: {
+            colors: '#667a92',
+            fontSize: '16px',
+            fontFamily: 'dosis-semiBold',
+            fontWeight: 400,
+            cssClass: 'apexcharts-xaxis-label',
+        },
         }
         // ["2021-09-18", "2021-09-19","2021-09-20","2021-09-21","2021-09-22","2021-09-23","2021-09-24"]
       },
       yaxis:{
         min: 0,
         max: 100,
-        title:{
-          style:{
-            fontFamily: 'dosis-regular'
-          }
-        },
+        decimalsInFloat: 0,
+        tickAmount: 5,
+        labels: {
+          show: true,
+          align: 'right',
+          minWidth: 0,
+          maxWidth: 160,
+          style: {
+              colors: '#667a92',
+              fontSize: '14px',
+              fontFamily: 'dosis-semiBold',
+              fontWeight: 400,
+              cssClass: 'apexcharts-yaxis-label',
+          },
+        }  
       },
       tooltip: {
         enabled: false
+      },
+      legend: {
+        fontSize: '18px',
+      fontFamily: 'dosis-semiBold',
+      fontWeight: 400,
+      labels: {
+        colors: '#667a92',
+        useSeriesColors: false
+    },
       }
     };
   }

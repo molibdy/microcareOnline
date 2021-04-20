@@ -35,28 +35,12 @@ export class BurgerMenuComponent implements OnInit {
    {
     this.foco = false
    }
-   buscadorSwitch()
-   {
-     this.focoBuscador = true
-   }
+ 
 
 
   ngOnInit(): void {
   
-    this.apiService.getMicros().subscribe((data:any)=>
-    {console.log(data.type)
-      if(data.type == 1){
-      this.apiService.micronutrientes = data.message
-      console.log(this.apiService.micronutrientes)
-      }
-    })
-    
-      this.servicioReceta.getRecetas().subscribe((data:any)=>
-      {
-        if(data.type == 1){
-        this.servicioReceta.recetas = data.message
-              }
-      })
+ 
   }  
 
 }
