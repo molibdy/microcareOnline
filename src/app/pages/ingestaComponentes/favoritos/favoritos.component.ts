@@ -11,19 +11,26 @@ import { Progress } from 'src/app/models/progress';
   styleUrls: ['./favoritos.component.css']
 })
 export class FavoritosComponent implements OnInit {
+  // borrando favorito 
   public isBorrando:boolean = false 
   public indiceBorrando:number;
   public borrando:Favourites;
-  public favoritos:Favourites[]  = []
-  public isAnadiendo:boolean = false
-  public anadiendo:Favourites;
-  public indiceAnadiendo:number = 0
   public idBorrando:number = 0
+  //// objetos favoritos 
+  public anadiendo:Favourites;
+  public favoritos:Favourites[]  = []
+  /// switch de anadir 
+  public isAnadiendo:boolean = false
+  public indiceAnadiendo:number = 0
+/// fechas
   public date=new Date()
   public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
+/// switch already anadida 
+  public alreadyAnadida:boolean = false
+  public showAlreadyConsumed:boolean =false
 
-  
-  constructor(private apiIngesta:IngestaService, private progressService:ProgressService) {
+/// constructor 
+  constructor(public apiIngesta:IngestaService, private progressService:ProgressService) {
     
    }
 
@@ -42,6 +49,7 @@ export class FavoritosComponent implements OnInit {
     
     }) 
   }
+
   deshacer(){
     this.progressService.removeProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.anadiendo.microscore))
          .subscribe((updated:any)=>{
@@ -53,40 +61,42 @@ export class FavoritosComponent implements OnInit {
               this.progressService.totalProgress.percents=progreso.message
               sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
 
-             /*  this.recetasService.updatePlannedRecipe(planned_recipe_id,false)
+               this.apiIngesta.updateConsumedFavourite(this.anadiendo.consumed_favourites_id,false)
               .subscribe((consumida:any)=>{
               console.log('consumida, type ' + consumida.type)
-              this.getPlannedRecipes(this.dateToString(this.date))
-              }) */
+              
+              })  
           })
         }
       })
   }
   consumirFavorito(i)
   {
-    /// aqui ira la llamada al servicio para importar 
-    this.isAnadiendo = true
-    this.indiceAnadiendo = i
-    this.anadiendo = this.apiIngesta.listaFavoritos[i]
-
-    this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.anadiendo.microscore))
-    .subscribe((updated:any)=>{
-      console.log('progreso añadido, type' + updated.type)
-      if(updated.type==1 || updated.type==2){
-        this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
-        .subscribe((progreso:any)=>{
-          this.progressService.totalProgress.percents=progreso.message
-          sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
-          
+    /// aqui ira la llamada al servicio para importar
+    if(this.isAnadiendo){
+      this.alreadyAnadida = true
+      this.showAlreadyConsumed=true
+    }
+    else{
+      this.isAnadiendo = true
+      this.indiceAnadiendo = i
+      this.anadiendo = this.apiIngesta.listaFavoritos[i]
+      this.apiIngesta.postConsumedFavorito(JSON.parse(sessionStorage.getItem('userSession')).user_id, true,this.anadiendo,this.dateString)
+      .subscribe((Consumido:any)=>{
+        this.anadiendo.consumed_favourites_id = Consumido.message
+        this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.anadiendo.microscore))
+        .subscribe((updated:any)=>{
+          console.log('progreso añadido, type' + updated.type)
+          if(updated.type==1 || updated.type==2){
+            this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+            .subscribe((progreso:any)=>{
+              this.progressService.totalProgress.percents=progreso.message
+              sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))             
+            }) 
+          } 
         })
-    
-
-        
-      }
-
-    })
-    
-    
+      }) 
+    }
   }
   cancelarBorrado(){
     this.indiceBorrando = 0
