@@ -47,7 +47,7 @@ export class PreferenciasComponent implements OnInit {
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
   fruits: string[] = [];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry', "crustaceo", "frutosSecos", "gluten", "huevo", "leche", "moluscos","mostaza", "pescado", "sesamo", "sulfitos", "altramuces"];
+  allFruits: string[];
   ObjectsIngredients: Ingredient[] = [];
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
@@ -62,20 +62,29 @@ export class PreferenciasComponent implements OnInit {
   alergiasCtrl = new FormControl();
   filteredAlergias: Observable<string[]>;
   alergias: string[] = [];
-  public totalAlergias:string[]=["apio","cacahuetes", "crustaceo", "frutosSecos", "gluten", "huevo", "leche", "moluscos","mostaza", "pescado", "sesamo", "sulfitos", "altramuces"]
-  public ObjectAlergias:object[]=[{name: "apio"},{name: "cacahuetes"}, {name: "crustaceo"}, {name: "frutosSecos"}, {name: "gluten"}, {name: "huevo"}, {name: "leche"}, {name: "moluscos"},{name: "mostaza"}, {name: "pescado"}, {name: "sesamo"}, {name: "sulfitos"}, {name: "altramuces"}]
+  public totalAlergias:string[]=[]
   public ingredientesAnadidos:string[]=[]
 ///// contructor 
   constructor(private ingredientService:IngredientesService) {
-  for(let i =0;i<this.ingredientService.ingredientesAvoid.length;i++){
+/*   for(let i =0;i<this.ingredientService.ingredientesAvoid.length;i++){
     this.fruits.push(this.ingredientService.ingredientesAvoid[i].ingredient_name)
+  } */
+/*   this.getAllergens()
+ */
+  this.allFruits = []
+  for(let i =0;i<this.ingredientService.Ingredientes.length;i++){
+    this.allFruits.push(this.ingredientService.Ingredientes[i].ingredient_name)
+    console.log(this.ingredientService.Ingredientes[i].ingredient_name); 
   }
+
   for(let i =0;i<this.ingredientService.alergenos.length;i++){
-    this.alergias.push(this.ingredientService.alergenos[i].allergen_name)
+    this.totalAlergias.push(this.ingredientService.alergenos[i].allergen_name)
+    console.log(this.ingredientService.alergenos[i].allergen_name);
     
-    this.getIngredientsAvoid()
   }
-  this.desplegable1
+   this.getIngredientsAvoid()
+ /*   this.getAlergias()
+ */  this.desplegable1
   this.desplegable2
   this.desplegable3
   this.desplegable4
@@ -154,11 +163,44 @@ export class PreferenciasComponent implements OnInit {
   }
 /////////// metodos autocompletar
   getIngredientsAvoid(){    
-      this.ingredientService.getIngredientesAvoid().subscribe((data:any) => {
-      this.ingredientService.ingredientesAvoid = data.message
+      this.fruits = []
+      this.ingredientService.ingredientesAvoid = []
+     console.log(this.ingredientService);
+      
 
+      this.ingredientService.getIngredientesAvoid().subscribe((data:any) => {
+        console.log(data.message);
+        
+      this.ingredientService.ingredientesAvoid = data.message
+        for(let i =0;i<this.ingredientService.ingredientesAvoid.length;i++){
+          this.fruits.push(this.ingredientService.ingredientesAvoid[i].ingredient_name)
+        }
       })
   }
+
+/*   getAlergias(){    
+    this.alergias = []
+    this.ingredientService.getAlergias().subscribe((data:any) => {
+      console.log('alergiss'+data);
+      
+    this.ingredientService.alergias = data
+      for(let i =0;i<this.ingredientService.alergias.length;i++){
+        this.alergias.push(this.ingredientService.alergias[i].allergen_name)
+      }
+    })
+}
+  getAllergens(){
+    this.ingredientService.getAlergenos().subscribe((alergenos:any)=>{
+      this.ingredientService.alergenos = alergenos
+      console.log(alergenos );
+      
+      for(let i =0;i<this.ingredientService.alergenos.length;i++){
+        this.totalAlergias.push(this.ingredientService.alergenos[i].allergen_name)
+      }
+
+    })
+  } */
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -188,6 +230,7 @@ export class PreferenciasComponent implements OnInit {
 
     if (index >= 0) {
       this.fruits.splice(index, 1);
+      this.ingredientService.ingredientesAvoid.splice(index, 1);
     }
   }
 
@@ -245,7 +288,8 @@ export class PreferenciasComponent implements OnInit {
 
   /// metodos recogida de datos
 
-  guardarPreferencias(){  //// guarda toda la funcionalidad de guardar preferencias, funciona con llamadas a atributos del servicio
+  guardarPreferencias(){
+                         //// guarda toda la funcionalidad de guardar preferencias, funciona con llamadas a atributos del servicio
     if(!this.isVegano && !this.isVegetariano){
       this.ingredientService.tipoDieta = 0
                                                   //Ni vegano ni vegetariano
@@ -262,19 +306,45 @@ export class PreferenciasComponent implements OnInit {
     }
 
      /// aqui mete los ingredientes a evitar
+     this.ingredientService.ingredientesAvoid = []
+
     for(let i =0; i<this.ingredientService.Ingredientes.length;i++){
      if( this.fruits.includes(this.ingredientService.Ingredientes[i].ingredient_name)){
        this.ingredientService.ingredientesAvoid.push(this.ingredientService.Ingredientes[i])
      }else{}
     }
-    if(this.ingredientService.ingredientesAvoid.length >0){
+   
       let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
       let objetoIngredientes = {user_id: userSession, ingredientes: this.ingredientService.ingredientesAvoid}
+      console.log(objetoIngredientes);
+      
     
       this.ingredientService.postIngredientesAvoid(objetoIngredientes).subscribe((data:any)=>{
         console.log(data); 
+        this.getIngredientsAvoid()
+/*         this.ingredientService.alergias = []
+ */
+/*         for(let i =0; i<this.ingredientService.alergenos.length;i++){
+         if( this.alergias.includes(this.ingredientService.alergenos[i].allergen_name)){
+           this.ingredientService.alergias.push(this.ingredientService.alergenos[i])
+         }else{}
+        }
+       
+          let objetoAlergias = {user_id: userSession, alergias: this.ingredientService.alergias}
+        
+           this.ingredientService.postAlergias(objetoAlergias).subscribe((data:any)=>{
+            console.log(data); 
+            this.getAlergias()
+          })  */
+
+
       })
-    }
+    
+
+           /// aqui mete los alergenos 
+ 
+     
+     
     /* this.ingredientService.alergenos.push(this.alergias) */ /// aqui mete los alergias a evitar
   /*   console.log(this.ingredientService.ingredientesAvoid);
     console.log(this.ingredientService.alergenos); */

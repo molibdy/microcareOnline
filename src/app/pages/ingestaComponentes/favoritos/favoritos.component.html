@@ -8,12 +8,14 @@
             Has consumido <span class="textDarkSemi18Bold">{{anadiendo.name}}</span>, <a class="link">Deshacer</a>
             </div> 
             </div>
-            <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of favoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)">
+            <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of apiIngesta.listaFavoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)" [style.background]="favorito.microscore[0].color">
                <div class="fondo-cerrar" (click)='quitarFavorito(i)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
                     {{favorito.name}}
                     
                     <mat-chip-list aria-label="Fish selection" class="marginTop10" >
-                        <mat-chip *ngFor="let micronutriente of favorito.score"  class="chip-material">{{micronutriente.name}}</mat-chip>
+                        <mat-chip   class="chip-material">{{favorito.microscore[0].acronym}}</mat-chip>
+                        <mat-chip   class="chip-material">{{favorito.microscore[1].acronym}}</mat-chip>
+
                       </mat-chip-list>
 
 

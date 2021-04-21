@@ -1,3 +1,4 @@
+import { IngredientesService } from 'src/app/shared/ingredientes.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { Progress } from '../models/progress';
@@ -18,6 +19,7 @@ export class LoadingService {
 
   constructor(
     private apiService: LoginInfoService, 
+    public IngredientesService: IngredientesService,
     public progressService:ProgressService, 
     public recetaService:RecetasService,
     public micronutrientService:MicronutrientesService,
@@ -44,58 +46,67 @@ export class LoadingService {
         sessionStorage.setItem('micronutrientes',JSON.stringify(this.micronutrientService.micronutrientes))
         console.log(this.micronutrientService.micronutrientes)
 
-        this.recetaService.getRecetas()      //  Obtener recetas
-        .subscribe((recipes:any)=>{
-          console.log(`Obtener recetas: ${recipes.type}`);
-          if(recipes.type == 1 || recipes.type == -2){
-            this.recetaService.recetas = recipes.message
-            console.log(this.recetaService.recetas)
+        this.IngredientesService.getIngredientes()
+        .subscribe((ingredientes:any)=>{
+          console.log("obtener ingredientes" + ingredientes.type);
+          
+          this.IngredientesService.Ingredientes = ingredientes.message
+          console.log(this.IngredientesService.Ingredientes);
+          
+          this.recetaService.getRecetas()   
+                                               //  Obtener recetas
+          .subscribe((recipes:any)=>{
+            console.log(`Obtener recetas: ${recipes.type}`);
+            if(recipes.type == 1 || recipes.type == -2){
+              this.recetaService.recetas = recipes.message
+              console.log(this.recetaService.recetas)
 
-            for(let j=0;j<this.recetaService.recetas.length;j++){  // Crear campos en las recetas para: 
-              this.recetaService.recetas[j].ingredientes=[];      // array de ingredientes
-              this.recetaService.recetas[j].dietas=[];      // array de dietas
-              this.recetaService.recetas[j].microscore=[];      // array de microscores (ordenadas de mayor a menor)
-            }
-            this.micronutrientService.getMicrosRecetas()
-            .subscribe((micros:any)=>{           //obtener microscore de cada receta
-              console.log(`Obtener microscores: ${micros.type}`);
-              for(let i=0; i<micros.message.length;i++){
-                for(let j=0;j<this.recetaService.recetas.length;j++){
-                  if(this.recetaService.recetas[j].recipe_id==micros.message[i].recipe_id){
-                    this.recetaService.recetas[j].microscore
-                    .push({
-                      micronutrient_id:micros.message[i].micronutrient_id,
-                      micronutrient_name:micros.message[i].micronutrient_name,
-                      acronym:micros.message[i].acronym,
-                      color:micros.message[i].color,
-                      percent:micros.message[i].percent,
-                      group_id:micros.message[i].group_id
-                    })
-                  }
-                }
-              } 
-              this.recetaService.getRecetasDetails()       // Obtener ingredientes y dietas de cada receta
-              .subscribe((detalles:any)=>{
-                console.log(`Obtener dietas e ingredientes: ${detalles.type}`);
-                for(let i=0; i<detalles.message.length;i++){
+              for(let j=0;j<this.recetaService.recetas.length;j++){  // Crear campos en las recetas para: 
+                this.recetaService.recetas[j].ingredientes=[];      // array de ingredientes
+                this.recetaService.recetas[j].dietas=[];      // array de dietas
+                this.recetaService.recetas[j].microscore=[];      // array de microscores (ordenadas de mayor a menor)
+              }
+              this.micronutrientService.getMicrosRecetas()
+              .subscribe((micros:any)=>{           //obtener microscore de cada receta
+                console.log(`Obtener microscores: ${micros.type}`);
+                for(let i=0; i<micros.message.length;i++){
                   for(let j=0;j<this.recetaService.recetas.length;j++){
-                    if(this.recetaService.recetas[j].recipe_id==detalles.message[i].recipe_id){  
-                      if(!this.recetaService.recetas[j].ingredientes.some(function (ingrediente){
-                        return ingrediente.ingredient_name==detalles.message[i].ingredient_name     
-                      })){                                      //añadir ingredientes si no están en la lista de ingredientes
-                        this.recetaService.recetas[j].ingredientes.push({
-                          ingredient_id:detalles.message[i].ingredient_id,
-                          ingredient_name:detalles.message[i].ingredient_name,
-                          amount:detalles.message[i].amount,
-                          unit:detalles.message[i].unit,
-                          total_grams:detalles.message[i].total_grams})
-                      }                                    //añadir dietas si no están en la lista de dietas
-                      if(!this.recetaService.recetas[j].dietas.includes(detalles.message[i].diet_name)){
-                        this.recetaService.recetas[j].dietas.push(detalles.message[i].diet_name)
-                      } 
+                    if(this.recetaService.recetas[j].recipe_id==micros.message[i].recipe_id){
+                      this.recetaService.recetas[j].microscore
+                      .push({
+                        micronutrient_id:micros.message[i].micronutrient_id,
+                        micronutrient_name:micros.message[i].micronutrient_name,
+                        acronym:micros.message[i].acronym,
+                        color:micros.message[i].color,
+                        percent:micros.message[i].percent,
+                        group_id:micros.message[i].group_id
+                      })
                     }
                   }
-                }
+                } 
+                this.recetaService.getRecetasDetails()       // Obtener ingredientes y dietas de cada receta
+                .subscribe((detalles:any)=>{
+                  console.log(`Obtener dietas e ingredientes: ${detalles.type}`);
+                  for(let i=0; i<detalles.message.length;i++){
+                    for(let j=0;j<this.recetaService.recetas.length;j++){
+                      if(this.recetaService.recetas[j].recipe_id==detalles.message[i].recipe_id){  
+                        if(!this.recetaService.recetas[j].ingredientes.some(function (ingrediente){
+                          return ingrediente.ingredient_name==detalles.message[i].ingredient_name     
+                        })){                                      //añadir ingredientes si no están en la lista de ingredientes
+                          this.recetaService.recetas[j].ingredientes.push({
+                            ingredient_id:detalles.message[i].ingredient_id,
+                            ingredient_name:detalles.message[i].ingredient_name,
+                            amount:detalles.message[i].amount,
+                            unit:detalles.message[i].unit,
+                            total_grams:detalles.message[i].total_grams})
+                        }                                    //añadir dietas si no están en la lista de dietas
+                        if(!this.recetaService.recetas[j].dietas.includes(detalles.message[i].diet_name)){
+                          this.recetaService.recetas[j].dietas.push(detalles.message[i].diet_name)
+                        } 
+                      }
+                    }
+                  }
+                
                 console.log(this.recetaService.recetas)
                 sessionStorage.setItem('recetas',JSON.stringify(this.recetaService.recetas))
 
@@ -188,11 +199,15 @@ export class LoadingService {
                         
                     }   
                   })
-                })
-              })  
-            })
-          }
+                 })
+                 })  
+              })
+            }
+          })
+        
         })
+
+
       }
     })          
   }
