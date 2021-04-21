@@ -24,7 +24,7 @@ input{
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    position: relative;
+    /* position: relative; */
     margin-top:40px;
     padding-bottom:20px;
 }
@@ -118,6 +118,7 @@ input{
     margin-top: 10px;
     text-align: center;
     color: #667a92;
+    text-transform:capitalize;
     }
 
 
@@ -184,7 +185,7 @@ input{
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
-    /* position: relative; */
+    position: relative;
 }
 
 /* .wrapper::-webkit-scrollbar{
@@ -300,6 +301,7 @@ img{
     justify-content: center;
     color: #667a92;
     margin-left: 15px;
+
 }
 
 
