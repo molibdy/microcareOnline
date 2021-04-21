@@ -1,6 +1,9 @@
+import { ProgressService } from './../../../shared/progress.service';
+import { Ingredient } from './../../../models/ingredient';
 import { Component, OnInit } from '@angular/core';
 import { Favourites } from 'src/app/models/favourites';
 import { IngestaService } from 'src/app/shared/ingesta.service';
+import { Progress } from 'src/app/models/progress';
 
 @Component({
   selector: 'app-favoritos',
@@ -13,23 +16,26 @@ export class FavoritosComponent implements OnInit {
   public borrando:Favourites;
   public favoritos:Favourites[]  = []
   public isAnadiendo:boolean = false
-  public anadiendo:object = {}
+  public anadiendo:Favourites;
   public indiceAnadiendo:number = 0
   public idBorrando:number = 0
-
+  public date=new Date()
+  public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
 
   
-  constructor(private apiIngesta:IngestaService) { }
+  constructor(private apiIngesta:IngestaService, private progressService:ProgressService) {
+    
+   }
 
   ngOnInit(): void {
     this.apiIngesta.mostrarFavoritos().subscribe((data:any)=>{
-      console.log(data.type);
       console.log(data);
-      
+      console.log( JSON.parse(sessionStorage.getItem('userSession')).user_id);
+
       
       if(data.type ==1 || data.type == -2){
         this.apiIngesta.listaFavoritos = data.message;
-      this.favoritos = this.apiIngesta.listaFavoritos;
+      
       }
   
       
@@ -41,7 +47,24 @@ export class FavoritosComponent implements OnInit {
     /// aqui ira la llamada al servicio para importar 
     this.isAnadiendo = true
     this.indiceAnadiendo = i
-    this.anadiendo = this.favoritos[i]
+    this.anadiendo = this.apiIngesta.listaFavoritos[i]
+
+    this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.anadiendo.microscore))
+    .subscribe((updated:any)=>{
+      console.log('progreso añadido, type' + updated.type)
+      if(updated.type==1 || updated.type==2){
+        this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+        .subscribe((progreso:any)=>{
+          this.progressService.totalProgress.percents=progreso.message
+          sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+          
+        })
+    
+
+        
+      }
+
+    })
     
     
   }
@@ -54,7 +77,7 @@ export class FavoritosComponent implements OnInit {
     this.isBorrando=true
     this.indiceBorrando = i
 /*     this.Borrando = {favourite_id}
- */    this.borrando = this.favoritos[i]
+ */    this.borrando = this.apiIngesta.listaFavoritos[i]
   }
   quitarFavoritoDefinitivo(){
 

@@ -8,7 +8,7 @@ import { Favourites } from '../models/favourites';
 export class IngestaService {
   public date=new Date()
   public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
-  public intakeID:number = 0
+  public lastIntake = {intake_id: 0, microscore: []}
   public introducirRecetaBooleano:boolean = false;
 
 
@@ -29,7 +29,8 @@ export class IngestaService {
     return this.http.post(this.url + '/favoritos', favorito )
   }
   mostrarFavoritos(){
-    return this.http.get(this.url + "/favoritos")
+    return this.http.get(this.url + "/favoritos?user_id=" + JSON.parse(sessionStorage.getItem('userSession')).user_id)
+    
   }
   quitarFavoritos(borrando:Favourites){
     return this.http.delete(this.url + "/favorito?favourite_id=" + borrando.favourite_id)
@@ -37,3 +38,7 @@ export class IngestaService {
 
 
 }
+function userSession(userSession: any) {
+  throw new Error('Function not implemented.');
+}
+

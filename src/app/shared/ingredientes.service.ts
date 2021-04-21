@@ -14,6 +14,8 @@ export class IngredientesService {
   public tipoDieta:number;
   public ingredientesAvoid:Ingredient[]
   public alergenos:Allergen[]
+  public alergias:Allergen[]
+
   constructor(private http:HttpClient) {
     this.tipoDieta = 0
     this.ingredientesAvoid = []
@@ -24,11 +26,20 @@ export class IngredientesService {
   getIngredientes(){
     return this.http.get(this.url)
   } 
+  getAlergenos(){
+    return this.http.get(this.url + '/all_allergen')
+  } 
   getIngredientesAvoid(){
     return this.http.get(this.url + '/avoid')
   } 
+  getAlergias(){
+    return this.http.get(this.url + '/allergen')
+  } 
   postIngredientesAvoid(ingrediente){
     return this.http.post(this.url + '/avoid', ingrediente)
+  }
+  postAlergias(alergias){
+    return this.http.post(this.url + '/allergen', alergias)
   }
   
 

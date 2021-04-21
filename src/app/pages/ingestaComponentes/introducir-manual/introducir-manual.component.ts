@@ -1,9 +1,13 @@
+import { Ingredient } from 'src/app/models/ingredient';
 
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { IngestaService } from 'src/app/shared/ingesta.service';
+import { IngredientesService } from 'src/app/shared/ingredientes.service';
+import { Progress } from 'src/app/models/progress';
+import { ProgressService } from 'src/app/shared/progress.service';
 
 
 
@@ -32,7 +36,18 @@ export class IntroducirManualComponent implements OnInit {
   public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
 
   public showGuardarFavorito:boolean=false;
-  constructor(private ingestaService:IngestaService) { }
+  constructor(private ingestaService:IngestaService,   
+              private ingredientService:IngredientesService,
+              private progressService:ProgressService) 
+    {
+
+    this.options = []
+    for(let i =0;i<this.ingredientService.Ingredientes.length;i++){
+      this.options.push(this.ingredientService.Ingredientes[i].ingredient_name)
+      console.log(this.ingredientService.Ingredientes[i].ingredient_name); 
+    }
+/*     this.getIngredientes()
+ */   }
   
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -42,13 +57,23 @@ export class IntroducirManualComponent implements OnInit {
     console.log(this.filteredOptions);
 
   }
+  getIngredientes(){
+    for(let i =0; i<this.ingredientService.Ingredientes.length;i++){
+       this.options.push(this.ingredientService.Ingredientes[i].ingredient_name)
+    }
+  
+  }
 
   crearIngrediente(ingrediente : string, peso:number)
   {
-    if(ingrediente.length > 0 && peso > 0){
+    if(this.options.includes(ingrediente)  && peso > 0){
       console.log(ingrediente);
       console.log("pasa");
-      this.listaIngredientes.push({ingrediente: ingrediente, peso : peso})
+      for(let i=0;i<this.ingredientService.Ingredientes.length;i++){
+          if(this.ingredientService.Ingredientes[i].ingredient_name == ingrediente){
+            this.listaIngredientes.push({ingrediente: this.ingredientService.Ingredientes[i], peso : peso})
+          }
+      }
     }
     else{
       console.log(this.listaIngredientes);
@@ -70,16 +95,28 @@ export class IntroducirManualComponent implements OnInit {
       let intake = {user_id:  userSession, date: this.dateString, ingredientes: this.listaIngredientes}
       this.ingestaService.postIntake(intake).subscribe((data:any)=>{
         console.log('callback de la ingesta');
-        console.log(data);
-        this.ingestaService.intakeID = data.message
-        console.log(data.message);
         
-        console.log(this.ingestaService.intakeID);
-        
-        this.hiddenIngesta = true;
+        this.ingestaService.lastIntake = {intake_id: data.intake_id, microscore: data.microscore}
 
+        this.progressService.updateProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.ingestaService.lastIntake.microscore))
+        .subscribe((updated:any)=>{
+          console.log('progreso añadido, type' + updated.type)
+          if(updated.type==1 || updated.type==2){
+            this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+            .subscribe((progreso:any)=>{
+              this.progressService.totalProgress.percents=progreso.message
+              sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+              this.hiddenIngesta = true
+              
+            })
+        
+
+            
+          }
+
+        })
+      
       })
-      console.log(this.listaIngredientes);
     }
     else
     {
@@ -118,11 +155,11 @@ export class IntroducirManualComponent implements OnInit {
     let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
     console.log(favorito);
     
-    let favoritoObject = {user_id: userSession, name: favorito, intake_id: this.ingestaService.intakeID}
+    let favoritoObject = {user_id: userSession, name: favorito, intake_id: this.ingestaService.lastIntake.intake_id}
     this.showGuardarFavorito=true
     this.ingestaService.guardarFavoritos(favoritoObject).subscribe((data:any) => {
       console.log(data);
-      this.ingestaService.intakeID = data.message
+      this.ingestaService.lastIntake.intake_id = data.intake_id
        this.ingestaService.introducirRecetaBooleano = false;
 
 
@@ -131,8 +168,9 @@ export class IntroducirManualComponent implements OnInit {
   anadirFavorito(){
     this.showGuardarFavorito = true
   }
+  
 
-
+}
   
 
 ///////// Recogida de datos //////////////
@@ -147,5 +185,4 @@ export class IntroducirManualComponent implements OnInit {
 
 
 
-
-}
+  
