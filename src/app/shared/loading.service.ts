@@ -113,6 +113,7 @@ export class LoadingService {
                 this.recetaService.getRecetasParaTi(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
                 .subscribe((recetas:any)=>{        // Lista recetas para ti
                   console.log(`Obtener recetas para ti: ${recetas.type}`);
+                  this.recetaService.recetasParaTi = []
                   for(let i=0;i<this.recetaService.recetas.length;i++){
                     let allRecipes=this.recetaService.recetas[i]
                     if(recetas.message.some(function(receta){
@@ -121,7 +122,6 @@ export class LoadingService {
                       this.recetaService.recetasParaTi.push(this.recetaService.recetas[i])
                     } 
                   } console.log(this.recetaService.recetasParaTi)
-                  sessionStorage.setItem('recetasParaTi',JSON.stringify(this.recetaService.recetasParaTi))
                   
                   this.progressService.getAverageProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id)
                   .subscribe((average:any)=>{           //  media del progreso del user por fechas

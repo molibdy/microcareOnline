@@ -34,18 +34,18 @@
     </div>
 
      <div class="br"></div>
-    <div class="wrapper">
-        <div  *ngFor="let receta of recetas, let i = index,"  class="item" (click)="verRecetaMicro(i)">
+     <div  class="wrapper">
+        <div *ngFor="let receta of recetas; let i=index" class="item" (click)="verRecetaMicro(i)">
             <div class="row-left"> 
-                <div class="chip1">
-                    Vegano
+                <div class="chip1" *ngIf="receta.dietas.length>0">
+                    {{receta.dietas[0]}}
                 </div>
-                <div class="chip2">
-                    Vegetariano
+                <div class="chip2" *ngIf="receta.dietas.length>1">
+                    {{receta.dietas[1]}}
                 </div>
             </div>
             <div class="foto">
-                <img src="{{receta.photo_url}}">
+                <img [src]="receta.photo_url">
             </div>
             <div class="row-center">
                 <div class="row-center">
@@ -55,14 +55,14 @@
                 </div>
                 <div class="row-center">
                     <div class="chip-micro1">
-                        B
+                        {{receta.microscore[0].acronym}}
                     </div>
                     <div class="chip-micro2">
-                            Mo
+                        {{receta.microscore[1].acronym}}
                     </div> 
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 </div>
 <div class="footer"></div>
