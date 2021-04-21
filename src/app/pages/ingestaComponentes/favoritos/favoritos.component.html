@@ -5,7 +5,7 @@
     <div class=" row-left-wrap" *ngIf="!isBorrando">
         <div class=" bordeAnadir marginTop10" *ngIf="isAnadiendo" (click)="isAnadiendo = false">
             <div class="textDarkSemi18  padding10">
-            Has consumido <span class="textDarkSemi18Bold">{{anadiendo.name}}</span>, <a class="link">Deshacer</a>
+            Has consumido <span class="textDarkSemi18Bold">{{anadiendo.name}}</span>, <a class="link" (click)="deshacer(anadiendo.favourite_id)">Deshacer</a>
             </div> 
             </div>
             <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of apiIngesta.listaFavoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)" [style.background]="favorito.microscore[0].color">

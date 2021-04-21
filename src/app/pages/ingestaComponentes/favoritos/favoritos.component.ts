@@ -42,6 +42,26 @@ export class FavoritosComponent implements OnInit {
     
     }) 
   }
+  deshacer(){
+    this.progressService.removeProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,this.anadiendo.microscore))
+         .subscribe((updated:any)=>{
+           console.log('progreso añadido, type' + updated.type)
+           if(updated.type==1 || updated.type==2){
+
+            this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+            .subscribe((progreso:any)=>{
+              this.progressService.totalProgress.percents=progreso.message
+              sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+
+             /*  this.recetasService.updatePlannedRecipe(planned_recipe_id,false)
+              .subscribe((consumida:any)=>{
+              console.log('consumida, type ' + consumida.type)
+              this.getPlannedRecipes(this.dateToString(this.date))
+              }) */
+          })
+        }
+      })
+  }
   consumirFavorito(i)
   {
     /// aqui ira la llamada al servicio para importar 
