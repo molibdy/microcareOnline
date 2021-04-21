@@ -164,7 +164,7 @@ export class GraficaOthersComponent implements OnInit {
       fontWeight: 400,
       labels: {
         colors: '#667a92',
-        useSeriesColors: false
+        useSeriesColors: true
     },
       }
     };

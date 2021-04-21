@@ -4,7 +4,7 @@
 
 <div class="col-center">
     <div class="header">
-        <app-botton-cruz routerLink="../home"></app-botton-cruz>
+        <app-botton-cruz (click)="activaNavBar('/home')"></app-botton-cruz>
         
     </div>
     <div class="row-left text">Menu</div>
@@ -22,7 +22,7 @@
         <div class="busqueda col-center" >
 
             <!--        //// Añadir ingesta //// -->                
-            <div class=" col-center  menu-item colorWhite"  routerLink="../anadir" >
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/anadir')" >
                 <div class="row-left widthMenu"  >
             
                     <div class="marginLeft20 col-center"> 
@@ -39,7 +39,7 @@
 
 
     <!--        //// Progreso //// -->                
-            <div class=" col-center  menu-item colorWhite"  routerLink="../home" >
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/home')" >
                 <div class="row-left widthMenu"  >
             
                     <div class="marginLeft20 col-center"> 
@@ -56,7 +56,7 @@
 
 
     <!--        //// Calendario //// -->                
-            <div class=" col-center  menu-item colorWhite"  routerLink="../dia" >
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/dia')">
                 <div class="row-left widthMenu"  >
             
                     <div class="marginLeft20 col-center"> 
@@ -73,7 +73,7 @@
 
     <!--        //// Recetas //// -->
 
-            <div class=" col-center  menu-item colorWhite"  routerLink="../buscar-receta" >
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/buscar-receta')" >
                 <div class="row-left widthMenu"  >
             
                     <div class="marginLeft20 col-center"> 
@@ -91,7 +91,7 @@
 
     <!--        //// Preferencias //// -->
 
-            <div class=" col-center  menu-item colorWhite"  routerLink="preferencias" >
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/menu/preferencias')" >
                 <div class="row-left widthMenu"  >
             
                     <div class="marginLeft20 col-center"> 
@@ -106,7 +106,7 @@
 
             <!--        //// Configuracion  //// -->
 
-            <div class=" col-center  menu-item colorWhite"  routerLink="configuracion" >
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/menu/configuracion')" >
                 <div class="row-left widthMenu"  >
             
                     <div class="marginLeft20 col-center"> 
@@ -125,7 +125,7 @@
 
 
         <div class="logout-container">
-            <div>Log out</div>
+            <div (click)="logOut()">Log out</div>
         </div>
 
     </div>

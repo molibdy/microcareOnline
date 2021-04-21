@@ -42,7 +42,6 @@ rutaMicro(i){
 
   console.log(this.micronutrientsGroup[i])
   this.micronutrientesServicio.selectedMicronutriente = this.micronutrientsGroup[i]
-  this.recetasServicio.recetasRicas = this.recetasServicio.recetas ///!! HAY QUE HACER UNA QUERY!!!///
 
   this.IngredientesService.getIngredientesMicro(this.micronutrientesServicio.selectedMicronutriente.micronutrient_id).subscribe((ingredient:any)=>
     { console.log(ingredient.type)
