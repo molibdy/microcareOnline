@@ -35,6 +35,13 @@ export class IngestaService {
   quitarFavoritos(borrando:Favourites){
     return this.http.delete(this.url + "/favorito?favourite_id=" + borrando.favourite_id)
   }
+  updateConsumedFavourite(planned_recipe_id:number,isConsumed:boolean){
+    return this.http.put(`${this.url}/consumidos`, {consumed_favourites_id:planned_recipe_id, isConsumed:isConsumed})
+  }
+  postConsumedFavorito(user_id:number, isConsumed:boolean, favourites:Favourites, date:string){
+    return this.http.post(`${this.url}/consumidos`,{user_id: user_id, isConsumed:isConsumed, date: date, favourite_id: favourites.favourite_id })
+
+  }
 
 
 }
