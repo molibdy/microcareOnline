@@ -48,6 +48,8 @@ export class ProgressService {
   public updateProgress(progreso:Progress){
     return this.http.put(this.url,progreso);
   }
+
+  
   public removeProgress(progreso:Progress){
     return this.http.put(this.url + '/remove',progreso);
   }

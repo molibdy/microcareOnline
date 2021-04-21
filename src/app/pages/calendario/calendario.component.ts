@@ -78,6 +78,7 @@ export class CalendarioComponent implements OnInit {
 
 
   deletePlan(planned_recipe_id:number){
+    
     console.log('entrando en deletion')
     this.recetasService.deletePlannedRecipe(planned_recipe_id).subscribe((deletion:any)=>{
       console.log(deletion)
@@ -88,11 +89,32 @@ export class CalendarioComponent implements OnInit {
     })
   }
 
-  deshacer(planned_recipe_id:number){
-    this.recetasService.updatePlannedRecipe(planned_recipe_id,false).subscribe((consumida:any)=>{
-      console.log('consumida, type ' + consumida.type)
-      this.getPlannedRecipes(this.dateToString(this.date))
-    })
+  deshacer(recipe_id:number,planned_recipe_id){
+      let selectedReceta=new Recipes();
+      for(let i=0;i<this.recetasService.recetas.length;i++){
+        if(this.recetasService.recetas[i].recipe_id==recipe_id){
+         selectedReceta=this.recetasService.recetas[i]
+        }
+      }
+      this.progressService.removeProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,selectedReceta.microscore))
+         .subscribe((updated:any)=>{
+           console.log('progreso añadido, type' + updated.type)
+           if(updated.type==1 || updated.type==2){
+   
+            this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+            .subscribe((progreso:any)=>{
+              this.progressService.totalProgress.percents=progreso.message
+              sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+  
+              this.recetasService.updatePlannedRecipe(planned_recipe_id,false)
+              .subscribe((consumida:any)=>{
+              console.log('consumida, type ' + consumida.type)
+              this.getPlannedRecipes(this.dateToString(this.date))
+              })
+          })
+        }
+      })
+  
   }
 
 
