@@ -76,6 +76,23 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon("burger",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/hamburguesa.svg"));
     this.matIconRegistry.addSvgIcon("flecha-desplegable",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/right-arrow.svg"));
 
+    this.matIconRegistry.addSvgIcon("isa",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/isa.svg"));
+    this.matIconRegistry.addSvgIcon("fran",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/fran.svg"));
+    this.matIconRegistry.addSvgIcon("rodri",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/rodri.svg"));
+    this.matIconRegistry.addSvgIcon("linkedinFran",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/linkedinFran.svg"));
+    this.matIconRegistry.addSvgIcon("linkedinIsa",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/linkedinIsa.svg"));
+    this.matIconRegistry.addSvgIcon("linkedinRodri",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/linkedinRodri.svg"));
+    this.matIconRegistry.addSvgIcon("linkedin",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/linkedin.svg"));
+
+    this.matIconRegistry.addSvgIcon("navbar",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/app/navbar.svg"));
+    this.matIconRegistry.addSvgIcon("progreso",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/app/progreso.svg"));
+    this.matIconRegistry.addSvgIcon("receta",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/app/receta.svg"));
+
+
+
+
+
+
     
 
 
