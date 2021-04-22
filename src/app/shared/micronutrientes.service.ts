@@ -23,8 +23,8 @@ export class MicronutrientesService {
   public selectedGroup: Group=new Group()
  
 
-  // private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
-  private url = 'http://localhost:300/micronutrientes'
+   private url = 'https://api-rest-microcare.herokuapp.com/micronutrientes'
+  //private url = 'http://localhost:300/micronutrientes'
 
 
   constructor(private http:HttpClient, ) { 

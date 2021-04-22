@@ -10,8 +10,8 @@ import { Ingredient } from '../models/ingredient';
 export class IngredientesService {
   public Ingredientes:Ingredient[] = []
 
-  // private url = 'https://api-rest-microcare.herokuapp.com/ingredientes'
-  private url = 'http://localhost:300/ingredientes'
+  private url = 'https://api-rest-microcare.herokuapp.com/ingredientes'
+  //private url = 'http://localhost:300/ingredientes'
   public dietas:Dietas[]=[];
   public ingredientesAvoid:Ingredient[]
   public alergenos:Allergen[]=[];

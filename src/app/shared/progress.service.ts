@@ -14,8 +14,8 @@ export class ProgressService {
   public averageProgressTotal:any[]=[];
   
 
-  // private url='https://api-rest-microcare.herokuapp.com/progreso';
-  private url='http://localhost:300/progreso';
+  private url='https://api-rest-microcare.herokuapp.com/progreso';
+ // private url='http://localhost:300/progreso';
   constructor(private http:HttpClient ) { }
 
 

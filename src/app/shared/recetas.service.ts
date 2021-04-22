@@ -18,8 +18,8 @@ export class RecetasService {
   public selectedDate:string;
 
 
-  // private url = 'https://api-rest-microcare.herokuapp.com/recetas'
-  private url = 'http://localhost:300/recetas'
+   private url = 'https://api-rest-microcare.herokuapp.com/recetas'
+ // private url = 'http://localhost:300/recetas'
 
   public recetasRicas: Recipes[]
 

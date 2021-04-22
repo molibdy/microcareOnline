@@ -13,7 +13,7 @@ export class UsdaService {
 
 
   getIngredient(ingredient_id:number){
-    return this.http.get(`https://api.nal.usda.gov/fdc/v1/food/${ingredient_id}?nutrients=301,305,307,306,312,304,309,303,317,618,619,404,405,406,417,320,401,328,323,430,415,421,418&api_key=96YZ02RkdnApClIOM9A7emTBv47PW9XPTJ9tTVtr`);
+    return this.http.get(`https://api.nal.usda.gov/fdc/v1/food/${ingredient_id}?nutrients=301,305,307,306,312,304,309,303,317,618,619,404,405,406,417,320,401,328,323,430,415,421,418&api_key=ZgpM9T0LKIiN0XuraVIocCPtpMql77B017ftJhP4`);
   }
 
 
