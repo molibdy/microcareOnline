@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Intro1Component implements OnInit {
 
+  
+
   constructor() { }
 
   ngOnInit(): void {

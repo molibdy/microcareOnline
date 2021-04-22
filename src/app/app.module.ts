@@ -107,9 +107,8 @@ import { GroupChartComponent } from './pages/group-chart/group-chart.component';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
-
-    
+    MatNativeDateModule,
+  
 
   ],
   providers: [],

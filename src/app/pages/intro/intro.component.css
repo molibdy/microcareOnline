@@ -150,6 +150,15 @@
       border-radius: 30px;
       box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1); 
   }
+  .busquedaa
+  {
+      height: auto;
+      margin: 0;
+      border-radius: 0px 0 30px 30px;
+      width: 340px;
+      border-radius: 30px;
+      box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1); 
+  }
 
   .scrollText
   {

@@ -94,6 +94,7 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon("altramuces",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/alergenos2/lupin.svg"));
     this.matIconRegistry.addSvgIcon("enter",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/Asset2.svg"));
 
+    this.matIconRegistry.addSvgIcon("tabla_grupos",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/tablagrupos.svg"));
 
     
   }
