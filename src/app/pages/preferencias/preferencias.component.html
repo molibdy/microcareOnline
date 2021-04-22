@@ -1,4 +1,4 @@
-<app-botton-cruz></app-botton-cruz>
+<app-botton-cruz routerLink="../"></app-botton-cruz>
 <div class="col-center">
     <div class="col-center iphoneCard">
         <div class="header">
@@ -22,8 +22,11 @@
 
                     <div class="colorWhite" *ngIf="desplegable1">
                         <div class="text row-center">
-                            <div [ngClass]="chip1" (click)="azul1()" (click)="preferenciasDieta(1)">vegetariano</div>
-                            <div [ngClass]="chip2" (click)="azul2()" (click)='preferenciasDieta(2)'>vegano</div>
+
+                            <div [ngClass]="chipDieta1" (click)="preferenciasDieta(ingredientService.dietas[0].diet_id)">{{ingredientService.dietas[0].diet_name}}
+                            </div>
+                            <div [ngClass]="chipDieta2" (click)="preferenciasDieta(ingredientService.dietas[1].diet_id)">{{ingredientService.dietas[1].diet_name}}
+                            </div>
                         </div>
                     </div>
                     <div class=" custom-hr"></div>
@@ -38,8 +41,6 @@
                     <div class=" custom-hr"></div>
 
                     <div class="colorWhite " *ngIf="desplegable2">
-
-
 
 
                         <div class="col-center  width300 ">
@@ -124,7 +125,7 @@
                     <!-- 4 -->
 
                 </div>
-                <div class="button-blue marginTop22" (click)="guardarPreferencias()">guardar preferencias</div>
+                <!-- <div class="button-blue marginTop22" (click)="guardarPreferencias()">guardar preferencias</div> -->
             </div>
 
         </div>

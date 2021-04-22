@@ -2,24 +2,48 @@
         <div class=" text20 widthMenu  " >Favoritos</div>
     </div>
 
+        <!-- banner instrucciones  -->
+
+    <div class="col-center bordeAnadir marginTop10" *ngIf="this.apiIngesta.listaFavoritos.length == 0">
+        <div class="textDarkSemi18 padding ">
+            <p>Bienvenidos a la sección de añadir, aquí podrás añadir tus ingestas y así actualizar tu progreso. </p>
+            <p>Añade alimentos de forma manual o selecciona una de las recetas recomendadas según el grupo de micronutrientes que más necesitas.</p>
+            <br>
+            <p>Después, guarda tus consumos más habituales como favoritos, presiona la tarjeta de favorito que hayas creado y añadelos a tu consumo diario.</p>
+         </div> 
+    </div>
+    <!-- banner ya has consumido el favorito  -->
+
+    <div class="col-center bordeEliminar marginTop10" *ngIf="showAlreadyConsumed"  (click)="showAlreadyConsumed = false">
+        <div class="textDarkSemi18 padding ">
+            Acabas de consumir ese favorito, date un respiro.
+         </div> 
+    </div>
+
     <div class=" row-left-wrap" *ngIf="!isBorrando">
-        <div class=" bordeAnadir marginTop10" *ngIf="isAnadiendo" (click)="isAnadiendo = false">
+        <div class=" bordeAnadir marginTop10" *ngIf="isAnadiendo && !showAlreadyConsumed" (click)="isAnadiendo = false">
             <div class="textDarkSemi18  padding10">
-            Has consumido <span class="textDarkSemi18Bold">{{anadiendo.name}}</span>, <a class="link">Deshacer</a>
+            Has consumido <span class="textDarkSemi18Bold">{{anadiendo.name}}</span>, <a class="link" (click)="deshacer(anadiendo.favourite_id)">Deshacer</a>
             </div> 
             </div>
-            <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of favoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)">
+            <div class="favoriteCard  col-center textBlueSemi20 relative" *ngFor="let favorito of apiIngesta.listaFavoritos; let i = index" [ngClass]="favorito.class" (click)="consumirFavorito(i)" [style.background]="favorito.microscore[0].color">
                <div class="fondo-cerrar" (click)='quitarFavorito(i)'> <mat-icon class=" iconSizeGray  " svgIcon='close' ></mat-icon></div>
                     {{favorito.name}}
-                    
+                    <div class="bordeAnadir" *ngIf="this.detalleMicro">hgfd</div>
+
                     <mat-chip-list aria-label="Fish selection" class="marginTop10" >
-                        <mat-chip *ngFor="let micronutriente of favorito.score"  class="chip-material">{{micronutriente.name}}</mat-chip>
+
+                        <mat-chip   class="chip-material" >{{favorito.microscore[0].acronym}}</mat-chip>
+                        <mat-chip   class="chip-material" >{{favorito.microscore[1].acronym}}</mat-chip>
+
                       </mat-chip-list>
 
 
                 
             </div>
     </div>
+
+<!-- //////////////////      banner eliminar favorito -->
 
     <div class="col-center bordeEliminar marginTop10" *ngIf="isBorrando">
         <div class="textDarkSemi18 padding ">
@@ -45,6 +69,7 @@
         </div>
        
     </div>
+
 
 
     

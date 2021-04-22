@@ -70,7 +70,7 @@
                     <ul >
                       <li *ngFor="let ingredient of listaIngredientes; let i = index" class=" ingredientLine">
                         <mat-icon class="quitarIngrediente iconSizeGray " svgIcon='close' (click)='quitarIngrediente(i)'></mat-icon>
-                        {{ingredient.peso | gramos}} de {{ingredient.ingrediente}} 
+                        {{ingredient.peso | gramos}} de {{ingredient.ingrediente.ingredient_name}} 
                       </li>
                     </ul>
               </div>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { User } from 'src/app/models/user';
+import { LoadingService } from 'src/app/shared/loading.service';
+import { LoginInfoService } from 'src/app/shared/login-info.service';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 
 import { RecetasService } from 'src/app/shared/recetas.service';
@@ -19,44 +23,31 @@ export class BurgerMenuComponent implements OnInit {
   public imageProfile:string = 'https://media-exp1.licdn.com/dms/image/C5603AQHgQm5806sx2A/profile-displayphoto-shrink_200_200/0/1541434175803?e=1621468800&v=beta&t=MOKmnJRHHZuVXWS2uTrRQvfKVEl3nVDhvMssTmYw79o'
 
 
-  constructor(private apiService:MicronutrientesService, private servicioReceta:RecetasService) 
+  constructor(private apiService:MicronutrientesService, 
+    private servicioReceta:RecetasService,
+    private loadingService:LoadingService,
+    private userService:LoginInfoService,
+    private router:Router) 
   {}
 
    
-   onFocusEvent(event: any)
-   {
-      console.log(this.coincidencia);
-    /*   this.foco = true */
-      console.log(event.target.value)
-      console.log(this.foco);
+  activaNavBar(ruta:string){
+    this.loadingService.showNavBar=true;
+    this.router.navigate([ruta])
   }
 
-   perderfoco()
-   {
-    this.foco = false
-   }
-   buscadorSwitch()
-   {
-     this.focoBuscador = true
-   }
+
+  logOut(){
+    sessionStorage.clear();
+    // this.userService.user=new User(0,'','')
+    this.loadingService.isLogeando=false
+    this.router.navigate(['/login'])
+  }
 
 
   ngOnInit(): void {
   
-    this.apiService.getMicros().subscribe((data:any)=>
-    {console.log(data.type)
-      if(data.type == 1){
-      this.apiService.micronutrientes = data.message
-      console.log(this.apiService.micronutrientes)
-      }
-    })
-    
-      this.servicioReceta.getRecetas().subscribe((data:any)=>
-      {
-        if(data.type == 1){
-        this.servicioReceta.recetas = data.message
-              }
-      })
+ 
   }  
 
 }

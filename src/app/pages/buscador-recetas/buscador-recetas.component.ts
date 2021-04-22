@@ -44,11 +44,13 @@ export class BuscadorRecetasComponent implements OnInit {
   ) {
     this.router=router
 
-    this.recetas=JSON.parse(sessionStorage.getItem('recetas'))
-    this.listaParaTi=JSON.parse(sessionStorage.getItem('recetasParaTi'))
-    this.listaNuevas=this.recetas
-    
-    this.recetas = JSON.parse(sessionStorage.getItem('recetas'))
+    // this.recetas=JSON.parse(sessionStorage.getItem('recetas'))
+    // this.recetasParaTi=JSON.parse(sessionStorage.getItem('recetasParaTi'))
+
+    this.recetas= this.recetaService.recetas
+    this.listaParaTi= this.recetaService.recetasParaTi
+    this.listaNuevas=this.recetaService.recetas ///habrá que cambiarlo por this.recetaService.recetasNuevas y añadir un campo a la tabla que sea fecha de creación
+
 
    }
 

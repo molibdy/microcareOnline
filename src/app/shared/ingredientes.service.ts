@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Allergen } from '../models/allergen';
+import { Dietas } from '../models/dietas';
 import { Ingredient } from '../models/ingredient';
 
 @Injectable({
@@ -11,14 +12,16 @@ export class IngredientesService {
 
   // private url = 'https://api-rest-microcare.herokuapp.com/ingredientes'
   private url = 'http://localhost:300/ingredientes'
-  public tipoDieta:number;
+  public dietas:Dietas[]=[];
   public ingredientesAvoid:Ingredient[]
-  public alergenos:Allergen[]
+  public alergenos:Allergen[]=[];
   public ingredientesRicos: Ingredient[] = []
+  public alergias:Allergen[]
+
   constructor(private http:HttpClient) {
-    this.tipoDieta = 0
-    this.ingredientesAvoid = []
-    this.alergenos = []
+    // this.dietas=[]
+    // this.ingredientesAvoid = []
+    // this.alergenos = []
    }
 
  
@@ -29,11 +32,28 @@ export class IngredientesService {
   getIngredientes(){
     return this.http.get(this.url)
   } 
+  getAlergenos(){
+    return this.http.get(this.url + '/allergen')
+  } 
+
+  getDietas(){
+    return this.http.get(this.url + '/dietas')
+  } 
+
+
+ 
+
+
+
   getIngredientesAvoid(){
     return this.http.get(this.url + '/avoid')
   } 
+
   postIngredientesAvoid(ingrediente){
     return this.http.post(this.url + '/avoid', ingrediente)
+  }
+  postAlergias(alergias){
+    return this.http.post(this.url + '/allergen', alergias)
   }
   
 

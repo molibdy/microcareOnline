@@ -1,8 +1,7 @@
 <div class="container">
-    
+    <app-botton-cruz routerLink="../"></app-botton-cruz>
     <div class="banner">
         <img [src]="selectedReceta.photo_url" [alt]="selectedReceta.recipe_name">
-        <app-botton-cruz routerLink="../"></app-botton-cruz>
     </div>
 
     <div class="col-center 100 iphoneCard">
@@ -46,28 +45,26 @@
         <mat-icon class="iconSizeGray derecha" svgIcon='close' (click)="cerrarDatePicker()"></mat-icon>
     
         <div class="row-center">
-              <mat-form-field appearance="none" >
-                  <div class="datePicker">
-                        <div class="row-center dateInput">
-                            <div>
-                            <mat-label class="textGraySemi16">¿Para qué día?</mat-label>
-                            <input matInput #dateInput [matDatepicker]="picker">
-                            </div>
-                        <mat-datepicker-toggle matSuffix [for]="picker">
-                            <mat-icon class="iconoGrande" matDatepickerToggleIcon [inline]='true'  svgIcon="calendario"></mat-icon>
-                        </mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+            <mat-form-field appearance="none" >
+                <div class="datePicker">
+                    <div class="row-center dateInput">
+                        <div>
+                        <mat-label class="textGraySemi16">¿Para qué día?</mat-label>
+                        <input matInput #dateInput [matDatepicker]="picker">
                         </div>
-        
-                        <div class="separador20"> </div> 
-        
-                    <button class="mybutton-blue-white" (click)="addToDay(dateInput)">
-                        Añadir al plan
-                    </button>
-                  </div>
-                 
-                </mat-form-field>
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon class="iconoGrande" matDatepickerToggleIcon [inline]='true'  svgIcon="calendario"></mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    </div>
     
+                    <div class="separador20"> </div> 
+    
+                <button class="mybutton-blue-white" (click)="addToDay(dateInput)">
+                    Añadir al plan
+                </button>
+                </div>
+            </mat-form-field>
         </div>
        
       </div>
@@ -127,11 +124,16 @@
         <div class="hr"></div>
       
     
-        <div class="col-left menu-item">
-            <div class="row-left">
-                    <div class="subtitle textBlueBold22">
-                        Ingredientes
-                    </div>
+        <div class="menu-item width">
+            <div class="row-left height">
+                <div class="subtitle textBlueBold22">
+                    Ingredientes
+                </div>
+                <div class="separador100"> </div>
+                <div class="col-center relative">
+                   <div> <mat-icon class="serves iconColor"  svgIcon="serves"></mat-icon></div>
+                   <div class = "numeroServes">{{selectedReceta.serves}}</div>
+                </div>
             </div>
         </div>
     

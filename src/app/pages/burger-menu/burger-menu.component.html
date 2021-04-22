@@ -1,59 +1,135 @@
-<div class="header"></div>
+<!-- <div class="header">
+    <app-botton-cruz routerLink="../home"></app-botton-cruz>
+</div> -->
+
 <div class="col-center">
-
+    <div class="header">
+        <app-botton-cruz (click)="activaNavBar('/home')"></app-botton-cruz>
+        
+    </div>
+    <div class="row-left text">Menu</div>
+    <app-barra-buscador></app-barra-buscador>
+    
     <div class="col-center 100 iphoneCard">
-        <app-usuario></app-usuario>
-        <br>
-        <div class="row-left text widthMenu marginLeft32 ">Menu</div>
-        <br>
-        <div class="busqueda col-center" >
-            <app-barra-buscador (click)=buscadorSwitch()></app-barra-buscador>
-                            
-                        <!--     <div class=" col-center  custom-hr"></div> -->
-        <!--                     //// otro item //// 
-         -->                        
-                    <div class=" col-center  menu-item colorWhite"  routerLink="../dia" >
-                                    <div class="row-left widthMenu" >
-                                
-                                            <div class="marginLeft32"> 
-                                                <mat-icon class="iconSize colorBlue"  svgIcon="reto"></mat-icon>
-                                            </div>
-                                            <div class="separadorMenu"></div>
-                                            <div class="text20">Planning diario</div>
-                          </div>
-                        </div>
-                        
-                          <div class=" col-center custom-hr"></div>
-                                  <!--                     //// otro item //// 
-                            --><div class=" col-center  menu-item colorWhite"  routerLink="../buscar-receta" >
-                                <div class="row-left widthMenu" >
-                                                    
-                                    <div class="marginLeft32"> 
-                                        <mat-icon class="iconSize colorBlue"  svgIcon="recipes"></mat-icon>
-                                    </div>
-                                    <div class="separadorMenu"></div>
-                                    <div class="text20">Recetas</div>
-                                  </div>
-                                 </div>
-                                 <div class=" col-center custom-hr"></div>
+        <!-- <app-barra-buscador></app-barra-buscador> -->
+        <!-- <app-usuario></app-usuario> -->
+    
+        <!-- <div class="row-left text widthMenu marginLeft32 ">Menu</div> -->
+      
 
-                                                  <!--                     //// otro item //// 
-                            -->                        <div class=" col-center  menu-item colorWhite"  routerLink="preferencias" >
-                                <div class="row-left widthMenu" >
-                                                    
-                                    <div class="marginLeft32"> 
-                                        <mat-icon class="iconSize colorBlue"  svgIcon="settings"></mat-icon>
-                                    </div>
-                                    <div class="separadorMenu"></div>
-                                    <div class="text20">Preferencias</div>
-                                  </div>
-                                 </div>
-                                 <div class=" col-center custom-hr"></div>
-                        
-        <!--                 <div class=" col-center  custom-hr"></div>
-         -->                
-                </div> 
-                        
+
+
+        <div class="busqueda col-center" >
+
+            <!--        //// Añadir ingesta //// -->                
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/anadir')" >
+                <div class="row-left widthMenu"  >
+            
+                    <div class="marginLeft20 col-center"> 
+                        <mat-icon class="iconSize colorBlue"  svgIcon="add"></mat-icon>
+                    </div>
+                    <div class="separadorMenu"></div>
+                    <div class="text20" >Añadir ingesta</div>
+                </div>
+            </div>
+                
+            <div class=" col-center custom-hr"></div>
+
+
+
+
+    <!--        //// Progreso //// -->                
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/home')" >
+                <div class="row-left widthMenu"  >
+            
+                    <div class="marginLeft20 col-center"> 
+                        <mat-icon class="iconSize colorBlue"  svgIcon="grafica"></mat-icon>
+                    </div>
+                    <div class="separadorMenu"></div>
+                    <div class="text20" >Tu progreso</div>
+                </div>
+            </div>
+                
+            <div class=" col-center custom-hr"></div>
+            
+            
+
+
+    <!--        //// Calendario //// -->                
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/dia')">
+                <div class="row-left widthMenu"  >
+            
+                    <div class="marginLeft20 col-center"> 
+                        <mat-icon class="iconSize colorBlue"  svgIcon="calendario"></mat-icon>
+                    </div>
+                    <div class="separadorMenu"></div>
+                    <div class="text20" >Planning diario</div>
+                </div>
+            </div>
+                
+            <div class=" col-center custom-hr"></div>
+
+
+
+    <!--        //// Recetas //// -->
+
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/buscar-receta')" >
+                <div class="row-left widthMenu"  >
+            
+                    <div class="marginLeft20 col-center"> 
+                        <mat-icon class="iconSize colorBlue"  svgIcon="recipes"></mat-icon>
+                    </div>
+                    <div class="separadorMenu"></div>
+                    <div class="text20" >Buscador de recetas</div>
+                </div>
+            </div>
+            <div class=" col-center custom-hr"></div>
+ 
+
+
+
+
+    <!--        //// Preferencias //// -->
+
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/menu/preferencias')" >
+                <div class="row-left widthMenu"  >
+            
+                    <div class="marginLeft20 col-center"> 
+                        <mat-icon class="iconSize colorBlue"  svgIcon="gluten"></mat-icon>
+                    </div>
+                    <div class="separadorMenu"></div>
+                    <div class="text20" >Preferencias alimentarias</div>
+                </div>
+            </div>
+            <div class=" col-center custom-hr"></div>
+
+
+            <!--        //// Configuracion  //// -->
+
+            <div class=" col-center  menu-item colorWhite"  (click)="activaNavBar('/menu/configuracion')" >
+                <div class="row-left widthMenu"  >
+            
+                    <div class="marginLeft20 col-center"> 
+                        <mat-icon class="iconSize colorBlue"  svgIcon="settings"></mat-icon>
+                    </div>
+                    <div class="separadorMenu"></div>
+                    <div class="text20" >Configuración de usuario</div>
+                </div>
+            </div>
+            <!-- <div class=" col-center custom-hr"></div> -->
+                
+         
+            
+
+        </div> 
+
+
+        <div class="logout-container">
+            <div (click)="logOut()">Log out</div>
+        </div>
+
     </div>
 </div>
-        
+<!-- 
+<div class="footer"></div>
+         -->

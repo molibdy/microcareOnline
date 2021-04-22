@@ -27,7 +27,19 @@
                     </div>
             </div>
         </div>
-    
+
+   
+
+        <!-- Lista de recetas planeadas -->
+        <div class="col-center menu-item" *ngIf="plannedRecipes.length==0">
+            <div class="row-center row-item">
+
+                    <div class="text">
+                        No tienes recetas planeadas
+                    </div>
+            </div>
+        </div>
+
         <div class="col-center menu-item" *ngFor="let receta of plannedRecipes">
             <div class="row-spaced row-item">
                 <div class="row-left">
@@ -44,16 +56,15 @@
             </div>
         </div>
        
-    
-    
-    <div class="col-center menu-item-bottom">
-        <div class="row-center ">
-                <button class="button-blue" routerLink="../buscar-receta">
-                    Añadir receta
-                </button>
+     
+        <div class="col-center menu-item-bottom">
+            <div class="row-center ">
+                    <button class="button-blue" routerLink="../buscar-receta">
+                        Añadir receta
+                    </button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 
@@ -73,6 +84,18 @@
             </div>
         </div>
     
+
+        <div class="col-center menu-item" *ngIf="consumedRecipes.length==0">
+            <div class="row-center row-item">
+
+                    <div class="text">
+                        Aún no has consumido nada
+                    </div>
+            </div>
+        </div>
+  
+     <!-- Lista de recetas consumidas -->
+
         <div class="col-center menu-item" *ngFor="let receta of consumedRecipes">
             <div class="row-spaced row-item">
                 <!-- <div class="check" (click)="addRegister(receta.planned_recipe_id)">
@@ -82,7 +105,7 @@
                     {{receta.recipe_name}}
                 </div>
 
-                <div class="link" (click)="deshacer(receta.planned_recipe_id)"> 
+                <div class="link" (click)="deshacer(receta.recipe_id,receta.planned_recipe_id)"> 
                     deshacer
                 </div>
             </div>

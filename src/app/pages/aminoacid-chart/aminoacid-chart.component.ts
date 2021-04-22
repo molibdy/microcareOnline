@@ -59,7 +59,6 @@ export class AminoacidChartComponent implements OnInit {
     //obtener progreso del grupo concreto
     let sumPercent:number=0
     for(let i=0; i<this.totalProgress.percents.length;i++){
-      console.log('id totalProgress[i]' + this.totalProgress.percents[i].group_id)
       if(this.totalProgress.percents[i].group_id==this.groupData.group_id){
         this.groupProgress.percents.push(this.totalProgress.percents[i])
         sumPercent+=this.totalProgress.percents[i].percent
@@ -122,6 +121,7 @@ export class AminoacidChartComponent implements OnInit {
               },
               offsetY: 8,
               color: " #667a92",
+              fontFamily: 'dosis-bold',
               fontSize: "30px",
               show: true
             }

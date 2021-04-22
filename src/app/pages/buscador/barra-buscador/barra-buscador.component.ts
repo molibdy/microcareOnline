@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Micronutrients } from 'src/app/models/micronutrient';
 import { Recipes } from 'src/app/models/recipes';
+import { IngredientesService } from 'src/app/shared/ingredientes.service';
+import { LoadingService } from 'src/app/shared/loading.service';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
 import { RecetasService } from 'src/app/shared/recetas.service';
 
@@ -26,7 +28,11 @@ public inputSearch:string = ""
   
   // public ingredientes: object[] = [{nombre: "Pera"},{nombre: "Manzana"},{nombre: "Granada"}];
   
-  constructor(public micronutrientesServicio:MicronutrientesService, public recetasServicio:RecetasService, public router:Router) {
+  constructor(public micronutrientesServicio:MicronutrientesService, 
+    public recetasServicio:RecetasService, 
+    private loadingService:LoadingService,
+    private IngredientesService:IngredientesService,
+    public router:Router) {
 
     this.micronutrientesServicio.micronutrientes 
 
@@ -84,26 +90,51 @@ this.micronutrientesBuscar = []
 }
 
 rutaMicro(i){
-
+  // console.log(this.micronutrientsGroup[i])
   this.micronutrientesServicio.selectedMicronutriente = this.micronutrientesBuscar[i]
-  this.recetasServicio.recetasRicas = this.recetasServicio.recetas ///!! HAY QUE HACER UNA QUERY!!!!!!///
-  // this.micronutrientesBuscar[i] = this.micronutrientesServicio.linkMicro()
-  this.router.navigate(["home/grupo/micro"], {queryParams: {micronutrient_id : this.micronutrientesBuscar[i].micronutrient_id}})
-  console.log(this.micronutrientesBuscar)
+  for(let j=0;j<this.micronutrientesServicio.grupos.length;j++){
+    if(this.micronutrientesServicio.grupos[j].group_id==this.micronutrientesServicio.selectedMicronutriente.group_id){
+      this.micronutrientesServicio.selectedGroup=this.micronutrientesServicio.grupos[j]
+    }
+  }
+
+  this.IngredientesService.getIngredientesMicro(this.micronutrientesServicio.selectedMicronutriente.micronutrient_id).subscribe((ingredient:any)=>
+    { console.log('ingredient'+ingredient.type)
+
+      if(ingredient.type == 1|| ingredient.type == -2){
+        this.IngredientesService.ingredientesRicos = ingredient.message
+
+        this.recetasServicio.getRecetasRicas(this.micronutrientesServicio.selectedMicronutriente.micronutrient_id).subscribe((recipe:any)=>
+        { console.log(recipe.type)   
+          if(recipe.type == 1|| recipe.type == -2){
+            this.recetasServicio.recetasRicas = []
+            for(let i = 0; this.recetasServicio.recetas.length>i ; i++){
+              for(let j = 0; recipe.message.length>j; j++){
+                if (this.recetasServicio.recetas[i].recipe_id == recipe.message[j].recipe_id){
+                  this.recetasServicio.recetasRicas.push(this.recetasServicio.recetas[i])
+                }console.log(this.recetasServicio.recetasRicas)
+              }
+            }
+            this.loadingService.showNavBar=true;
+            this.router.navigate(["/home/grupo/micro"])
+          }  
+        })
+      }
+    })
 
 }
 
    
 rutaReceta(i){
-  //  this.recetaService.selectedReceta_id=recipe_id  ESTO DEBERÍA SER OBJETO RECETA?
+ 
   this.micronutrientesServicio.getMicrosReceta(this.recetasBuscar[i].recipe_id).subscribe((micronutrientes:any)=>{
    if(micronutrientes.type==1 || micronutrientes.type==-1){
      this.micronutrientesServicio.microsReceta=micronutrientes.message;
    }
    this.recetasServicio.selectedReceta = this.recetasBuscar[i]
-   // this.micronutrientesBuscar[i] = this.micronutrientesServicio.linkMicro()
+   this.loadingService.showNavBar=true;
    this.router.navigate(['buscar-receta/receta']);
-   console.log(this.recetasBuscar)
+  //  console.log(this.recetasBuscar)
   })
  }
 

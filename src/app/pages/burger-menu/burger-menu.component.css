@@ -4,6 +4,8 @@
 {
     width: 340px;
     border-radius: 30px;
+    margin-bottom: 70px;
+    margin-top: 20px;
 }
 .iphoneCardTitle
 {
@@ -13,15 +15,10 @@
 .menu-item
 {
     width: inherit;
-    height: 100px;
-  /*   border: solid 0.5px 0.5px 0 0 #B2C1C6;
-    border-bottom: solid 0.5px rgba(178, 193, 198, 0.685); */
+    height: 70px;
+    cursor:pointer;
 }
-.menu-item-expandible
-{
-    width: 100%;
-    height: auto;
-}
+
 
 .menu-item:hover
 {
@@ -61,6 +58,7 @@
     text-align: center;
     font-family: dosis-bold;
     text-transform: capitalize;
+    margin-bottom: 20px;
   }
 
   .textSubtitle
@@ -73,11 +71,12 @@
   }
   .text20
 {
-    font-size: 28px;
+    font-size: 22px;
     color: #667a92;
     text-align: center;
-    font-family: dosis-bold;
-    text-transform: capitalize;
+    font-family: dosis-semiBold;
+    /* height: 28px; */
+    /* text-transform: capitalize; */
 }
 
 .buscarNavbar input
@@ -121,13 +120,14 @@
 {
     height: auto;
     margin: 0;
-    border-radius: 0px 0px 30px 30px;
+    border-radius: 30px;
     width: 340px;
-    margin-bottom: 100px;
-
-/*     background-color:  rgba(178, 193, 198, 0.185);;
- */    overflow-x: hidden;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    overflow-x: hidden;
     overflow-y:auto;
+/*     background-color:  rgba(178, 193, 198, 0.185); */ 
+  
 }
 .busqueda::-webkit-scrollbar
 {
@@ -147,7 +147,7 @@
 }
 .separadorMenu
 {
-    width: 30px;
+    width: 25px;
 }
 .separadorMenuDesplegable
 {
@@ -158,12 +158,15 @@
     margin-left: 32px;
     
 }
+.marginLeft20
+{
+    margin-left: 32px;
+    
+}
 .row-left{
     display: flex;
     flex-direction: row;
-    align-content: center;
     justify-content: flex-start;
-    justify-items: left;
     align-items: center;
 
 }
@@ -172,11 +175,11 @@
     width: inherit;
 }
 
-.iconSize
+/* .iconSize
 {
-    height: 32px;
+    height: 28px;
     width: 32px;
-}
+} */
 .iconSizeGray
 {
     height: 22px;
@@ -208,3 +211,27 @@
     align-self: center;
 }
 
+
+
+.logout-container{
+    font-size: 20px;
+    /* color: #667a92; */
+    color:#FF96A3;
+    text-align: center;
+    font-family: dosis-semiBold;
+    
+    width: 90%;
+    margin-bottom: 20px;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: flex-start; */
+}
+
+
+.logout-container:hover{
+    color: #667a92;
+}
+
+.logout-container div{
+    cursor: pointer;
+}

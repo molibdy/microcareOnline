@@ -12,6 +12,7 @@ export class ProgressService {
   public totalProgress:Progress=new Progress(0,'',[]);
   public averageProgress:any[]=[];
   public averageProgressTotal:any[]=[];
+  
 
   // private url='https://api-rest-microcare.herokuapp.com/progreso';
   private url='http://localhost:300/progreso';
@@ -36,16 +37,21 @@ export class ProgressService {
   }
 
   public getAverageProgress(user_id:number){
-    return this.http.get(`${this.url}?user_id=${user_id}`);
+    return this.http.get(`${this.url}/average?user_id=${user_id}`);
   }
 
-  public getAverageProgressTotal(){
-    return this.http.get(this.url);
-  }
+  // public getAverageProgressTotal(){
+  //   return this.http.get(this.url);
+  // }
 
 
   public updateProgress(progreso:Progress){
     return this.http.put(this.url,progreso);
+  }
+
+  
+  public removeProgress(progreso:Progress){
+    return this.http.put(this.url + '/remove',progreso);
   }
   
 

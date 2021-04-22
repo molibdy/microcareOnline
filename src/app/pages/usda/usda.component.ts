@@ -14,7 +14,7 @@ public ingredient_id: number;
     this.ingredient_id=0
   }
 
-
+///////////https://fdc.nal.usda.gov/api-guide.html  ////link para la USDA
 
   searchIngredient(){
     console.log('buscando')

@@ -17,6 +17,7 @@ export class RecetasService {
   public plannedRecipes:Recipes[]=[]
   public selectedDate:string;
 
+
   // private url = 'https://api-rest-microcare.herokuapp.com/recetas'
   private url = 'http://localhost:300/recetas'
 
@@ -28,6 +29,7 @@ export class RecetasService {
     this.selectedReceta=new Recipes()
     this.recetasRicas = []
     this.selectedDate=''
+
    }
 
  
