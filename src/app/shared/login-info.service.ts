@@ -2,6 +2,7 @@ import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Preferencias } from '../models/preferencias';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class LoginInfoService{
   public isNonRegistered:boolean = false
  
   public user:User = new User(0,"","")
-  
+  public preferencias:Preferencias=new Preferencias()
   constructor(private http:HttpClient) { 
  
   }
@@ -52,6 +53,17 @@ export class LoginInfoService{
   }
 
 
+  getPreferences(user_id:number){
+    return this.http.get(this.url +'/preferencias?user_id='+ user_id)
+  }
 
+
+  deletePreferencias(ruta:string,preferencia_id:number){
+    return this.http.delete(`${this.url}/preferencias?ruta=${ruta}&user_id=${this.user.user_id}&preferencia_id=${preferencia_id}`)
+  }
+
+  postPreferencias(ruta:string,preferencia_id:number){
+    return this.http.post(this.url +'/preferencias', {ruta: ruta, user_id:this.user.user_id, preferencia_id:preferencia_id})
+  }
 
 }

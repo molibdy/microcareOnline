@@ -29,8 +29,9 @@ export class PreferenciasComponent implements OnInit {
   public desplegable2: boolean = false
   public desplegable3: boolean = false
   public desplegable4: boolean = false
-  public chip1:string ="chip-grande"
-  public chip2:string ="chip-grande"
+  public chipDieta1:string ="chip-grande"
+  public chipDieta2:string ="chip-grande"
+
 
 /////// Guardar Alimentos excluidos
 
@@ -46,7 +47,7 @@ export class PreferenciasComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
-  fruits: string[] = [];
+  fruits: string[];
   allFruits: string[];
   ObjectsIngredients: Ingredient[] = [];
 
@@ -64,180 +65,223 @@ export class PreferenciasComponent implements OnInit {
   alergias: string[] = [];
   public totalAlergias:string[]=[]
   public ingredientesAnadidos:string[]=[]
+  
+
 ///// contructor 
-  constructor(private ingredientService:IngredientesService) {
-/*   for(let i =0;i<this.ingredientService.ingredientesAvoid.length;i++){
-    this.fruits.push(this.ingredientService.ingredientesAvoid[i].ingredient_name)
-  } */
-/*   this.getAllergens()
- */
-  this.allFruits = []
-  for(let i =0;i<this.ingredientService.Ingredientes.length;i++){
-    this.allFruits.push(this.ingredientService.Ingredientes[i].ingredient_name)
-    console.log(this.ingredientService.Ingredientes[i].ingredient_name); 
-  }
+  constructor(public ingredientService:IngredientesService,
+    public userService:LoginInfoService) {
 
-  for(let i =0;i<this.ingredientService.alergenos.length;i++){
-    this.totalAlergias.push(this.ingredientService.alergenos[i].allergen_name)
-    console.log(this.ingredientService.alergenos[i].allergen_name);
-    
-  }
-   this.getIngredientsAvoid()
- /*   this.getAlergias()
- */  this.desplegable1
-  this.desplegable2
-  this.desplegable3
-  this.desplegable4
-  this.chip1
-  this.chip2
 
-  this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-    startWith(null),
-    map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
-    
-  this.filteredAlergias = this.alergiasCtrl.valueChanges.pipe(
+    this.allFruits = []
+    for(let i =0;i<this.ingredientService.Ingredientes.length;i++){
+      this.allFruits.push(this.ingredientService.Ingredientes[i].ingredient_name)
+    }
+
+    this.totalAlergias = []
+    for(let i =0;i<this.ingredientService.alergenos.length;i++){
+      this.totalAlergias.push(this.ingredientService.alergenos[i].allergen_name)
+    }
+
+
+    this.fruits=[];
+    for(let i =0;i<this.userService.preferencias.ingredientes.length;i++){
+      this.fruits.push(this.userService.preferencias.ingredientes[i].ingredient_name)
+    }
+    console.log(this.userService.preferencias.alergenos)
+    this.alergias=[];
+    for(let i =0;i<this.userService.preferencias.alergenos.length;i++){
+      this.alergias.push(this.userService.preferencias.alergenos[i].allergen_name)
+      console.log(this.userService.preferencias.alergenos[i].allergen_name);
+      
+    }
+
+
+    if(this.userService.preferencias.dietas.some((dieta)=>{
+      return dieta.diet_id==this.ingredientService.dietas[0].diet_id
+    })){
+      console.log('tiene dieta 1')
+      this.chipDieta1="chip-grande-azul"
+    }
+
+    if(this.userService.preferencias.dietas.some((dieta)=>{
+      return dieta.diet_id==this.ingredientService.dietas[1].diet_id
+    })){
+      console.log('tiene dieta 2')
+      this.chipDieta2="chip-grande-azul"
+    }
+
+
+
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
-      map((alergia: string | null) => alergia ? this._filter2(alergia) : this.totalAlergias.slice()));
+      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+      
+    this.filteredAlergias = this.alergiasCtrl.valueChanges.pipe(
+        startWith(null),
+        map((alergia: string | null) => alergia ? this._filter2(alergia) : this.totalAlergias.slice()));
 
 }
 
 
-/// funciones movimiento rodri
-  pulsar1(){
-    if(this.desplegable1){
-    this.desplegable1=false
-    }
-    else{
-      this.desplegable1 =true
-    }
-   }
 
-   pulsar4(){
-    if(this.desplegable4){
-    this.desplegable4=false
-    }
-    else{
-      this.desplegable4 =true
-    }
-   }
 
-   pulsar2(){
-    if(this.desplegable2){
-    this.desplegable2=false
-    }
-    else{
-      this.desplegable2 =true
-    }
-   }
 
-   pulsar3(){
-    if(this.desplegable3){
-    this.desplegable3=false
-    }
-    else{
-      this.desplegable3 =true
-    }
-   }
 
-   azul1(){
-    if(this.chip1 == "chip-grande"){
-    this.chip1 = "chip-grande-azul"
-    }
-    else {
-      this.chip1 ="chip-grande"
-    }
-   }
-
-   azul2(){
-    if(this.chip2 == "chip-grande"){
-    this.chip2 = "chip-grande-azul"
-    }
-    else {
-      this.chip2 ="chip-grande"
-    }
-   }
-////////////////////////////////
-  ngOnInit(): void {
-
-    
+preferenciasDieta(dieta_id:number){
+  console.log(dieta_id)
+  if(this.userService.preferencias.dietas.some((dieta)=>{
+    return dieta.diet_id==dieta_id
+  })){
+    console.log('haciendo delete')
+    this.userService.deletePreferencias('dietas',dieta_id).subscribe((deletion:any)=>{
+      if(deletion.type==1){
+        this.userService.getPreferences(this.userService.user.user_id).subscribe((preferencias:any)=>{
+          this.userService.preferencias=preferencias.message
+          if(dieta_id==this.ingredientService.dietas[0].diet_id){
+            this.chipDieta1 = "chip-grande"
+          }else if(dieta_id==this.ingredientService.dietas[1].diet_id){
+            this.chipDieta2 = "chip-grande"
+          }
+         
+        })
+      }
+    })
+  }else{
+    console.log('haciendo post')
+    this.userService.postPreferencias('dietas',dieta_id).subscribe((addition:any)=>{
+      if(addition.type==1){
+        this.userService.getPreferences(this.userService.user.user_id).subscribe((preferencias:any)=>{
+          this.userService.preferencias=preferencias.message
+          if(dieta_id==this.ingredientService.dietas[0].diet_id){
+            this.chipDieta1 = "chip-grande-azul"
+          }else if(dieta_id==this.ingredientService.dietas[1].diet_id){
+            this.chipDieta2 = "chip-grande-azul"
+          }
+        })
+      }
+    })
   }
-/////////// metodos autocompletar
-  getIngredientsAvoid(){    
-      this.fruits = []
-      this.ingredientService.ingredientesAvoid = []
-     console.log(this.ingredientService);
-      
 
-      this.ingredientService.getIngredientesAvoid().subscribe((data:any) => {
-        console.log(data.message);
-        
-      this.ingredientService.ingredientesAvoid = data.message
-        for(let i =0;i<this.ingredientService.ingredientesAvoid.length;i++){
-          this.fruits.push(this.ingredientService.ingredientesAvoid[i].ingredient_name)
+  
+}
+
+
+
+
+
+////// REMOVE alergia   ///
+remove2(alergia: string): void {
+  const index = this.alergias.indexOf(alergia);
+
+  if (index >= 0) {
+    this.alergias.splice(index, 1);
+
+    // delete de la bbdd
+    for(let i=0;i<this.ingredientService.alergenos.length;i++){
+      if(this.ingredientService.alergenos[i].allergen_name==alergia){
+        this.userService.deletePreferencias('alergenos',this.ingredientService.alergenos[i].allergen_id).subscribe((deletion:any)=>{
+          if(deletion.type==1){
+            this.userService.getPreferences(this.userService.user.user_id).subscribe((preferencias:any)=>{
+              this.userService.preferencias=preferencias.message
+            })
+          }
+        })
+      }
+    }
+
+  }
+}
+
+
+////// ADD  alergia   ///
+
+selected2(event: MatAutocompleteSelectedEvent): void {
+
+    // post a la bbdd
+  for(let i=0;i<this.ingredientService.alergenos.length;i++){
+    if(this.ingredientService.alergenos[i].allergen_name==event.option.viewValue){
+      this.userService.postPreferencias('alergenos',this.ingredientService.alergenos[i].allergen_id).subscribe((addition:any)=>{
+        if(addition.type==1){
+          this.userService.getPreferences(this.userService.user.user_id).subscribe((preferencias:any)=>{
+            this.userService.preferencias=preferencias.message
+          })
         }
       })
+    }
   }
 
-/*   getAlergias(){    
-    this.alergias = []
-    this.ingredientService.getAlergias().subscribe((data:any) => {
-      console.log('alergiss'+data);
-      
-    this.ingredientService.alergias = data
-      for(let i =0;i<this.ingredientService.alergias.length;i++){
-        this.alergias.push(this.ingredientService.alergias[i].allergen_name)
-      }
-    })
+  this.alergias.push(event.option.viewValue);
+  this.alergiaInput.nativeElement.value = '';
+  this.alergiasCtrl.setValue(null);
+  this.alergiaInput.nativeElement.blur()
 }
-  getAllergens(){
-    this.ingredientService.getAlergenos().subscribe((alergenos:any)=>{
-      this.ingredientService.alergenos = alergenos
-      console.log(alergenos );
-      
-      for(let i =0;i<this.ingredientService.alergenos.length;i++){
-        this.totalAlergias.push(this.ingredientService.alergenos[i].allergen_name)
-      }
 
-    })
-  } */
+private _filter2(value: string): string[] {
+  const filterValue2 = value.toLowerCase();
 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+  return this.totalAlergias.filter(alergia => alergia.toLowerCase().indexOf(filterValue2) === 0);
+}
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      if(!this.fruits.includes(value.trim())){
-        this.fruits.push(value.trim());
-        this.ingredientesAnadidos.push((value.trim()))
-      }
-      
-    }
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-    
 
-    this.fruitCtrl.setValue(null);
-    console.log(this.ingredientesAnadidos);
 
-  }
+
+
+
+
+
+////// REMOVE  avoid_ingredient   ///
 
   remove(fruit: string): void {
     const index = this.fruits.indexOf(fruit);
 
     if (index >= 0) {
       this.fruits.splice(index, 1);
-      this.ingredientService.ingredientesAvoid.splice(index, 1);
+
+      // post a la bbdd
+      for(let i=0;i<this.ingredientService.Ingredientes.length;i++){
+        if(this.ingredientService.Ingredientes[i].ingredient_name==fruit){
+          this.userService.deletePreferencias('avoidIngredients',this.ingredientService.Ingredientes[i].ingredient_id).subscribe((deletion:any)=>{
+            console.log('haciendo delete')
+            console.log(deletion.type)
+            if(deletion.type==1){
+              this.userService.getPreferences(this.userService.user.user_id).subscribe((preferencias:any)=>{
+                this.userService.preferencias=preferencias.message
+              })
+            }
+          })
+        }
+      }
+
     }
   }
 
+
+  //// ADD  avoid_ingredient   ///
+
   selected(event: MatAutocompleteSelectedEvent): void {
+    // post a la bbdd
+    console.log('antes del for')
+    for(let i=0;i<this.ingredientService.Ingredientes.length;i++){
+      console.log('entrando al for')
+      if(this.ingredientService.Ingredientes[i].ingredient_name==event.option.viewValue){
+        this.userService.postPreferencias('avoidIngredients',this.ingredientService.Ingredientes[i].ingredient_id).subscribe((addition:any)=>{
+          console.log('haciendo post')
+          console.log(addition.type)
+          if(addition.type==1){
+            this.userService.getPreferences(this.userService.user.user_id).subscribe((preferencias:any)=>{
+              this.userService.preferencias=preferencias.message
+            })
+          }
+        })
+      }
+    }
     this.fruits.push(event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
+
+      
+
   }
 
   private _filter(value: string): string[] {
@@ -247,138 +291,58 @@ export class PreferenciasComponent implements OnInit {
   }
 
 
-  add2(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.alergias.push(value.trim());
-    }
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
 
-    this.alergiasCtrl.setValue(null);
+
+
+  
+
+
+
+/// funciones movimiento rodri
+pulsar1(){
+  if(this.desplegable1){
+  this.desplegable1=false
   }
-
-  remove2(alergia: string): void {
-    const index = this.alergias.indexOf(alergia);
-
-    if (index >= 0) {
-      this.alergias.splice(index, 1);
-    }
+  else{
+    this.desplegable1 =true
   }
+ }
 
-  selected2(event: MatAutocompleteSelectedEvent): void {
-    this.alergias.push(event.option.viewValue);
-    this.alergiaInput.nativeElement.value = '';
-    this.alergiasCtrl.setValue(null);
-    this.alergiaInput.nativeElement.blur()
+ pulsar4(){
+  if(this.desplegable4){
+  this.desplegable4=false
   }
-
-  private _filter2(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.totalAlergias.filter(alergia => alergia.toLowerCase().indexOf(filterValue) === 0);
+  else{
+    this.desplegable4 =true
   }
+ }
 
+ pulsar2(){
+  if(this.desplegable2){
+  this.desplegable2=false
+  }
+  else{
+    this.desplegable2 =true
+  }
+ }
 
-  /// metodos recogida de datos
+ pulsar3(){
+  if(this.desplegable3){
+  this.desplegable3=false
+  }
+  else{
+    this.desplegable3 =true
+  }
+ }
 
-  guardarPreferencias(){
-                         //// guarda toda la funcionalidad de guardar preferencias, funciona con llamadas a atributos del servicio
-    if(!this.isVegano && !this.isVegetariano){
-      this.ingredientService.tipoDieta = 0
-                                                  //Ni vegano ni vegetariano
-    }
-    if(this.isVegetariano && !this.isVegano){
-      this.ingredientService.tipoDieta = 2
-    }                                             // Solo vegetariano
-    if(this.isVegano && this.isVegetariano){
-      this.ingredientService.tipoDieta = 3
-    }
-    if(this.isVegano && !this.isVegetariano){
-      this.ingredientService.tipoDieta = 1
-                                                      /// Solo vegano
-    }
-
-     /// aqui mete los ingredientes a evitar
-     this.ingredientService.ingredientesAvoid = []
-
-    for(let i =0; i<this.ingredientService.Ingredientes.length;i++){
-     if( this.fruits.includes(this.ingredientService.Ingredientes[i].ingredient_name)){
-       this.ingredientService.ingredientesAvoid.push(this.ingredientService.Ingredientes[i])
-     }else{}
-    }
-   
-      let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
-      let objetoIngredientes = {user_id: userSession, ingredientes: this.ingredientService.ingredientesAvoid}
-      console.log(objetoIngredientes);
-      
-    
-      this.ingredientService.postIngredientesAvoid(objetoIngredientes).subscribe((data:any)=>{
-        console.log(data); 
-        this.getIngredientsAvoid()
-/*         this.ingredientService.alergias = []
- */
-/*         for(let i =0; i<this.ingredientService.alergenos.length;i++){
-         if( this.alergias.includes(this.ingredientService.alergenos[i].allergen_name)){
-           this.ingredientService.alergias.push(this.ingredientService.alergenos[i])
-         }else{}
-        }
-       
-          let objetoAlergias = {user_id: userSession, alergias: this.ingredientService.alergias}
-        
-           this.ingredientService.postAlergias(objetoAlergias).subscribe((data:any)=>{
-            console.log(data); 
-            this.getAlergias()
-          })  */
-
-
-      })
-    
-
-           /// aqui mete los alergenos 
  
-     
-     
-    /* this.ingredientService.alergenos.push(this.alergias) */ /// aqui mete los alergias a evitar
-  /*   console.log(this.ingredientService.ingredientesAvoid);
-    console.log(this.ingredientService.alergenos); */
-    console.log(this.ingredientService.tipoDieta);
-    
+  ngOnInit(): void {
 
     
-    
-
-
-    
-
   }
-  preferenciasDieta(i){
-    if(i == 1){
-      if(this.isVegetariano){
-        this.isVegetariano = false
-      }else{
-        this.isVegetariano = true
-      }
-    }
-    if(i==2){
-      if(this.isVegano){
-        this.isVegano = false
-      }else{
-        this.isVegano = true
-      }    
-    }
-  }
-  
-  
 
 }
-function ingredient_name(ingredient_name: any) {
-  throw new Error('Function not implemented.');
-}
+
 
