@@ -59,6 +59,10 @@ export class RecetasService {
     return this.http.get(this.url + '/detalles')
   }
   
+  getSelectedDetails(recipe_id:number){
+    return this.http.get(this.url + '/detalles?recipe_id='+recipe_id)
+  }
+
   getRecetasRicas(micronutrient_id:number){
     console.log("haciendo get en servicio")
     return this.http.get(this.url + '/ricas?micronutrient_id='+ micronutrient_id)

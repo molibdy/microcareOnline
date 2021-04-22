@@ -106,7 +106,7 @@ export class GraficaOthersComponent implements OnInit {
           tools:{
             download: false,
             selection: false,
-            zoom: false,
+            zoom: true,
             zoomin: true,
             zoomout: true,
             pan: false,
@@ -160,12 +160,12 @@ export class GraficaOthersComponent implements OnInit {
       },
       legend: {
         fontSize: '18px',
-      fontFamily: 'dosis-semiBold',
-      fontWeight: 400,
-      labels: {
-        colors: '#667a92',
-        useSeriesColors: true
-    },
+        fontFamily: 'dosis-semiBold',
+        fontWeight: 400,
+        labels: {
+          colors: '#667a92',
+          useSeriesColors: true
+        },
       }
     };
   }

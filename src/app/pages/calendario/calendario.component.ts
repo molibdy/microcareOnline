@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Favourites } from 'src/app/models/favourites';
 import { PlannedRecipe } from 'src/app/models/planned-recipe';
 import { Progress } from 'src/app/models/progress';
 import { Recipes } from 'src/app/models/recipes';
+import { IngestaService } from 'src/app/shared/ingesta.service';
 import { ProgressService } from 'src/app/shared/progress.service';
 import { RecetasService } from 'src/app/shared/recetas.service';
 
@@ -16,20 +18,26 @@ export class CalendarioComponent implements OnInit {
   public date:Date;
   public fecha:string;
   public dateString:string;
-  public plannedRecipes:PlannedRecipe[];
-  public consumedRecipes:PlannedRecipe[];
+  public plannedRecipes:PlannedRecipe[]=[];
+  public consumedRecipes:PlannedRecipe[]=[];
+  public consumedFavourites:any[]=[];
+  public consumedIngestas:any[]=[];
   public retos:string[];
   constructor(public recetasService:RecetasService,
-    private progressService:ProgressService) { 
+    private progressService:ProgressService,
+    private ingestaService:IngestaService) { 
     this.date=new Date();
     this.fecha=this.dateToFecha()
     this.dateString=this.dateToString(this.date)
     // this.plannedRecipes=[]
     // this.consumedRecipes=[]
     this.getPlannedRecipes(this.dateString)
+    this.getConsumedFavoritos(this.dateString)
+    this.getIngestas(this.dateString)
     this.retos=['2 kiwis','30g nueces','añade 10g de cúrcuma a una receta']
   }
 
+  
   getPlannedRecipes(date:string){
     this.recetasService.getPlannedRecetas(JSON.parse(sessionStorage.getItem('userSession')).user_id,date)
     .subscribe((recetas:any)=>{
@@ -46,6 +54,31 @@ export class CalendarioComponent implements OnInit {
       }
     })
   }
+
+  getConsumedFavoritos(date:string){
+    this.ingestaService.getConsumedFavoritos(JSON.parse(sessionStorage.getItem('userSession')).user_id,date)
+    .subscribe((favoritos:any)=>{
+      if(favoritos.type==1 || favoritos.type==-1){
+        this.consumedFavourites=[]
+        for(let i=0;i<favoritos.message.length;i++){
+          if(favoritos.message[i].isConsumed){
+            this.consumedFavourites.push(favoritos.message[i])
+          }
+        }
+      }
+    })
+  }
+
+  getIngestas(date:string){
+    this.ingestaService.getIngestas(JSON.parse(sessionStorage.getItem('userSession')).user_id,date)
+    .subscribe((ingestas:any)=>{
+      if(ingestas.type==1 || ingestas.type==-1){
+        this.consumedIngestas=ingestas.message
+        
+      }
+    })
+  }
+
 
 
   addRegister(recipe_id:number,planned_recipe_id){
@@ -104,7 +137,7 @@ export class CalendarioComponent implements OnInit {
             this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
             .subscribe((progreso:any)=>{
               this.progressService.totalProgress.percents=progreso.message
-              sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+              // sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
   
               this.recetasService.updatePlannedRecipe(planned_recipe_id,false)
               .subscribe((consumida:any)=>{
@@ -118,27 +151,80 @@ export class CalendarioComponent implements OnInit {
   }
 
 
+  deshacerFavorito(favourite_id:number,consumed_favourites_id){
+    let selectedFavorito=new Favourites();
+    for(let i=0;i<this.ingestaService.listaFavoritos.length;i++){
+      if(this.ingestaService.listaFavoritos[i].favourite_id==favourite_id){
+       selectedFavorito=this.ingestaService.listaFavoritos[i]
+      }
+    }
+    this.progressService.removeProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,selectedFavorito.microscore))
+       .subscribe((updated:any)=>{
+         console.log('progreso añadido, type' + updated.type)
+         if(updated.type==1 || updated.type==2){
+ 
+          this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+          .subscribe((progreso:any)=>{
+            this.progressService.totalProgress.percents=progreso.message
+            // sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+
+            this.ingestaService.updateConsumedFavourite(consumed_favourites_id,false)
+            .subscribe((consumida:any)=>{
+            console.log('consumida, type ' + consumida.type)
+            this.getConsumedFavoritos(this.dateToString(this.date))
+            })
+        })
+      }
+    })
+
+}
+
+deshacerIngesta(intake_id:number){
+  let selectedIngesta;
+  for(let i=0;i<this.consumedIngestas.length;i++){
+    if(this.consumedIngestas[i].intake_id==intake_id){
+     selectedIngesta=this.consumedIngestas[i]
+    }
+  }
+  this.progressService.removeProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,selectedIngesta.microscore))
+     .subscribe((updated:any)=>{
+       console.log('progreso añadido, type' + updated.type)
+       if(updated.type==1 || updated.type==2){
+
+        this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+        .subscribe((progreso:any)=>{
+          this.progressService.totalProgress.percents=progreso.message
+          // sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+
+          this.ingestaService.deleteIngestas(intake_id)
+          .subscribe((deletion:any)=>{
+          console.log('deletion, type ' + deletion.type)
+          this.getIngestas(this.dateToString(this.date))
+          })
+      })
+    }
+  })
+
+}
+
+
   public nextDay(){
     this.date.setDate(this.date.getDate()+1)
     this.fecha=this.dateToFecha()
-    this.getPlannedRecipes(this.dateToString(this.date))
+    this.dateString=this.dateToString(this.date)
+    this.getPlannedRecipes(this.dateString)
+    this.getConsumedFavoritos(this.dateString)
   }
 
   public prevDay(){
     this.date.setDate(this.date.getDate()-1)
     this.fecha=this.dateToFecha()
-    this.getPlannedRecipes(this.dateToString(this.date))
+    this.dateString=this.dateToString(this.date)
+    this.getPlannedRecipes(this.dateString)
+    this.getConsumedFavoritos(this.dateString)
   }
 
-  public fillRecipes(){
-    // llama a todas las recetas de la tabla "plan" que tengan fecha= this.date 
-    //this.plannedRecipes= data.result
-  }
 
-  public fillRetos(){
-    // llama a todos los retos de la tabla "plan" que tengan fecha= this.date 
-    //this.retos=data.result
-  }
 
 
 
