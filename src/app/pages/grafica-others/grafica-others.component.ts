@@ -9,7 +9,8 @@ import {
   ApexDataLabels,
   ApexTooltip,
   ApexStroke,
-  ApexYAxis
+  ApexYAxis,
+  ApexLegend
 } from "ng-apexcharts";
 import { LoginInfoService } from "src/app/shared/login-info.service";
 import { ProgressService } from "src/app/shared/progress.service";
@@ -22,6 +23,7 @@ export type ChartOptions = {
   tooltip: ApexTooltip;
   dataLabels: ApexDataLabels;
   yaxis: ApexYAxis
+  legend:ApexLegend
 };
 
 

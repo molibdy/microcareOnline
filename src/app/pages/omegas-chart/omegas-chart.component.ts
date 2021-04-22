@@ -73,7 +73,7 @@ export class OmegasChartComponent implements OnInit {
  
 
     this.chartOptions = {
-      series: [this.averagePercent],         //DEPENDIENTE DE CLASE
+      series: [100],         //DEPENDIENTE DE CLASE
       chart: {
         height: 190,
         type: "radialBar",
