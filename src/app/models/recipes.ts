@@ -11,6 +11,7 @@ export class Recipes {
     public ingredientes:Ingredient[];
     public dietas:string[];
     public microscore:Microscore[]
+    public alergenos:string[]
   
 
 }

@@ -123,9 +123,20 @@
     
         <div class="hr"></div>
       
-    
-        <div class="menu-item width">
+        <div class=" menu-item width ">
+            <div class="row-left">
+                <div class="row-left-wrap">
+                    <div *ngFor="let alergia of selectedReceta.alergenos">
+                        <mat-icon [svgIcon]='alergia' class="iconSize colorDark"></mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" menu-item width " style="border: 1px solid red;">
             <div class="row-left height">
+
+                
                 <div class="subtitle textBlueBold22">
                     Ingredientes
                 </div>
@@ -135,13 +146,14 @@
                    <div class = "numeroServes">{{selectedReceta.serves}}</div>
                 </div>
             </div>
+            
         </div>
     
         <div class="col-center menu-item" *ngFor="let ingrediente of selectedReceta.ingredientes">
             <div class="row-left row-item">
                 <div class="check"></div>
                 <div class="text">
-                    {{ingrediente.amount}} {{ingrediente.unit}} de {{ingrediente.ingredient_name}} ({{ingrediente.total_grams}}gr)
+                    {{ingrediente.amount}} de {{ingrediente.ingredient_name}} {{ingrediente.total_grams | grams}}
                 </div>
             </div>
         </div>

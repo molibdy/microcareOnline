@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlannedRecipe } from 'src/app/models/planned-recipe';
@@ -49,6 +50,7 @@ export class VistaRecetaComponent implements OnInit {
     this.isConsumed=false
     this.alreadyConsumed=false
     this.showAlreadyConsumed=false
+    this.getDetalles()
   }
 
 
@@ -103,6 +105,19 @@ export class VistaRecetaComponent implements OnInit {
     this.isDateSelected=false
     this.showDatePicker=false
   }
+  public getDetalles(){
+    this.recetasService.getSelectedDetails(this.selectedReceta.recipe_id).subscribe((detalles:any)=>{
+      console.log(detalles)
+      this.selectedReceta.alergenos=[];
+      for(let i=0; i<detalles.message.length;i++){
+        if(!this.selectedReceta.alergenos.includes(detalles.message[i].allergen_name)){
+          this.selectedReceta.alergenos.push(detalles.message[i].allergen_name)
+        }
+      }
+      console.log(this.selectedReceta.alergenos)
+    })
+  }
+  
 
   public addToDay(date:HTMLInputElement){
     if(date.value.length>0){

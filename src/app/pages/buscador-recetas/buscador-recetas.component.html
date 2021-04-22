@@ -51,9 +51,9 @@
         <div class="br"></div>
 
         <div  class="wrapper">
-            <div *ngFor="let receta of listaParaTi; let i=index" class="item" (click)="verRecetaParaTi(i)">
+            <div *ngFor="let receta of recetaService.recetasParaTi; let i=index" class="item" (click)="verRecetaParaTi(i)">
                 <div class="row-left"> 
-                    <div class="chip1" *ngIf="receta.dietas.length>0">
+                    <div class="chip1" *ngIf="receta.dietas[0]">
                         {{receta.dietas[0]}}
                     </div>
                     <div class="chip2" *ngIf="receta.dietas.length>1">
@@ -70,10 +70,10 @@
                         </div>
                     </div>
                     <div class="row-center">
-                        <div class="chip-micro1">
+                        <div class="chip-micro1" [style.background-color]="receta.microscore[0].color">
                             {{receta.microscore[0].acronym}}
                         </div>
-                        <div class="chip-micro2">
+                        <div class="chip-micro2" [style.background-color]="receta.microscore[1].color">
                             {{receta.microscore[1].acronym}}
                         </div> 
                     </div>
@@ -92,9 +92,9 @@
             <div class="br"></div>
 
     <div class="wrapper">
-        <div *ngFor="let receta of listaNuevas; let i=index" class="item" (click)="verRecetaNuevas(i)">
+        <div *ngFor="let receta of recetaService.recetas; let i=index" class="item" (click)="verRecetaNuevas(i)">
             <div class="row-left"> 
-                <div class="chip1" *ngIf="receta.dietas.length>0">
+                <div class="chip1" *ngIf="receta.dietas[0]">
                     {{receta.dietas[0]}}
                 </div>
                 <div class="chip2" *ngIf="receta.dietas.length>1">
@@ -111,10 +111,10 @@
                     </div>
                 </div>
                 <div class="row-center">
-                    <div class="chip-micro1">
+                    <div class="chip-micro1" [style.background-color]="receta.microscore[0].color">
                         {{receta.microscore[0].acronym}}
                     </div>
-                    <div class="chip-micro2">
+                    <div class="chip-micro2" [style.background-color]="receta.microscore[1].color">
                         {{receta.microscore[1].acronym}}
                     </div> 
                 </div>

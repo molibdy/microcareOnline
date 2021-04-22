@@ -23,8 +23,13 @@ import { RecetasService } from 'src/app/shared/recetas.service';
 export class BuscadorRecetasComponent implements OnInit {
   
 
+  public date=new Date();
+  public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`;
+  public yesterday=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()-1}`;
+
+
   public recetas: Recipes[]
-  public listaParaTi : Recipes[]
+  // public listaParaTi : Recipes[]
   public listaNuevas : Recipes[]
 
 
@@ -36,33 +41,42 @@ export class BuscadorRecetasComponent implements OnInit {
   constructor(
     public recetaService:RecetasService,
     private router:Router,
-
-    
-    public recetasService:RecetasService,
     public micronutrienteServicio:MicronutrientesService, 
 
   ) {
     this.router=router
 
-    // this.recetas=JSON.parse(sessionStorage.getItem('recetas'))
-    // this.recetasParaTi=JSON.parse(sessionStorage.getItem('recetasParaTi'))
+    
+    // this.listaNuevas=this.recetaService.recetas ///habrá que cambiarlo por this.recetaService.recetasNuevas y añadir un campo a la tabla que sea fecha de creación
+    this.recetaService.recetas
 
-    this.recetas= this.recetaService.recetas
-    this.listaParaTi= this.recetaService.recetasParaTi
-    this.listaNuevas=this.recetaService.recetas ///habrá que cambiarlo por this.recetaService.recetasNuevas y añadir un campo a la tabla que sea fecha de creación
-
-
+    this.recetaService.getRecetasParaTi(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.yesterday)
+    .subscribe((recetas:any)=>{        // Lista recetas para ti
+      console.log(`Obtener recetas para ti: ${recetas.type}`);
+      this.recetaService.recetasParaTi = []
+      for(let i=0;i<this.recetaService.recetas.length;i++){
+        let allRecipes=this.recetaService.recetas[i]
+        if(recetas.message.some(function(receta){
+          return receta.recipe_id==allRecipes.recipe_id
+        })){
+          this.recetaService.recetasParaTi.push(this.recetaService.recetas[i])
+        } 
+      }
+    }) 
    }
 
- 
+
+
+
+
    verRecetaParaTi(i:number){
-     this.recetaService.selectedReceta=this.listaParaTi[i]
+     this.recetaService.selectedReceta=this.recetaService.recetasParaTi[i]
      this.router.navigate(['../buscar-receta/receta']);
    }
 
 
    verRecetaNuevas(i:number){
-    this.recetaService.selectedReceta=this.listaNuevas[i]
+    this.recetaService.selectedReceta=this.recetaService.recetas[i]
     this.router.navigate(['../buscar-receta/receta']);
    }
 
@@ -77,20 +91,20 @@ buscar(search){
   
   this.recetasBuscar=[]
   this.inputSearch = search
-  console.log(this.recetas)
+ 
   let input = this.inputSearch.toUpperCase();
   console.log(input);
 
   console.log(this.inputSearch.length);
   this.mySwitch = true
   
-  for(let i=0; i < this.recetas.length; i++){
-    if(this.recetas[i].recipe_name.toUpperCase().indexOf(input) > -1){
-      this.recetasBuscar.push(this.recetas[i])
+  for(let i=0; i < this.recetaService.recetas.length; i++){
+    if(this.recetaService.recetas[i].recipe_name.toUpperCase().indexOf(input) > -1){
+      this.recetasBuscar.push(this.recetaService.recetas[i])
     }
   }  
 
-  console.log(this.recetasBuscar)
+  
 
 }
 
@@ -103,10 +117,10 @@ buscar(search){
      if(micronutrientes.type==1 || micronutrientes.type==-1){
        this.micronutrienteServicio.microsReceta=micronutrientes.message;
      }
-     this.recetasService.selectedReceta = this.recetasBuscar[i]
+     this.recetaService.selectedReceta = this.recetasBuscar[i]
      // this.micronutrientesBuscar[i] = this.micronutrientesServicio.linkMicro()
      this.router.navigate(['buscar-receta/receta']);
-     console.log(this.recetasService.selectedReceta.photo_url)
+     console.log(this.recetaService.selectedReceta.photo_url)
     })
    }
    

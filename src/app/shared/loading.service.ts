@@ -11,9 +11,10 @@ import { RecetasService } from './recetas.service';
   providedIn: 'root'
 })
 export class LoadingService {
-  public date=new Date()
-  public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`
-  public isLogeando:boolean=false
+  public date=new Date();
+  public dateString=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`;
+  public yesterday=`${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()-1}`;
+  public isLogeando:boolean=false;
 
   public showNavBar:boolean=false;
 
@@ -28,8 +29,12 @@ export class LoadingService {
   ) { 
 
     
-
+   
   }
+
+
+
+
 
   public getRuta(){
     return this.activeRoute.snapshot.url
@@ -75,8 +80,7 @@ export class LoadingService {
                 this.IngredientesService.Ingredientes = ingredientes.message
                 console.log(this.IngredientesService.Ingredientes);
                 
-                this.recetaService.getRecetas()   
-                                                    //  Obtener recetas
+                this.recetaService.getRecetas()   //  Obtener recetas                                  
                 .subscribe((recipes:any)=>{
                   console.log(`Obtener recetas: ${recipes.type}`);
                   if(recipes.type == 1 || recipes.type == -2){
@@ -130,9 +134,8 @@ export class LoadingService {
                         }
                       
                       console.log(this.recetaService.recetas)
-                      sessionStorage.setItem('recetas',JSON.stringify(this.recetaService.recetas))
 
-                      this.recetaService.getRecetasParaTi(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
+                      this.recetaService.getRecetasParaTi(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.yesterday)
                       .subscribe((recetas:any)=>{        // Lista recetas para ti
                         console.log(`Obtener recetas para ti: ${recetas.type}`);
                         this.recetaService.recetasParaTi = []

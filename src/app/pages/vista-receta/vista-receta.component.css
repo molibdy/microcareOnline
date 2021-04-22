@@ -58,6 +58,7 @@
 
 .height{
     height: 55px;
+    border:1px solid black;
 }
 
 .banner{
@@ -81,13 +82,16 @@ img{
 
 
 .title{
-font-size: 28px;
+font-size: 26px;
 color: #667a92;
-text-align: center;
+text-align: left;
 font-family: dosis-bold;
-text-transform: capitalize;
 margin-top: 15px;
-padding-left: 30px;
+padding-left: 20px;
+padding-right: 10px;
+/* margin-bottom: 5px;
+margin-top: 5px; */
+line-height: 30px;
 }
 
 .subtitle{
@@ -97,6 +101,7 @@ padding-left: 30px;
     font-family: dosis-bold;
     text-transform: capitalize; */
     margin-top: 5px;
+    
     }
 
 
@@ -437,4 +442,24 @@ padding-left: 30px;
       font-size: 18px;
       margin-left: 10px;
       cursor: pointer;
+  }
+
+
+
+
+  .row-left-wrap{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      width: 100px;
+  }
+
+
+
+  .iconSize{
+   
+    height: 30px;
+    /* cursor: pointer; */
+      
   }

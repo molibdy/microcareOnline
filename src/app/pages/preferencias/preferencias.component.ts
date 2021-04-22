@@ -10,6 +10,7 @@ import {map, startWith} from 'rxjs/operators';
 import { LoginInfoService } from 'src/app/shared/login-info.service';
 import { IngredientesService } from 'src/app/shared/ingredientes.service';
 import { Ingredient } from 'src/app/models/ingredient';
+import { RecetasService } from 'src/app/shared/recetas.service';
 
 @Component({
   selector: 'app-preferencias',
@@ -21,11 +22,10 @@ import { Ingredient } from 'src/app/models/ingredient';
 ///////// clase preferencias 
 
 export class PreferenciasComponent implements OnInit {
+
   public inputText:string = ""
   public foco:boolean = false
-  public coincidencia:string[] = ['','Hey como estas',"adios amigo","sss","dd"]
-  public imageProfile:string = 'https://media-exp1.licdn.com/dms/image/C5603AQHgQm5806sx2A/profile-displayphoto-shrink_200_200/0/1541434175803?e=1621468800&v=beta&t=MOKmnJRHHZuVXWS2uTrRQvfKVEl3nVDhvMssTmYw79o'
-  public desplegable1: boolean = false
+   public desplegable1: boolean = false
   public desplegable2: boolean = false
   public desplegable3: boolean = false
   public desplegable4: boolean = false
@@ -69,7 +69,8 @@ export class PreferenciasComponent implements OnInit {
 
 ///// contructor 
   constructor(public ingredientService:IngredientesService,
-    public userService:LoginInfoService) {
+    public userService:LoginInfoService,
+    private recetaService:RecetasService) {
 
 
     this.allFruits = []
@@ -157,6 +158,7 @@ preferenciasDieta(dieta_id:number){
           }else if(dieta_id==this.ingredientService.dietas[1].diet_id){
             this.chipDieta2 = "chip-grande-azul"
           }
+          
         })
       }
     })

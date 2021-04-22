@@ -85,7 +85,7 @@
         </div>
     
 
-        <div class="col-center menu-item" *ngIf="consumedRecipes.length==0">
+        <div class="col-center menu-item" *ngIf="consumedRecipes.length==0 && consumedFavourites.length==0 && consumedIngestas.length==0">
             <div class="row-center row-item">
 
                     <div class="text">
@@ -97,7 +97,7 @@
      <!-- Lista de recetas consumidas -->
 
         <div class="col-center menu-item" *ngFor="let receta of consumedRecipes">
-            <div class="row-spaced row-item">
+            <div class="row-spaced row-item" >
                 <!-- <div class="check" (click)="addRegister(receta.planned_recipe_id)">
                     
                 </div> -->
@@ -110,7 +110,41 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- Lista de favoritos consumidos -->
+
+        <div class="col-center menu-item" *ngFor="let favorito of consumedFavourites">
+            <div class="row-spaced row-item" >
+                <!-- <div class="check" (click)="addRegister(favorito.planned_recipe_id)">
+                    
+                </div> -->
+                <div class="text">
+                    {{favorito.name}}
+                </div>
+
+                <div class="link" (click)="deshacerFavorito(favorito.favourite_id,favorito.consumed_favourites_id)"> 
+                    deshacer
+                </div>
+            </div>
+        </div>
        
+        <!-- Lista de ingestas consumidas -->
+
+        <div class="col-center menu-item" *ngFor="let ingesta of consumedIngestas; let i=index" >
+            <div class="row-spaced row-item">
+                <!-- <div class="check" (click)="addRegister(ingesta.planned_recipe_id)">
+                    
+                </div> -->
+                <div class="text">
+                    Ingesta {{i+1}}
+                </div>
+
+                <div class="link" (click)="deshacerIngesta(ingesta.intake_id)"> 
+                    eliminar
+                </div>
+            </div>
+        </div>
     
     
    
@@ -121,7 +155,7 @@
 
 
 <!-- Retos del día -->
-
+<!-- 
 <div id="retos" class="col-center">
     <div class="iphoneCard">
         <div class="col-center menu-item-top">
@@ -147,7 +181,7 @@
     </div>
   
     
-</div>
+</div> -->
 <div class="footer"></div>
 
 
