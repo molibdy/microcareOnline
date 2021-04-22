@@ -83,6 +83,7 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon("linkedinIsa",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/linkedinIsa.svg"));
     this.matIconRegistry.addSvgIcon("linkedinRodri",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/linkedinRodri.svg"));
     this.matIconRegistry.addSvgIcon("linkedin",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/linkedin.svg"));
+    this.matIconRegistry.addSvgIcon("historia",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/team/man.svg"));
 
     this.matIconRegistry.addSvgIcon("navbar",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/app/navbar.svg"));
     this.matIconRegistry.addSvgIcon("progreso",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/app/progreso.svg"));
