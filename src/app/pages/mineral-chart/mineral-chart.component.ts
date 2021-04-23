@@ -68,7 +68,7 @@ export class MineralChartComponent implements OnInit {
  
 
     this.chartOptions = {
-      series: [25],         //DEPENDIENTE DE CLASE
+      series: [this.averagePercent],         //DEPENDIENTE DE CLASE
       chart: {
         height: 190,
         type: "radialBar",
