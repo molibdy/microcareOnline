@@ -352,3 +352,13 @@ button{
     width: 150px;
 }
 
+
+
+
+.mensajito{
+    color:#667a92;
+    font-family: dosis-semiBold;
+    width:300px;
+    margin-left:20px;
+    text-align: center;
+}

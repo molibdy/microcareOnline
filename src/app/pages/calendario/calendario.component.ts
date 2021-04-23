@@ -72,8 +72,13 @@ export class CalendarioComponent implements OnInit {
   getIngestas(date:string){
     this.ingestaService.getIngestas(JSON.parse(sessionStorage.getItem('userSession')).user_id,date)
     .subscribe((ingestas:any)=>{
-      if(ingestas.type==1 || ingestas.type==-1){
-        this.consumedIngestas=ingestas.message
+      if(ingestas!=null){
+        if(ingestas.type==1 || ingestas.type==-1){
+          this.consumedIngestas=ingestas.message
+      }else{
+        this.consumedIngestas=[]
+      }
+      
         
       }
     })
@@ -188,7 +193,8 @@ deshacerIngesta(intake_id:number){
   }
   this.progressService.removeProgress(new Progress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString,selectedIngesta.microscore))
      .subscribe((updated:any)=>{
-       console.log('progreso añadido, type' + updated.type)
+       console.log('progreso eliminado, type' + updated.type)
+       console.log(updated)
        if(updated.type==1 || updated.type==2){
 
         this.progressService.getProgress(JSON.parse(sessionStorage.getItem('userSession')).user_id,this.dateString)
@@ -214,6 +220,7 @@ deshacerIngesta(intake_id:number){
     this.dateString=this.dateToString(this.date)
     this.getPlannedRecipes(this.dateString)
     this.getConsumedFavoritos(this.dateString)
+    this.getIngestas(this.dateToString(this.date))
   }
 
   public prevDay(){
@@ -222,6 +229,7 @@ deshacerIngesta(intake_id:number){
     this.dateString=this.dateToString(this.date)
     this.getPlannedRecipes(this.dateString)
     this.getConsumedFavoritos(this.dateString)
+    this.getIngestas(this.dateToString(this.date))
   }
 
 
