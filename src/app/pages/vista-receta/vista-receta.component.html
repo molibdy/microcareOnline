@@ -36,50 +36,51 @@
                         </div> 
                     </button>
             </div>
+        </div>
     
     
            
-      <!-- desplegable para elegir la fecha al clickar en PLANEAR -->
-      <div class="datePicker-container" *ngIf="showDatePicker">
-        <div class="hr"></div>
-        <mat-icon class="iconSizeGray derecha" svgIcon='close' (click)="cerrarDatePicker()"></mat-icon>
-    
-        <div class="row-center">
-            <mat-form-field appearance="none" >
-                <div class="datePicker">
-                    <div class="row-center dateInput">
-                        <div>
-                        <mat-label class="textGraySemi16">¿Para qué día?</mat-label>
-                        <input matInput #dateInput [matDatepicker]="picker">
+        <!-- desplegable para elegir la fecha al clickar en PLANEAR -->
+        <div class="datePicker-container" *ngIf="showDatePicker">
+            <div class="hr"></div>
+            <mat-icon class="iconSizeGray derecha" svgIcon='close' (click)="cerrarDatePicker()"></mat-icon>
+        
+            <div class="row-center">
+                <mat-form-field appearance="none" >
+                    <div class="datePicker">
+                        <div class="row-center dateInput">
+                            <div>
+                            <mat-label class="textGraySemi16">¿Para qué día?</mat-label>
+                            <input matInput #dateInput [matDatepicker]="picker">
+                            </div>
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                            <mat-icon class="iconoGrande" matDatepickerToggleIcon [inline]='true'  svgIcon="calendario"></mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                         </div>
-                    <mat-datepicker-toggle matSuffix [for]="picker">
-                        <mat-icon class="iconoGrande" matDatepickerToggleIcon [inline]='true'  svgIcon="calendario"></mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+        
+                        <div class="separador20"> </div> 
+        
+                    <button class="mybutton-blue-white" (click)="addToDay(dateInput)">
+                        Añadir al plan
+                    </button>
                     </div>
-    
-                    <div class="separador20"> </div> 
-    
-                <button class="mybutton-blue-white" (click)="addToDay(dateInput)">
-                    Añadir al plan
-                </button>
-                </div>
-            </mat-form-field>
-        </div>
-       
-      </div>
-    
-    
-          <!-- mensaje al seleccionar fecha  -->
-    <div class="datePicker-container" *ngIf="isDateSelected">
-        <div class="hr"></div>
-        <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
-            <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
-            Receta añadida al plan del día {{dateToString(selectedDate)}}
-            <!-- <a class="link" (click)="goToPlan()">Ver plan</a> -->
+                </mat-form-field>
+            </div>
+        
         </div>
         
-    </div>
+        
+            <!-- mensaje al seleccionar fecha  -->
+        <div class="datePicker-container" *ngIf="isDateSelected">
+            <div class="hr"></div>
+            <div class="mensaje-container textBlueRegular16" (click)='cerrarDatePicker()'>
+                <!-- <mat-icon class="cerrarMensaje" svgIcon='close' (click)='cerrarDatePicker()'></mat-icon> -->
+                Receta añadida al plan del día {{dateToString(selectedDate)}}
+                <!-- <a class="link" (click)="goToPlan()">Ver plan</a> -->
+            </div>
+            
+        </div>
        
     
           <!-- mensaje al CONSUMIR receta -->
@@ -156,7 +157,7 @@
             
         <!-- </div> -->
     
-        <div class="container-ingredientes width">
+        <div class="container-ingredientes ">
             <div class="col-center menu-item" *ngFor="let ingrediente of selectedReceta.ingredientes">
                 <div class="row-left row-item">
                     <div class="check"></div>
@@ -192,6 +193,7 @@
     </div>
     
 </div>
+
 
 
 
