@@ -198,7 +198,7 @@ export class LoadingService {
                                       .subscribe((progresoUser:any)=>{          //Obtiene el progreso para cada micronutriente del user hoy
                                         console.log(`Obtener progreso: ${progresoUser.type}`);
                                         this.progressService.totalProgress=new Progress(this.apiService.user.user_id,this.dateString,progresoUser.message)   
-                                        sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
+                                        // sessionStorage.setItem('totalProgress',JSON.stringify(this.progressService.totalProgress))
                                         console.log(this.progressService.totalProgress);
                     
                                             

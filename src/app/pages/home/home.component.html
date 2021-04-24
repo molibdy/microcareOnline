@@ -12,7 +12,7 @@
 
     <div class="iphoneCard">
         <div class="title textBlueBold22">Tus nutrientes hoy</div>
-        <div class="row-center-wrap">
+        <div class="row-center-wrap" *ngIf="progressService.totalProgress.user_id>0">
             <div (click)="goToGroup('vitaminas')" class="col-center">
                 <app-vitamin-chart></app-vitamin-chart>
                 <div class="title  textBlueSemi20">Vitaminas</div>
@@ -39,7 +39,7 @@
 
     <div class="iphoneCard">
         <div class="title textBlueBold22">Tu progreso vs otros users</div>
-        <app-grafica-others></app-grafica-others>
+        <app-grafica-others *ngIf="progressService.averageProgressTotal.length>0"></app-grafica-others>
     </div>
 
     <div class="footer"></div>

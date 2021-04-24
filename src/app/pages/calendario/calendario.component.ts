@@ -70,16 +70,32 @@ export class CalendarioComponent implements OnInit {
   }
 
   getIngestas(date:string){
+    console.log('entrando en get ingestas')
     this.ingestaService.getIngestas(JSON.parse(sessionStorage.getItem('userSession')).user_id,date)
     .subscribe((ingestas:any)=>{
+      console.log('get ingestas: ')
+      console.log(ingestas)
       if(ingestas!=null){
+        console.log('get ingestas: '+ingestas.type)
         if(ingestas.type==1 || ingestas.type==-1){
           this.consumedIngestas=ingestas.message
+          for(let i=0;i<this.consumedIngestas.length;i++){
+            this.consumedIngestas[i].name=`ingesta (${this.consumedIngestas[i].microscore[0].micronutrient_name}, ${this.consumedIngestas[i].microscore[1].micronutrient_name}...)`;
+          }
+          this.ingestaService.mostrarFavoritos().subscribe((favoritos:any)=>{
+            if(favoritos.type==1){
+              for(let i=0;i<this.consumedIngestas.length;i++){
+                for(let j=0;j<favoritos.message.length;j++){
+                  if(this.consumedIngestas[i].intake_id==favoritos.message[j].intake_id){
+                    this.consumedIngestas[i].name=favoritos.message[j].name
+                  }
+                }
+              }
+            }
+          })
+        }
       }else{
         this.consumedIngestas=[]
-      }
-      
-        
       }
     })
   }

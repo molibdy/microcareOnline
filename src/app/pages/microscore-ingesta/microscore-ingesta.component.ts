@@ -1,4 +1,3 @@
-
 import { Component, ViewChild, OnInit } from "@angular/core";
 import {
   ApexAxisChartSeries,
@@ -12,7 +11,7 @@ import {
   ApexYAxis
 } from "ng-apexcharts";
 import { Recipes } from "src/app/models/recipes";
-import { RecetasService } from "src/app/shared/recetas.service";
+import { IngestaService } from "src/app/shared/ingesta.service";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -24,30 +23,26 @@ export type ChartOptions = {
   legend:ApexLegend;
   yaxis:ApexYAxis
 };
-
 @Component({
-  selector: 'app-micro-score',
-  templateUrl: './micro-score.component.html',
-  styleUrls: ['./micro-score.component.css']
+  selector: 'app-microscore-ingesta',
+  templateUrl: './microscore-ingesta.component.html',
+  styleUrls: ['./microscore-ingesta.component.css']
 })
-export class MicroScoreComponent implements OnInit {
+export class MicroscoreIngestaComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  public selectedReceta:Recipes;
-  public isMenos=true;
-  public isMas=false;
+ 
 
-  constructor(public recetasService:RecetasService) {
-    this.selectedReceta=this.recetasService.selectedReceta;
+  constructor(public ingestaService:IngestaService) {
     let microData=[];
     let microColors=[];
     let microCategories=[];
     let altura=20;
-    for(let i=0;i<this.selectedReceta.microscore.length;i++){
-      if(this.selectedReceta.microscore[i].percent>=1){
-        microData.push(this.selectedReceta.microscore[i].percent);
-        microColors.push(this.selectedReceta.microscore[i].color);
-        microCategories.push(this.selectedReceta.microscore[i].micronutrient_name[0].toUpperCase() + this.selectedReceta.microscore[i].micronutrient_name.substring(1));
+    for(let i=0;i<this.ingestaService.lastIntake.microscore.length;i++){
+      if(this.ingestaService.lastIntake.microscore[i].percent>=1){
+        microData.push(this.ingestaService.lastIntake.microscore[i].percent);
+        microColors.push(this.ingestaService.lastIntake.microscore[i].color);
+        microCategories.push(this.ingestaService.lastIntake.microscore[i].micronutrient_name[0].toUpperCase() + this.ingestaService.lastIntake.microscore[i].micronutrient_name.substring(1));  
         altura+=25;
       }
     }
@@ -65,7 +60,7 @@ export class MicroScoreComponent implements OnInit {
       },
       chart: {
         type: "bar",
-        height: `${altura}px`,           // DEPENDIENTE DE LAST INTAKE
+        height: `${altura}px`,              // DEPENDIENTE DE LAST INTAKE
         width:"340px",
         fontFamily: "dosis-regular",
         foreColor: "#667a92",
@@ -111,7 +106,7 @@ export class MicroScoreComponent implements OnInit {
         
       },
       xaxis: {
-        categories: microCategories,
+        categories: microCategories,    // DEPENDIENTE DE LAST INTAKE
         labels: {
           show: true,
           style: {
@@ -132,17 +127,6 @@ export class MicroScoreComponent implements OnInit {
         }
       }
     };
-  }
-
-
-  verMenos(){
-    this.isMas=false
-    this.isMenos=true
-  }
-
-  verMas(){
-    this.isMas=true
-    this.isMenos=false
   }
 
   ngOnInit(): void {

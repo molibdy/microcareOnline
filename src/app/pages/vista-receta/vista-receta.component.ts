@@ -41,6 +41,9 @@ export class VistaRecetaComponent implements OnInit {
     public recetasService:RecetasService,
     private router:Router
     ) { 
+      if(this.recetasService.selectedReceta.recipe_id==0){
+        this.router.navigate(['/buscar-receta'])
+      }
       this.selectedReceta=this.recetasService.selectedReceta
     
     this.showDatePicker=false

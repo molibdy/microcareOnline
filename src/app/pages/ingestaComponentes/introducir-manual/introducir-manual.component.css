@@ -83,8 +83,9 @@
 {
     font-size: 20px;
     color: #B2C1C6;
-    text-align: center;
+    text-align: left;
     font-family: dosis-bold;
+    width: 16px;
 }
 .boton-anadir
 {
@@ -95,6 +96,8 @@
   border:solid 0.5px rgba(178, 193, 198, 0.281);
   background-color:white;
   color: #667a92;
+  display: flex;
+  flex-direction: column;
   justify-content: center; 
   text-align:center;
   font-size: 22px;
@@ -374,8 +377,8 @@ input::-webkit-inner-spin-button {
 {
     height: 24px;
     width: 24px;
-    margin-top: 3px;
-    margin-right: 3px;
+    /* margin-top: 3px;
+    margin-right: 3px; */
 }
 .custom-hr-2
 {
@@ -431,4 +434,19 @@ input::-webkit-inner-spin-button {
       font-size: 16px;
       margin-left: 10px;
       cursor: pointer;
+  }
+
+
+  .microscore-container{
+    width: 330px;
+    padding-left: 16px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: white;
+    /* position: relative; */
+    border-radius: 20px;
+    box-shadow: 1px 3px 8px rgba(84, 0, 0, 0.1);
+    margin-top:15px
+    /* border: 2px solid #5ce1e6  */
+  
   }

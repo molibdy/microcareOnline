@@ -17,7 +17,7 @@
 
 <!-- Recetas del día -->
 
-<div id="recetas" class="col-center">
+<div  class="col-center">
     <div class="iphoneCard">
        
         <div class="col-center menu-item-top">
@@ -73,13 +73,13 @@
 
 <!-- Consumiciones -->
 
-<div id="recetas" class="col-center">
+<div class="col-center">
     <div class="iphoneCard">
        
         <div class="col-center menu-item-top">
             <div class="row-left">
                     <div class="title">
-                        Recetas consumidas
+                        Consumido hoy:
                     </div>
             </div>
         </div>
@@ -131,11 +131,11 @@
        
         <!-- Lista de ingestas consumidas -->
 
-        <div class="col-center menu-item" *ngFor="let ingesta of consumedIngestas; let i=index" >
+        <div class="col-center menu-item" *ngFor="let ingesta of consumedIngestas" >
             <div class="row-spaced row-item">
          
                 <div class="text">
-                    Ingesta {{i+1}}
+                    {{ingesta.name}}
                 </div>
 
                 <div class="link" (click)="deshacerIngesta(ingesta.intake_id)"> 
@@ -143,10 +143,8 @@
                 </div>
             </div>
         </div>
-    
-    
-   
-</div>
+
+    </div>
 </div>
 
 
@@ -181,38 +179,7 @@
     
 </div> -->
 <div class="footer"></div>
+<div class="footer"></div>
 
 
 
-
-
-    <!-- <div class="col-center 100 iphoneCard">
-       
-            <div class="col-center menu-item-top">
-                <div class="row-center">
-                        <div class="text">
-                            Día 1
-                        </div>
-                </div>
-                <div class="custom-hr"></div>
-            </div>
-
-            <div class="col-center menu-item">
-                <div class="row-center">
-                        <div class="text">
-                            Día 2
-                        </div>
-                </div>
-                <div class="custom-hr"></div>
-            </div>
-           
-            <div class="col-center menu-item-bottom">
-                <div class="row-center">
-                        <div class="text">
-                            Día 3
-                        </div>
-                </div>
-                <div class="custom-hr"></div>
-            </div>
-            
-    </div> -->

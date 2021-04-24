@@ -22,7 +22,7 @@
                         <div class="textBlueSemi20 marginBottom6 marginleft6">Ingrediente</div>
 
                         <input type="text"
-                                placeholder="Escoge uno"
+                                placeholder="Escribe aquí"
                                 aria-label="Number"
                                 matInput
                                 [formControl]="myControl"
@@ -44,12 +44,12 @@
                     <div class=" textBlueSemi20 marginBottom6 marginleft6">Cantidad</div>
                     <div class="row-left inputCantidad ">
                         <input type="number"  #peso>
-                        <p class=" text20Gray"  >g</p>
+                        <div class=" text20Gray"  >g</div>
                     </div>
                 </div>
 
                 <!-- <div class="row-right" (click)='crearIngrediente(ingrediente.value, peso.valueAsNumber)' > -->
-                  <button class="boton-anadir marginleft10" (click)='crearIngrediente(ingrediente.value, peso.valueAsNumber)'>
+                  <button class="boton-anadir marginleft10" (click)='crearIngrediente(ingrediente.value, peso.valueAsNumber); peso.value=""; ingrediente.value=""'>
                     <mat-icon class=" iconSizeGrayAdd  " svgIcon='add' ></mat-icon>
                   </button>
               
@@ -89,6 +89,7 @@
             ¡Consumo registrado!
             <a class="link" (click)="anadirFavorito()">¿Guardar como favorito?</a>
           </div>
+         
 
           
           <div class=" widtMenu" *ngIf="showGuardarFavorito">
@@ -103,6 +104,11 @@
                 <button class="boton-guardar colorWhite dosis-bold backgroundBlue marginLeft10 " 
                 (click)='guardarFavorito(nombreReceta.value)'>guardar</button>
               </div>
+          </div>
+
+          <div class="microscore-container textBlueRegular16" *ngIf="ingestaService.lastIntake.microscore.length>0">
+            Nutrientes en esta ingesta:
+            <app-microscore-ingesta></app-microscore-ingesta>
           </div>
       </div>
 </div>

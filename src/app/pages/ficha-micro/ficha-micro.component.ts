@@ -19,12 +19,16 @@ export class FichaMicroComponent implements OnInit {
   public ingredientes: Ingredient[]
   public recetas:Recipes[] = []
   public recetasRespuesta
- 
- 
   public selectedMicronutriente: Micronutrients
   
-    constructor(private router:Router, public MicronutrientesService: MicronutrientesService, public RecetasService:RecetasService, public IngredientesService:IngredientesService) {
+    constructor(private router:Router, 
+      public MicronutrientesService: MicronutrientesService, 
+      public RecetasService:RecetasService, 
+      public IngredientesService:IngredientesService) {
 
+        if(this.MicronutrientesService.selectedGroup.group_id==0){
+          this.router.navigate(['/home'])
+        }
       //this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
     this.ingredientes = this.IngredientesService.ingredientesRicos
     console.log(this.ingredientes);

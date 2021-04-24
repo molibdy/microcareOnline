@@ -18,8 +18,8 @@ import { RecetasService } from 'src/app/shared/recetas.service';
 export class BarraBuscadorComponent implements OnInit {
 
 
-public micronutrientes:any[]  
-public recetas: any[] /// va a contener todos las recetas de la bbdd
+// public micronutrientes:any[]  
+// public recetas: any[] /// va a contener todos las recetas de la bbdd
 public mySwitch: boolean = false
 public recetasBuscar: Recipes[] // va a contener la busqueda del input de recetas
 public micronutrientesBuscar: Micronutrients[]
@@ -34,15 +34,13 @@ public inputSearch:string = ""
     private IngredientesService:IngredientesService,
     public router:Router) {
 
-    this.micronutrientesServicio.micronutrientes 
-
-    this.recetasServicio.recetas
+ 
     
-   // this.recetas = this.recetasServicio.recetas
-    this.recetas = JSON.parse(sessionStorage.getItem('recetas'))
+  //  this.recetas = this.recetasServicio.recetas
+    // this.recetas = JSON.parse(sessionStorage.getItem('recetas'))
     
     // this.micronutrientes = this.micronutrientesServicio.micronutrientes
-    this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
+    // this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
 
    }
 
@@ -72,16 +70,16 @@ this.recetasBuscar=[]
 this.micronutrientesBuscar = []
 
   let input = this.inputSearch.toUpperCase();
-  for(let i=0; i < this.micronutrientes.length; i++){
-    if(this.micronutrientes[i].micronutrient_name.toUpperCase().indexOf(input) > -1){
-      this.micronutrientesBuscar.push(this.micronutrientes[i])
+  for(let i=0; i < this.micronutrientesServicio.micronutrientes .length; i++){
+    if(this.micronutrientesServicio.micronutrientes [i].micronutrient_name.toUpperCase().indexOf(input) > -1){
+      this.micronutrientesBuscar.push(this.micronutrientesServicio.micronutrientes [i])
     }
   }
 
   let entrada = this.inputSearch.toUpperCase();
-  for(let i=0; i < this.recetas.length; i++){
-    if(this.recetas[i].recipe_name.toUpperCase().indexOf(entrada) > -1){
-      this.recetasBuscar.push(this.recetas[i])
+  for(let i=0; i < this.recetasServicio.recetas.length; i++){
+    if(this.recetasServicio.recetas[i].recipe_name.toUpperCase().indexOf(entrada) > -1){
+      this.recetasBuscar.push(this.recetasServicio.recetas[i])
     }
   }
 

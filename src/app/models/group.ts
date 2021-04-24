@@ -1,5 +1,5 @@
 export class Group {
-    public group_id:number;
+    public group_id:number=0;
     public name:string;
     public color:string;
     public color2:string;

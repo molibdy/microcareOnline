@@ -7,7 +7,7 @@
     <div class="col-center 100 iphoneCard">
        
         
-        <div class="col-left menu-item">
+        <div class="col-left width">
             <div class="row-center">
                     <div class="title">
                         {{selectedReceta.recipe_name}}
@@ -123,40 +123,50 @@
     
         <div class="hr"></div>
       
-        <div class=" menu-item width ">
-            <div class="row-left">
-                <div class="row-left-wrap">
-                    <div *ngFor="let alergia of selectedReceta.alergenos">
-                        <mat-icon [svgIcon]='alergia' class="iconSize colorDark"></mat-icon>
+        <!-- <div class=" menu-item width "> -->
+            <!-- <div class="row-left"> -->
+                <div class="row-left container-alergenos" >
+                    <div class="row-left alergenos">
+                        <div *ngFor="let alergia of selectedReceta.alergenos">
+                            <mat-icon [svgIcon]='alergia' class="iconSize colorDark"></mat-icon>
+                        </div>
+                    </div>
+                   
+                    <div class="separador100"> </div>
+                    <div class="col-center relative">
+                        <div> <mat-icon class="serves iconColor"  svgIcon="serves"></mat-icon></div>
+                    <div class = "numeroServes">{{selectedReceta.serves}}</div>
+                    </div>
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
+
+        <!-- <div class=" width " > -->
+            <div class="row-left ">
+
+                <div class="subtitle textBlueBold22">
+                    Ingredientes
+                </div>
+                <!-- <div class="separador100"> </div>
+                <div class="col-center relative">
+                   <div> <mat-icon class="serves iconColor"  svgIcon="serves"></mat-icon></div>
+                   <div class = "numeroServes">{{selectedReceta.serves}}</div>
+                </div> -->
+            </div>
+            
+        <!-- </div> -->
+    
+        <div class="container-ingredientes width">
+            <div class="col-center menu-item" *ngFor="let ingrediente of selectedReceta.ingredientes">
+                <div class="row-left row-item">
+                    <div class="check"></div>
+                    <div class="text">
+                        {{ingrediente.amount}} de {{ingrediente.ingredient_name}} {{ingrediente.total_grams | grams}}
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class=" menu-item width " >
-            <div class="row-left height">
-
-                
-                <div class="subtitle textBlueBold22">
-                    Ingredientes
-                </div>
-                <div class="separador100"> </div>
-                <div class="col-center relative">
-                   <div> <mat-icon class="serves iconColor"  svgIcon="serves"></mat-icon></div>
-                   <div class = "numeroServes">{{selectedReceta.serves}}</div>
-                </div>
-            </div>
-            
-        </div>
-    
-        <div class="col-center menu-item" *ngFor="let ingrediente of selectedReceta.ingredientes">
-            <div class="row-left row-item">
-                <div class="check"></div>
-                <div class="text">
-                    {{ingrediente.amount}} de {{ingrediente.ingredient_name}} {{ingrediente.total_grams | grams}}
-                </div>
-            </div>
-        </div>
+       
        
     
         <div class=" container-pasos">

@@ -44,8 +44,9 @@ export class IntroducirManualComponent implements OnInit {
     this.options = []
     for(let i =0;i<this.ingredientService.Ingredientes.length;i++){
       this.options.push(this.ingredientService.Ingredientes[i].ingredient_name)
-      console.log(this.ingredientService.Ingredientes[i].ingredient_name); 
     }
+    this.options.sort()
+    console.log(this.options)
 /*     this.getIngredientes()
  */   }
   
@@ -76,9 +77,9 @@ export class IntroducirManualComponent implements OnInit {
       }
     }
     else{
-      console.log(this.listaIngredientes);
-      console.log("hey");
+      console.log("no está en la bbdd");
     }
+    // this.myControl.setValue('')
   }
 
   quitarIngrediente(i:number){
@@ -90,11 +91,10 @@ export class IntroducirManualComponent implements OnInit {
     if(true)
     {
       let userSession = JSON.parse(sessionStorage.getItem('userSession')).user_id
-      console.log(userSession);
       
       let intake = {user_id:  userSession, date: this.dateString, ingredientes: this.listaIngredientes}
       this.ingestaService.postIntake(intake).subscribe((data:any)=>{
-        console.log('callback de la ingesta');
+        console.log('post ingesta ' + data.type);
         
         this.ingestaService.lastIntake = {intake_id: data.intake_id, microscore: data.microscore}
 
