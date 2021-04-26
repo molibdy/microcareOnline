@@ -69,6 +69,7 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon("close",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/close.svg"));
     this.matIconRegistry.addSvgIcon("add",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/add.svg"));
     this.matIconRegistry.addSvgIcon("serves",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/restaurant.svg"));
+    this.matIconRegistry.addSvgIcon("apuntando-hacia-abajo",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/apuntando-hacia-abajo.svg"));
 
     this.matIconRegistry.addSvgIcon("search",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/vidrio-de-aumento.svg"));
     this.matIconRegistry.addSvgIcon("close",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/close.svg"));
@@ -90,7 +91,9 @@ export class AppComponent {
     this.matIconRegistry.addSvgIcon("receta",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/app/receta.svg"));
 
 
-
+    this.matIconRegistry.addSvgIcon("front",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/herramientasUsadas/front.svg"));
+    this.matIconRegistry.addSvgIcon("back",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/herramientasUsadas/back.svg"));
+    this.matIconRegistry.addSvgIcon("futurasImplementaciones",this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/svg/herramientasUsadas/futurasImplementaciones.svg"));
 
 
 
