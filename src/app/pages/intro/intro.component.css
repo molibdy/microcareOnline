@@ -88,6 +88,20 @@
     
   }
   
+.imgBack{
+  width: 300px;
+  height: 300px;
+}
+
+.imgFront{
+  width: 290px;
+  height: 200px;
+}
+
+.futuro{
+  width: 300px;
+  height: auto;
+}
 
 .textT{
     font-size: 26px;

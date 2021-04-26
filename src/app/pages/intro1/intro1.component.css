@@ -33,6 +33,12 @@
     width: 318px;
     height: 185px;
   }
+
+  .mano{
+    width: 40px;
+    height: 40px;
+    color: #2b638f;
+  }
   
   .menu-item:hover
   {
