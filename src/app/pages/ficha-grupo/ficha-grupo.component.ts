@@ -49,7 +49,7 @@ rutaMicro(i){
 
   console.log(this.micronutrientsGroup[i])
   for(let j=0;j<this.micronutrientesServicio.micronutrientes.length;j++){
-    if(this.micronutrientesServicio.micronutrientes[j].micronutrient_id=this.micronutrientsGroup[i].micronutrient_id){
+    if(this.micronutrientesServicio.micronutrientes[j].micronutrient_id==this.micronutrientsGroup[i].micronutrient_id){
       this.micronutrientesServicio.selectedMicronutriente = this.micronutrientesServicio.micronutrientes[j]
     }
   }
