@@ -13,7 +13,8 @@
 
 
     <div class="cargando" *ngIf="loadingService.isLogeando">
-        Cargando
+        Cargando <br>
+        <div class="lds-ring marginTop22"><div></div><div></div><div></div><div></div></div>
     </div>
 
     <div *ngIf="!loadingService.isLogeando">
