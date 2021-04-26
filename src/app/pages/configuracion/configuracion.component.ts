@@ -13,9 +13,9 @@ export class ConfiguracionComponent implements OnInit {
   
   public user:User
   public newName:string=null;
-  public newEmail:string='';
-  public newPassword:string='';
-  public newPhoto:string='';
+  public newEmail:string=null;
+  public newPassword:string=null;
+  public newPhoto:string=null;
   public savedChanges:boolean=false;
   public showChangePic:boolean=false;
   constructor(
@@ -42,9 +42,9 @@ export class ConfiguracionComponent implements OnInit {
     this.userService.putUsuario(configuracion).subscribe((modified:any)=>{
       if(modified.type==1){
         this.newName=null;
-        this.newEmail='';
-        this.newPassword='';
-        this.newPhoto='';
+        this.newEmail=null;
+        this.newPassword=null;
+        this.newPhoto=null;
         this.savedChanges=true
         this.showChangePic=false
         this.userService.getUsuarioChanged(JSON.parse(sessionStorage.getItem('userSession')).user_id).subscribe((newUserData:any)=>{
