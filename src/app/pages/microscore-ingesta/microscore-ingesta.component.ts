@@ -31,7 +31,8 @@ export type ChartOptions = {
 export class MicroscoreIngestaComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
- 
+  public isMenos=true;
+  public isMas=false;
 
   constructor(public ingestaService:IngestaService) {
     let microData=[];
@@ -128,6 +129,18 @@ export class MicroscoreIngestaComponent implements OnInit {
       }
     };
   }
+
+
+  verMenos(){
+    this.isMas=false
+    this.isMenos=true
+  }
+
+  verMas(){
+    this.isMas=true
+    this.isMenos=false
+  }
+
 
   ngOnInit(): void {
   }

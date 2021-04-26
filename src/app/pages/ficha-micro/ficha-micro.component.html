@@ -37,7 +37,7 @@
      <div  class="wrapper">
         <div *ngFor="let receta of recetas; let i=index" class="item" (click)="verRecetaMicro(i)">
             <div class="row-left"> 
-                <div class="chip1" *ngIf="receta.dietas.length>0">
+                <div class="chip1" *ngIf="receta.dietas[0]">
                     {{receta.dietas[0]}}
                 </div>
                 <div class="chip2" *ngIf="receta.dietas.length>1">

@@ -5,7 +5,10 @@ import { Group } from 'src/app/models/group';
 import { Micronutrients } from 'src/app/models/micronutrient';
 import { IngredientesService } from 'src/app/shared/ingredientes.service';
 import { MicronutrientesService } from 'src/app/shared/micronutrientes.service';
+import { ProgressService } from 'src/app/shared/progress.service';
 import { RecetasService } from 'src/app/shared/recetas.service';
+import { Microscore } from "src/app/models/microscore";
+
 
 
 @Component({
@@ -17,10 +20,14 @@ export class FichaGrupoComponent implements OnInit {
 
 
 public micronutrientes: Micronutrients[]
-public micronutrientsGroup: Micronutrients[] = []
+public micronutrientsGroup: Microscore[] = []
 public selectedGroup: Group
 
-  constructor(public micronutrientesServicio:MicronutrientesService, public recetasServicio:RecetasService, public IngredientesService:IngredientesService, public router:Router ) {
+  constructor(public micronutrientesServicio:MicronutrientesService, 
+    public recetasServicio:RecetasService, 
+    public IngredientesService:IngredientesService,
+    public progressService:ProgressService, 
+    public router:Router ) {
 
   // this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
 
@@ -29,9 +36,9 @@ public selectedGroup: Group
   this.selectedGroup = this.micronutrientesServicio.selectedGroup
   
   
-  for(let i = 0; i<this.micronutrientes.length; i++){
-    if(this.selectedGroup.group_id == this.micronutrientes[i].group_id){
-      this.micronutrientsGroup.push(this.micronutrientes[i])
+  for(let i = 0; i<this.progressService.totalProgress.percents.length; i++){
+    if(this.selectedGroup.group_id == this.progressService.totalProgress.percents[i].group_id){
+      this.micronutrientsGroup.push(this.progressService.totalProgress.percents[i])
     } 
   }
  
@@ -41,7 +48,12 @@ public selectedGroup: Group
 rutaMicro(i){
 
   console.log(this.micronutrientsGroup[i])
-  this.micronutrientesServicio.selectedMicronutriente = this.micronutrientsGroup[i]
+  for(let j=0;j<this.micronutrientesServicio.micronutrientes.length;j++){
+    if(this.micronutrientesServicio.micronutrientes[j].micronutrient_id=this.micronutrientsGroup[i].micronutrient_id){
+      this.micronutrientesServicio.selectedMicronutriente = this.micronutrientesServicio.micronutrientes[j]
+    }
+  }
+  
 
   this.IngredientesService.getIngredientesMicro(this.micronutrientesServicio.selectedMicronutriente.micronutrient_id).subscribe((ingredient:any)=>
     { console.log(ingredient.type)

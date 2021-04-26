@@ -1,14 +1,41 @@
 #chart {
-    max-width: 650px;
-    margin-left: -20px;
-    margin-top: -10px;
-    margin-bottom: 6px;
+  max-width: 650px;
+  width:340px;
+  margin-bottom: 6px;
+}
 
-  }
-  
+.chartSmall {
+width:340px;
+margin-left: -20px;
+margin-top: -10px;
+max-height: 190px;
+  overflow-y: hidden;
+
+}
+
+.chartGrande {
+width:340px;
+margin-left: -20px;
+margin-top: -10px;
+margin-bottom: -25px;
+}
+
 .menosMargin{
-  margin-top: -35px;
-  margin-left: 30px;
+/* margin-top: -35px; */
+margin-left: 30px;
 
+}
+
+
+.link{
+text-decoration: none;
+color: #5ce1e6;
+font-family: dosis-regular;
+font-size: 18px;
+margin-top: 5px;
+cursor: pointer;
+float:right;
+margin-bottom:6px;
+margin-right: 10px;
 }
 

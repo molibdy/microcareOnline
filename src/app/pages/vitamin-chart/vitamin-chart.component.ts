@@ -91,7 +91,8 @@ export class VitaminChartComponent implements OnInit {
               top: 1,
               left: 0,
               blur: 4,
-              opacity: 0.24
+              opacity: 0.69,
+              color:this.groupData.color
             }
           },
           track: {
