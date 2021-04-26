@@ -30,6 +30,9 @@ public selectedGroup: Group
     public router:Router ) {
 
   // this.micronutrientes = JSON.parse(sessionStorage.getItem('micronutrientes'))
+  if(this.micronutrientesServicio.selectedGroup.group_id==0){
+    this.router.navigate(['/home'])
+  }
 
   this.micronutrientes = this.micronutrientesServicio.micronutrientes
   

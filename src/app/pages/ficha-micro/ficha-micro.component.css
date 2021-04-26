@@ -118,7 +118,8 @@ input{
     margin-top: 10px;
     text-align: center;
     color: #667a92;
-    text-transform:capitalize;
+    text-transform:none;
+    border:2px solid;
     }
 
 

@@ -20,7 +20,7 @@
     <div class="br"></div>
     <div class="row-left wrap ancho100 chip-container">
         <div *ngFor="let ingrediente of ingredientes"> 
-            <div class="chip-grande">{{ingrediente.ingredient_name}}
+            <div class="chip-grande" [ngStyle]="{'border-color': MicronutrientesService.selectedGroup.color2}">{{ingrediente.ingredient_name}}
             </div>
         </div>
     </div>
@@ -54,10 +54,10 @@
                     </div>
                 </div>
                 <div class="row-center">
-                    <div class="chip-micro1">
+                    <div class="chip-micro1" [style.background-color]="receta.microscore[0].color">
                         {{receta.microscore[0].acronym}}
                     </div>
-                    <div class="chip-micro2">
+                    <div class="chip-micro2" [style.background-color]="receta.microscore[1].color">
                         {{receta.microscore[1].acronym}}
                     </div> 
                 </div>

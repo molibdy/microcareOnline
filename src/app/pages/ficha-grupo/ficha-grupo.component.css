@@ -100,7 +100,7 @@
     text-align: center;
     margin-top: 10px;
     color: #667a92;
-    text-transform:capitalize;
+    text-transform:none;
     overflow: hidden;
     border: 2px solid;
 }
@@ -121,7 +121,7 @@
     justify-content:space-around;
     text-align: center;
     color: #667a92;
-    text-transform:capitalize;
+    text-transform:none;
 }
 
 .chip-color{
