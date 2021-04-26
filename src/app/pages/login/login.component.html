@@ -12,31 +12,32 @@
     </div>
 
 
-    <div class="cargando" *ngIf="loadingService.isLogeando">
-        Cargando
+    <div class="cargando textBlueBold28" *ngIf="loadingService.isLogeando">
+        Cargando <br>
+        <div class="lds-ring marginTop22"><div></div><div></div><div></div><div></div></div>
     </div>
 
     <div *ngIf="!loadingService.isLogeando">
         <form [formGroup]= "loginForm">
-            <div class="input"  >
-                <input type="text" formControlName="username"  placeholder="Nombre de usuario">
+            <div class="input "  >
+                <input type="text" class="textoInput"  formControlName="username"  placeholder="Nombre de usuario">
             </div>
            
     
             <br>
-            <div class="input">
+            <div class="input textBlueRegular22">
                 <input type="password" formControlName="password" placeholder="Contraseña">
             </div>
         
             <br>
-            <button class="button-blue" (click)='logearse()' >entrar</button>
+            <button class="button-blue textBlueRegular22" (click)='logearse()' >ENTRAR</button>
             <br>
             <br>
             <br>
             <br>
             
-            <p class="text" >¿Todavía no tienes cuenta? </p>
-            <button class="button-gray"  routerLink="../register"  >crear cuenta</button>
+            <p class="text textBlueRegular22" >¿Todavía no tienes cuenta? </p>
+            <button class="button-gray textoCrear"  routerLink="../register"  >CREAR CUENTA</button>
         </form>
         <div class="footer"></div>
         <!-- <form [formGroup]= "loginForm">
