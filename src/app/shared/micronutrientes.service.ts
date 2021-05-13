@@ -10,9 +10,6 @@ import { Micronutrients } from '../models/micronutrient';
   providedIn: 'root'
 })
 export class MicronutrientesService {
-  rutaMicro() {
-    throw new Error('Method not implemented.');
-  }
 
   public micronutrientes: Micronutrients[]=[];
   public microsReceta:any[]=[];
